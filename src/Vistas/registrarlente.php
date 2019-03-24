@@ -20,13 +20,15 @@
 				</div>
 				<form id="form_r" method="post" action="/#/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
 					
-					<input required name="armazon" type="text" class="col-md-12 norightborder btn2" placeholder="Armazon">
+					<input required name="medico" type="text" class="col-md-12 norightborder btn2" placeholder="Medico">
 					<input required name="armazon_lejos" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Lejos">
 					<input required name="armazon_cerca" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Cerca">
 					<input required name="lejos_od" type="text" class="col-md-6 norightborder btn2" placeholder="Lejos OD">
 					<input required name="cerca_od" type="text" class="col-md-6 norightborder btn2" placeholder="Cerca OD">
 					<input required name="lejos_oi" type="text" class="col-md-6 norightborder btn2" placeholder="Lejos OI">
 					<input required name="cerca_oi" type="text" class="col-md-6 norightborder btn2" placeholder="Cerca OI">
+					<input required name="cilindrico" type="text" class="col-md-6 norightborder btn2" placeholder="Cilindrico">
+					<input required name="en_grados" type="text" class="col-md-6 norightborder btn2" placeholder="En Grados">
 					<input required name="color" type="text" class="col-md-6 norightborder btn2" placeholder="Color">
 					<input required name="descripcion" type="text" class="col-md-6 norightborder btn2" placeholder="Descripcion">
 					<button type="submit" class="contact submit btn-primary btn-xl pull-right">Cargar</button>
