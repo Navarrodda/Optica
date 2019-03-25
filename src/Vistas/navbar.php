@@ -50,15 +50,21 @@
                             <a class="page-scroll" style="color:white" href="/inicio/iniciar">Iniciar Sesion</a>
                         </li>
                         <li>
-                            <a class="page-scroll" style="color:white" href="/inicio/registrar/">opciones</a>
-                             <ul>
+                            <a class="page-scroll botonimagen" style="background-image: url(<?= URL_IMG . 'menu.png' ?>);" href="/"></a>
+                            <ul>
                                 <li>
-                            <a class="page-scroll" style="color:white" href="/inicio/registrlente/">opciones1</a>
-                        </li>
+                                    <a class="page-scroll" style="color:white" href="/inicio/registrar/">opciones</a>
+                                </li>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="/inicio/registrlente/">opciones1</a>
+                                </li>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="/inicio/clientes/">opciones2</a>
+                                </li>
+                            </ul>
+                        </li>                   
                         <li>
-                            <a class="page-scroll" style="color:white" href="/inicio/clientes/">opciones2</a>
-                        </li>
-                             </ul>
+                            <a class="page-scroll" style="color:white" href="/">salir</a>
                         </li>
                     </ul>
                 </nav>

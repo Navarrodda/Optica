@@ -1241,6 +1241,7 @@ input.error,textarea.error {
 	left:0;
 	background:black;
 	padding:0;
+	border-radius: 5px;
 }
 
 #primary_nav_wrap ul ul li
@@ -1417,17 +1418,17 @@ input.error,textarea.error {
 }
 
 .flexsearch--input:focus {
-  outline: none;
-  border-color: #333;
+	outline: none;
+	border-color: #333;
 }
 
 .flexsearch--input:focus.flexsearch--submit {
- 	color: #333; 
+	color: #333; 
 }
 
 .flexsearch--submit:hover {
-  color: #333;
-  cursor: pointer;
+	color: #333;
+	cursor: pointer;
 }
 
 ::-webkit-input-placeholder {
@@ -1435,6 +1436,17 @@ input.error,textarea.error {
 }
 
 input:-moz-placeholder {
-  color: #888
+	color: #888
 }
 
+.botonimagen{
+	height:30px;
+	width:30px;
+	border-radius:100px;
+	-webkit-border-radius: 60;
+	-moz-border-radius: 60;
+	text-decoration: none;
+	border: 1px; 
+	color:#f05f40;
+	background-position:center;
+}
