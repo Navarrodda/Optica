@@ -18,8 +18,8 @@ else{
 <div class="container">
     <div class="row">
         <div class="col-xs-12 texto-chico">
-            <div class="table-responsive">
-                <table class="table table-hover">
+         <div class="table-responsive">
+                   <table class="table table-hover">
                  <?php /*
                  if($this->listado!= null )
                  {

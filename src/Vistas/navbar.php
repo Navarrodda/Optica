@@ -51,12 +51,14 @@
                         </li>
                         <li>
                             <a class="page-scroll" style="color:white" href="/inicio/registrar/">opciones</a>
-                        </li>
-                        <li>
+                             <ul>
+                                <li>
                             <a class="page-scroll" style="color:white" href="/inicio/registrlente/">opciones1</a>
                         </li>
                         <li>
                             <a class="page-scroll" style="color:white" href="/inicio/clientes/">opciones2</a>
+                        </li>
+                             </ul>
                         </li>
                     </ul>
                 </nav>
