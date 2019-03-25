@@ -110,6 +110,11 @@ class InicioControladora
 		require(URL_VISTA . "cliente.php");
 	}
 
+        public function registrlente()
+    {
+        require(URL_VISTA . "registrarlente.php");
+    }
+
 	public function registrarvehiculo()
 	{
 

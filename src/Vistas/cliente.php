@@ -5,12 +5,12 @@
  if($this->listado!= null )
  {
     ?>
-    <h2 class="section-heading">Usuarios registrados en el Sistema</h2>
+    <h2 class="section-heading">Clientes registrados en el Sistema</h2>
     <?php
 }
 else{
     ?>
-    <h2 class="section-heading">No hay Usuarios cargados en el Sistema</h2>
+    <h2 class="section-heading">No hay Clientes cargados en el Sistema</h2>
     <?php
 }
 */?>
@@ -23,7 +23,7 @@ else{
                  <?php /*
                  if($this->listado!= null )
                  {
-                    ?>
+                    */?>
                     <thead>
                         <tr style="color:white">
                             <th>
@@ -44,7 +44,7 @@ else{
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
+                        <?php/*
                         /** @var \Modelo\Usuarios $objeto 
                         foreach ($this->listado as $objeto) {
                             ?>
@@ -75,8 +75,8 @@ else{
                     </tr>
                     <?php 
                 }
-            }*/
-            ?>
+            }
+           */ ?>
         </tbody>
     </table>
 </div>
