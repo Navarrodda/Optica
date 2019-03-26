@@ -50,7 +50,18 @@
                             <a class="page-scroll" style="color:white" href="/inicio/iniciar">Iniciar Sesion</a>
                         </li>
                         <li>
-                            <a class="page-scroll botonimagen" style="background-image: url(<?= URL_IMG . 'menu.png' ?>);" href="/"></a>
+                            <a class="page-scroll" style="color:white" href="">Facturacion</a>
+                            <ul>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="/inicio/facturasimple/">Simple</a>
+                                </li>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="">Cliente Registrado</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="page-scroll botonimagen" style="background-image: url(<?= URL_IMG . 'menu.png' ?>);" href=""></a>
                             <ul>
                                 <li>
                                     <a class="page-scroll" style="color:white" href="/inicio/registrar/">opciones</a>
@@ -62,7 +73,7 @@
                                     <a class="page-scroll" style="color:white" href="/inicio/clientes/">opciones2</a>
                                 </li>
                             </ul>
-                        </li>                   
+                        </li>               
                         <li>
                             <a class="page-scroll" style="color:white" href="/">salir</a>
                         </li>
