@@ -27,9 +27,10 @@
 						<label for="entrega" class="col-md-1.5" style="color:white">Sera Entregado el Dia:</label>
 						<input required name="entrega" type="date" class="col-md-3.5 norightborder btn2">	
 					</div>				
-					<input required name="senior" type="text" class="col-md-3 norightborder btn2" placeholder="Señor">
+					<input required name="doctor" type="text" class="col-md-3 norightborder btn2" placeholder="Doctor">
 					<input required name="observaciones" type="text" class="col-md-3 norightborder btn2" placeholder="Observaciones">
-					
+					<input required name="a_cuenta" type="number" class="col-md-3 norightborder btn2" placeholder="$ A Cuenta">
+					<input required name="saldo" type="number" class="col-md-3 norightborder btn2" placeholder="$ Saldo">
 					<input required name="lejos_od" type="text" class="col-md-3 norightborder btn2" placeholder="Lejos OD">
 					<input required name="cerca_od" type="text" class="col-md-3 norightborder btn2" placeholder="Cerca OD">
 					<input required name="lejos_oi" type="text" class="col-md-6 norightborder btn2" placeholder="Lejos OI">
