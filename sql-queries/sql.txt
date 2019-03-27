@@ -2,13 +2,22 @@ CREATE DATABASE optica_santa_rita_plantillas;
 
 USE optica_santa_rita_plantillas;
 
-CREATE TABLE usuario(
+CREATE TABLE roles(
+id_rol TINYINT AUTO_INCREMENT NOT NULL,
+nombre VARCHAR(10),
+CONSTRAINT pk_id_rol PRIMARY KEY (id_rol)
+);
+
+
+CREATE TABLE usuarios(
 id_usuario TINYINT AUTO_INCREMENT NOT NULL,
+id_rol TINYINT,     
 nombre VARCHAR(20) NOT NULL,
 apellido VARCHAR(20)NOT NULL,
 email VARCHAR(50) NOT NULL,
 pass VARCHAR(17) NOT NULL,
 calle VARCHAR(20) NOT NULL,
 telefono VARCHAR(15)NOT NULL,
-CONSTRAINT pk_id_usuario PRIMARY KEY (id_usuario)
+CONSTRAINT pk_id_usuario PRIMARY KEY (id_usuario),
+CONSTRAINT fk_id_usuario_rol FOREIGN KEY (id_rol) REFERENCES roles (id_rol)    
 );

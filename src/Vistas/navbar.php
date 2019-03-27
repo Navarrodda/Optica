@@ -56,6 +56,9 @@
                                     <a class="page-scroll" style="color:white" href="/inicio/facturasimple/">Simple</a>
                                 </li>
                                 <li>
+                                    <a class="page-scroll" style="color:white" href="/inicio/facturasimple1/">Simple1</a>
+                                </li>
+                                <li>
                                     <a class="page-scroll" style="color:white" href="">Cliente Registrado</a>
                                 </li>
                             </ul>

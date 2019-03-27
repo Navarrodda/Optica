@@ -119,6 +119,33 @@ public function facturasimple()
     require(URL_VISTA . "simple.php");
 }
 
+public function facturasimple1()
+{
+    require(URL_VISTA . "simple1.php");
+    require("../conexion.php");
+
+if(isset($_POST['guardar'])){
+
+$titulo = $_POST['titulo'];
+$encabezado = $_POST['encabezado'];
+$area = $_POST['area'];
+$dirige = $_POST['dirigido'].'<br>';
+
+$p = $_POST['numero'];
+
+for ($i=1; $i <=$p; $i++) {
+
+        $pregunta = $_POST["pregunta$i"];
+
+         echo $pregunta.'<br>';
+
+
+
+        }
+        echo "<br>";    
+}
+}
+
 public function registrarvehiculo()
 {
 

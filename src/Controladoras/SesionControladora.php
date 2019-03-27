@@ -5,16 +5,12 @@ namespace Controladoras;
 //use Dao\RolBdDao; ejemplo
 
 
-class PDF
+class SesionControladora
 {
 
-
-
- public function __construct()
-    {
-    	
-    }
-
-
+	public function __construct()
+	{
+		
+	}
 
 }
