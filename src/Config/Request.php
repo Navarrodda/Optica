@@ -58,7 +58,7 @@ class Request
 
         if (empty($ArregloUrl)) {
             // Si Arreglo Url esta vacio, cargo el controlador por defecto y  cargo el index por defecto.
-            $this->controlador = 'inicio';
+            $this->controlador = 'vista';
             $this->metodo = 'index';
         } else {
             // Quito el primer elemento del array y lo uso como controlador y el segundo lo uso como metodo

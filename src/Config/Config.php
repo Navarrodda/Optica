@@ -3,7 +3,7 @@
 namespace Config;
 
 
-define("DB_NAME", "baseautos");
+define("DB_NAME", "optica_santa_rita_plantillas");
 define("DB_USER", "root");
 define("DB_PASS", "micaddyes19");
 define("DB_HOST", "localhost");
