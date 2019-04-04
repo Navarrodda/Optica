@@ -8,10 +8,10 @@ include (URL_VISTA . 'navbar.php');
     </div>
 <?php } ?>
 
-<div class="container" style="margin-top:30px;">
+<div class="container mh-400" style="margin-top:30px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2 text-center">
-            <h2 class="section-heading">REGISTRAR PERSONAL</h2>
+            <h2 class="section-heading">REGISTRAR USUARIO</h2>
             <hr class="primary">
             <div class="regularform">
                 <form id="form_r" method="post" action="/registrar/registrarse" id="contactform" class="text-left" autocomplete="off">

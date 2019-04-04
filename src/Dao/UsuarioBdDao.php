@@ -53,11 +53,11 @@ class UsuarioBdDao
 
         $sentencia = $conexion->prepare($sql);
 
-        $nombre = $usuarios->getNombre();
-        $nombre = $usuarios->getNombre();
-        $apellido = $usuarios->getApellido();
-        $calle = $usuarios->getCalle();
-        $telefono = $usuarios->getTelefono();
+        $nombre = $usuario->getNombre();
+        $nombre = $usuario->getNombre();
+        $apellido = $usuario->getApellido();
+        $calle = $usuario->getCalle();
+        $telefono = $usuario->getTelefono();
         
         $email = $usuario->getEmail();
         $pass = $usuario->getPassword();
