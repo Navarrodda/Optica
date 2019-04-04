@@ -47,16 +47,16 @@
                             <a class="page-scroll" style="color:white" href="/">Inicio</a>
                         </li>
                         <li>
-                            <a class="page-scroll" style="color:white" href="/inicio/iniciar">Iniciar Sesion</a>
+                            <a class="page-scroll" style="color:white" href="/vista/iniciar">Iniciar Sesion</a>
                         </li>
                         <li>
                             <a class="page-scroll" style="color:white" href="">Facturacion</a>
                             <ul>
                                 <li>
-                                    <a class="page-scroll" style="color:white" href="/inicio/facturasimple/">Simple</a>
+                                    <a class="page-scroll" style="color:white" href="/vista/facturasimple/">Simple</a>
                                 </li>
                                 <li>
-                                    <a class="page-scroll" style="color:white" href="/inicio/facturasimple1/">Simple1</a>
+                                    <a class="page-scroll" style="color:white" href="/vista/facturasimple1/">Simple1</a>
                                 </li>
                                 <li>
                                     <a class="page-scroll" style="color:white" href="">Cliente Registrado</a>
@@ -67,13 +67,13 @@
                             <a class="page-scroll botonimagen" style="background-image: url(<?= URL_IMG . 'menu.png' ?>);" href=""></a>
                             <ul>
                                 <li>
-                                    <a class="page-scroll" style="color:white" href="/inicio/registrar/">opciones</a>
+                                    <a class="page-scroll" style="color:white" href="/vista/registrar/">opciones</a>
                                 </li>
                                 <li>
-                                    <a class="page-scroll" style="color:white" href="/inicio/registrlente/">opciones1</a>
+                                    <a class="page-scroll" style="color:white" href="/vista/registrlente/">opciones1</a>
                                 </li>
                                 <li>
-                                    <a class="page-scroll" style="color:white" href="/inicio/clientes/">opciones2</a>
+                                    <a class="page-scroll" style="color:white" href="/vista/clientes/">opciones2</a>
                                 </li>
                             </ul>
                         </li>               

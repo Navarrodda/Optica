@@ -1,18 +1,21 @@
 <?php
 
 namespace Controladoras;
-
-//use Dao\RolBdDao; ejemplo
-
+//Modelo
+use \Modelo\Mensaje;
+use\Modelo\Rol;
+//Dao
+use \Dao\RolBdDao;
 
 class VistaControladora
 {
 
-
+	protected $daoRol;
 
 	public function __construct()
 	{
 
+		$this->daoRol = \Dao\RolBdDao::getInstancia();
 	}
 
 	public function index()
@@ -42,6 +45,14 @@ class VistaControladora
 	public function facturasimple()
 	{
 		require(URL_VISTA . "simple.php");
+	}
+
+	public function registrarusuario()
+	{
+
+		$roles = $this->daoRol->traerTodo();
+		unset($roles[1]); /* Elimino la posicion "Cliente" */
+		require(URL_VISTA . "registrarusuario.php");
 	}
 
 }

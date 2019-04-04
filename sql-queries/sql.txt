@@ -4,7 +4,7 @@ USE optica_santa_rita_plantillas;
 
 CREATE TABLE roles(
 id_rol TINYINT AUTO_INCREMENT NOT NULL,
-nombre VARCHAR(10),
+nombre VARCHAR(15),
 CONSTRAINT pk_id_rol PRIMARY KEY (id_rol)
 );
 

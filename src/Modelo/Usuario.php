@@ -2,16 +2,17 @@
 
 namespace Modelo;
 
+
 class Usuario
 {
 	private $id;
+    private $id_rol;
 	private $nombre;
 	private $apellido;
 	private $email;
 	private $calle;
 	private $telefono;
 	private $password;
-
 
 	/**
 	 * Class Constructor
@@ -23,18 +24,16 @@ class Usuario
 	 * @param    $telefono   
 	 * @param    $password   
 	 */
-	public function __construct($nombre, $apellido, $email, $calle, $telefono, $password)
+	 public function __construct(\Modelo\Rol $rol, $nombre, $apellido, $email, $calle, $telefono, $password)
 	{
-		$this->nombre = $nombre;
-		$this->apellido = $apellido;
-		$this->email = $email;
-		$this->calle = $calle;
-		$this->telefono = $telefono;
-		$this->password = $password;
+        $this->setId($rol);
+        $this->setNombre($nombre);
+		$this->setApellido($apellido);
+		$this->setEmail($email);
+		$this->setCalle($calle);
+		$this->setTelefono($telefono);
+		$this->setPassword($password);
 	}
-
-
-
 
     /**
      * @return mixed
@@ -56,7 +55,25 @@ class Usuario
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIdRol()
+    {
+        return $this->id_rol;
+    }
 
+    /**
+     * @param mixed $id_rol
+     *
+     * @return self
+     */
+    public function setIdRol($id_rol)
+    {
+        $this->id_rol = $id_rol;
+
+        return $this;
+    }
 
     /**
      * @return mixed
@@ -78,7 +95,6 @@ class Usuario
         return $this;
     }
 
-
     /**
      * @return mixed
      */
@@ -98,7 +114,6 @@ class Usuario
 
         return $this;
     }
-
 
     /**
      * @return mixed
@@ -120,7 +135,6 @@ class Usuario
         return $this;
     }
 
-
     /**
      * @return mixed
      */
@@ -140,8 +154,6 @@ class Usuario
 
         return $this;
     }
-
-
 
     /**
      * @return mixed
@@ -163,8 +175,6 @@ class Usuario
         return $this;
     }
 
-
-
     /**
      * @return mixed
      */
@@ -184,10 +194,4 @@ class Usuario
 
         return $this;
     }
-
-    /**
-     * @param mixed $telefono
-     *
-     * @return self
-     */
 }
