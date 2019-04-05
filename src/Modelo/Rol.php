@@ -4,36 +4,37 @@ namespace Modelo;
 
 class Rol
 {
-	private $id_rol;
+	private $id;
 	private $prioridad;
 
 
-	/**
-	 * Class Constructor
-	 * @param    $id_rol   
-	 * @param    $prioridad   
-	 */
-	public function __construct($prioridad)
-	{
-		$this->prioridad = $prioridad;
-	}
+    /**
+     * Class Constructor
+     * @param    $id   
+     * @param    $prioridad   
+     */
+    public function __construct($prioridad)
+    {
+        $this->prioridad = $prioridad;
+    }
+
 
     /**
      * @return mixed
      */
-    public function getIdRol()
+    public function getId()
     {
-        return $this->id_rol;
+        return $this->id;
     }
 
     /**
-     * @param mixed $id_rol
+     * @param mixed $id
      *
      * @return self
      */
-    public function setIdRol($id_rol)
+    public function setId($id)
     {
-        $this->id_rol = $id_rol;
+        $this->id = $id;
 
         return $this;
     }

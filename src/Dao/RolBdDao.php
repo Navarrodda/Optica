@@ -71,29 +71,29 @@ class RolBdDao
 
     public function traerTodo()
     {
-     $sql = "SELECT * FROM $this->tabla";
+       $sql = "SELECT * FROM $this->tabla";
 
-     $conexion = Conexion::conectar();
+       $conexion = Conexion::conectar();
 
-     $sentencia = $conexion->prepare($sql);
+       $sentencia = $conexion->prepare($sql);
 
-     $sentencia->execute();
+       $sentencia->execute();
 
-     $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+       $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
 
-     $this->mapear($dataSet);
+       $this->mapear($dataSet);
 
-     if(!empty($this->listado)){
+       if(!empty($this->listado)){
         return $this->listado;
     }
 
     return null;
 }
 
-public function traerPorId($id)
+public function traerPorId($id_rol)
 {
     /** @noinspection SqlResolve */
-    $sql = "SELECT * FROM $this->tabla WHERE id_rol = \"$id\" LIMIT 1";
+    $sql = "SELECT * FROM $this->tabla WHERE id_rol = \"$id_rol\" LIMIT 1";
 
     $conexion = Conexion::conectar();
 
@@ -118,7 +118,7 @@ public function mapear($dataSet)
     if($dataSet){
         $this->listado = array_map(function ($p) {
             $r = new Rol($p['nombre']);
-            $r->setIdRol($p['id_rol']);
+            $r->setId($p['id_rol']);
             return $r;
         }, $dataSet);
     }

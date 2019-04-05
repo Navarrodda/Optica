@@ -24,7 +24,7 @@ include (URL_VISTA . 'navbar.php');
 
                     <select style="height: 40px;" name="id_rol" class="col-md-6 norightborder btn2">
                         <?php foreach ($roles as $key => $value) { ?>
-                            <option value="<?= $value->getIdRol();  ?>"><?= $value->getPrioridad();  ?></option> 
+                            <option value="<?= $value->getId();  ?>"><?= $value->getPrioridad();  ?></option> 
                         <?php } ?> 
                     </select>
 

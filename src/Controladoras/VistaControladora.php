@@ -51,7 +51,6 @@ class VistaControladora
 	{
 
 		$roles = $this->daoRol->traerTodo();
-		unset($roles[1]); /* Elimino la posicion "Cliente" */
 		require(URL_VISTA . "registrarusuario.php");
 	}
 

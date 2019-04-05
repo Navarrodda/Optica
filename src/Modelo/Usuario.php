@@ -24,9 +24,10 @@ class Usuario
 	 * @param    $telefono   
 	 * @param    $password   
 	 */
-	 public function __construct(\Modelo\Rol $rol, $nombre, $apellido, $email, $calle, $telefono, $password)
+    
+	 public function __construct($nombre, $apellido, $email, $calle, $telefono, $password, Rol $id_rol)
 	{
-        $this->setId($rol);
+        $this->setIdRol($id_rol);
         $this->setNombre($nombre);
 		$this->setApellido($apellido);
 		$this->setEmail($email);

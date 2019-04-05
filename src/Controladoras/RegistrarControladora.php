@@ -10,19 +10,21 @@ use Dao\UsuarioBdDao as UsuarioBdDao;
 
 class RegistrarControladora
 {
-	protected $daoUsuario, $daoRol;
+	protected $daoUsuario;
+	protected $daoRol;
 
 	public function __construct() {
 		$this->daoUsuario = UsuarioBdDao::getInstancia();
 		$this->daoRol = RolBdDao::getInstancia();
 	}
 
-	public function registrarse( $id_rol, $nombre, $apellido, $calle, $telefono, $email, $pass ) {
+	public function registrarse($nombre, $apellido, $calle, $telefono, $email, $pass, $id_rol) {
 		try{
 			$regCompleted = FALSE;
 	
 			if( ! $this->daoUsuario->verificarEmail( $email ) ) {
-				$userInstance = new Usuario( $this->daoRol->traerPorId( $id_rol ), $nombre, $apellido, $calle, $telefono,$email,$pass );
+				print_r($id_rol);
+				$userInstance = new Usuario($nombre, $apellido, $email, $calle, $telefono, $pass, $this->daoRol->traerPorId( $id_rol ));
 				$idUser = $this->daoUsuario->agregar( $userInstance );
 				$userInstance->setId( $idUser );
 				$regCompleted = TRUE;
