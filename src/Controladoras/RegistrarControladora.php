@@ -1,15 +1,12 @@
 <?php
 
 namespace Controladoras;
-    // Modelos
 
-use \Modelo\Rol;
-use \Modelo\Usuario;
-use \Modelo\Mensaje;
-
-	// Daos
-use \Dao\RolBdDao;
-use \Dao\UsuarioBdDao as UsuarioBdDao;
+use Modelo\Rol;
+use Modelo\Usuario;
+use Modelo\Mensaje;
+use Dao\RolBdDao as RolBdDao;
+use Dao\UsuarioBdDao as UsuarioBdDao;
 
 class RegistrarControladora
 {
@@ -17,34 +14,23 @@ class RegistrarControladora
 	protected $daoUsuario;
 	protected $daoRol;
 
-	public function __construct(){
-
+	public function __construct() {
 		$this->daoUsuario = UsuarioBdDao::getInstancia();
-		$this->daoRol = \Dao\RolBdDao::getInstancia();
-
+		$this->daoRol = RolBdDao::getInstancia();
 	}
 
 
-	public function registrarse($id_rol, $nombre, $apellido, $calle, $telefono, $email, $pass)
-	{
-
+	public function registrarse( $id_rol, $nombre, $apellido, $calle, $telefono, $email, $pass ) {
 		try{
-
 			$reg_completado = FALSE;
-			print_r($daoUsuario);
 	
-			if(!$daoUsuario->verificarEmail($email))	
-			{
-				
-
-				$usuario = new Usuario($daoRol->traerPorId($id_rol), $nombre, $apellido, $calle, $telefono,$email,$pass);
-				print_r($usuario);
+			if( ! $daoUsuario->verificarEmail( $email ) ) {
+				$usuario = new Usuario( $daoRol->traerPorId($id_rol), $nombre, $apellido, $calle, $telefono,$email,$pass);
 				$id_usuario = $daoUsuario->agregar($usuario);
 				$usuario->setId($id_usuario);
 				$reg_completado = TRUE;
 
 				$this->mensaje = new Mensaje("success", "El Usuario fue registrado con exito!");
-
 			}
 
 			switch ($reg_completado) {
