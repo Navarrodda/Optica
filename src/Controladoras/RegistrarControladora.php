@@ -2,15 +2,14 @@
 
 namespace Controladoras;
 
-use Modelo\Rol;
-use Modelo\Usuario;
-use Modelo\Mensaje;
+use Modelo\Rol as Rol;
+use Modelo\Usuario as Usuario;
+use Modelo\Mensaje as Mensaje;
 use Dao\RolBdDao as RolBdDao;
 use Dao\UsuarioBdDao as UsuarioBdDao;
 
 class RegistrarControladora
 {
-
 	protected $daoUsuario;
 	protected $daoRol;
 
@@ -19,21 +18,19 @@ class RegistrarControladora
 		$this->daoRol = RolBdDao::getInstancia();
 	}
 
-
 	public function registrarse( $id_rol, $nombre, $apellido, $calle, $telefono, $email, $pass ) {
 		try{
-			$reg_completado = FALSE;
+			$regCompleted = FALSE;
 	
 			if( ! $daoUsuario->verificarEmail( $email ) ) {
-				$usuario = new Usuario( $daoRol->traerPorId($id_rol), $nombre, $apellido, $calle, $telefono,$email,$pass);
-				$id_usuario = $daoUsuario->agregar($usuario);
-				$usuario->setId($id_usuario);
-				$reg_completado = TRUE;
-
+				$usuario = new Usuario( $daoRol->traerPorId( $id_rol ), $nombre, $apellido, $calle, $telefono,$email,$pass );
+				$idUser = $daoUsuario->agregar( $usuario );
+				$usuario->setId( $idUser );
+				$regCompleted = TRUE;
 				$this->mensaje = new Mensaje("success", "El Usuario fue registrado con exito!");
 			}
 
-			switch ($reg_completado) {
+			switch ($regCompleted) {
 				case TRUE:
 				require(URL_VISTA . 'inicio.php');
 				break;
