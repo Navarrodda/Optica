@@ -46,7 +46,7 @@ class UsuarioBdDao
     public function agregar(Usuario $usuario)
     {
       try{
-        
+
         /** @noinspection SqlResolve */
         $sql = ("INSERT INTO $this->tabla (id_rol, nombre, apellido, email, pass, calle, telefono ) VALUES (:id_rol, :nombre, :apellido, :email, :pass, :calle, :telefono)");
 
@@ -54,13 +54,16 @@ class UsuarioBdDao
 
         $sentencia = $conexion->prepare($sql);
 
-        $id_rol = $usuario->getIdRol();
+        $r = $usuario->getIdRol();
+        $id_rol = $r->getId();
+
         $nombre = $usuario->getNombre();
         $apellido = $usuario->getApellido();
         $calle = $usuario->getCalle();
         $telefono = $usuario->getTelefono();
         $email = $usuario->getEmail();
         $pass = $usuario->getPassword();
+
 
         $sentencia->bindParam(":id_rol",$id_rol);
         $sentencia->bindParam(":nombre",$nombre);
