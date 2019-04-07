@@ -1,7 +1,7 @@
 <?php  include(URL_VISTA . 'navbar.php') ?>
 
 <div class="container lower-box box-primary" style="margin-top: 30px;text-align: center;">
- <?php /*
+ <?php 
  if($this->listado!= null )
  {
     ?>
@@ -13,17 +13,17 @@ else{
     <h2 class="section-heading">No hay Clientes cargados en el Sistema</h2>
     <?php
 }
-*/?>
+?>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-xs-12 texto-chico">
          <div class="table-responsive">
                    <table class="table table-hover">
-                 <?php /*
+                 <?php 
                  if($this->listado!= null )
                  {
-                    */?>
+                    ?>
                     <thead>
                         <tr style="color:white">
                             <th>
@@ -44,8 +44,7 @@ else{
                         </tr>
                     </thead>
                     <tbody>
-                        <?php/*
-                        /** @var \Modelo\Usuarios $objeto 
+                        <?php
                         foreach ($this->listado as $objeto) {
                             ?>
                             <tr style="color:white">
@@ -76,7 +75,7 @@ else{
                     <?php 
                 }
             }
-           */ ?>
+           ?>
         </tbody>
     </table>
 </div>

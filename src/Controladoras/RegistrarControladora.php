@@ -5,6 +5,7 @@ namespace Controladoras;
 use Modelo\Rol as Rol;
 use Modelo\Usuario as Usuario;
 use Modelo\Mensaje as Mensaje;
+use Modelo\LimpiarEntrada as Limpiar; 
 use Dao\RolBdDao as RolBdDao;
 use Dao\UsuarioBdDao as UsuarioBdDao;
 
@@ -33,7 +34,7 @@ class RegistrarControladora
 
 			switch ($regCompleted) {
 				case TRUE:
-				require(URL_VISTA . 'inicio.php');
+				require(URL_VISTA . "inicio.php");
 				break;
 
 				case FALSE:

@@ -4,6 +4,12 @@
   ================================================== -->
   <?php  include(URL_VISTA . 'navbar.php') ?>
 
+  <?php if(isset($this->mensaje)) {?>
+    <div class="container">
+      <h1> <?= $this->mensaje->cartelAlert($this->mensaje->getMensaje(),$this->mensaje->getTipo()) ?></h1>
+    </div>
+  <?php } ?>
+
   <div id="tm-wrap">
     <div class="tm-main-content">
       <div class="container tm-site-header-container" >
@@ -15,37 +21,37 @@
               <p style="color:black">David Navarro &copy;GC</p>        
             </div>                        
           </div>                
-       </div>
-     </div>  
-   </div>
- </div>
-    
-   
+        </div>
+      </div>  
+    </div>
+  </div>
+  
+  
 
-<script type="text/javascript">
+  <script type="text/javascript">
 
-  $(".alert").delay(200).addClass("in").fadeOut(3500);
+    $(".alert").delay(200).addClass("in").fadeOut(3500);
 
-</script>
-<script src="js/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->    
-<script src="slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->  
-<script src="js/anime.min.js"></script>                     <!-- http://animejs.com/ -->
-<script src="js/main.js"></script>  
-<script>  
+  </script>
+  <script src="js/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->    
+  <script src="slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->  
+  <script src="js/anime.min.js"></script>                     <!-- http://animejs.com/ -->
+  <script src="js/main.js"></script>  
+  <script>  
 
 
-  function setupFooter() {
-    var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
+    function setupFooter() {
+      var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
 
-    var main = $('.tm-main-content');
+      var main = $('.tm-main-content');
 
-    if($(window).height() < pageHeight) {
-      main.addClass('tm-footer-relative');
+      if($(window).height() < pageHeight) {
+        main.addClass('tm-footer-relative');
+      }
+      else {
+        main.removeClass('tm-footer-relative');   
+      }
     }
-    else {
-      main.removeClass('tm-footer-relative');   
-    }
-  }
 
         /* DOM is ready
         ------------------------------------------------*/
