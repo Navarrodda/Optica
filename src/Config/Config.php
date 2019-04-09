@@ -10,7 +10,7 @@ define("DB_HOST", "localhost");
 
 // Constantes front
 define('ROOT',  dirname(__DIR__) . "/");
-define("URL_VISTA",  ROOT . 'Vistas/');
+define("URL_VISTA",  ROOT . '/Vistas/');
 define("URL_FONT_AWESOME", '/font-awesome/');
 define("URL_FONTAWESOME", '/fontawesome/');
 define("URL_CSS", '/css/');

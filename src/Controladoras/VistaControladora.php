@@ -2,10 +2,13 @@
 
 namespace Controladoras;
 //Modelo
-use \Modelo\Mensaje;
-use\Modelo\Rol;
+
+use Modelo\Mensaje as Mensaje;
+use Modelo\Rol as Rol;
+
 //Dao
-use \Dao\RolBdDao;
+
+use Dao\RolBdDao as RolBdDao;
 
 class VistaControladora
 {
@@ -15,7 +18,7 @@ class VistaControladora
 	public function __construct()
 	{
 
-		$this->daoRol = \Dao\RolBdDao::getInstancia();
+		$this->daoRol = RolBdDao::getInstancia();
 	}
 
 	public function index()
@@ -42,6 +45,7 @@ class VistaControladora
 	{
 		require(URL_VISTA . "registrarlente.php");
 	}
+	
 	public function facturasimple()
 	{
 		require(URL_VISTA . "simple.php");
@@ -49,7 +53,6 @@ class VistaControladora
 
 	public function registrarusuario()
 	{
-
 		$roles = $this->daoRol->traerTodo();
 		require(URL_VISTA . "registrarusuario.php");
 	}
