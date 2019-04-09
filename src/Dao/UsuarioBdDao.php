@@ -243,7 +243,7 @@ public function mapear($dataSet)
     $dataSet = is_array($dataSet) ? $dataSet : false;
     if($dataSet){
         $this->listado = array_map(function ($p) {
-            $u = new Usuario(
+            $usuario = new Usuario(
                 $p['id_rol'],
                 $p['nombre'],
                 $p['apellido'],
@@ -251,8 +251,8 @@ public function mapear($dataSet)
                 $p['telefono'],
                 $p['email'],
                 $p['pwd']);
-            $u->setId($p['id_usuario']);
-            return $u;
+            $usuario->setId($p['id_usuario']);
+            return $usuario;
         }, $dataSet);
     }
 }

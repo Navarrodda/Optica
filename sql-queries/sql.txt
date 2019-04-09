@@ -42,6 +42,7 @@ en_grados VARCHAR(10) NOT NULL,
 distancia VARCHAR(10) NOT NULL,
 calibre VARCHAR (10) NOT NULL,
 puente VARCHAR (10) NOT NULL,
+descripcion VARCHAR(50) DEFAULT "---" , 
 fecha DATE NOT NULL,
 CONSTRAINT pk_id_lente PRIMARY KEY (id_lente)    
 );
