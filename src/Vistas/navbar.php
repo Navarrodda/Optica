@@ -23,34 +23,12 @@
                             <a class="page-scroll" style="color:white" href="#">Inicio</a>
                         </li>
                         <li>
-                            <a class="page-scroll" style="color:orange" href="#"><?= $_SESSION['nickname'] ?> </a>
+                            <a class="page-scroll" style="color:orange" href="#"><?= $_SESSION['nombre'] ?> </a>
                             <ul>
                                 <li><a href="#">opciones</a></li>
                             </ul>
                         </li>
-                        <?php if(isset($notifiaciones)) { ?>
-                            <li>
-                                <a class="page-scroll" style="color:green;cursor:pointer" data-target="#notiModal" data-toggle="modal" >Notifiaciones</a>
-                            </li>
-                        <?php } ?>
-                        <li>
-                            <a class="page-scroll" style="color:white" href="#">Salir</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        <?php }else{ ?>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" id="primary_nav_wrap">
-                <nav id="primary_nav_wrap">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a class="page-scroll" style="color:white" href="/">Inicio</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" style="color:white" href="/vista/iniciar">Iniciar Sesion</a>
-                        </li>
-                        <li>
-                            <a class="page-scroll" style="color:white" href="">Facturacion</a>
+                                        <a class="page-scroll" style="color:white" href="">Facturacion</a>
                             <ul>
                                 <li>
                                     <a class="page-scroll" style="color:white" href="/vista/facturasimple/">Simple</a>
@@ -78,8 +56,22 @@
                             </ul>
                         </li>               
                         <li>
-                            <a class="page-scroll" style="color:white" href="/">salir</a>
+                            <a class="page-scroll" style="color:white" href="/sesion/terminar">salir</a>
                         </li>
+                    </ul>
+                </nav>
+            </div>
+        <?php }else{ ?>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" id="primary_nav_wrap">
+                <nav id="primary_nav_wrap">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="page-scroll" style="color:white" href="/">Inicio</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" style="color:white" href="/vista/iniciar">Iniciar Sesion</a>
+                        </li>
+                        <li>
                     </ul>
                 </nav>
             </div>

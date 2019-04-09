@@ -4,6 +4,9 @@ namespace Controladoras;
 
 use Modelo\LimpiarEntrada;
 use Modelo\Mensaje;
+use Modelo\Rol as Rol;
+use Modelo\Usuario as Usuario;;
+use Dao\UsuarioBdDao as UsuarioBdDao;
 
 
 class SesionControladora
@@ -11,10 +14,12 @@ class SesionControladora
 
 	private $mensaje;
 	private $limpiar;
+	protected $daoUsuario;
 
 	public function __construct()
 	{
 		$this->limpiar= new LimpiarEntrada();
+		$this->daoUsuario = UsuarioBdDao::getInstancia();
 	}
 
 	public function logueando($mail, $pwd)
@@ -32,20 +37,20 @@ class SesionControladora
 				if ($mail === "" || $pwd === "") {
 					$this->mensaje = new Mensaje('warning', 'Debe llenar todos los campos !');
 				} else {
-					$daoC = $this->daoCuenta;
-					/** @var Cuenta $cuenta */
-					$cuenta = $daoC->traerPorMail($mail);
+					/** @var Cuenta $usuario */
+					$usuario = $this->daoUsuario->traerPorMail($mail);
 
-					if ($mail === $cuenta->getEmail() && $pwd === $cuenta->getPass()) {
-						$rol = $cuenta->getRol();
+					if ($mail === $usuario->getEmail() && $pwd === $usuario->getPassword()) {
+						$rol = $usuario->getIdRol();
                         //Seteo las variables de sesión.
 						$_SESSION["mail"] = $mail;
+						$_SESSION["nombre"] =$usuario->getNombre();
 						$_SESSION["pass"] = $pwd;
-						$_SESSION["nickname"] = $cuenta->getNickname();
 						$_SESSION["rol"] = $rol->getPrioridad();
                         //Mensaje de success
 						$this->mensaje = new Mensaje('success', 'Ha iniciado sesión satisfactoriamente 
-							! Se ha logueado como' . ' ' . '<i><strong>' . $cuenta->getNickname() . '</strong></i>');
+							! Se ha logueado como' . ' ' . '<i><strong>' . $usuario->getNombre()
+							. '</strong></i>');
 						$ir_a_inicio = TRUE;
 					} else {
 						$this->mensaje = new Mensaje('warning', 'Los datos introducidos son incorrectos !');
@@ -66,27 +71,28 @@ class SesionControladora
 			require(URL_VISTA . 'iniciarSesion.php');
 		}
 
-		public function terminar()
-		{
-        // Elimio las variables de sesión y sus valores.
-			$_SESSION = array();
-        // Eliminamos la cookie del usuario que identifcaba a esa sesión, verifcando "si existía".
-			if (ini_get("session.use_cookies") == true) {
-				$parametros = session_get_cookie_params();
-				setcookie(
-					session_name(),
-					'',
-					time() - 99999,
-					$parametros["path"],
-					$parametros["domain"],
-					$parametros["secure"],
-					$parametros["httponly"]
-				);
-			}
-			session_destroy();
-
-			$this->mensaje = new Mensaje('info', 'Ha cerrado sesión !');
-			require("../Vistas/inicio.php");
-		}
-
 	}
+	public function terminar()
+	{
+        // Elimio las variables de sesión y sus valores.
+		$_SESSION = array();
+        // Eliminamos la cookie del usuario que identifcaba a esa sesión, verifcando "si existía".
+		if (ini_get("session.use_cookies") == true) {
+			$parametros = session_get_cookie_params();
+			setcookie(
+				session_name(),
+				'',
+				time() - 99999,
+				$parametros["path"],
+				$parametros["domain"],
+				$parametros["secure"],
+				$parametros["httponly"]
+			);
+		}
+		session_destroy();
+
+		$this->mensaje = new Mensaje('info', 'Ha cerrado sesión !');
+		require("../Vistas/inicio.php");
+	}
+
+}
