@@ -2,14 +2,14 @@
 
 namespace Modelo;
 
-use\Modelo\Cliente;
+use\Modelo\Lente;
 use\Modelo\Senia;
 
 class Senia_x_cliente
 {
 	private $id_senia_x_cliente;
 	private $id_senia;
-	private $id_cliente;
+	private $id_Lente;
 
 
 	/**
@@ -18,10 +18,10 @@ class Senia_x_cliente
 	 * @param    $id_senia   
 	 * @param    $id_cliente   
 	 */
-	public function __construct(Senia $id_senia,Cliente $id_cliente)
+	public function __construct(Senia $id_senia,Lente $id_Lente)
 	{
 		$this->id_senia = $id_senia;
-		$this->id_cliente = $id_cliente;
+		$this->id_Lente = $id_Lente;
 	}
 
 	
@@ -31,7 +31,7 @@ class Senia_x_cliente
      */
     public function getIdSeniaXCliente()
     {
-    	return $this->id_senia_x_cliente;
+        return $this->id_senia_x_cliente;
     }
 
     /**
@@ -41,9 +41,9 @@ class Senia_x_cliente
      */
     public function setIdSeniaXCliente($id_senia_x_cliente)
     {
-    	$this->id_senia_x_cliente = $id_senia_x_cliente;
+        $this->id_senia_x_cliente = $id_senia_x_cliente;
 
-    	return $this;
+        return $this;
     }
 
     /**
@@ -51,7 +51,7 @@ class Senia_x_cliente
      */
     public function getIdSenia()
     {
-    	return $this->id_senia;
+        return $this->id_senia;
     }
 
     /**
@@ -61,28 +61,28 @@ class Senia_x_cliente
      */
     public function setIdSenia($id_senia)
     {
-    	$this->id_senia = $id_senia;
+        $this->id_senia = $id_senia;
 
-    	return $this;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getIdCliente()
+    public function getIdLente()
     {
-    	return $this->id_cliente;
+        return $this->id_Lente;
     }
 
     /**
-     * @param mixed $id_cliente
+     * @param mixed $id_Lente
      *
      * @return self
      */
-    public function setIdCliente($id_cliente)
+    public function setIdLente($id_Lente)
     {
-    	$this->id_cliente = $id_cliente;
+        $this->id_Lente = $id_Lente;
 
-    	return $this;
+        return $this;
     }
 }

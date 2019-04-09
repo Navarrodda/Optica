@@ -242,18 +242,21 @@ public function mapear($dataSet)
 {
     $dataSet = is_array($dataSet) ? $dataSet : false;
     if($dataSet){
-        $this->listado = array_map(function ($p) {
-            $usuario = new Usuario(
-                $p['id_rol'],
-                $p['nombre'],
-                $p['apellido'],
-                $p['calle'],
-                $p['telefono'],
-                $p['email'],
-                $p['pwd']);
-            $usuario->setId($p['id_usuario']);
-            return $usuario;
-        }, $dataSet);
-    }
+       $this->listado = array_map(function ($p) {
+        $daoRol = RolBdDao::getInstancia();
+        $usuario = new Usuario
+        (
+            $p['nombre'],
+            $p['apellido'],
+            $p['calle'],
+            $p['telefono'],
+            $p['email'],
+            $p['pass'],
+        $daoRol->traerPorId($p['id_rol'])
+    );
+       $usuario->setId($p['id_usuario']);
+       return $usuario;
+   }, $dataSet);
+}
 }
 }
