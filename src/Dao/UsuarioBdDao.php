@@ -159,6 +159,8 @@ public function traerTodo()
 
 
 public function verificarEmail($email){
+
+
     $sql = "SELECT * FROM $this->tabla WHERE email = \"$email\" LIMIT 1";
     $conexion = Conexion::conectar();
     $sentencia = $conexion->prepare($sql);
@@ -197,24 +199,30 @@ public function traerPorId($id)
 
 public function traerPorMail($email)
 {
-    /** @noinspection SqlResolve */
-    $sql = "SELECT * FROM $this->tabla WHERE email =  \"$email\" LIMIT 1";
+    try{
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE email =  \"$email\" LIMIT 1";
 
-    $conexion = Conexion::conectar();
+        $conexion = Conexion::conectar();
 
-    $sentencia = $conexion->prepare($sql);
+        $sentencia = $conexion->prepare($sql);
 
-    $sentencia->execute();
+        $sentencia->execute();
 
-    $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
 
-    $this->mapear($dataSet);
+        $this->mapear($dataSet);
 
-    if (!empty($this->listado[0])) {
-        return $this->listado[0];
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+
+        return null;
+    }catch(\PDOException $e){
+        echo $e->getMessage();die();
+    }catch(\Exception $e){
+        echo $e->getMessage();die();
     }
-
-    return null;
 }
 public function traerPorNombre($nombre)
 {
@@ -242,21 +250,21 @@ public function mapear($dataSet)
 {
     $dataSet = is_array($dataSet) ? $dataSet : false;
     if($dataSet){
-       $this->listado = array_map(function ($p) {
+     $this->listado = array_map(function ($p) {
         $daoRol = RolBdDao::getInstancia();
         $usuario = new Usuario
         (
             $p['nombre'],
             $p['apellido'],
+            $p['email'],
             $p['calle'],
             $p['telefono'],
-            $p['email'],
             $p['pass'],
-        $daoRol->traerPorId($p['id_rol'])
-    );
-       $usuario->setId($p['id_usuario']);
-       return $usuario;
-   }, $dataSet);
-}
+            $daoRol->traerPorId($p['id_rol'])
+        );
+        $usuario->setId($p['id_usuario']);
+        return $usuario;
+    }, $dataSet);
+ }
 }
 }

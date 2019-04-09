@@ -22,28 +22,28 @@ class SesionControladora
 		$this->daoUsuario = UsuarioBdDao::getInstancia();
 	}
 
-	public function logueando($mail, $pass)
+	public function logueando($email, $pass)
 	{
 		$ir_a_inicio = FALSE;
 
 		try {
-			$this->limpiar->cleanInput($mail);
+			$this->limpiar->cleanInput($email);
 
 			$this->limpiar->cleanInput($pass);
 
 
 
-			if (isset($mail) && isset($pass))  {
-				if ($mail === "" || $pass === "") {
+			if (isset($email) && isset($pass))  {
+				if ($email === "" || $pass === "") {
 					$this->mensaje = new Mensaje('warning', 'Debe llenar todos los campos !');
 				} else {
 					/** @var Cuenta $usuario */
-					$usuario = $this->daoUsuario->traerPorMail($mail);
+					$usuario = $this->daoUsuario->traerPorMail($email);
 
-					if ($mail === $usuario->getEmail() && $pass === $usuario->getPassword()) {
+					if ($email === $usuario->getEmail() && $pass === $usuario->getPassword()) {
 						$rol = $usuario->getIdRol();
                         //Seteo las variables de sesión.
-						$_SESSION["mail"] = $mail;
+						$_SESSION["email"] = $email;
 						$_SESSION["nombre"] =$usuario->getNombre();
 						$_SESSION["pass"] = $pass;
 						$_SESSION["rol"] = $rol->getPrioridad();

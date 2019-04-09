@@ -20,14 +20,15 @@
                 <nav id="primary_nav_wrap">
                     <ul class="nav navbar-nav navbar-right " >
                         <li>
-                            <a class="page-scroll" style="color:white" href="#">Inicio</a>
+                            <a class="page-scroll" style="color:white" href="/">Inicio</a>
                         </li>
                         <li>
-                            <a class="page-scroll" style="color:orange" href="#"><?= $_SESSION['nombre'] ?> </a>
+                            <a class="page-scroll" style="color:orange" href="/"><?= $_SESSION['nombre'] ?> </a>
                             <ul>
                                 <li><a href="#">opciones</a></li>
                             </ul>
                         </li>
+                        <li>
                                         <a class="page-scroll" style="color:white" href="">Facturacion</a>
                             <ul>
                                 <li>

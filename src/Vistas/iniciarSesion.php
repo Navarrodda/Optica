@@ -42,7 +42,7 @@ if(isset($reg_completado))
 		             </strong>
 		        </p>
 
-		        <input name="mail" type="email" class=" col-md-6 norightborder btn2" placeholder="Nombre de usuario o Email" required />
+		        <input name="email" type="email" class=" col-md-6 norightborder btn2" placeholder="Nombre de usuario o Email" required />
 		        <input name="pass" type="password" class="col-md-6 norightborder btn2" placeholder="contraseña" required />
                 
                 <button type="submit" class="contact submit  btn-primary btn-xl pull-right">Iniciar Sesion</button>
