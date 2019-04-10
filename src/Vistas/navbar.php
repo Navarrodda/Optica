@@ -24,9 +24,6 @@
                         </li>
                         <li>
                             <a class="page-scroll" style="color:orange" href="/"><?= $_SESSION['nombre'] ?> </a>
-                            <ul>
-                                <li><a href="#">opciones</a></li>
-                            </ul>
                         </li>
                         <li>
                                         <a class="page-scroll" style="color:white" href="">Facturacion</a>

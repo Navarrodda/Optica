@@ -22,7 +22,7 @@ class RegistrarControladora
 	public function registrarse($nombre, $apellido, $calle, $telefono, $email, $pass, $id_rol) {
 		try{
 			$regCompleted = FALSE;
-	
+
 			if( ! $this->daoUsuario->verificarEmail( $email ) ) {
 				print_r($id_rol);
 				$userInstance = new Usuario($nombre, $apellido, $email, $calle, $telefono, $pass, $this->daoRol->traerPorId( $id_rol ));
@@ -34,16 +34,22 @@ class RegistrarControladora
 
 			switch ($regCompleted) {
 				case TRUE:
+				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
 				break;
 
 				case FALSE:
+				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "registrarusuario.php");
+				include URL_VISTA . 'footer.php';
 				break;
 			}
 
 		}catch(\PDOException $pdo_error){
+			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "registrarse.php");
+			include URL_VISTA . 'footer.php';
 		}catch(\Exception $error){
 			echo $error->getMessage();
 		}

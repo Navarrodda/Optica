@@ -43,6 +43,7 @@ class SesionControladora
 					if ($email === $usuario->getEmail() && $pass === $usuario->getPassword()) {
 						$rol = $usuario->getIdRol();
                         //Seteo las variables de sesión.
+						$_SESSION["id"] = $usuario->getId();
 						$_SESSION["email"] = $email;
 						$_SESSION["nombre"] =$usuario->getNombre();
 						$_SESSION["pass"] = $pass;
@@ -66,9 +67,13 @@ class SesionControladora
 		}
 
 		if($ir_a_inicio){
-			require(URL_VISTA . 'inicio.php');
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "inicio.php");
+			include URL_VISTA . 'footer.php';		
 		}else{
-			require(URL_VISTA . 'iniciarSesion.php');
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "iniciarSesion.php");
+			include URL_VISTA . 'footer.php';
 		}
 
 	}
@@ -92,7 +97,9 @@ class SesionControladora
 		session_destroy();
 
 		$this->mensaje = new Mensaje('info', 'Ha cerrado sesión !');
-		require("../Vistas/inicio.php");
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "inicio.php");
+		include URL_VISTA . 'footer.php';
 	}
 
 }

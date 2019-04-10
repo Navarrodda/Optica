@@ -39,9 +39,5 @@ require_once '../Config/Autoload.php';
 
 Config\Autoload::iniciar();
 
-include URL_VISTA . 'header.php'; //El header es estático para todas las páginas.
-
  
 Config\Router::direccionar(new Config\Request());
-
-include URL_VISTA . 'footer.php'; //El footer es estático para todas las páginas.

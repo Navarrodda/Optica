@@ -23,38 +23,60 @@ class VistaControladora
 
 	public function index()
 	{
+		
+		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "inicio.php");
+		include URL_VISTA . 'footer.php';
 	}   
 
 	public function iniciar()
 	{
+		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "iniciarSesion.php");
+		include URL_VISTA . 'footer.php';
 	}
 
 	public function registrar()
 	{
+		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "registrarcliente.php");
+		include URL_VISTA . 'footer.php';
 	}
 
 	public function clientes()
 	{
+		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
+		include URL_VISTA . 'footer.php';
 	}
 
 	public function registrlente()
 	{
+		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "registrarlente.php");
+		include URL_VISTA . 'footer.php';
 	}
 	
 	public function facturasimple()
 	{
+		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "simple.php");
+		include URL_VISTA . 'footer.php'; 
 	}
 
 	public function registrarusuario()
 	{
 		$roles = $this->daoRol->traerTodo();
+		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "registrarusuario.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+		public function modificarusuario()
+	{
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarusuario.php");
+		include URL_VISTA . 'footer.php';
 	}
 
 }
