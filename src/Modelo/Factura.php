@@ -8,22 +8,27 @@ class Factura
 private $id;
 private $nombre;
 private $fecha;
+private $monto;
 private $descripcion;
 
 
     /**
      * Class Constructor
-     * @param    $id   
      * @param    $nombre   
      * @param    $fecha   
+     * @param    $monto   
      * @param    $descripcion   
      */
-    public function __construct($nombre, $fecha, $descripcion)
+    public function __construct($nombre, $fecha, $monto, $descripcion)
     {
         $this->nombre = $nombre;
         $this->fecha = $fecha;
+        $this->monto = $monto;
         $this->descripcion = $descripcion;
     }
+
+
+ 
 
     /**
      * @return mixed
@@ -81,6 +86,26 @@ private $descripcion;
     public function setFecha($fecha)
     {
         $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMonto()
+    {
+        return $this->monto;
+    }
+
+    /**
+     * @param mixed $monto
+     *
+     * @return self
+     */
+    public function setMonto($monto)
+    {
+        $this->monto = $monto;
 
         return $this;
     }

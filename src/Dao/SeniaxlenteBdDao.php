@@ -4,7 +4,7 @@ namespace Dao;
 
 use Modelo\Senias_x_lentes;
 
-class Seniaxcliente
+class Seniaxlente
 {
     protected $tabla = "senias_x_lentes";
     protected $listado;
@@ -136,11 +136,13 @@ class Seniaxcliente
         $dataSet = is_array($dataSet) ? $dataSet : false;
         if($dataSet){
             $this->listado = array_map(function ($p) {
+                $daoLente = LenteBdDao::getInstancia();
+                $daoSenia = BdDao::getInstancia();
                 $sxl = new Senias_x_lentes(
-                    $p['id_lente '],
-                    $p['id_senia '],
+                    $daoLente->traerPorId($p['id_lente']),
+                    $daoSenia->traerPorId($p['id_senia'])
                 );
-                $sxl->setId($p['id_senia_x_lente ']);
+                $sxl->getIdSeniaXLente()($p['id_senia_x_lente']);
                 return $sxl;
             }, $dataSet);
         }

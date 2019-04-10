@@ -4,8 +4,8 @@ namespace Dao;
 
 use \Modelo\Usuario;
 
-class UsuarioBdDao
-{
+class UsuarioBdDao{
+
     protected $tabla = "usuarios";
     protected $listado;
     private static $instancia;
@@ -23,8 +23,7 @@ class UsuarioBdDao
 
     }
 
-    public function traerIdPorMail($mail)
-    {
+    public function traerIdPorMail($mail){
         $sql = "SELECT id_usuario FROM $this->tabla WHERE email = \"$mail\" LIMIT 1";
 
         $conexion = Conexion::conectar();
@@ -43,8 +42,7 @@ class UsuarioBdDao
         return null;
     }
 
-    public function agregar(Usuario $usuario)
-    {
+    public function agregar(Usuario $usuario){
       try{
 
         /** @noinspection SqlResolve */
@@ -83,8 +81,7 @@ class UsuarioBdDao
     }
 }
 
-public function eliminarPorId($id)
-{
+public function eliminarPorId($id){
 
     $sql = "DELETE FROM $this->tabla WHERE id= \"$id\"";
 
@@ -95,8 +92,7 @@ public function eliminarPorId($id)
     $sentencia->execute();
 }
 
-public function eliminarPorMail($mail)
-{
+public function eliminarPorMail($mail){
     /** @noinspection SqlResolve */
     $sql = "DELETE FROM $this->tabla WHERE email = \"$mail\"";
 
@@ -107,38 +103,43 @@ public function eliminarPorMail($mail)
     $sentencia->execute();
 }
 
-public function actualizar(Usuario $usuario)
-{
-    /** @noinspection SqlResolve */
+public function actualizar(Usuario $usuario){
 
-    $id = $usuario->getId();
+    try{
+        /** @noinspection SqlResolve */
 
-    $sql = ("UPDATE $this->tabla SET  nombre=:nombre,  apellido=:apellido, calle=:calle,
-        telefono=:telefono,email=:email,pass=:pass WHERE id_usuario=\"$id\"");
+        $id = $usuario->getId();
 
-    $conexion = Conexion::conectar();
+        $sql = ("UPDATE $this->tabla SET  nombre=:nombre,  apellido=:apellido, calle=:calle,
+            telefono=:telefono,email=:email,pass=:pass WHERE id_usuario=\"$id\"");
 
-    $sentencia = $conexion->prepare($sql);
+        $conexion = Conexion::conectar();
 
-    $nombre = $usuarios->getNombre();
-    $apellido = $usuarios->getApellido();
-    $calle = $usuarios->getCalle();
-    $telefono = $usuarios->getTelefono();
-    $email = $usuario->getEmail();
-    $pass = $usuario->getPassword();
+        $sentencia = $conexion->prepare($sql);
 
-    $sentencia->bindParam(":nombre",$nombre);
-    $sentencia->bindParam(":apellido",$apellido);
-    $sentencia->bindParam(":calle",$calle);
-    $sentencia->bindParam(":telefono",$telefono);
-    $sentencia->bindParam(":email", $email);
-    $sentencia->bindParam(":pass", $pass);
+        $nombre = $usuarios->getNombre();
+        $apellido = $usuarios->getApellido();
+        $calle = $usuarios->getCalle();
+        $telefono = $usuarios->getTelefono();
+        $email = $usuario->getEmail();
+        $pass = $usuario->getPassword();
 
-    $sentencia->execute();
+        $sentencia->bindParam(":nombre",$nombre);
+        $sentencia->bindParam(":apellido",$apellido);
+        $sentencia->bindParam(":calle",$calle);
+        $sentencia->bindParam(":telefono",$telefono);
+        $sentencia->bindParam(":email", $email);
+        $sentencia->bindParam(":pass", $pass);
+
+        $sentencia->execute();
+    }catch(\PDOException $e){
+        echo $e->getMessage();die();
+    }catch(\Exception $e){
+        echo $e->getMessage();die();
+    }
 }
 
-public function traerTodo()
-{
+public function traerTodo(){
     $sql = "SELECT * FROM $this->tabla";
 
     $conexion = Conexion::conectar();
@@ -175,8 +176,7 @@ public function verificarEmail($email){
     return FALSE;
 }
 
-public function traerPorId($id)
-{
+public function traerPorId($id){
 
     /** @noinspection SqlResolve */
     $sql = "SELECT * FROM $this->tabla WHERE id_cuenta =  \"$id\" LIMIT 1";
@@ -197,8 +197,8 @@ public function traerPorId($id)
     return null;
 }
 
-public function traerPorMail($email)
-{
+public function traerPorMail($email){
+
     try{
         /** @noinspection SqlResolve */
         $sql = "SELECT * FROM $this->tabla WHERE email =  \"$email\" LIMIT 1";
@@ -224,8 +224,8 @@ public function traerPorMail($email)
         echo $e->getMessage();die();
     }
 }
-public function traerPorNombre($nombre)
-{
+
+public function traerPorNombre($nombre){
     /** @noinspection SqlResolve */
     $sql = "SELECT * FROM $this->tabla WHERE nombre =  \"$nombre\" LIMIT 1";
 
@@ -246,11 +246,10 @@ public function traerPorNombre($nombre)
     return null;
 }
 
-public function mapear($dataSet)
-{
+public function mapear($dataSet){
     $dataSet = is_array($dataSet) ? $dataSet : false;
     if($dataSet){
-     $this->listado = array_map(function ($p) {
+       $this->listado = array_map(function ($p) {
         $daoRol = RolBdDao::getInstancia();
         $usuario = new Usuario
         (
@@ -265,6 +264,6 @@ public function mapear($dataSet)
         $usuario->setId($p['id_usuario']);
         return $usuario;
     }, $dataSet);
- }
+   }
 }
 }

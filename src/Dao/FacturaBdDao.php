@@ -2,11 +2,11 @@
 
 namespace Dao;
 
-use Modelo\Lente_x_cliente;
+use \Modelo\Factura
 
-class LentexclienteBdDao{
+class FacturaBdDao{
 
-	protected $tabla = "lentes_x_clientes";
+	protected $tabla = "facturas";
 	protected static $instancia;
 	protected $listado;
 
@@ -42,24 +42,26 @@ class LentexclienteBdDao{
 		return null;
 	}
 
-	public function agregar(Lente_x_cliente $lentecliente){
+
+	public function agregar(Factura $factura){
 
 		try{
 
-			$sql = ("INSERT INTO $this->tabla ( id_cliente, id_lente) VALUES ( :id_cliente, :id_lente) ");
+			$sql = ("INSERT INTO $this->tabla (nombre, fecha, monto, descripcion ) VALUES ( :nombre, :fecha, :monto, :descripcion  ) ");
 
 			$conexion = Conexion::conectar();
 
 			$sentencia = $conexion->prepare($sql);
 
-			$c = $lentecliente->getIdCliente();
-			$id_cliente = $c->getId();
+			$nombre = $factura->getNombre();
+			$fecha = $factura->getFecha();
+			$monto = $factura->getMonto();
+			$descripcion = $factura->getDescripcion();
 
-			$l = $lentecliente->getIdLente();
-			$id_lente = $l->getId();
-
-			$sentencia->bindParam(":id_cliente",$id_cliente);
-			$sentencia->bindParam(":id_lente",$id_lente);
+			$sentencia->bindParam(":nombre",$nombre);
+			$sentencia->bindParam(":fecha",$fecha);
+			$sentencia->bindParam(":monto",$monto);
+			$sentencia->bindParam(":descripcion",$descripcion);
 
 			$sentencia->execute();
 
@@ -73,7 +75,7 @@ class LentexclienteBdDao{
 
 	public function traerPorId($id)
 	{
-		$sql = "SELECT * FROM $this->tabla WHERE id_lente_x_cliente = \"$id\" LIMIT 1";
+		$sql = "SELECT * FROM $this->tabla WHERE id_tipo_cerveza = \"$id\" LIMIT 1";
 
 		$conexion = Conexion::conectar();
 
@@ -91,24 +93,20 @@ class LentexclienteBdDao{
 		return null;
 	}
 
-	private function mapear($dataSet)
-	{
-		$dataSet = is_array($dataSet) ? $dataSet : null;
-
-		if(!empty($dataSet[0]))
-		{
-			$this->listado = array_map( function ($lc){
-				$daoCliente = ClienteBdDao::getInstancia();
-				$daoLente = LenteBdDao::getInstancia();
-				$lentecliente = new Lente_x_cliente(
-					$daoCliente->traerPorId($p['id_cliente']),
-					$daoLente->traerPorId($p['id_lente'])
-				);
-				$lentecliente->setId($lc['id_lente_x_cliente']);
-				return $lentecliente; 
-
-			}, $dataSet);
-		}
-	}
-
+	public function mapear($dataSet){
+    $dataSet = is_array($dataSet) ? $dataSet : false;
+    if($dataSet){
+       $this->listado = array_map(function ($p) {
+        $factura = new Factura
+        (
+            $p['nombre'],
+            $p['fecha'],
+            $p['monto'],
+            $p['descripcion']
+        );
+        $factura->setId($p['id_factura']);
+        return $factura;
+    }, $dataSet);
+   }
+}
 }

@@ -5,9 +5,9 @@ namespace Modelo;
 use\Modelo\Lente;
 use\Modelo\Senia;
 
-class Senia_x_cliente
+class Senia_x_lente
 {
-	private $id_senia_x_cliente;
+	private $id_senia_x_lente;
 	private $id_senia;
 	private $id_Lente;
 
@@ -26,22 +26,24 @@ class Senia_x_cliente
 
 	
 
+    
+
     /**
      * @return mixed
      */
-    public function getIdSeniaXCliente()
+    public function getIdSeniaXLente()
     {
-        return $this->id_senia_x_cliente;
+        return $this->id_senia_x_lente;
     }
 
     /**
-     * @param mixed $id_senia_x_cliente
+     * @param mixed $id_senia_x_lente
      *
      * @return self
      */
-    public function setIdSeniaXCliente($id_senia_x_cliente)
+    public function setIdSeniaXLente($id_senia_x_lente)
     {
-        $this->id_senia_x_cliente = $id_senia_x_cliente;
+        $this->id_senia_x_lente = $id_senia_x_lente;
 
         return $this;
     }
