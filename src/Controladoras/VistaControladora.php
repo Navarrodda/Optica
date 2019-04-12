@@ -3,22 +3,27 @@
 namespace Controladoras;
 //Modelo
 
-use Modelo\Mensaje as Mensaje;
+use Modelo\Mensaje;
 use Modelo\Rol as Rol;
+use Modelo\Cliente as Cliente;
 
 //Dao
 
 use Dao\RolBdDao as RolBdDao;
+use Dao\ClienteBdDao as ClienteBdDao;
 
 class VistaControladora
 {
-
 	protected $daoRol;
+	protected $daoCliente;
+	
+	private $mensaje;
 
 	public function __construct()
 	{
 
 		$this->daoRol = RolBdDao::getInstancia();
+		$this->daoCliente = ClienteBdDao::getInstancia();
 	}
 
 	public function index()
@@ -52,6 +57,7 @@ class VistaControladora
 
 	public function registrlente()
 	{
+		$cliente = $this->daoCliente->traerTodo();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "registrarlente.php");
 		include URL_VISTA . 'footer.php';

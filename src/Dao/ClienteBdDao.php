@@ -5,6 +5,7 @@ namespace Dao;
 use Modelo\Cliente;
 
 class ClienteBdDao{
+    
 	protected $tabla = "clientes";
 	private static $instancia;
     protected $listado;
@@ -107,10 +108,8 @@ class ClienteBdDao{
     }
 
     public function mapear($dataSet){
-
         $dataSet = is_array($dataSet) ? $dataSet : false;
-
-        if($dataSet[0]){
+        if($dataSet){
             $this->listado = array_map(function($p){
                 $cliente = new Cliente(
                     $p['nombre'],

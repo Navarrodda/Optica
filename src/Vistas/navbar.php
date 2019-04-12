@@ -9,7 +9,7 @@
                         <div class="flexsearch--input-wrapper">
                             <input class="flexsearch--input" type="search" placeholder="search">
                         </div>
-                        <input class="flexsearch--submit" type="submit" value="&#10140;"/>
+                        <input class="flexsearch--submit" type="submit" value="&#10140;">
                     </form>
                 </div>
             </div>
@@ -24,9 +24,14 @@
                         </li>
                         <li>
                             <a class="page-scroll" style="color:orange" href="/"><?= $_SESSION['nombre'] ?> </a>
+                            <ul>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="/vista/clientes/">Clientes</a>
+                                </li>
+                            </ul>   
                         </li>
                         <li>
-                                        <a class="page-scroll" style="color:white" href="">Facturacion</a>
+                            <a class="page-scroll" style="color:white" href="">Facturacion</a>
                             <ul>
                                 <li>
                                     <a class="page-scroll" style="color:white" href="/vista/facturasimple/">Simple</a>
@@ -43,13 +48,10 @@
                             <a class="page-scroll botonimagen" style="background-image: url(<?= URL_IMG . 'menu.png' ?>);" href=""></a>
                             <ul>
                                 <li>
-                                    <a class="page-scroll" style="color:white" href="/vista/registrar/">opciones</a>
+                                    <a class="page-scroll" style="color:white" href="/vista/registrar/">Registrar Cliente</a>
                                 </li>
                                 <li>
-                                    <a class="page-scroll" style="color:white" href="/vista/registrlente/">opciones1</a>
-                                </li>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/vista/clientes/">opciones2</a>
+                                    <a class="page-scroll" style="color:white" href="/vista/registrlente/">Registrar Lente Del Cliente </a>
                                 </li>
                             </ul>
                         </li>               
@@ -70,59 +72,59 @@
                             <a class="page-scroll" style="color:white" href="/vista/iniciar">Iniciar Sesion</a>
                         </li>
                         <li>
-                    </ul>
-                </nav>
-            </div>
-
-
-        <?php } ?>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
-
-
-<?php if(isset($notifiaciones)) { ?>
-    <!-- Modal -->
-
-    <div class="modal fade" id="notiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">NOTIFICACIONES</h4>
+                        </ul>
+                    </nav>
                 </div>
-                <div class="modal-body">
-                    <?php foreach($notifiaciones as $notificacion){ ?>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        MENSAJE
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-chico">
-                                        <?= $notificacion->getMensaje() ?>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <form method="post" action="/notificacion/eliminar">
-                            <input type="hidden" name="id" value=<?= $notificacion->getId() ?>>
-                            <button type="submit" style="border-color: black" class="btn btn-danger">ELIMINAR NOTIFICACION</button>
-                        </form>
-                    <?php } ?>
 
-                </div>
-                <div class="modal-footer">
 
-                    <button type="button" style="border-color: black" class="btn btn-success" data-dismiss="modal">OK</button>
+            <?php } ?>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <?php if(isset($notifiaciones)) { ?>
+        <!-- Modal -->
+
+        <div class="modal fade" id="notiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">NOTIFICACIONES</h4>
+                    </div>
+                    <div class="modal-body">
+                        <?php foreach($notifiaciones as $notificacion){ ?>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            MENSAJE
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-chico">
+                                            <?= $notificacion->getMensaje() ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <form method="post" action="/notificacion/eliminar">
+                                <input type="hidden" name="id" value=<?= $notificacion->getId() ?>>
+                                <button type="submit" style="border-color: black" class="btn btn-danger">ELIMINAR NOTIFICACION</button>
+                            </form>
+                        <?php } ?>
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" style="border-color: black" class="btn btn-success" data-dismiss="modal">OK</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<?php } ?>
+    <?php } ?>
