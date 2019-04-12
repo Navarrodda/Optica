@@ -48,7 +48,7 @@ class RegistrarControladora
 
 		}catch(\PDOException $pdo_error){
 			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "registrarse.php");
+			require(URL_VISTA . 'error.php');
 			include URL_VISTA . 'footer.php';
 		}catch(\Exception $error){
 			echo $error->getMessage();
