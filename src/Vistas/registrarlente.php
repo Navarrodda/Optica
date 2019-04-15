@@ -3,19 +3,12 @@
 <div class="container mh-400" style="margin-top:30px;">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2 text-center">
-			<?php 
-			if($this->cliente != null)
-			{
-				?>
+			<?php if($this->cliente != NULL){ ?>
 				<h2 class="section-heading">Registrar el Lente del Cliente</h2>
-				<?php
-			}
-			else{
-				?>
-				<h2 class="section-heading">No hay Clientes Registrados en el Sistema</h2>
-				<?php
-			}
-			?>
+				<?php }
+			else {
+				?><h2 class="section-heading">No hay Clientes Registrados en el Sistema</h2>
+				<?php } ?>
 			<hr class="primary">
 			<p>
 				<strong style="color:black">
@@ -30,7 +23,7 @@
 					</div>
 				</div>
 				<?php 
-				if($this->cliente!= null )
+				if($this->cliente!= NULL )
 				{
 					?>
 					<form id="form_r" method="post" action="/#/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
