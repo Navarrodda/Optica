@@ -18,6 +18,7 @@ class VistaControladora
 	protected $daoCliente;
 	
 	private $mensaje;
+	private $cliente;
 
 	public function __construct()
 	{

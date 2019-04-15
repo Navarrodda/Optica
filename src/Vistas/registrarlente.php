@@ -3,18 +3,24 @@
 <div class="container mh-400" style="margin-top:30px;">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2 text-center">
-			<?php if($this->cliente != NULL){ ?>
+			<?php if($this->cliente != NULL ){ ?>
 				<h2 class="section-heading">Registrar el Lente del Cliente</h2>
-				<?php }
+				<hr class="primary">
+				<p>
+					<strong style="color:black">
+						Registrar! .
+					</strong>
+				</p>
+			<?php }
 			else {
 				?><h2 class="section-heading">No hay Clientes Registrados en el Sistema</h2>
-				<?php } ?>
-			<hr class="primary">
-			<p>
-				<strong style="color:black">
-					Registrar! .
-				</strong>
-			</p>
+				<hr class="primary">
+				<p>
+					<strong style="color:black">
+						Registre un Cliente! .
+					</strong>
+				</p>
+			<?php } ?>
 			<div class="regularform">
 				<div class="done">
 					<div class="alert alert-success">
