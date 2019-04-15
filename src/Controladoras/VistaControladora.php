@@ -51,6 +51,7 @@ class VistaControladora
 
 	public function clientes()
 	{
+		$cliente = $this->daoCliente->traerTodo();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
 		include URL_VISTA . 'footer.php';
