@@ -80,10 +80,17 @@ class VistaControladora
 		include URL_VISTA . 'footer.php';
 	}
 
-		public function modificarusuario()
+	public function modificarusuario()
 	{
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "modificarusuario.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function pdf()
+	{
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "llamarpdf.php");
 		include URL_VISTA . 'footer.php';
 	}
 

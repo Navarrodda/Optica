@@ -42,6 +42,9 @@
                                 <li>
                                     <a class="page-scroll" style="color:white" href="">Cliente Registrado</a>
                                 </li>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="/pdf/pdfvista">pdf</a>
+                                </li>
                             </ul>
                         </li>
                         <li>

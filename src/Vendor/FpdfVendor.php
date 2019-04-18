@@ -1,11 +1,12 @@
 <?php
-namespace Vendor; 
+
+namespace Vendor;
 
 
 define('FPDF_VERSION','1.81');
 
 
-class FPDF
+class FpdfVendor
 {
 protected $page;               // current page number
 protected $n;                  // current object number
@@ -66,7 +67,6 @@ protected $PDFVersion;         // PDF version number
 /*******************************************************************************
 *                               Public methods                                 *
 *******************************************************************************/
-
 function __construct($orientation='P', $unit='mm', $size='A4')
 {
 	// Some checks
@@ -163,6 +163,18 @@ function __construct($orientation='P', $unit='mm', $size='A4')
 	$this->SetCompression(true);
 	// Set default PDF version number
 	$this->PDFVersion = '1.3';
+}
+
+function Header()
+{
+	// To be implemented in your own inherited class
+	include URL_VISTA . 'header.php';
+}
+
+function Footer()
+{
+	// To be implemented in your own inherited class
+	include URL_VISTA . 'footer.php';
 }
 
 function SetMargins($left, $top, $right=null)
@@ -351,16 +363,6 @@ function AddPage($orientation='', $size='', $rotation=0)
 	}
 	$this->TextColor = $tc;
 	$this->ColorFlag = $cf;
-}
-
-function Header()
-{
-	// To be implemented in your own inherited class
-}
-
-function Footer()
-{
-	// To be implemented in your own inherited class
 }
 
 function PageNo()
@@ -973,9 +975,32 @@ function SetXY($x, $y)
 	$this->SetY($y,false);
 }
 
+protected function _checkoutput()
+{
+	if(PHP_SAPI!='cli')
+	{
+		if(headers_sent($file,$line))
+			$this->Error("Some data has already been output, can't send PDF file (output started at $file:$line)");
+	}
+	if(ob_get_length())
+	{
+		// The output buffer is not empty
+
+		if(preg_match('/^(\xEF\xBB\xBF)?\s*$/',ob_get_contents()))
+		{
+			// It contains only a UTF-8 BOM and/or whitespace, let's clean it
+			ob_clean();
+
+		}
+		else
+			$this->Error("Some data has already been output, can't send PDF file");
+	}
+}
+
 function Output($dest='', $name='', $isUTF8=false)
 {
 	// Output PDF to some destination
+
 	$this->Close();
 	if(strlen($name)==1 && strlen($dest)!=1)
 	{
@@ -992,6 +1017,7 @@ function Output($dest='', $name='', $isUTF8=false)
 	{
 		case 'I':
 			// Send to standard output
+			echo "david";
 			$this->_checkoutput();
 			if(PHP_SAPI!='cli')
 			{
@@ -1040,25 +1066,6 @@ protected function _dochecks()
 		@set_magic_quotes_runtime(0);
 }
 
-protected function _checkoutput()
-{
-	if(PHP_SAPI!='cli')
-	{
-		if(headers_sent($file,$line))
-			$this->Error("Some data has already been output, can't send PDF file (output started at $file:$line)");
-	}
-	if(ob_get_length())
-	{
-		// The output buffer is not empty
-		if(preg_match('/^(\xEF\xBB\xBF)?\s*$/',ob_get_contents()))
-		{
-			// It contains only a UTF-8 BOM and/or whitespace, let's clean it
-			ob_clean();
-		}
-		else
-			$this->Error("Some data has already been output, can't send PDF file");
-	}
-}
 
 protected function _getpagesize($size)
 {
