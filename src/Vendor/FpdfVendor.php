@@ -1012,7 +1012,6 @@ function Output($dest='', $name='', $isUTF8=false)
 	{
 		case 'I':
 			// Send to standard output
-			echo "david";
 			$this->_checkoutput();
 			if(PHP_SAPI!='cli')
 			{
