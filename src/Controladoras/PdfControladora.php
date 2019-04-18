@@ -14,12 +14,11 @@ class PdfControladora
 		
 	}
 	
-
 	function pdfvista()
 	{
 		$pdf = new pdf();
 		$pdf->AddPage();
-		$pdf->Output();
-		
+		$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
+		$pdf->Output();	
 	}
 }

@@ -19,4 +19,4 @@ define("URL_JS", '/js/');
 define("URL_SLICK", '/slick/');
 define("URL_IMG", '/img/');
 define("URL_BOOTSTRAP", 'bootstrap.min.css');
-define("URL_IMG_USUARIOS" , URL_IMG . 'imagen_usuarios/');
+define("URL_IMG_USUARIOS" , URL_IMG . 'Plantilla/');
