@@ -54,7 +54,7 @@ class PdfControladora
 				$pdf->AddPage();
 				$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
 				$pdf->SetTextColor(0,0,0);
-				$pdf->SetFont('Arial','B',10);
+				$pdf->SetFont('Arial','B',8);
 				ini_set('date.timezone','America/Buenos_Aires');
 				$timed= date('d',time());
 				$timem= date('m',time()); 
@@ -82,7 +82,7 @@ class PdfControladora
 				//Nombre}
 				//Apellido{
 				$pdf->SetY(16);
-				$pdf->SetX(134);
+				$pdf->SetX(132);
 				$pdf->MultiCell(145,15,$usuario->getApellido());
 				//Apellido}
 				//}
@@ -109,7 +109,7 @@ class PdfControladora
 				//Nombre}
 				//Apellido{
 				$pdf->SetY(92.5);
-				$pdf->SetX(39);
+				$pdf->SetX(37);
 				$pdf->MultiCell(135,15,$usuario->getApellido());
 				//Apellido}
 				//Calle{
