@@ -45,7 +45,8 @@ class SesionControladora
                         //Seteo las variables de sesión.
 						$_SESSION["id"] = $usuario->getId();
 						$_SESSION["email"] = $email;
-						$_SESSION["nombre"] =$usuario->getNombre();
+						$_SESSION["nombre"] = $usuario->getNombre();
+						$_SESSION["apellido"] = $usuario->getApellido();
 						$_SESSION["pass"] = $pass;
 						$_SESSION["rol"] = $rol->getPrioridad();
                         //Mensaje de success
