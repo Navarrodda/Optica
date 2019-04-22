@@ -15,11 +15,19 @@
       <div class="container tm-site-header-container" >
         <div class="row">
           <div class="col-sm-12 col-md-11 col-lg-9 col-md-col-xl-6 mb-md-0 mb-sm-4 mb-4 tm-site-header-col">
-            <div class="tm-site-header">
-              <h1 style="color:black" class="mb-12">Programación‎</h1>
-              <img src="/img/underline.png" class="img-fluid mb-1">
-              <p style="color:black">David Navarro &copy;GC</p>        
-            </div>                        
+            <?php if(isset($_SESSION['rol'])) {?>
+              <div class="tm-site-header">
+                <h1 style="color:black" class="mb-12">Bienvenido</h1>
+                 <img src="/img/underline.png" class="img-fluid mb-1">
+                <p style="color:black"><?= $_SESSION['nombre'],' ', $_SESSION['apellido']?></p> 
+              </div> 
+            <?php }else{ ?>
+              <div class="tm-site-header">
+                <h1 style="color:black" class="mb-12">Programación‎</h1>
+                <img src="/img/underline.png" class="img-fluid mb-1">
+                <p style="color:black">David Navarro &copy;GC</p>        
+              </div> 
+            <?php } ?>                       
           </div>                
         </div>
       </div>  

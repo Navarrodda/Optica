@@ -40,7 +40,7 @@ class PdfControladora
 	//SetFont establecer fuente
 	//Set Font Size establecer tamaño de fuente
 	//Text texto Text($x, $y, $txt) top:45.300;left:436.152
-	//MultiCell
+	//MultiCell($w, $h, $txt);
 
 	function pdfvista()
 	{
@@ -58,15 +58,30 @@ class PdfControladora
 				ini_set('date.timezone','America/Buenos_Aires');
 				$timed= date('d',time());
 				$timem= date('m',time()); 
-				$timey= date('y',time()); 
+				$timey= date('y',time());
+				//Dia{
+				$pdf->SetY(16);
+				$pdf->SetX(83.5);
+				$pdf->MultiCell(145,15,$timed);
+				//Dia}
+				//Mes{
+				$pdf->SetY(16);
+				$pdf->SetX(93.5);
+				$pdf->MultiCell(145,15,$timem);
+				//Mes}
+				//Anio{
+				$pdf->SetY(16);
+				$pdf->SetX(103.5);
+				$pdf->MultiCell(145,15,$timey);
+				//Anio} 
 				//Nombre{
-				$pdf->Ln(6);
-				$pdf->SetX(123);
+				$pdf->SetY(16);
+				$pdf->SetX(124);
 				$pdf->MultiCell(145,15,$usuario->getNombre());
 				//Nombre}
 				//Apellido{
-				$pdf->Ln(-15);
-				$pdf->SetX(134);
+				$pdf->SetY(16);
+				$pdf->SetX(135);
 				$pdf->MultiCell(145,15,$usuario->getApellido());
 				$pdf->Output();
 				//Apellido}
