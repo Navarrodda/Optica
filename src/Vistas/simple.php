@@ -4,11 +4,11 @@
 <div class="container mh-400" style="margin-top:20px;">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2 text-center">
-			<h2 class="section-heading" style="color:black">Registrar el Lente del Cliente</h2>
+			<h2 class="section-heading" style="color:black">Factura Simple</h2>
 			<hr class="primary">
 			<p>
 				<strong style="color:black">
-					Registrar! .
+					Factura a PDF! .
 				</strong>
 			</p>
 			<div class="regularform">
@@ -63,7 +63,7 @@
 					<input required name="subtotal" type="number" class="col-md-4 norightborder btn2" placeholder="$ Subtotal">
 					<input required name="senia" type="number" class="col-md-4 norightborder btn2" placeholder="$ Seña">
 					<input required name="saldo_total" type="number" class="col-md-4 norightborder btn2" placeholder="$ Saldo Total">
-					<button type="submit" class="contact submit btn-primary btn-xl pull-right">Enviar</button>
+					<button type="submit" class="contact submit btn-primary btn-xl pull-right">Cargar</button>
 				</form>
 			</div>
 		</div>

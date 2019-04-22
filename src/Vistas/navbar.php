@@ -36,6 +36,12 @@
                             <a class="page-scroll" style="color:white" href="">Facturacion</a>
                             <ul>
                                 <li>
+                                    <a class="page-scroll" style="color:white" href="/pdf/pdfplantilla"  target="_blank">PDF Plantilla</a>
+                                </li>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="/pdf/pdfvista"  target="_blank">PDF <?= $_SESSION['nombre'],' ', $_SESSION['apellido']?></a>
+                                </li>
+                                <li>
                                     <a class="page-scroll" style="color:white" href="/vista/facturasimple/">Simple</a>
                                 </li>
                                 <li>
@@ -43,12 +49,6 @@
                                 </li>
                                 <li>
                                     <a class="page-scroll" style="color:white" href="">Cliente Registrado</a>
-                                </li>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/pdf/pdfvista"  target="_blank">PDF <?= $_SESSION['nombre'],' ', $_SESSION['apellido']?></a>
-                                </li>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/pdf/pdfplantilla"  target="_blank">PDF Plantilla</a>
                                 </li>
                             </ul>
                         </li>
