@@ -59,6 +59,7 @@ class PdfControladora
 				$timed= date('d',time());
 				$timem= date('m',time()); 
 				$timey= date('y',time());
+				//1 Parte{
 				//Dia{
 				$pdf->SetY(16);
 				$pdf->SetX(83.5);
@@ -83,9 +84,21 @@ class PdfControladora
 				$pdf->SetY(16);
 				$pdf->SetX(135);
 				$pdf->MultiCell(145,15,$usuario->getApellido());
-				$pdf->Output();
 				//Apellido}
-
+				//}
+				//2 Parte{
+				//Nombre{
+				$pdf->SetY(92);
+				$pdf->SetX(29);
+				$pdf->MultiCell(135,15,$usuario->getNombre());
+				//Nombre}
+				//Apellido{
+				$pdf->SetY(92);
+				$pdf->SetX(39);
+				$pdf->MultiCell(135,15,$usuario->getApellido());
+				//Apellido}
+				//}
+				$pdf->Output();
 
 			}
 			else
