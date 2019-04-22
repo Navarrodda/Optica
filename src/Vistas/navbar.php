@@ -45,7 +45,10 @@
                                     <a class="page-scroll" style="color:white" href="">Cliente Registrado</a>
                                 </li>
                                 <li>
-                                    <a class="page-scroll" style="color:white" href="/pdf/pdfvista"  target="_blank">pdf</a>
+                                    <a class="page-scroll" style="color:white" href="/pdf/pdfvista"  target="_blank">PDF <?= $_SESSION['nombre'],' ', $_SESSION['apellido']?></a>
+                                </li>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="/pdf/pdfplantilla"  target="_blank">PDF Plantilla</a>
                                 </li>
                             </ul>
                         </li>

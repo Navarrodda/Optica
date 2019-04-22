@@ -198,9 +198,7 @@ public function traerPorId($id){
 }
 
 public function traerPorMail($email){
-
     try{
-        /** @noinspection SqlResolve */
         $sql = "SELECT * FROM $this->tabla WHERE email =  \"$email\" LIMIT 1";
 
         $conexion = Conexion::conectar();
