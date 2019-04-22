@@ -82,21 +82,46 @@ class PdfControladora
 				//Nombre}
 				//Apellido{
 				$pdf->SetY(16);
-				$pdf->SetX(135);
+				$pdf->SetX(134);
 				$pdf->MultiCell(145,15,$usuario->getApellido());
 				//Apellido}
 				//}
 				//2 Parte{
+				//Dia{
+				$pdf->SetY(80.5);
+				$pdf->SetX(163);
+				$pdf->MultiCell(145,15,$timed);
+				//Dia}
+				//Mes{
+				$pdf->SetY(80.5);
+				$pdf->SetX(173.5);
+				$pdf->MultiCell(145,15,$timem);
+				//Mes}
+				//Anio{
+				$pdf->SetY(80.5);
+				$pdf->SetX(183.5);
+				$pdf->MultiCell(145,15,$timey);
+				//Anio} 
 				//Nombre{
-				$pdf->SetY(92);
+				$pdf->SetY(92.5);
 				$pdf->SetX(29);
 				$pdf->MultiCell(135,15,$usuario->getNombre());
 				//Nombre}
 				//Apellido{
-				$pdf->SetY(92);
+				$pdf->SetY(92.5);
 				$pdf->SetX(39);
 				$pdf->MultiCell(135,15,$usuario->getApellido());
 				//Apellido}
+				//Calle{
+				$pdf->SetY(92.5);
+				$pdf->SetX(110.5);
+				$pdf->MultiCell(135,15,$usuario->getCalle());
+				//Calle}
+				//Telefono{
+				$pdf->SetY(92.5);
+				$pdf->SetX(165.5);
+				$pdf->MultiCell(135,15,$usuario->getTelefono());
+				//Telefono}
 				//}
 				$pdf->Output();
 
