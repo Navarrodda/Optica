@@ -291,6 +291,33 @@ class PdfControladora
 				$pdf->SetX(165.5);
 				$pdf->MultiCell(135,15,$usuario->getTelefono());
 				//Telefono}
+				//Reseta con fecha{
+				//Dia{
+				$pdf->SetY(99.5);
+				$pdf->SetX(48);
+				$pdf->MultiCell(145,15,'22');
+				//Dia}
+				//Mes{
+				$pdf->SetY(99.5);
+				$pdf->SetX(61);
+				$pdf->MultiCell(145,15,'11');
+				//Mes}
+				//Anio{
+				$pdf->SetY(99.5);
+				$pdf->SetX(75);
+				$pdf->MultiCell(145,15,'16');
+				//Anio}
+				//Reseta con fecha}
+				//Dr{
+				$pdf->SetY(99.5);
+				$pdf->SetX(89.5);
+				$pdf->MultiCell(145,15,'Perez');
+				//Dr}
+				//Proc{
+				$pdf->SetY(99.5);
+				$pdf->SetX(158.5);
+				$pdf->MultiCell(145,15,'Roberto');
+				//Proc}
 				//}
 				$pdf->Output();
 
