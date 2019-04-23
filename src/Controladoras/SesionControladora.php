@@ -51,7 +51,7 @@ class SesionControladora
 						$_SESSION["rol"] = $rol->getPrioridad();
                         //Mensaje de success
 						$this->mensaje = new Mensaje('success', 'Ha iniciado sesión satisfactoriamente 
-							! Se ha logueado como' . ' ' . '<i><strong>' . $usuario->getNombre()
+							! Se ha logueado como' . ' ' . '<i><strong>' .  $usuario->getEmail()
 							. '</strong></i>');
 						$ir_a_inicio = TRUE;
 					} else {

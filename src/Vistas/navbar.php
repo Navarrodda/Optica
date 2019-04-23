@@ -45,7 +45,7 @@
                                     <a class="page-scroll" style="color:white" href="/vista/facturasimple/">Simple</a>
                                 </li>
                                 <li>
-                                    <a class="page-scroll" style="color:white" href="/">Simple1</a>
+                                    <a class="page-scroll" style="color:white" href="/pdf/pdfsimple">Simple1</a>
                                 </li>
                                 <li>
                                     <a class="page-scroll" style="color:white" href="">Cliente Registrado</a>

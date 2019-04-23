@@ -60,6 +60,7 @@ class PdfControladora
 				$timem= date('m',time()); 
 				$timey= date('y',time());
 				//1 Parte{
+				//Fecha{
 				//Dia{
 				$pdf->SetY(16);
 				$pdf->SetX(83.5);
@@ -74,7 +75,9 @@ class PdfControladora
 				$pdf->SetY(16);
 				$pdf->SetX(103.5);
 				$pdf->MultiCell(145,15,$timey);
-				//Anio} 
+				//Anio}
+				//}
+				//Senior{ 
 				//Nombre{
 				$pdf->SetY(16);
 				$pdf->SetX(124);
@@ -85,8 +88,10 @@ class PdfControladora
 				$pdf->SetX(132);
 				$pdf->MultiCell(145,15,$usuario->getApellido());
 				//Apellido}
+				//Senior}
 				//}
 				//2 Parte{
+				//Fecha{
 				//Dia{
 				$pdf->SetY(80.5);
 				$pdf->SetX(163);
@@ -101,7 +106,9 @@ class PdfControladora
 				$pdf->SetY(80.5);
 				$pdf->SetX(183.5);
 				$pdf->MultiCell(145,15,$timey);
-				//Anio} 
+				//Anio}
+				//Fecha}
+				//Senior{ 
 				//Nombre{
 				$pdf->SetY(92.5);
 				$pdf->SetX(29);
@@ -112,6 +119,7 @@ class PdfControladora
 				$pdf->SetX(37);
 				$pdf->MultiCell(135,15,$usuario->getApellido());
 				//Apellido}
+				//Senior}
 				//Calle{
 				$pdf->SetY(92.5);
 				$pdf->SetX(110.5);
@@ -163,6 +171,147 @@ class PdfControladora
 		}
 
 	}
+
+	function pdfsimple()
+	{
+		if(!empty($_SESSION))
+		{
+			$email = $_SESSION["email"];
+			$usuario = $this->daoUsuario->traerPorMail($email);
+			if($usuario != NULL )
+			{
+				$pdf = new pdf();
+				$pdf->AddPage();
+				$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
+				$pdf->SetTextColor(0,0,0);
+				$pdf->SetFont('Arial','B',8);
+				ini_set('date.timezone','America/Buenos_Aires');
+				$timed= date('d',time());
+				$timem= date('m',time()); 
+				$timey= date('y',time());
+				//1 Parte{
+				//Fecha{
+				//Dia{
+				$pdf->SetY(16);
+				$pdf->SetX(83.5);
+				$pdf->MultiCell(145,15,$timed);
+				//Dia}
+				//Mes{
+				$pdf->SetY(16);
+				$pdf->SetX(93.5);
+				$pdf->MultiCell(145,15,$timem);
+				//Mes}
+				//Anio{
+				$pdf->SetY(16);
+				$pdf->SetX(103.5);
+				$pdf->MultiCell(145,15,$timey);
+				//Anio}
+				//}
+				//Senior{ 
+				//Nombre{
+				$pdf->SetY(16);
+				$pdf->SetX(124);
+				$pdf->MultiCell(145,15,$usuario->getNombre());
+				//Nombre}
+				//Apellido{
+				$pdf->SetY(16);
+				$pdf->SetX(132);
+				$pdf->MultiCell(145,15,$usuario->getApellido());
+				//Apellido}
+				//Senior}
+				//Observaciones{
+				$pdf->SetY(23);
+				$pdf->SetX(89);
+				$pdf->MultiCell(145,15,'monocromaticos');//Observacion
+				//Observaciones}
+				//Sera entregado el dia{
+				//Dia{
+				$pdf->SetY(30.5);
+				$pdf->SetX(53);
+				$pdf->MultiCell(145,15,'03');
+				//Dia}
+				//Mes{
+				$pdf->SetY(30.5);
+				$pdf->SetX(60);
+				$pdf->MultiCell(145,15,'21');
+				//Mes}
+				//Anio{
+				$pdf->SetY(30.5);
+				$pdf->SetX(67.5);
+				$pdf->MultiCell(145,15,'14');
+				//Sera entregado el dia}
+				//A cuenta{
+				$pdf->SetY(25);
+				$pdf->SetX(152.6);
+				$pdf->MultiCell(145,15,'11111');
+				//A cuenta}
+				//Saldo{
+				$pdf->SetY(30.3);
+				$pdf->SetX(152.6);
+				$pdf->MultiCell(145,15,'22222');
+				//Saldo}
+				//}
+				//2 Parte{
+				//Fecha{
+				//Dia{
+				$pdf->SetY(80.5);
+				$pdf->SetX(163);
+				$pdf->MultiCell(145,15,$timed);
+				//Dia}
+				//Mes{
+				$pdf->SetY(80.5);
+				$pdf->SetX(173.5);
+				$pdf->MultiCell(145,15,$timem);
+				//Mes}
+				//Anio{
+				$pdf->SetY(80.5);
+				$pdf->SetX(183.5);
+				$pdf->MultiCell(145,15,$timey);
+				//Anio}
+				//Fecha}
+				//Senior{ 
+				//Nombre{
+				$pdf->SetY(92.5);
+				$pdf->SetX(29);
+				$pdf->MultiCell(135,15,$usuario->getNombre());
+				//Nombre}
+				//Apellido{
+				$pdf->SetY(92.5);
+				$pdf->SetX(37);
+				$pdf->MultiCell(135,15,$usuario->getApellido());
+				//Apellido}
+				//Senior}
+				//Calle{
+				$pdf->SetY(92.5);
+				$pdf->SetX(110.5);
+				$pdf->MultiCell(135,15,$usuario->getCalle());
+				//Calle}
+				//Telefono{
+				$pdf->SetY(92.5);
+				$pdf->SetX(165.5);
+				$pdf->MultiCell(135,15,$usuario->getTelefono());
+				//Telefono}
+				//}
+				$pdf->Output();
+
+			}
+			else
+			{
+				$this->mensaje = new Mensaje('warning', 'No se pudo mostrar el PDF hubo un error!');
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "pdf.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}
+		else
+		{
+			$this->mensaje = new Mensaje('warning', 'Deve iniciar secion!');
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "inicio.php");
+			include URL_VISTA . 'footer.php';
+		}
+	}		
 
 	/*function pdfvista()
 	{
