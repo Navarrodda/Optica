@@ -8,7 +8,7 @@
 
 <div class="container mh-400" style="margin-top:30px;">
     <div class="container lower-box box-primary" style="text-align: center;">
-       <?php if($this->cliente!= null ) { ?>
+        <?php if($cliente!= null ) { ?>
         <h2 class="section-heading">Clientes registrados en el Sistema</h2>
         <hr class="primary"> <?php }
         else{ ?>
@@ -21,7 +21,7 @@
                    <div class="table-responsive">
                      <table class="table table-hover">
                        <?php 
-                       if($this->cliente!= null )
+                       if($cliente!= null )
                        {
                         ?>
                         <thead>
@@ -48,7 +48,7 @@
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($this->cliente as $objeto) {
+                            foreach ($cliente as $objeto) {
                                 ?>
                                 <tr style="color:white">
                                     <td>
@@ -72,7 +72,7 @@
                                 </td>
                                 <td>
                                     <a href="#" class="disabled">
-                                        <span class="glyphicon glyphicon-trash" title="No implementado..."
+                                        <span class="glyphicon glyphicon-trash" title="Eliminar Cliente"
                                         data-toggle="tooltip" data-placement="right">
                                     </span>
                                 </a>

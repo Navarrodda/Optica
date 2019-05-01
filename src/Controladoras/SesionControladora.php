@@ -2,19 +2,24 @@
 
 namespace Controladoras;
 
-use Modelo\LimpiarEntrada;
-use Modelo\Mensaje;
+//Modelo
+use Modelo\LimpiarEntrada as LimpiarEntrada;
+use Modelo\Mensaje as Mensaje;
 use Modelo\Rol as Rol;
-use Modelo\Usuario as Usuario;;
+use Modelo\Usuario as Usuario;
+
+//Dao
 use Dao\UsuarioBdDao as UsuarioBdDao;
 
 
 class SesionControladora
 {
 
+	protected $daoRol;
+	protected $daoCliente;
+	
 	private $mensaje;
-	private $limpiar;
-	protected $daoUsuario;
+	private $cliente;
 
 	public function __construct()
 	{
