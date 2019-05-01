@@ -19,7 +19,6 @@ class Cliente
      */
     public function __construct($nombre, $apellido, $telefono)
     {
-        $this->id = $id;
         $this->nombre = $nombre;
         $this->apellido = $apellido;
         $this->telefono = $telefono;

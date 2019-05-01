@@ -17,7 +17,7 @@
 						Your message has been sent. Thank you!
 					</div>
 				</div>
-				<form id="form_r" method="post" action="/#/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
+				<form id="form_r" method="post" action="/registrar/registrarcliente/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
 
 					<input required name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Ingresa Nombre del Cliente">
 					<input required name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">

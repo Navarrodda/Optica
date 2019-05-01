@@ -65,9 +65,9 @@ class Mensaje
     public function cartelAlert($msj,$tipo)
     {
         $html = "
-            <div class='container' style='margin-top:50px; margin-bottom: 30px;'>
+            <div class='container' style='margin-top:50px; margin-bottom: 10px;'>
                 <div class='row'> 
-                    <div class='col-sm-8 col-md-offset-2'>
+                    <div class='col-sm-12'>
                          <div class='alert alert-" . $tipo . "  alert-dismissable' style='text-align: center;'>
                             <a href='#'' class='close' data-dismiss='alert' aria-label='close'>×</a>
                  " . $msj . "

@@ -145,7 +145,7 @@ class PdfControladora
 		}
 		else
 		{
-			$this->mensaje = new Mensaje('warning', 'Deve iniciar secion!');
+			$this->mensaje = new Mensaje('warning', 'Debe iniciar secion!');
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "inicio.php");
 			include URL_VISTA . 'footer.php';
@@ -489,7 +489,7 @@ class PdfControladora
 		}
 		else
 		{
-			$this->mensaje = new Mensaje('warning', 'Deve iniciar secion!');
+			$this->mensaje = new Mensaje('warning', 'Debe iniciar secion!');
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "inicio.php");
 			include URL_VISTA . 'footer.php';

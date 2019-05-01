@@ -2,6 +2,12 @@
 
 include (URL_VISTA . 'navbar.php');
 
+if(isset($this->mensaje)) {?>
+    <div class="container">
+      <h1> <?= $this->mensaje->cartelAlert($this->mensaje->getMensaje(),$this->mensaje->getTipo()) ?></h1>
+    </div>
+  <?php } 
+
 if(isset($error)){ ?>
     <div class="container" style="margin-top:50px; margin-bottom: 30px;">
 
@@ -10,10 +16,8 @@ if(isset($error)){ ?>
         </div>
 
     </div>
-<?php }else{ 
+<?php } 
 
-header("Location: " . URL_VISTA . 'inicio.php');
-}
 
 include (URL_VISTA . 'footer.php');
 die();

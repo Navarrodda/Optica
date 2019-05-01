@@ -5,7 +5,7 @@ namespace Dao;
 use Modelo\Cliente;
 
 class ClienteBdDao{
-    
+
 	protected $tabla = "clientes";
 	private static $instancia;
     protected $listado;
@@ -89,22 +89,73 @@ class ClienteBdDao{
     
     public function traerTodo()
     {
-        $sql = "SELECT * FROM $this->tabla";
+        try{
+            $sql = "SELECT * FROM $this->tabla";
 
-        $conexion = Conexion::conectar();
+            $conexion = Conexion::conectar();
 
-        $sentencia = $conexion->prepare($sql);
+            $sentencia = $conexion->prepare($sql);
 
-        $sentencia->execute();
+            $sentencia->execute();
 
-        $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
 
-        $this->mapear($dataSet);
+            $this->mapear($dataSet);
 
-        if (!empty($this->listado)) {
-            return $this->listado;
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
         }
-        return null;
+    }
+
+    public function verificarNombre($nombre){
+
+        try{
+
+
+            $sql = "SELECT * FROM $this->tabla WHERE nombre = \"$nombre\" LIMIT 1";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+            if(!empty($dataSet))
+            {
+                return TRUE;
+            }
+
+            return FALSE;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+    public function verificarApellido($apellido){
+
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE apellido = \"$apellido\" LIMIT 1";
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            $dataSet = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+            if(!empty($dataSet))
+            {
+                return TRUE;
+            }
+
+            return FALSE;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
     }
 
     public function mapear($dataSet){

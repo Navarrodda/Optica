@@ -1,8 +1,14 @@
 <?php  include(URL_VISTA . 'navbar.php') ?>
 
+<?php if(isset($this->mensaje)) {?>
+    <div class="container">
+      <h1> <?= $this->mensaje->cartelAlert($this->mensaje->getMensaje(),$this->mensaje->getTipo()) ?></h1>
+  </div>
+<?php } ?>
+
 <div class="container mh-400" style="margin-top:30px;">
     <div class="container lower-box box-primary" style="text-align: center;">
-     <?php if($this->cliente!= null ) { ?>
+       <?php if($this->cliente!= null ) { ?>
         <h2 class="section-heading">Clientes registrados en el Sistema</h2>
         <hr class="primary"> <?php }
         else{ ?>
@@ -12,11 +18,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 texto-chico">
-                 <div class="table-responsive">
-                   <table class="table table-hover">
-                     <?php 
-                     if($this->cliente!= null )
-                     {
+                   <div class="table-responsive">
+                     <table class="table table-hover">
+                       <?php 
+                       if($this->cliente!= null )
+                       {
                         ?>
                         <thead>
                             <tr style="color:white">
@@ -24,10 +30,13 @@
                                     id
                                 </th>
                                 <th>
-                                    Nickname
+                                    Nombre
                                 </th>
                                 <th>
-                                    Mail
+                                    Apellido
+                                </th>
+                                <th>
+                                    Telefono
                                 </th>
                                 <th>
                                     Modificar
@@ -46,10 +55,13 @@
                                         <?= $objeto->getId(); ?>
                                     </td>
                                     <td>
-                                        <?= $objeto->getNikname(); ?>
+                                        <?= $objeto->getNombre(); ?>
                                     </td>
                                     <td>
-                                        <?= $objeto->getEmail(); ?>
+                                        <?= $objeto->getApellido(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getTelefono(); ?>
                                     </td>
                                     <td>
                                         <a href="#" class="disabled">
