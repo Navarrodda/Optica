@@ -1,5 +1,12 @@
 <?php  include(URL_VISTA . 'navbar.php') ; ?>
 
+?>
+<?php if(isset($this->mensaje)) {?>
+    <div class="container">
+        <h1> <?= $this->mensaje->cartelAlert($this->mensaje->getMensaje(),$this->mensaje->getTipo()) ?></h1>
+    </div>
+<?php } ?>
+
 <div class="container mh-400" style="margin-top:40px;">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2 text-center">

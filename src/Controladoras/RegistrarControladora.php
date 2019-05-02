@@ -6,7 +6,6 @@ use Modelo\Rol as Rol;
 use Modelo\Usuario as Usuario;
 use Modelo\Cliente as Cliente;
 use Modelo\Mensaje as Mensaje;
-use Modelo\LimpiarEntrada as Limpiar; 
 use Dao\RolBdDao as RolBdDao;
 use Dao\UsuarioBdDao as UsuarioBdDao;
 use Dao\ClienteBdDao as ClienteBdDao;
@@ -60,30 +59,75 @@ class RegistrarControladora
 
 	public function registrarcliente($nombre, $apellido, $telefono){
 		try{
-			$regCompleted = FALSE;
+			if(!empty($_SESSION)){
+				$regCompleted = FALSE;
 
-			if( ! $this->daoCliente->verificarNombre($nombre) ){
-				if( ! $this->daoCliente->verificarApellido($apellido) ){
+				$nombre = ucfirst($nombre); 
+				$apellido = ucfirst($apellido); 
+
+				$verificacion = 0;
+
+
+				if( ! $this->daoCliente->verificarNombre($nombre)){
+					if( ! $this->daoCliente->verificarApellido($apellido))
+					{
+						$verificacion = 0;
+					}
+				}
+				else{
+					if( ! $this->daoCliente->verificarApellido($apellido))
+					{
+						$verificacion = 0;
+					}
+					else{
+						$verificacion = 1;
+					}
+				}
+				if(  ! $this->daoCliente->verificarApellido($apellido)){
+					if( ! $this->daoCliente->verificarNombre($nombre))
+					{
+						$verificacion = 0;
+					}
+
+				}
+				else{
+					if( ! $this->daoCliente->verificarNombre($nombre))
+					{
+						$verificacion = 0;
+					}
+					else{
+						$verificacion = 1;
+					}
+				}
+
+				if($verificacion === 0){
 					$userInstance = new Cliente($nombre, $apellido, $telefono);
 					$idClie = $this->daoCliente->agregar( $userInstance );
 					$userInstance->setId( $idClie );
 					$regCompleted = TRUE;
 					$this->mensaje = new Mensaje( "success", "El Cliente fue registrado con exito!" );
 				}
-			}
 
-			switch ($regCompleted){
-				case TRUE:
+				switch ($regCompleted){
+					case TRUE:
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "inicio.php");
+					include URL_VISTA . 'footer.php';
+					break;
+
+					case FALSE:
+					$this->mensaje = new Mensaje( "success", "El Cliente ya esta registrado con ese Nombre y Apellido!" );
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "registrarcliente.php");
+					include URL_VISTA . 'footer.php';
+					break;
+				}
+			}
+			else{
+				$this->mensaje = new Mensaje( "success", "Deve iniciar sesion" );
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "inicio.php");
 				include URL_VISTA . 'footer.php';
-				break;
-
-				case FALSE:
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "registrarusuario.php");
-				include URL_VISTA . 'footer.php';
-				break;
 			}
 
 		}catch(\PDOException $pdo_error){

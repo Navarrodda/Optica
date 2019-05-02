@@ -15,11 +15,9 @@ use Dao\UsuarioBdDao as UsuarioBdDao;
 class SesionControladora
 {
 
-	protected $daoRol;
-	protected $daoCliente;
+	protected $daoUsuario;
 	
 	private $mensaje;
-	private $cliente;
 
 	public function __construct()
 	{

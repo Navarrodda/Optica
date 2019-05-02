@@ -18,21 +18,6 @@ class ClienteBdDao{
         return self::$instancia;
     }
 
-    public function verificarDni($dni)
-    {
-        $sql = "SELECT * FROM $this->tabla WHERE dni = \"$dni\" LIMIT 1";
-        $conexion = Conexion::conectar();
-        $sentencia = $conexion->prepare($sql);
-        $sentencia->execute();
-        $dataSet = $sentencia->fetch(\PDO::FETCH_ASSOC);
-
-        if(!empty($dataSet))
-        {
-            return TRUE;
-        }
-
-        return FALSE;
-    }
 
     public function agregar(Cliente $cliente)
     {
@@ -65,26 +50,32 @@ class ClienteBdDao{
 
     public function traerPorId($id)
     {   
-        if ($id != null) {
-            $sql = ("SELECT * FROM $this->tabla WHERE id_cliente = \"$id\" LIMIT 1" );
+        try{
+            if ($id != null) {
+                $sql = ("SELECT * FROM $this->tabla WHERE id_cliente = \"$id\" LIMIT 1" );
 
-            $conexion = Conexion::conectar();
+                $conexion = Conexion::conectar();
 
-            $sentencia = $conexion->prepare($sql);
+                $sentencia = $conexion->prepare($sql);
 
-            $sentencia->execute();
+                $sentencia->execute();
 
-            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+                $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
 
-            $this->mapear($dataSet);
+                $this->mapear($dataSet);
 
-            if(!empty($this->listado[0])){
+                if(!empty($this->listado[0])){
 
-                return $this->listado[0];
+                    return $this->listado[0];
+                }
             }
-        }
 
-        return null;
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
     }
     
     public function traerTodo()
@@ -151,6 +142,23 @@ class ClienteBdDao{
             }
 
             return FALSE;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
+    public function eliminarPorId($id_cliente ){
+        try{
+
+            $sql = "DELETE FROM $this->tabla WHERE id_cliente = \"$id_cliente \"";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
         }catch(\PDOException $e){
             echo $e->getMessage();die();
         }catch(\Exception $e){

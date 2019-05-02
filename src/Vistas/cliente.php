@@ -71,8 +71,8 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="#" class="disabled">
-                                        <span class="glyphicon glyphicon-trash" title="Eliminar Cliente"
+                                    <a type="submit" method="post"  name="id_cliente" value=" <?= $objeto->getId(); ?>" href="/administrar/eliminarcliente/<?= $objeto->getId(); ?>" class="disabled">
+                                        <span class="glyphicon glyphicon-trash"  title="Eliminar Cliente"
                                         data-toggle="tooltip" data-placement="right">
                                     </span>
                                 </a>

@@ -3,16 +3,17 @@
 namespace Controladoras;
 
 //Modelo
-use Modelo\Mensaje;
-use Modelo\Rol as Rol;
+use Modelo\Mensaje as Mensaje;
 use Modelo\Cliente as Cliente;
 
 //Dao
-use Dao\RolBdDao as RolBdDao;
 use Dao\ClienteBdDao as ClienteBdDao;
 
 class AdministrarControladora
 {
+	protected $daoCliente;
+
+	private $cliente;
 
 
 
@@ -22,8 +23,54 @@ class AdministrarControladora
 	}
 
 	function eliminarcliente($id_cliente){
+		try{
+			print_r($id_cliente);
+			if(!empty($_SESSION)){
+
+				$regCompleted = FALSE;
+
+				if(isset($id_cliente)){
+					$cliente= $this->daoCliente->traerPorId($id_cliente);
+					$nombre = $cliente->getNombre();
+					$apellido = $cliente->getApellido();
+					$this->daoCliente->eliminarPorId($id_cliente);
+					$regCompleted = TRUE;
+					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente al cliente
+						! El CLiente eliminado fue:' .' ',' '. '<i><strong>' .  $nombre ,$apellido
+						. '</strong></i>');
+				}
 
 
-	}	
+				switch ($regCompleted){
+					case TRUE:
+					$this->daoCliente->traerTodo();
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "cliente.php");
+					include URL_VISTA . 'footer.php';
+					break;
 
+					case FALSE:
+					$this->daoCliente->traerTodo();
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "cliente.php");
+					include URL_VISTA . 'footer.php';
+					break;
+				}
+			}
+			else{
+				$this->mensaje = new Mensaje( "success", "Deve iniciar sesion" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}catch(\PDOException $pdo_error){
+			$this->mensaje = new \Modelo\Mensaje("danger","Ocurrio un error con la Base de Datos: " . $pdo_error);
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'error.php');
+			include URL_VISTA . 'footer.php';
+		}catch(\Exception $error){
+			echo $error->getMessage();
+		}
+	}
 }
