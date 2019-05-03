@@ -5,11 +5,15 @@ namespace Controladoras;
 //Modelo
 use Modelo\Mensaje;
 use Modelo\Rol as Rol;
+use Modelo\Usuario as Usuario;
 use Modelo\Cliente as Cliente;
+use Modelo\Lente as Lente;
 
 //Dao
 use Dao\RolBdDao as RolBdDao;
+//use Dao\UsuarioBdDao as UsuarioBdDao;
 use Dao\ClienteBdDao as ClienteBdDao;
+use Dao\LenteBdDao as LenteBdDao;
 
 class VistaControladora
 {
@@ -18,12 +22,14 @@ class VistaControladora
 	
 	private $mensaje;
 	private $cliente;
+	private $lente;
 
 	public function __construct()
 	{
 
 		$this->daoRol = RolBdDao::getInstancia();
 		$this->daoCliente = ClienteBdDao::getInstancia();
+		$this->daoLente = LenteBdDao::getInstancia();
 	}
 
 	public function index()
@@ -90,6 +96,14 @@ class VistaControladora
 	{
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "llamarpdf.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function lentecliente($id_cliente)
+	{
+		$cliente = $this->daoCliente->traerPorId($id_cliente);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "registrarlente.php");
 		include URL_VISTA . 'footer.php';
 	}
 

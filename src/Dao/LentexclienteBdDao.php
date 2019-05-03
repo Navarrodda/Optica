@@ -22,24 +22,31 @@ class LentexclienteBdDao{
 
 	public function traerTodo()
 	{
-		$sql = "SELECT * FROM $this->tabla";
+		try{
 
-		$conexion = Conexion::conectar();
+			$sql = "SELECT * FROM $this->tabla";
 
-		$sentencia = $conexion->prepare($sql);
+			$conexion = Conexion::conectar();
 
-		$sentencia->execute();
+			$sentencia = $conexion->prepare($sql);
 
-		$dataSet =  $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+			$sentencia->execute();
 
-		$this->mapear($dataSet);
+			$dataSet =  $sentencia->fetchAll(\PDO::FETCH_ASSOC);
 
-		if(!empty($this->listado))
-		{
-			return $this->listado;
+			$this->mapear($dataSet);
+
+			if(!empty($this->listado))
+			{
+				return $this->listado;
+			}
+
+			return null;
+		}catch(\PDOException $e){
+			echo $e->getMessage();die();
+		}catch(\Exception $e){
+			echo $e->getMessage();die();
 		}
-
-		return null;
 	}
 
 	public function agregar(Lente_x_cliente $lentecliente){

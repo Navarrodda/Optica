@@ -3,7 +3,7 @@
 <div class="container mh-400" style="margin-top:30px;">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2 text-center">
-			<?php if($this->cliente != NULL ){ ?>
+			<?php if($cliente != NULL ){ ?>
 				<h2 class="section-heading">Registrar el Lente del Cliente</h2>
 				<hr class="primary">
 				<p>
@@ -29,7 +29,7 @@
 					</div>
 				</div>
 				<?php 
-				if($this->cliente!= NULL )
+				if($cliente!= NULL )
 				{
 					?>
 					<form id="form_r" method="post" action="/#/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
@@ -38,7 +38,7 @@
 								<option value="<?= $value->getId();  ?>"><?= $value->getNombre();  ?></option> 
 							<?php } ?> 
 						</select>
-						<input required name="medico" type="text" class="col-md-12 norightborder btn2" placeholder="Medico">
+						<input required name="medico" type="text" class="col-md-6 norightborder btn2" placeholder="Medico">
 						<input required name="armazon_lejos" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Lejos">
 						<input required name="armazon_cerca" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Cerca">
 						<input required name="lejos_od" type="text" class="col-md-6 norightborder btn2" placeholder="Lejos OD">

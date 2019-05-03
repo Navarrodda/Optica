@@ -2,7 +2,7 @@
 
 namespace Dao;
 
-use Modelo\Lente
+use Modelo\Lente;
 
 class LenteBdDao{
 
@@ -22,24 +22,30 @@ class LenteBdDao{
 
 	public function traerTodo()
 	{
-		$sql = "SELECT * FROM $this->tabla";
+		try{
+			$sql = "SELECT * FROM $this->tabla";
 
-		$conexion = Conexion::conectar();
+			$conexion = Conexion::conectar();
 
-		$sentencia = $conexion->prepare($sql);
+			$sentencia = $conexion->prepare($sql);
 
-		$sentencia->execute();
+			$sentencia->execute();
 
-		$dataSet =  $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+			$dataSet =  $sentencia->fetchAll(\PDO::FETCH_ASSOC);
 
-		$this->mapear($dataSet);
+			$this->mapear($dataSet);
 
-		if(!empty($this->listado))
-		{
-			return $this->listado;
+			if(!empty($this->listado))
+			{
+				return $this->listado;
+			}
+
+			return null;
+		}catch(\PDOException $e){
+			echo $e->getMessage();die();
+		}catch(\Exception $e){
+			echo $e->getMessage();die();
 		}
-
-		return null;
 	}
 
 	public function agregar(Lente $lente){
@@ -90,22 +96,29 @@ class LenteBdDao{
 
 	public function traerPorId($id)
 	{
-		$sql = "SELECT * FROM $this->tabla WHERE id_tipo_cerveza = \"$id\" LIMIT 1";
+		try{
 
-		$conexion = Conexion::conectar();
+			$sql = "SELECT * FROM $this->tabla WHERE id_tipo_cerveza = \"$id\" LIMIT 1";
 
-		$sentencia = $conexion->prepare($sql);
+			$conexion = Conexion::conectar();
 
-		$sentencia->execute();
+			$sentencia = $conexion->prepare($sql);
 
-		$dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+			$sentencia->execute();
 
-		$this->mapear($dataSet);
+			$dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
 
-		if(!empty($this->listado[0])){
-			return $this->listado[0];
+			$this->mapear($dataSet);
+
+			if(!empty($this->listado[0])){
+				return $this->listado[0];
+			}
+			return null;
+		}catch(\PDOException $e){
+			echo $e->getMessage();die();
+		}catch(\Exception $e){
+			echo $e->getMessage();die();
 		}
-		return null;
 	}
 
 	private function mapear($dataSet)

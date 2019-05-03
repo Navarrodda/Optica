@@ -9,81 +9,90 @@
 <div class="container mh-400" style="margin-top:30px;">
     <div class="container lower-box box-primary" style="text-align: center;">
         <?php if($cliente!= null ) { ?>
-        <h2 class="section-heading">Clientes registrados en el Sistema</h2>
-        <hr class="primary"> <?php }
-        else{ ?>
-            <h2 class="section-heading">No hay Clientes cargados en el Sistema</h2>
-            <hr class="primary"> <?php } ?>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 texto-chico">
-                   <div class="table-responsive">
-                     <table class="table table-hover">
-                       <?php 
-                       if($cliente!= null )
-                       {
-                        ?>
-                        <thead>
-                            <tr style="color:white">
-                                <th>
-                                    id
-                                </th>
-                                <th>
-                                    Nombre
-                                </th>
-                                <th>
-                                    Apellido
-                                </th>
-                                <th>
-                                    Telefono
-                                </th>
-                                <th>
-                                    Modificar
-                                </th>
-                                <th>
-                                    Eliminar
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($cliente as $objeto) {
-                                ?>
+            <h2 class="section-heading">Clientes registrados en el Sistema</h2>
+            <hr class="primary"> <?php }
+            else{ ?>
+                <h2 class="section-heading">No hay Clientes cargados en el Sistema</h2>
+                <hr class="primary"> <?php } ?>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 texto-chico">
+                     <div class="table-responsive">
+                       <table class="table table-hover">
+                         <?php 
+                         if($cliente!= null )
+                         {
+                            ?>
+                            <thead>
                                 <tr style="color:white">
-                                    <td>
-                                        <?= $objeto->getId(); ?>
+                                    <th>
+                                        id
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Apellido
+                                    </th>
+                                    <th>
+                                        Telefono
+                                    </th>
+                                    <th>
+                                        Lentes
+                                    </th>
+                                    <th>
+                                        Modificar
+                                    </th>
+                                    <th>
+                                        Eliminar
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($cliente as $objeto) {
+                                    ?>
+                                    <tr style="color:white">
+                                        <td>
+                                            <?= $objeto->getId(); ?>
+                                        </td>
+                                        <td>
+                                            <?= $objeto->getNombre(); ?>
+                                        </td>
+                                        <td>
+                                            <?= $objeto->getApellido(); ?>
+                                        </td>
+                                        <td>
+                                            <?= $objeto->getTelefono(); ?>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="disabled">         
+                                                <span class="glyphicon glyphicon-plus" title="Lentes"
+                                                data-toggle="tooltip" data-placement="right">
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="disabled">
+                                                <span class="glyphicon glyphicon-pencil" title="No implementado..."
+                                                data-toggle="tooltip" data-placement="right">
+                                            </span>
+                                        </a>
                                     </td>
                                     <td>
-                                        <?= $objeto->getNombre(); ?>
-                                    </td>
-                                    <td>
-                                        <?= $objeto->getApellido(); ?>
-                                    </td>
-                                    <td>
-                                        <?= $objeto->getTelefono(); ?>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="disabled">
-                                            <span class="glyphicon glyphicon-pencil" title="No implementado..."
+                                        <a type="submit" method="post"  name="id_cliente" href="/administrar/eliminarcliente/<?= $objeto->getId(); ?>" class="disabled">
+                                            <span class="glyphicon glyphicon-trash"  title="Eliminar Cliente"
                                             data-toggle="tooltip" data-placement="right">
                                         </span>
                                     </a>
                                 </td>
-                                <td>
-                                    <a type="submit" method="post"  name="id_cliente" value=" <?= $objeto->getId(); ?>" href="/administrar/eliminarcliente/<?= $objeto->getId(); ?>" class="disabled">
-                                        <span class="glyphicon glyphicon-trash"  title="Eliminar Cliente"
-                                        data-toggle="tooltip" data-placement="right">
-                                    </span>
-                                </a>
-                            </td>
-                        </tr>
-                    <?php } 
-                } ?>
-            </tbody>
-        </table>
+                            </tr>
+                        <?php } 
+                    } ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 </div>
 </div>
 </div>

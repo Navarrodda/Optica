@@ -24,11 +24,10 @@ class AdministrarControladora
 
 	function eliminarcliente($id_cliente){
 		try{
-			print_r($id_cliente);
+			
 			if(!empty($_SESSION)){
 
 				$regCompleted = FALSE;
-
 				if(isset($id_cliente)){
 					$cliente= $this->daoCliente->traerPorId($id_cliente);
 					$nombre = $cliente->getNombre();
@@ -36,21 +35,20 @@ class AdministrarControladora
 					$this->daoCliente->eliminarPorId($id_cliente);
 					$regCompleted = TRUE;
 					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente al cliente
-						! El CLiente eliminado fue:' .' ',' '. '<i><strong>' .  $nombre ,$apellido
+						! El CLiente eliminado fue:' .' '.'<i><strong>' .  $nombre
 						. '</strong></i>');
 				}
 
 
 				switch ($regCompleted){
 					case TRUE:
-					$this->daoCliente->traerTodo();
 					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "cliente.php");
+					require(URL_VISTA . "inicio.php");
 					include URL_VISTA . 'footer.php';
 					break;
 
 					case FALSE:
-					$this->daoCliente->traerTodo();
+					$cliente = $this->daoCliente->traerTodo();
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "cliente.php");
 					include URL_VISTA . 'footer.php';

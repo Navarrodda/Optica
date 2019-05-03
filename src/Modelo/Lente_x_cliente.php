@@ -13,12 +13,6 @@ class Lente_x_cliente
 	private $id_lente;
 
 
-	/**
-	 * Class Constructor
-	 * @param    $id_lente_x_cliente   
-	 * @param    $id_cliente   
-	 * @param    $id_lente   
-	 */
 	public function __construct(Cliente $id_cliente,Lente $id_lente)
 	{
 		$this->id_cliente = $id_cliente;

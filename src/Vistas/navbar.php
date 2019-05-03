@@ -53,7 +53,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a class="page-scroll botonimagen" style="background-image: url(<?= URL_IMG . 'menu.png' ?>);" href=""></a>
+                            <a class="page-scroll botonimagen" style="background-image: url(<?= URL_IMG . 'Iconos/menu.png' ?>);" href=""></a>
                             <ul>
                                 <li>
                                     <a class="page-scroll" style="color:white" href="/vista/registrar/">Registrar Cliente</a>
