@@ -73,6 +73,14 @@ class VistaControladora
 		require(URL_VISTA . "registrarlente.php");
 		include URL_VISTA . 'footer.php';
 	}
+
+		public function modificarcliente($id_cliente)
+	{
+		$cliente = $this->daoCliente->traerPorId($id_cliente);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarcliente.php");
+		include URL_VISTA . 'footer.php';
+	}
 	
 	public function facturasimple()
 	{

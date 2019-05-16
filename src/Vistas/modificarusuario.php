@@ -15,12 +15,12 @@ include (URL_VISTA . 'navbar.php');
             <hr class="primary">
             <div class="regularform">
                 <form id="form_r" method="post" action="/registrar/modificar" id="contactform" class="text-left" autocomplete="off">
-                    <input required name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Nombre">
-                    <input required name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
-                    <input required name="calle" type="text" class="col-md-6 btn2" placeholder="Calle">
-                    <input required name="telefono" type="text" class="col-md-6 btn2" placeholder="Telefono">
-                    <input required name="email" type="email" class="col-md-6 btn2" placeholder="Correo electronico">
-                    <input name="pass" autocomplete="off" type="password" class="col-md-6 norightborder btn2" placeholder="Contraseña" required>
+                    <input name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Nombre">
+                    <input name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
+                    <input name="calle" type="text" class="col-md-6 btn2" placeholder="Calle">
+                    <input name="telefono" type="text" class="col-md-6 btn2" placeholder="Telefono">
+                    <input name="email" type="email" class="col-md-6 btn2" placeholder="Correo electronico">
+                    <input name="pass" autocomplete="off" type="password" class="col-md-6 norightborder btn2" placeholder="Contraseña">
 
 
                     <button type="submit" class="contact submit btn-primary btn-xl pull-right">Cargar</button>

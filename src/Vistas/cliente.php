@@ -68,12 +68,12 @@
                                         </td>
                                         <td>
                                             <a href="/vista/lentecliente/<?= $objeto->getId(); ?>" class="disabled">         
-                                                <span class="glyphicon glyphicon-plus" title="Lentes"
+                                                <span class="glyphicon glyphicon-list" title="Lentes"
                                                 data-toggle="tooltip" data-placement="right">
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="#" class="disabled">
+                                            <a type="submit" method="post"  name="id_cliente"  href="/vista/modificarcliente/<?= $objeto->getId(); ?>" class="disabled">
                                                 <span class="glyphicon glyphicon-pencil" title="No implementado..."
                                                 data-toggle="tooltip" data-placement="right">
                                             </span>
