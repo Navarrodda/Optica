@@ -48,6 +48,32 @@ class ClienteBdDao{
         }
     }
 
+    public function actualizar(Cliente $cliente, $id){
+        try{
+
+            $sql = ("UPDATE $this->tabla SET  nombre=:nombre,  apellido=:apellido,
+                telefono=:telefono WHERE id_cliente=\"$id\"");
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $nombre           = $cliente->getNombre();
+            $apellido         = $cliente->getApellido();
+            $telefono        = $cliente->getTelefono();
+            
+            $sentencia->bindParam(":nombre", $nombre);
+            $sentencia->bindParam(":apellido", $apellido);
+            $sentencia->bindParam(":telefono",$telefono);
+
+            $sentencia->execute();
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
     public function traerPorId($id)
     {   
         try{
