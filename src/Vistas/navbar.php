@@ -58,9 +58,6 @@
                                 <li>
                                     <a class="page-scroll" style="color:white" href="/vista/registrar/">Registrar Cliente</a>
                                 </li>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/vista/registrlente/">Registrar Lente Del Cliente </a>
-                                </li>
                             </ul>
                         </li>               
                         <li>

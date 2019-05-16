@@ -26,6 +26,9 @@ class RegistrarControladora
 		try{
 			$regCompleted = FALSE;
 
+			$nombre = ucwords($nombre); 
+			$apellido = ucwords($apellido);
+
 			if( ! $this->daoUsuario->verificarEmail( $email ) ) {
 				$userInstance = new Usuario($nombre, $apellido, $email, $calle, $telefono, $pass, $this->daoRol->traerPorId( $id_rol ));
 				$idUser = $this->daoUsuario->agregar( $userInstance );
@@ -62,8 +65,8 @@ class RegistrarControladora
 			if(!empty($_SESSION)){
 				$regCompleted = FALSE;
 
-				$nombre = ucfirst($nombre); 
-				$apellido = ucfirst($apellido); 
+				$nombre = ucwords($nombre); 
+				$apellido = ucwords($apellido); 
 
 				$verificacion = 0;
 

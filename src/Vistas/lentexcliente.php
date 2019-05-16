@@ -8,11 +8,13 @@
 
 <div class="container mh-400" style="margin-top:30px;">
     <div class="container lower-box box-primary" style="text-align: center;">
-        <?php if($cliente!= null ) { ?>
-            <h2 class="section-heading">Clientes registrados en el Sistema</h2>
+        <?php if($lente!= null ) { ?>
+            <h2 class="section-heading">Lentes registrados en el Sistema del CLeinte: <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?>  </h2>
+            <a  class="glyphicon glyphicon-plus" style="color:black" method="post" name="id_cliente" href="/vista/registrlente/<?= $cliente->getId(); ?>">Registrar Lente+</a>
             <hr class="primary"> <?php }
             else{ ?>
-                <h2 class="section-heading">No hay Clientes cargados en el Sistema</h2>
+                <h2 class="section-heading">No hay Lentes cargados en el Sistema del Cliente: <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?> </h2>
+                <a  class="glyphicon glyphicon-plus" style="color:black" method="post" name="id_cliente" href="/vista/registrlente/<?= $cliente->getId(); ?> ">Registrar Lente+</a>
                 <hr class="primary"> <?php } ?>
             </div>
             <div class="container">
@@ -21,7 +23,7 @@
                      <div class="table-responsive">
                        <table class="table table-hover">
                          <?php 
-                         if($cliente!= null )
+                         if($lente!= null )
                          {
                             ?>
                             <thead>
@@ -51,7 +53,7 @@
                             </thead>
                             <tbody>
                                 <?php
-                                foreach ($cliente as $objeto) {
+                                foreach ($lente as $objeto) {
                                     ?>
                                     <tr style="color:white">
                                         <td>
@@ -67,7 +69,7 @@
                                             <?= $objeto->getTelefono(); ?>
                                         </td>
                                         <td>
-                                            <a href="/vista/lentecliente/<?= $objeto->getId(); ?>" class="disabled">         
+                                            <a href="#" class="disabled">         
                                                 <span class="glyphicon glyphicon-plus" title="Lentes"
                                                 data-toggle="tooltip" data-placement="right">
                                             </span>

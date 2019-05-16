@@ -8,12 +8,14 @@ use Modelo\Rol as Rol;
 use Modelo\Usuario as Usuario;
 use Modelo\Cliente as Cliente;
 use Modelo\Lente as Lente;
+use Modelo\Lente_x_cliente as Lentexcliente;
 
 //Dao
 use Dao\RolBdDao as RolBdDao;
 //use Dao\UsuarioBdDao as UsuarioBdDao;
 use Dao\ClienteBdDao as ClienteBdDao;
 use Dao\LenteBdDao as LenteBdDao;
+use Dao\LentexclienteBdDao as LentexclienteBdDao;
 
 class VistaControladora
 {
@@ -22,6 +24,7 @@ class VistaControladora
 	
 	private $mensaje;
 	private $cliente;
+	private $lentexcliente;
 	private $lente;
 
 	public function __construct()
@@ -30,6 +33,7 @@ class VistaControladora
 		$this->daoRol = RolBdDao::getInstancia();
 		$this->daoCliente = ClienteBdDao::getInstancia();
 		$this->daoLente = LenteBdDao::getInstancia();
+		$this->daoLentexcliente = LentexclienteBdDao::getInstancia();
 	}
 
 	public function index()
@@ -62,9 +66,9 @@ class VistaControladora
 		include URL_VISTA . 'footer.php';
 	}
 
-	public function registrlente()
+	public function registrlente($id_cliente)
 	{
-		$cliente = $this->daoCliente->traerTodo();
+		$cliente = $this->daoCliente->traerPorId($id_cliente);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "registrarlente.php");
 		include URL_VISTA . 'footer.php';
@@ -102,9 +106,24 @@ class VistaControladora
 	public function lentecliente($id_cliente)
 	{
 		$cliente = $this->daoCliente->traerPorId($id_cliente);
+		$lentexcliente = $this->daoLentexcliente->traerTodo();
+		if($lentexcliente != NULL)
+		{
+			if($cliente->getId() === $lentexcliente->getIdCliente())
+			{
+				$lente = $this->daoLente->traerPorId($lentexcliente->getIdLente());
+			}
+			
+		}
+		else
+		{
+			$lente = NULL;
+		}
+		
 		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "registrarlente.php");
+		require(URL_VISTA . "lentexcliente.php");
 		include URL_VISTA . 'footer.php';
+
 	}
 
 }

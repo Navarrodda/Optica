@@ -80,6 +80,8 @@ class LentexclienteBdDao{
 
 	public function traerPorId($id)
 	{
+		try{
+
 		$sql = "SELECT * FROM $this->tabla WHERE id_lente_x_cliente = \"$id\" LIMIT 1";
 
 		$conexion = Conexion::conectar();
@@ -96,6 +98,11 @@ class LentexclienteBdDao{
 			return $this->listado[0];
 		}
 		return null;
+		}catch(\PDOException $e){
+			echo $e->getMessage();die();
+		}catch(\Exception $e){
+			echo $e->getMessage();die();
+		}
 	}
 
 	private function mapear($dataSet)
