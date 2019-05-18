@@ -60,13 +60,13 @@
                                             <?= $objeto->getId(); ?>
                                         </td>
                                         <td>
-                                            <?= $objeto->getNombre(); ?>
+                                            
                                         </td>
                                         <td>
-                                            <?= $objeto->getApellido(); ?>
+                                            
                                         </td>
                                         <td>
-                                            <?= $objeto->getTelefono(); ?>
+                                           
                                         </td>
                                         <td>
                                             <a href="#" class="disabled">         

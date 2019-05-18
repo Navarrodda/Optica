@@ -2,8 +2,8 @@
 
 namespace Modelo;
 
-use \Modelo\Cliente;
-use \Modelo\Lente;
+use Modelo\Cliente as Cliente;
+use Modelo\Lente as Lente;
 
 class Lente_x_cliente
 {

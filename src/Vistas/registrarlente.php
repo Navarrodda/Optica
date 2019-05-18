@@ -31,8 +31,10 @@
 				<?php 
 				if($cliente!= NULL )
 				{ ?>
-					<form id="form_r" method="post" action="/#/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
-						<input required name="medico" type="text" class="col-md-12 norightborder btn2" placeholder="Medico">
+					<form id="form_r" method="post" action="/registrar/registrarlente/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
+						<input  name="id_cliente" type=hidden value="<?= $cliente->getId()?>">
+						<input required name="medico" type="text" class="col-md-6 norightborder btn2" placeholder="Medico">
+						<input required name="fecha" type="date" class="col-md-6 norightborder btn2" placeholder="Fecha">
 						<input required name="armazon_lejos" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Lejos">
 						<input required name="armazon_cerca" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Cerca">
 						<input required name="lejos_od" type="text" class="col-md-6 norightborder btn2" placeholder="Lejos OD">
@@ -42,8 +44,11 @@
 						<input required name="cilindrico" type="text" class="col-md-6 norightborder btn2" placeholder="Cilindrico">
 						<input required name="en_grados" type="text" class="col-md-6 norightborder btn2" placeholder="En Grados">
 						<input required name="color" type="text" class="col-md-6 norightborder btn2" placeholder="Color">
-						<input required name="descripcion" type="text" class="col-md-6 norightborder btn2" placeholder="Descripcion">
+						<input required name="distancia" type="text" class="col-md-6 norightborder btn2" placeholder="Distancia">
+						<input required name="calibre" type="text" class="col-md-6 norightborder btn2" placeholder="Calibre">
+						<input required name="puente" type="text" class="col-md-6 norightborder btn2" placeholder="Puente">
 						<button type="submit" class="contact submit btn-primary btn-xl pull-right">Registrar</button>
+
 					</form>
 					<?php 
 				}

@@ -5,52 +5,39 @@ namespace Modelo;
 class Lente
 {
     private $id;
-    private $medico; 
+    private $medico;
+    private $armazon_cerca; 
+    private $armazon_lejos;
     private $lejos_od;
     private $lejos_oi;
     private $cerca_od;
     private $cerca_oi;
-    private $descripcion;
-    private $fecha;
     private $cilindrico;
     private $en_grados;
-    private $distacia;
+    private $distancia;
     private $calibre;
     private $puente;
+    private $color;
+    private $fecha;
 
-
-    /**
-     * Class Constructor
-     * @param    $medico   
-     * @param    $lejos_od   
-     * @param    $lejos_oi   
-     * @param    $cerca_od   
-     * @param    $cerca_oi   
-     * @param    $descripcion   
-     * @param    $fecha   
-     * @param    $cilindrico   
-     * @param    $en_grados   
-     * @param    $distacia   
-     * @param    $calibre   
-     * @param    $puente   
-     */
-    public function __construct($medico, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $descripcion, $fecha, $cilindrico, $en_grados, $distacia, $calibre, $puente)
+    public function __construct($medico, $armazon_cerca, $armazon_lejos, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $cilindrico, $en_grados, $distancia, $calibre, $puente, $color, $fecha)
     {
         $this->medico = $medico;
+        $this->armazon_cerca = $armazon_cerca;
+        $this->armazon_lejos = $armazon_lejos;
         $this->lejos_od = $lejos_od;
         $this->lejos_oi = $lejos_oi;
         $this->cerca_od = $cerca_od;
         $this->cerca_oi = $cerca_oi;
-        $this->descripcion = $descripcion;
-        $this->fecha = $fecha;
         $this->cilindrico = $cilindrico;
         $this->en_grados = $en_grados;
-        $this->distacia = $distacia;
+        $this->distancia = $distancia;
         $this->calibre = $calibre;
         $this->puente = $puente;
+        $this->color = $color;
+        $this->fecha = $fecha;
     }
     
-
     /**
      * @return mixed
      */
@@ -87,6 +74,46 @@ class Lente
     public function setMedico($medico)
     {
         $this->medico = $medico;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmazonLejos()
+    {
+        return $this->armazon_lejos;
+    }
+
+    /**
+     * @param mixed $armazon_lejos
+     *
+     * @return self
+     */
+    public function setArmazonLejos($armazon_lejos)
+    {
+        $this->armazon_lejos = $armazon_lejos;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmazonCerca()
+    {
+        return $this->armazon_cerca;
+    }
+
+    /**
+     * @param mixed $armazon_cerca
+     *
+     * @return self
+     */
+    public function setArmazonCerca($armazon_cerca)
+    {
+        $this->armazon_cerca = $armazon_cerca;
 
         return $this;
     }
@@ -174,26 +201,6 @@ class Lente
     /**
      * @return mixed
      */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
-    /**
-     * @param mixed $descripcion
-     *
-     * @return self
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getFecha()
     {
         return $this->fecha;
@@ -254,19 +261,39 @@ class Lente
     /**
      * @return mixed
      */
-    public function getDistacia()
+    public function getColor()
     {
-        return $this->distacia;
+        return $this->color;
     }
 
     /**
-     * @param mixed $distacia
+     * @param mixed $color
      *
      * @return self
      */
-    public function setDistacia($distacia)
+    public function setColor($color)
     {
-        $this->distacia = $distacia;
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDistancia()
+    {
+        return $this->distancia;
+    }
+
+    /**
+     * @param mixed $distancia
+     *
+     * @return self
+     */
+    public function setDistancia($distancia)
+    {
+        $this->distancia = $distancia;
 
         return $this;
     }

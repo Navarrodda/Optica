@@ -51,27 +51,30 @@ class LenteBdDao{
 	public function agregar(Lente $lente){
 
 		try{
-
-			$sql = ("INSERT INTO $this->tabla (medico, lejos_od, lejos_oi, cerca_od, cerca_oi, cilindrico,  en_grados, distancia, calibre, puente, descripcion, fecha) VALUES (:medico, :lejos_od, :lejos_oi, :cerca_od, :cerca_oi:, :cilindrico, :en_grados, :distancia, :calibre, :puente, :descripcion, :fecha) ");
+			$sql = ("INSERT INTO $this->tabla (medico, armazon_cerca, armazon_lejos, lejos_od, lejos_oi, cerca_od, cerca_oi, cilindrico, en_grados, distancia, calibre, puente, color, fecha) VALUES (:medico, :armazon_cerca, :armazon_lejos, :lejos_od, :lejos_oi, :cerca_od, :cerca_oi, :cilindrico, :en_grados, :distancia, :calibre, :puente, :color, :fecha) ");
 
 			$conexion = Conexion::conectar();
 
 			$sentencia = $conexion->prepare($sql);
 
 			$medico = $lente->getMedico();
+			$armazon_cerca = $lente->getArmazonCerca();
+			$armazon_lejos = $lente->getArmazonLejos();
 			$lejos_od = $lente->getLejosOd();
 			$lejos_oi = $lente->getLejosOi();
 			$cerca_od = $lente->getCercaOd();
 			$cerca_oi = $lente->getCercaOi();
 			$cilindrico = $lente->getCilindrico();
 			$en_grados = $lente->getEnGrados();
-			$distancia = $lente->getDistacia();
+			$distancia = $lente->getDistancia();
 			$calibre = $lente->getCalibre();
 			$puente = $lente->getPuente();
-			$descripcion = $lente->getDescripcion();
+			$color = $lente->getColor();
 			$fecha = $lente->getFecha();
 
 			$sentencia->bindParam(":medico",$medico);
+			$sentencia->bindParam(":armazon_cerca",$armazon_cerca);
+			$sentencia->bindParam(":armazon_lejos",$armazon_lejos);
 			$sentencia->bindParam(":lejos_od",$lejos_od);
 			$sentencia->bindParam(":lejos_oi",$lejos_oi);
 			$sentencia->bindParam(":cerca_od",$cerca_od);
@@ -81,7 +84,7 @@ class LenteBdDao{
 			$sentencia->bindParam(":distancia",$distancia);
 			$sentencia->bindParam(":calibre",$calibre);
 			$sentencia->bindParam(":puente",$puente);
-			$sentencia->bindParam(":descripcion",$descripcion);
+			$sentencia->bindParam(":color",$color);
 			$sentencia->bindParam(":fecha",$fecha);
 
 			$sentencia->execute();
@@ -98,7 +101,7 @@ class LenteBdDao{
 	{
 		try{
 
-			$sql = "SELECT * FROM $this->tabla WHERE id_tipo_cerveza = \"$id\" LIMIT 1";
+			$sql = "SELECT * FROM $this->tabla WHERE id_lente = \"$id\" LIMIT 1";
 
 			$conexion = Conexion::conectar();
 
@@ -131,6 +134,8 @@ class LenteBdDao{
 
 				$lente = new Lente(
 					$l['medico'],
+					$l['armazon_cerca'],
+					$l['armazon_lejos'],
 					$l['lejos_od'],
 					$l['lejos_oi'],
 					$l['cerca_od'],
@@ -140,7 +145,7 @@ class LenteBdDao{
 					$l['distancia'],
 					$l['calibre'],
 					$l['puente'],
-					$l['descripcion'],
+					$l['color'],
 					$l['fecha']);
 				$lente->setId($l['id_lente']);
 				return $lente; 

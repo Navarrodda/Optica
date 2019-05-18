@@ -2,8 +2,8 @@
 
 namespace Modelo;
 
-use\Modelo\Cliente;
-use\Modelo\Factura;
+use\Modelo\Cliente as Cliente;
+use\Modelo\Factura as Factura;
 
 class Factura_x_cliente
 {

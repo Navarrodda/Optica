@@ -33,6 +33,8 @@ CONSTRAINT pk_id_clientes PRIMARY KEY (id_cliente)
 CREATE TABLE lentes(
 id_lente BIGINT AUTO_INCREMENT NOT NULL,
 medico VARCHAR(30) NOT NULL,
+armazon_cerca VARCHAR(30) NOT NULL,
+armazon_lejos VARCHAR(30) NOT NULL,
 lejos_od VARCHAR(10) NOT NULL ,
 lejos_oi VARCHAR(10) NOT NULL,
 cerca_od VARCHAR(10) NOT NULL,
@@ -40,10 +42,10 @@ cerca_oi VARCHAR(10) NOT NULL,
 cilindrico VARCHAR(10) NOT NULL,
 en_grados VARCHAR(10) NOT NULL,
 distancia VARCHAR(10) NOT NULL,
-calibre VARCHAR (10) NOT NULL,
-puente VARCHAR (10) NOT NULL,
-descripcion VARCHAR(50) DEFAULT "---" , 
-fecha DATE NOT NULL,
+calibre VARCHAR(10) NOT NULL,
+puente VARCHAR(10) NOT NULL,
+color VARCHAR(20) NOT NULL,
+fecha DATE,
 CONSTRAINT pk_id_lente PRIMARY KEY (id_lente)    
 );
 

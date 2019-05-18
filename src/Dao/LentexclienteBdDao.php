@@ -115,12 +115,11 @@ class LentexclienteBdDao{
 				$daoCliente = ClienteBdDao::getInstancia();
 				$daoLente = LenteBdDao::getInstancia();
 				$lentecliente = new Lente_x_cliente(
-					$daoCliente->traerPorId($p['id_cliente']),
-					$daoLente->traerPorId($p['id_lente'])
+					$daoCliente->traerPorId($lc['id_cliente']),
+					$daoLente->traerPorId($lc['id_lente'])
 				);
-				$lentecliente->setId($lc['id_lente_x_cliente']);
+				$lentecliente->setIdLenteXCliente($lc['id_lente_x_cliente']);
 				return $lentecliente; 
-
 			}, $dataSet);
 		}
 	}

@@ -21,6 +21,7 @@ class VistaControladora
 {
 	protected $daoRol;
 	protected $daoCliente;
+	protected $daoLentexcliente;
 	
 	private $mensaje;
 	private $cliente;
@@ -74,7 +75,7 @@ class VistaControladora
 		include URL_VISTA . 'footer.php';
 	}
 
-		public function modificarcliente($id_cliente)
+	public function modificarcliente($id_cliente)
 	{
 		$cliente = $this->daoCliente->traerPorId($id_cliente);
 		include URL_VISTA . 'header.php';
@@ -117,21 +118,28 @@ class VistaControladora
 		$lentexcliente = $this->daoLentexcliente->traerTodo();
 		if($lentexcliente != NULL)
 		{
-			if($cliente->getId() === $lentexcliente->getIdCliente())
-			{
-				$lente = $this->daoLente->traerPorId($lentexcliente->getIdLente());
-			}
-			
-		}
-		else
-		{
-			$lente = NULL;
-		}
-		
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "lentexcliente.php");
-		include URL_VISTA . 'footer.php';
+			if(!empty($id_cliente)){
+				{
+					$lente = $lentexcliente->Cliente->getId();
+					print_r($lente);
+					
+					if($id_cliente === $id_lentexcliente)
+					{
 
+						$lente = $lentexcliente->getIdLente();
+						$lente = $this->daoLente->traerPorId($lente);
+					}
+				}	
+			}
+			else
+			{
+				$lente = NULL;
+			}
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "lentexcliente.php");
+			include URL_VISTA . 'footer.php';
+
+		}
 	}
 
 }
