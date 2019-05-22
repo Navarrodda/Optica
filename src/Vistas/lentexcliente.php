@@ -20,11 +20,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 texto-chico">
-                     <div class="table-responsive">
-                       <table class="table table-hover">
-                         <?php 
-                         if($lente!= null )
-                         {
+                       <div class="table-responsive">
+                         <table class="table table-hover">
+                           <?php 
+                           if($lente!= null )
+                           {
                             ?>
                             <thead>
                                 <tr style="color:white">
@@ -32,69 +32,132 @@
                                         id
                                     </th>
                                     <th>
-                                        Nombre
+                                        Medico
                                     </th>
                                     <th>
-                                        Apellido
+                                        Mrmazon Cerca
                                     </th>
                                     <th>
-                                        Telefono
+                                        Armazon Lejos
                                     </th>
                                     <th>
-                                        Lentes
+                                        Lejos OD
                                     </th>
                                     <th>
-                                        Modificar
+                                        Lejos OI
                                     </th>
                                     <th>
-                                        Eliminar
+                                        Cerca OD
                                     </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                foreach ($lente as $objeto) {
-                                    ?>
-                                    <tr style="color:white">
-                                        <td>
-                                            <?= $objeto->getId(); ?>
-                                        </td>
-                                        <td>
-                                            
-                                        </td>
-                                        <td>
-                                            
-                                        </td>
-                                        <td>
-                                           
-                                        </td>
-                                        <td>
-                                            <a href="#" class="disabled">         
-                                                <span class="glyphicon glyphicon-plus" title="Lentes"
-                                                data-toggle="tooltip" data-placement="right">
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="disabled">
-                                                <span class="glyphicon glyphicon-pencil" title="No implementado..."
-                                                data-toggle="tooltip" data-placement="right">
-                                            </span>
-                                        </a>
+                                    <th>
+                                        Cerca OI
+                                    </th>
+                                    <th>
+                                        Cilindrico
+                                    </th>
+                                    <th>
+                                        En Grados
+                                    </th>
+                                    <th>
+                                       Distancia
+                                   </th>
+                                   <th>
+                                    Calibre
+                                </th>
+                                <th>
+                                    Puente
+                                </th>
+                                <th>
+                                    Color
+                                </th>
+                                <th>
+                                    Fecha
+                                </th>
+                                <th>
+                                    Modificar
+                                </th>
+                                <th>
+                                    Eliminar
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($lente as $objeto) {
+                                ?>
+                                <tr style="color:white">
+                                    <td>
+                                        <?= $objeto->getId(); ?>
                                     </td>
                                     <td>
-                                        <a type="submit" method="post"  name="id_cliente" href="/administrar/eliminarcliente/<?= $objeto->getId(); ?>" class="disabled">
-                                            <span class="glyphicon glyphicon-trash"  title="Eliminar Cliente"
+                                        <?= $objeto->getMedico(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getArmazonLejos(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getArmazonCerca(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getLejosOd(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getLejosOi(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getCercaOd(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getCercaOi(); ?>
+                                    </td>
+                                    <td> 
+                                        <?= $objeto->getCilindrico(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getEnGrados(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getDistancia(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getCalibre(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getPuente(); ?>
+                                    </td>
+                                    <td>
+                                        <?= $objeto->getColor(); ?>
+                                    </td> 
+                                    <td>
+                                        <?= $objeto->getFecha(); ?>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="disabled">         
+                                            <span class="glyphicon glyphicon-plus" title="Lentes"
+                                            data-toggle="tooltip" data-placement="right">
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="disabled">
+                                            <span class="glyphicon glyphicon-pencil" title="No implementado..."
                                             data-toggle="tooltip" data-placement="right">
                                         </span>
                                     </a>
                                 </td>
-                            </tr>
-                        <?php } 
-                    } ?>
-                </tbody>
-            </table>
-        </div>
+                                <td>
+                                    <a type="submit" method="post"  name="id_cliente" href="/administrar/eliminarcliente/<?= $objeto->getId(); ?>" class="disabled">
+                                        <span class="glyphicon glyphicon-trash"  title="Eliminar Cliente"
+                                        data-toggle="tooltip" data-placement="right">
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } 
+                } ?>
+            </tbody>
+        </table>
     </div>
+</div>
 </div>
 </div>
 </div>
