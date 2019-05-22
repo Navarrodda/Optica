@@ -114,32 +114,28 @@ class VistaControladora
 
 	public function lentecliente($id_cliente)
 	{
+		$lente = NULL;
 		$cliente = $this->daoCliente->traerPorId($id_cliente);
-		$lentexcliente = $this->daoLentexcliente->traerTodo();
-		if($lentexcliente != NULL)
-		{
-			if(!empty($id_cliente)){
-				{
-					$lente = $lentexcliente->Cliente->getId();
-					print_r($lente);
-					
-					if($id_cliente === $id_lentexcliente)
-					{
-
-						$lente = $lentexcliente->getIdLente();
-						$lente = $this->daoLente->traerPorId($lente);
-					}
-				}	
-			}
-			else
+		if(!empty($id_cliente)){
 			{
-				$lente = NULL;
-			}
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "lentexcliente.php");
-			include URL_VISTA . 'footer.php';
+				$lentexcliente = $this->daoLentexcliente->traerPorIdCliente($id_cliente);
 
+				if(!empty($lentexcliente))
+				{
+					$longitud = count($lentexcliente);
+					
+					for ($contador = 0; $contador <= $longitud; $contador++) 
+					{
+						if(!empty($lentexcliente[$contador]))
+						{
+							$lente[$contador] = $lentexcliente[$contador]->getIdLente();
+						}
+					}
+				}
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "lentexcliente.php");
+				include URL_VISTA . 'footer.php';
+			}
 		}
 	}
-
 }

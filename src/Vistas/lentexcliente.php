@@ -56,7 +56,7 @@
                                         Cilindrico
                                     </th>
                                     <th>
-                                        En Grados
+                                        En G°
                                     </th>
                                     <th>
                                        Distancia
