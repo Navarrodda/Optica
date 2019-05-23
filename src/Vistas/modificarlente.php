@@ -47,7 +47,7 @@
 						<input name="distancia" type="text" class="col-md-6 norightborder btn2" placeholder="Distancia">
 						<input name="calibre" type="text" class="col-md-6 norightborder btn2" placeholder="Calibre">
 						<input name="puente" type="text" class="col-md-6 norightborder btn2" placeholder="Puente">
-						<button type="submit" class="contact submit btn-primary btn-xl pull-right">Registrar</button>
+						<button type="submit" class="contact submit btn-primary btn-xl pull-right">Modificar</button>
 					</form>
 					<?php 
 				}

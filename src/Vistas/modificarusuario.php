@@ -23,7 +23,7 @@ include (URL_VISTA . 'navbar.php');
                     <input name="pass" autocomplete="off" type="password" class="col-md-6 norightborder btn2" placeholder="Contraseña">
 
 
-                    <button type="submit" class="contact submit btn-primary btn-xl pull-right">Cargar</button>
+                    <button type="submit" class="contact submit btn-primary btn-xl pull-right">Modificar</button>
                 </form>
             </div>
         </div>
