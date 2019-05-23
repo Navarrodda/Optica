@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
-	<meta name="author" content="">comentarios</title>
+	<meta name="author" content="">.</title>
 	<!-- Bootstrap Core CSS -->
 	<link rel="stylesheet" href="<?= URL_CSS .'bootstrap.min.css' ?>" type="text/css">
 	<!-- Plugin CSS -->

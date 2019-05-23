@@ -32,13 +32,13 @@
                                         id
                                     </th>
                                     <th>
-                                        Medico
+                                        Dr.
+                                    </th>
+                                     <th>
+                                        Arm. Lejos
                                     </th>
                                     <th>
-                                        Mrmazon Cerca
-                                    </th>
-                                    <th>
-                                        Armazon Lejos
+                                        Arm. Cerca
                                     </th>
                                     <th>
                                         L OD
@@ -53,31 +53,34 @@
                                         C OI
                                     </th>
                                     <th>
-                                        Cilindrico
+                                        Cil
                                     </th>
                                     <th>
                                         En G°
                                     </th>
                                     <th>
-                                       Distancia
+                                       D.I.
                                    </th>
                                    <th>
-                                    Calibre
+                                    Cal.
                                 </th>
                                 <th>
-                                    Puente
+                                    Pue.
                                 </th>
                                 <th>
-                                    Color
+                                    Co.
                                 </th>
                                 <th>
-                                    Fecha
+                                    Fec.
                                 </th>
                                 <th>
-                                    Modificar
+                                    PDF
                                 </th>
                                 <th>
-                                    Eliminar
+                                    Mod.
+                                </th>
+                                <th>
+                                    Eli.
                                 </th>
                             </tr>
                         </thead>
@@ -138,7 +141,7 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="#" class="disabled">
+                                        <a href="/vista/modificarlente/<?= $cliente->getId()?>/<?=$objeto->getId(); ?>" class="disabled">
                                             <span class="glyphicon glyphicon-pencil" title="No implementado..."
                                             data-toggle="tooltip" data-placement="right">
                                         </span>

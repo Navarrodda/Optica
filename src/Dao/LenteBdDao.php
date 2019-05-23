@@ -97,6 +97,55 @@ class LenteBdDao{
 		}
 	}
 
+	public function actualizar(Lente $lente, $id){
+		try{
+
+			$sql = ("UPDATE $this->tabla SET medico=:medico, armazon_cerca=:armazon_cerca, armazon_lejos=:armazon_lejos, lejos_od=:lejos_od, lejos_oi=:lejos_oi, cerca_od=:cerca_od, cerca_oi=:cerca_oi, cilindrico=:cilindrico, en_grados=:en_grados, distancia=:distancia, calibre=:calibre, puente=:puente, color=:color, fecha=:fecha WHERE id_lente=\"$id\"");
+
+			$conexion = Conexion::conectar();
+
+			$sentencia = $conexion->prepare($sql);
+
+			$medico = $lente->getMedico();
+			$armazon_cerca = $lente->getArmazonCerca();
+			$armazon_lejos = $lente->getArmazonLejos();
+			$lejos_od = $lente->getLejosOd();
+			$lejos_oi = $lente->getLejosOi();
+			$cerca_od = $lente->getCercaOd();
+			$cerca_oi = $lente->getCercaOi();
+			$cilindrico = $lente->getCilindrico();
+			$en_grados = $lente->getEnGrados();
+			$distancia = $lente->getDistancia();
+			$calibre = $lente->getCalibre();
+			$puente = $lente->getPuente();
+			$color = $lente->getColor();
+			$fecha = $lente->getFecha();
+
+			$sentencia->bindParam(":medico",$medico);
+			$sentencia->bindParam(":armazon_cerca",$armazon_cerca);
+			$sentencia->bindParam(":armazon_lejos",$armazon_lejos);
+			$sentencia->bindParam(":lejos_od",$lejos_od);
+			$sentencia->bindParam(":lejos_oi",$lejos_oi);
+			$sentencia->bindParam(":cerca_od",$cerca_od);
+			$sentencia->bindParam(":cerca_oi",$cerca_oi);
+			$sentencia->bindParam(":cilindrico",$cilindrico);
+			$sentencia->bindParam(":en_grados",$en_grados);
+			$sentencia->bindParam(":distancia",$distancia);
+			$sentencia->bindParam(":calibre",$calibre);
+			$sentencia->bindParam(":puente",$puente);
+			$sentencia->bindParam(":color",$color);
+			$sentencia->bindParam(":fecha",$fecha);
+
+			$sentencia->execute();
+
+			return $conexion->lastInsertId();
+		}catch(\PDOException $e){
+			echo $e->getMessage();die();
+		}catch(\Exception $e){
+			echo $e->getMessage();die();
+		}
+	}
+
 	public function traerPorId($id)
 	{
 		try{

@@ -138,4 +138,13 @@ class VistaControladora
 			}
 		}
 	}
+	public function modificarlente($id_cliente, $id_lente)
+	{
+		$cliente = $this->daoCliente->traerPorId($id_cliente);
+		$lente = $this->daoLente->traerPorId($id_lente);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarlente.php");
+		include URL_VISTA . 'footer.php';
+	}
+
 }
