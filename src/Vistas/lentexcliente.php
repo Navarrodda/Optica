@@ -148,7 +148,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a type="submit" method="post"  name="id_cliente" href="/administrar/eliminarcliente/<?= $objeto->getId(); ?>" class="disabled">
+                                    <a type="submit" method="post"  name="id_cliente" href="/administrar/eliminarlente/<?= $objeto->getId(); ?>/<?= $cliente->getId(); ?>" class="disabled">
                                         <span class="glyphicon glyphicon-trash"  title="Eliminar Cliente"
                                         data-toggle="tooltip" data-placement="right">
                                     </span>

@@ -6,19 +6,23 @@ namespace Controladoras;
 use Modelo\Mensaje as Mensaje;
 use Modelo\Cliente as Cliente;
 use Modelo\Lente as Lente;
+use Modelo\Lente_x_cliente as Lente_x_cliente;
 
 
 //Dao
 use Dao\ClienteBdDao as ClienteBdDao;
 use Dao\LenteBdDao as LenteBdDao;
+use Dao\LentexclienteBdDao as LentexclienteBdDao;
 
 class AdministrarControladora
 {
 	protected $daoCliente;
 	protected $daoLente;
+	protected $daoLentexcliente;
 
 	private $cliente;
 	private $lente;
+	private $lentexcliente;
 
 
 
@@ -26,6 +30,7 @@ class AdministrarControladora
 	{
 		$this->daoCliente = ClienteBdDao::getInstancia();
 		$this->daoLente = LenteBdDao::getInstancia();
+		$this->daoLentexcliente = LentexclienteBdDao::getInstancia();
 	}
 
 	function eliminarcliente($id_cliente){
@@ -270,6 +275,56 @@ class AdministrarControladora
 					$this->mensaje = new Mensaje( "success", "Ocurio un Problema" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "modificarlente.php");
+					include URL_VISTA . 'footer.php';
+					break;
+				}
+			}
+			else{
+				$this->mensaje = new Mensaje( "success", "Deve iniciar sesion" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}catch(\PDOException $pdo_error){
+			$this->mensaje = new \Modelo\Mensaje("danger","Ocurrio un error con la Base de Datos: " . $pdo_error);
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'error.php');
+			include URL_VISTA . 'footer.php';
+		}catch(\Exception $error){
+			echo $error->getMessage();
+		}
+	}
+
+	function eliminarlente($id_lente, $id_cliente){
+		try{
+			
+			if(!empty($_SESSION)){
+
+				$regCompleted = FALSE;
+				if(isset($id_lente)){
+					$cliente= $this->daoCliente->traerPorId($id_cliente);
+					$nombre = $cliente->getNombre();
+					$this->daoLentexcliente->eliminarPorIdLente($id_lente);
+					$this->daoLente->eliminarPorId($id_lente);
+					$regCompleted = TRUE;
+					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente el lente del cliente
+						! El Cliente es:' .' '.'<i><strong>' .  $nombre
+						. '</strong></i>');
+				}
+
+
+				switch ($regCompleted){
+					case TRUE:
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "inicio.php");
+					include URL_VISTA . 'footer.php';
+					break;
+
+					case FALSE:
+					$cliente = $this->daoCliente->traerTodo();
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "cliente.php");
 					include URL_VISTA . 'footer.php';
 					break;
 				}

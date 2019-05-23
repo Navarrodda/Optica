@@ -172,6 +172,22 @@ class LenteBdDao{
 			echo $e->getMessage();die();
 		}
 	}
+	public function eliminarPorId($id_lente ){
+        try{
+
+            $sql = "DELETE FROM $this->tabla WHERE id_lente = \"$id_lente \"";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
 
 	private function mapear($dataSet)
 	{
