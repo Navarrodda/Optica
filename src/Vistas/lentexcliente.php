@@ -41,16 +41,16 @@
                                         Armazon Lejos
                                     </th>
                                     <th>
-                                        Lejos OD
+                                        L OD
                                     </th>
                                     <th>
-                                        Lejos OI
+                                        L OI
                                     </th>
                                     <th>
-                                        Cerca OD
+                                        C OD
                                     </th>
                                     <th>
-                                        Cerca OI
+                                        C OI
                                     </th>
                                     <th>
                                         Cilindrico

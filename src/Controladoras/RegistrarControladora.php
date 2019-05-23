@@ -158,7 +158,8 @@ class RegistrarControladora
 		try{
 			if(!empty($_SESSION)){
 				$regCompleted = FALSE;
-				$medico = ucwords($medico); 
+				$medico = ucwords($medico);
+			    $color = ucwords($color);
 				if(!empty($id_cliente)){
 					$lentInstance = new Lente($medico, $armazon_cerca, $armazon_lejos, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $cilindrico, $en_grados, $distancia, $calibre, $puente, $color, $fecha);
 					$idLent= $this->daoLente->agregar( $lentInstance );
