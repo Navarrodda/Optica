@@ -18,11 +18,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 texto-chico">
-                     <div class="table-responsive">
-                       <table class="table table-hover">
-                         <?php 
-                         if($cliente!= null )
-                         {
+                       <div class="table-responsive">
+                         <table class="table table-hover">
+                           <?php 
+                           if($cliente!= null )
+                           {
                             ?>
                             <thead>
                                 <tr style="color:white">
@@ -94,5 +94,29 @@
         </div>
     </div>
 </div>
+<?php
+if(!empty($longitud))
+{
+if($longitud > 10) {
+    ?>
+    <div id="navegador">
+        <ul>
+            <li><a href="#">Siguiente</a></li>
+            <?php
+            for ($contador = 10; $contador < $longitud; $contador++){
+                $limit = $limit + 1;
+            ?>
+            <li><a href="/vista/clienteslimit/<?= $limit; ?>/<?= $longitud; ?>"><?php print_r($entrada); ?></a></li>
+            <?php
+            $entrada++;
+        }
+        ?>
+        <li><a href="#">Anterior</a></li>
+    </ul>
+</div>
+<?php
+}
+}
+?>
 </div>
 </div>

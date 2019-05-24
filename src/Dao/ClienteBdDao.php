@@ -130,6 +130,32 @@ class ClienteBdDao{
         }
     }
 
+     public function traerTodoLimit($limit)
+    {
+        try{
+            $sql = "SELECT * FROM $this->tabla LIMIT $limit, 10";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+
+            $this->mapear($dataSet);
+
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
     public function verificarNombre($nombre){
 
         try{

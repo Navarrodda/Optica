@@ -61,7 +61,23 @@ class VistaControladora
 
 	public function clientes()
 	{
-		$cliente = $this->daoCliente->traerTodo();
+		$limit = 0;
+		$entrada = 1; 
+		$cliente = $this->daoCliente->traerTodoLimit($limit);
+		$medir = $this->daoCliente->traerTodo();
+		$longitud = count($medir);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "cliente.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function clienteslimit($limit, $longitud)
+	{
+		$longitud = $longitud - $limit;
+		if (!empty($limit)) {
+			$limit = $limit + 9;
+			$cliente = $this->daoCliente->traerTodoLimit($limit);
+		}
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
 		include URL_VISTA . 'footer.php';
