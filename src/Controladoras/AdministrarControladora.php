@@ -43,6 +43,22 @@ class AdministrarControladora
 					$cliente= $this->daoCliente->traerPorId($id_cliente);
 					$nombre = $cliente->getNombre();
 					$apellido = $cliente->getApellido();
+					$lentexcliente = $this->daoLentexcliente->traerPorIdCliente($id_cliente);
+					$this->daoLentexcliente->eliminarPorIdCliente($id_cliente);
+					if(!empty($lentexcliente))
+					{
+						$longitud = count($lentexcliente);
+
+						for ($contador = 0; $contador <= $longitud; $contador++) 
+						{
+							if(!empty($lentexcliente[$contador]))
+							{
+								$lente[$contador] = $lentexcliente[$contador]->getIdLente();
+								$id_lente = $lente[$contador]->getId();
+								$this->daoLente->eliminarPorId($id_lente);
+							}
+						}
+					}
 					$this->daoCliente->eliminarPorId($id_cliente);
 					$regCompleted = TRUE;
 					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente al cliente
@@ -67,7 +83,7 @@ class AdministrarControladora
 				}
 			}
 			else{
-				$this->mensaje = new Mensaje( "success", "Deve iniciar sesion" );
+				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "inicio.php");
 				include URL_VISTA . 'footer.php';
@@ -168,7 +184,7 @@ class AdministrarControladora
 				}
 			}
 			else{
-				$this->mensaje = new Mensaje( "success", "Deve iniciar sesion" );
+				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "inicio.php");
 				include URL_VISTA . 'footer.php';
@@ -272,7 +288,7 @@ class AdministrarControladora
 					break;
 
 					case FALSE:
-					$this->mensaje = new Mensaje( "success", "Ocurio un Problema" );
+					$this->mensaje = new Mensaje( "success", "Ocurrio un Problema" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "modificarlente.php");
 					include URL_VISTA . 'footer.php';
@@ -280,7 +296,7 @@ class AdministrarControladora
 				}
 			}
 			else{
-				$this->mensaje = new Mensaje( "success", "Deve iniciar sesion" );
+				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "inicio.php");
 				include URL_VISTA . 'footer.php';
@@ -330,7 +346,7 @@ class AdministrarControladora
 				}
 			}
 			else{
-				$this->mensaje = new Mensaje( "success", "Deve iniciar sesion" );
+				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "inicio.php");
 				include URL_VISTA . 'footer.php';

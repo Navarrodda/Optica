@@ -151,6 +151,23 @@ class LentexclienteBdDao{
         }
     }
 
+    public function eliminarPorIdCliente($id_cliente ){
+        try{
+
+            $sql = "DELETE FROM $this->tabla WHERE id_cliente = \"$id_cliente \"";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
 
 	private function mapear($dataSet)
 	{
