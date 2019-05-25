@@ -103,10 +103,11 @@ if($longitud > 10) {
         <ul>
             <li><a href="#">Siguiente</a></li>
             <?php
-            for ($contador = 10; $contador < $longitud; $contador++){
-                $limit = $limit + 1;
+            for ($contador = 9; $contador < $longitud; $contador++){
+                $limit = $limit + 9;
+                $contador = $contador + 9;
             ?>
-            <li><a href="/vista/clienteslimit/<?= $limit; ?>/<?= $longitud; ?>"><?php print_r($entrada); ?></a></li>
+            <li><a href="/vista/clienteslimit/<?= $limit; ?>/<?= $longitud; ?>/<?= $entrada; ?>"><?php print_r($entrada); ?></a></li>
             <?php
             $entrada++;
         }

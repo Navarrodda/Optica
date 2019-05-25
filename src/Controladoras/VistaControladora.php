@@ -71,11 +71,11 @@ class VistaControladora
 		include URL_VISTA . 'footer.php';
 	}
 
-	public function clienteslimit($limit, $longitud)
+	public function clienteslimit($limit, $longitud, $entrada)
 	{
-		$longitud = $longitud - $limit;
+		$entrada = $entrada + 1;
+		$longitud = $longitud - 9;
 		if (!empty($limit)) {
-			$limit = $limit + 9;
 			$cliente = $this->daoCliente->traerTodoLimit($limit);
 		}
 		include URL_VISTA . 'header.php';
