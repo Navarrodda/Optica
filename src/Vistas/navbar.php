@@ -27,22 +27,35 @@
                         <li>
                             <a class="page-scroll" style="color:orange" href="/"><?= $_SESSION['nombre'],' ', $_SESSION['apellido'] ?> </a>
                             <ul>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/vista/clientes/">Clientes</a>
-                                </li>
                             </ul>   
                         </li>
+                        <li>
+                            <a class="page-scroll" style="color:white" href="/">Clientes</a>
+                            <ul>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="/vista/registrar/">Registrar Cliente</a>
+                                </li>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="/vista/clientes/">Vista Clientes</a>
+                                </li>
+                            </ul>
+                        </li>
+                         <li>
+                            <a class="page-scroll" style="color:white" href="/">PDF</a>
+                            <ul>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="/pdf/pdfplantilla"  target="_blank">Plantilla</a>
+                                </li>
+                                 <li>
+                                    <a class="page-scroll" style="color:white" href="/pdf/pdfvista"  target="_blank">Plantilla Con datos actuales</a>
+                                </li>
+                            </ul>
+                        </li>  
                         <li>
                             <a class="page-scroll" style="color:white" href="">Facturacion</a>
                             <ul>
                                 <li>
-                                    <a class="page-scroll" style="color:white" href="/pdf/pdfplantilla"  target="_blank">PDF Plantilla</a>
-                                </li>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/pdf/pdfvista"  target="_blank">PDF <?= $_SESSION['nombre'],' ', $_SESSION['apellido']?></a>
-                                </li>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/vista/facturasimple/">Simple</a>
+                                    <a class="page-scroll" style="color:white" href="/vista/facturasimple/">Cargar Manual</a>
                                 </li>
                                 <li>
                                     <a class="page-scroll" style="color:white" href="/pdf/pdfsimple">Simple1</a>
@@ -51,15 +64,7 @@
                                     <a class="page-scroll" style="color:white" href="">Cliente Registrado</a>
                                 </li>
                             </ul>
-                        </li>
-                        <li>
-                            <a class="page-scroll botonimagen" style="background-image: url(<?= URL_IMG . 'Iconos/menu.png' ?>);" href=""></a>
-                            <ul>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/vista/registrar/">Registrar Cliente</a>
-                                </li>
-                            </ul>
-                        </li>               
+                        </li>              
                         <li>
                             <a class="page-scroll" style="color:white" href="/sesion/terminar">salir</a>
                         </li>
