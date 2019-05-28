@@ -16,7 +16,7 @@ nombre VARCHAR(20) NOT NULL,
 apellido VARCHAR(20)NOT NULL,
 email VARCHAR(50) NOT NULL,
 pass VARCHAR(17) NOT NULL,
-calle VARCHAR(20) NOT NULL,
+calle VARCHAR(30) NOT NULL,
 telefono VARCHAR(15)NOT NULL,
 CONSTRAINT pk_id_usuario PRIMARY KEY (id_usuario),
 CONSTRAINT fk_id_usuario_rol FOREIGN KEY (id_rol) REFERENCES roles (id_rol)    

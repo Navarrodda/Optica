@@ -64,7 +64,7 @@
 					<input name="subtotal" type="number" class="col-md-4 norightborder btn2" placeholder="$ Subtotal">
 					<input name="senia" type="number" class="col-md-4 norightborder btn2" placeholder="$ Seña">
 					<input name="saldo_total" type="number" class="col-md-4 norightborder btn2" placeholder="$ Saldo Total">
-					<button type="submit" class="contact submit btn-primary btn-xl pull-right">Enviar</button>
+					<button type="submit" class="contact submit btn-primary btn-xl pull-right">Cargar</button>
 				</form>
 			</div>
 		</div>

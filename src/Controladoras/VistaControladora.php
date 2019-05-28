@@ -12,7 +12,7 @@ use Modelo\Lente_x_cliente as Lentexcliente;
 
 //Dao
 use Dao\RolBdDao as RolBdDao;
-//use Dao\UsuarioBdDao as UsuarioBdDao;
+use Dao\UsuarioBdDao as UsuarioBdDao;
 use Dao\ClienteBdDao as ClienteBdDao;
 use Dao\LenteBdDao as LenteBdDao;
 use Dao\LentexclienteBdDao as LentexclienteBdDao;
@@ -21,10 +21,12 @@ class VistaControladora
 {
 	protected $daoRol;
 	protected $daoCliente;
+	protected $daoUsuario;
 	protected $daoLentexcliente;
 	
 	private $mensaje;
 	private $cliente;
+	private $usuario;
 	private $lentexcliente;
 	private $lente;
 
@@ -33,6 +35,7 @@ class VistaControladora
 
 		$this->daoRol = RolBdDao::getInstancia();
 		$this->daoCliente = ClienteBdDao::getInstancia();
+		$this->daoUsuario = UsuarioBdDao::getInstancia();
 		$this->daoLente = LenteBdDao::getInstancia();
 		$this->daoLentexcliente = LentexclienteBdDao::getInstancia();
 	}
@@ -114,8 +117,20 @@ class VistaControladora
 		include URL_VISTA . 'footer.php';
 	}
 
+	public function usuario()
+	{
+		$id = $_SESSION["id"];
+		$usuario = $this->daoUsuario->traerPorId($id);
+		print_r($usuario->getNombre());
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "usuario.php");
+		include URL_VISTA . 'footer.php';
+	}
+
 	public function modificarusuario()
 	{
+		$id = $_SESSION["id"];
+		$usuario = $this->daoUsuario->traerPorId($id);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "modificarusuario.php");
 		include URL_VISTA . 'footer.php';

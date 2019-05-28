@@ -103,33 +103,33 @@ public function eliminarPorMail($mail){
     $sentencia->execute();
 }
 
-public function actualizar(Usuario $usuario){
+public function actualizar(Usuario $usuario, $id){
 
     try{
-        /** @noinspection SqlResolve */
-
-        $id = $usuario->getId();
-
-        $sql = ("UPDATE $this->tabla SET  nombre=:nombre,  apellido=:apellido, calle=:calle,
-            telefono=:telefono,email=:email,pass=:pass WHERE id_usuario=\"$id\"");
+        $sql = ("UPDATE $this->tabla SET id_rol=:id_rol, nombre=:nombre,  apellido=:apellido, email=:email,pass=:pass, calle=:calle, telefono=:telefono WHERE id_usuario=\"$id\"");
 
         $conexion = Conexion::conectar();
 
         $sentencia = $conexion->prepare($sql);
 
-        $nombre = $usuarios->getNombre();
-        $apellido = $usuarios->getApellido();
-        $calle = $usuarios->getCalle();
-        $telefono = $usuarios->getTelefono();
+        $r = $usuario->getIdRol();
+        $id_rol = $r->getId();
+
+        $nombre = $usuario->getNombre();
+        $apellido = $usuario->getApellido();
+        $calle = $usuario->getCalle();
+        $telefono = $usuario->getTelefono();
         $email = $usuario->getEmail();
         $pass = $usuario->getPassword();
 
+        $sentencia->bindParam(":id_rol",$id_rol);
         $sentencia->bindParam(":nombre",$nombre);
         $sentencia->bindParam(":apellido",$apellido);
-        $sentencia->bindParam(":calle",$calle);
-        $sentencia->bindParam(":telefono",$telefono);
         $sentencia->bindParam(":email", $email);
         $sentencia->bindParam(":pass", $pass);
+        $sentencia->bindParam(":calle",$calle);
+        $sentencia->bindParam(":telefono",$telefono);
+
 
         $sentencia->execute();
     }catch(\PDOException $e){
@@ -176,25 +176,34 @@ public function verificarEmail($email){
     return FALSE;
 }
 
-public function traerPorId($id){
+public function traerPorId($id)
+{   
+    try{
+        if ($id != null) {
+            $sql = ("SELECT * FROM $this->tabla WHERE id_usuario = \"$id\" LIMIT 1" );
 
-    /** @noinspection SqlResolve */
-    $sql = "SELECT * FROM $this->tabla WHERE id_cuenta =  \"$id\" LIMIT 1";
+            $conexion = Conexion::conectar();
 
-    $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare($sql);
 
-    $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
 
-    $sentencia->execute();
+            $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
 
-    $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
 
-    $this->mapear($dataSet);
+            if(!empty($this->listado[0])){
 
-    if (!empty($this->listado[0])) {
-        return $this->listado[0];
+                return $this->listado[0];
+            }
+        }
+
+        return null;
+    }catch(\PDOException $e){
+        echo $e->getMessage();die();
+    }catch(\Exception $e){
+        echo $e->getMessage();die();
     }
-    return null;
 }
 
 public function traerPorMail($email){
@@ -247,7 +256,7 @@ public function traerPorNombre($nombre){
 public function mapear($dataSet){
     $dataSet = is_array($dataSet) ? $dataSet : false;
     if($dataSet){
-       $this->listado = array_map(function ($p) {
+     $this->listado = array_map(function ($p) {
         $daoRol = RolBdDao::getInstancia();
         $usuario = new Usuario
         (
@@ -262,6 +271,6 @@ public function mapear($dataSet){
         $usuario->setId($p['id_usuario']);
         return $usuario;
     }, $dataSet);
-   }
+ }
 }
 }

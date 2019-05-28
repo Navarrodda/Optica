@@ -27,6 +27,9 @@
                         <li>
                             <a class="page-scroll" style="color:orange" href="/"><?= $_SESSION['nombre'],' ', $_SESSION['apellido'] ?> </a>
                             <ul>
+                                <li>
+                                    <a class="page-scroll" style="color:white" href="/vista/usuario/">Cuenta</a>
+                                </li>
                             </ul>   
                         </li>
                         <li>
@@ -40,13 +43,13 @@
                                 </li>
                             </ul>
                         </li>
-                         <li>
+                        <li>
                             <a class="page-scroll" style="color:white" href="/">PDF</a>
                             <ul>
                                 <li>
                                     <a class="page-scroll" style="color:white" href="/pdf/pdfplantilla"  target="_blank">Plantilla</a>
                                 </li>
-                                 <li>
+                                <li>
                                     <a class="page-scroll" style="color:white" href="/pdf/pdfvista"  target="_blank">Plantilla Con datos actuales</a>
                                 </li>
                             </ul>

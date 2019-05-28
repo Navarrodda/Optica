@@ -11,10 +11,11 @@ include (URL_VISTA . 'navbar.php');
 <div class="container mh-400" style="margin-top:30px;">
     <div class="row">
         <div class="col-md-8 col-md-offset-2 text-center">
-            <h2 class="section-heading">REGISTRAR USUARIO</h2>
+            <h2 class="section-heading">Modificar Cuenta</h2>
             <hr class="primary">
             <div class="regularform">
-                <form id="form_r" method="post" action="/registrar/modificar" id="contactform" class="text-left" autocomplete="off">
+                <form id="form_r" method="post" action="/administrar/modificarusuario/" id="contactform" class="text-left" autocomplete="off">
+                    <input  name="id_usuario" type=hidden value="<?= $usuario->getId()?>">
                     <input name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Nombre">
                     <input name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
                     <input name="calle" type="text" class="col-md-6 btn2" placeholder="Calle">

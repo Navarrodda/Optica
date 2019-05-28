@@ -5,22 +5,26 @@ namespace Controladoras;
 //Modelo
 use Modelo\Mensaje as Mensaje;
 use Modelo\Cliente as Cliente;
+use Modelo\Usuario as Usuario;
 use Modelo\Lente as Lente;
 use Modelo\Lente_x_cliente as Lente_x_cliente;
 
 
 //Dao
 use Dao\ClienteBdDao as ClienteBdDao;
+use Dao\UsuarioBdDao as UsuarioBdDao;
 use Dao\LenteBdDao as LenteBdDao;
 use Dao\LentexclienteBdDao as LentexclienteBdDao;
 
 class AdministrarControladora
 {
 	protected $daoCliente;
+	protected $daoUsuario;
 	protected $daoLente;
 	protected $daoLentexcliente;
 
 	private $cliente;
+	private $usuario;
 	private $lente;
 	private $lentexcliente;
 
@@ -29,6 +33,7 @@ class AdministrarControladora
 	public function __construct()
 	{
 		$this->daoCliente = ClienteBdDao::getInstancia();
+		$this->daoUsuario = UsuarioBdDao::getInstancia();
 		$this->daoLente = LenteBdDao::getInstancia();
 		$this->daoLentexcliente = LentexclienteBdDao::getInstancia();
 	}
@@ -179,6 +184,86 @@ class AdministrarControladora
 					$this->mensaje = new Mensaje( "success", "Ya hay Cliente registrado con ese Nombre y Apellido!" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "modificarcliente.php");
+					include URL_VISTA . 'footer.php';
+					break;
+				}
+			}
+			else{
+				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}catch(\PDOException $pdo_error){
+			$this->mensaje = new \Modelo\Mensaje("danger","Ocurrio un error con la Base de Datos: " . $pdo_error);
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'error.php');
+			include URL_VISTA . 'footer.php';
+		}catch(\Exception $error){
+			echo $error->getMessage();
+		}
+	}
+
+		function modificarusuario($id_usuario, $nombre, $apellido, $calle, $telefono, $email, $pass){
+		try{
+
+			if(!empty($_SESSION)){
+
+				$regCompleted = FALSE;
+				
+
+				$nombre = ucwords($nombre); 
+				$apellido = ucwords($apellido); 
+				$calle = ucwords($calle);
+
+				$usuario = $this->daoUsuario->traerPorId($id_usuario);
+
+				$id_rol = $usuario->getIdRol();
+
+				if(empty($nombre))
+				{
+					$nombre = $usuario->getNombre();
+				}
+				if(empty($apellido))
+				{
+					$apellido =  $usuario->getApellido();
+				}
+				if(empty($email))
+				{
+					$email =  $usuario->getEmail();
+				}
+				if(empty($pass))
+				{
+					$pass =  $usuario->getPassword();
+				}
+				if(empty($calle))
+				{
+					$calle =  $usuario->getCalle();
+				}
+				if(empty($telefono))
+				{
+					$telefono =  $usuario->getTelefono();
+				}
+
+				if(!empty($id_usuario)){
+					$usuarioInstance = new Usuario($nombre, $apellido, $email, $calle, $telefono, $pass, $id_rol);
+					$idUse = $this->daoUsuario->actualizar( $usuarioInstance, $id_usuario);
+					$regCompleted = TRUE;
+					$this->mensaje = new Mensaje( "success", "La cuenta fue modificada con exito!" );
+				}
+
+				switch ($regCompleted){
+					case TRUE:
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "inicio.php");
+					include URL_VISTA . 'footer.php';
+					break;
+
+					case FALSE:
+					$this->mensaje = new Mensaje( "success", "Error!" );
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "modificarusuario.php");
 					include URL_VISTA . 'footer.php';
 					break;
 				}
