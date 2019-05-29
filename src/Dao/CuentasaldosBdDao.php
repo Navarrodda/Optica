@@ -6,7 +6,7 @@ use \Modelo\Senia;
 
 class SeniaBdDao{
 
-	protected $tabla = "senias";
+	protected $tabla = "cuentas_saldos";
 	protected static $instancia;
 	protected $listado;
 
@@ -43,20 +43,22 @@ class SeniaBdDao{
 	}
 
 
-	public function agregar(Senia $senia1){
+	public function agregar(Cuentas_saldos $Cuentas){
 
 		try{
 
-			$sql = ("INSERT INTO $this->tabla (senia, fecha) VALUES ( :senia, :fecha) ");
+			$sql = ("INSERT INTO $this->tabla (a_cuenta, saldo, fecha) VALUES (:a_cuenta, :saldo, :fecha) ");
 
 			$conexion = Conexion::conectar();
 
 			$sentencia = $conexion->prepare($sql);
 
-			$senia = $senia1->getSenia();
-			$fecha = $senia1->getFecha();
+			$a_cuenta = $Cuentas->getACuenta();
+			$saldo = $Cuentas->getSaldo();
+			$fecha = $Cuentas->getFecha();
 
-			$sentencia->bindParam(":descripcion",$descripcion);
+			$sentencia->bindParam(":a_cuenta",$a_cuenta);
+			sentencia->bindParam(":saldo",$saldo);
 			$sentencia->bindParam(":fecha",$fecha);
 
 			$sentencia->execute();
@@ -69,24 +71,26 @@ class SeniaBdDao{
 		}
 	}
 
-	public function actualizar(Senia $senia1){
+	public function actualizar(Cuentas_saldos $Cuentas){
 
 		try{
 			/** @noinspection SqlResolve */
 
 			$id = $senia1->getIdSenia();
 
-			$sql = ("UPDATE $this->tabla SET  senia=:senia,  fecha=:fecha 
-				WHERE id_senia=\"$id\"");
+			$sql = ("UPDATE $this->tabla SET  a_cuenta=:a_cuenta, saldo=:saldo,  fecha=:fecha 
+				WHERE id_cuenta_saldo=\"$id\"");
 
 			$conexion = Conexion::conectar();
 
 			$sentencia = $conexion->prepare($sql);
 
-			$senia = $senia1->getSenia();
-			$fecha = $senia1->getFecha();
+			$a_cuenta = $Cuentas->getACuenta();
+			$saldo = $Cuentas->getSaldo();
+			$fecha = $Cuentas->getFecha();
 
-			$sentencia->bindParam(":descripcion",$descripcion);
+			$sentencia->bindParam(":a_cuenta",$a_cuenta);
+			sentencia->bindParam(":saldo",$saldo);
 			$sentencia->bindParam(":fecha",$fecha);
 
 
@@ -100,7 +104,7 @@ class SeniaBdDao{
 
 	public function traerPorId($id)
 	{
-		$sql = "SELECT * FROM $this->tabla WHERE id_tipo_cerveza = \"$id\" LIMIT 1";
+		$sql = "SELECT * FROM $this->tabla WHERE id_cuenta_saldo = \"$id\" LIMIT 1";
 
 		$conexion = Conexion::conectar();
 
@@ -123,12 +127,13 @@ class SeniaBdDao{
 		$dataSet = is_array($dataSet) ? $dataSet : false;
 		if($dataSet){
 			$this->listado = array_map(function ($p) {
-				$senia1 = new Senia
+				$senia1 = new Cuentas_saldos
 				(
-					$p['senia'],
+					$p['a_cuenta'],
+					$p['saldo'],
 					$p['fecha']
 				);
-				$senia1->setIdSenia($p['id_senia']);
+				$senia1->setIdSenia($p['id_cuenta_saldo']);
 				return $senia1;
 			}, $dataSet);
 		}

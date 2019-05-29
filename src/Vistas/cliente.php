@@ -18,11 +18,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 texto-chico">
-                       <div class="table-responsive">
-                         <table class="table table-hover">
-                           <?php 
-                           if($cliente!= null )
-                           {
+                     <div class="table-responsive">
+                       <table class="table table-hover">
+                         <?php 
+                         if($cliente!= null )
+                         {
                             ?>
                             <thead>
                                 <tr style="color:white">
@@ -34,6 +34,9 @@
                                     </th>
                                     <th>
                                         Apellido
+                                    </th>
+                                    <th>
+                                        Direccion
                                     </th>
                                     <th>
                                         Telefono
@@ -64,11 +67,14 @@
                                             <?= $objeto->getApellido(); ?>
                                         </td>
                                         <td>
+                                            <?= $objeto->getCalle(); ?>
+                                        </td>
+                                        <td>
                                             <?= $objeto->getTelefono(); ?>
                                         </td>
                                         <td>
                                             <a href="/vista/lentecliente/<?= $objeto->getId(); ?>" class="disabled">         
-                                                <span class="glyphicon glyphicon-list" title="Lentes"
+                                                <span class="glyphicon glyphicon-open-file" title="Lentes"
                                                 data-toggle="tooltip" data-placement="right">
                                             </span>
                                         </td>
@@ -97,26 +103,26 @@
 <?php
 if(!empty($longitud))
 {
-if($longitud > 10) {
-    ?>
-    <div id="navegador">
-        <ul>
-            <li><a href="#">Siguiente</a></li>
-            <?php
-            for ($contador = 9; $contador < $longitud; $contador++){
-                $limit = $limit + 9;
-                $contador = $contador + 9;
-            ?>
-            <li><a href="/vista/clienteslimit/<?= $limit; ?>/<?= $longitud; ?>/<?= $entrada; ?>"><?php print_r($entrada); ?></a></li>
-            <?php
-            $entrada++;
-        }
+    if($longitud > 10) {
         ?>
-        <li><a href="#">Anterior</a></li>
-    </ul>
-</div>
-<?php
-}
+        <div id="navegador">
+            <ul>
+                <li><a href="#">Siguiente</a></li>
+                <?php
+                for ($contador = 9; $contador < $longitud; $contador++){
+                    $limit = $limit + 9;
+                    $contador = $contador + 9;
+                    ?>
+                    <li><a href="/vista/clienteslimit/<?= $limit; ?>/<?= $longitud; ?>/<?= $entrada; ?>"><?php print_r($entrada); ?></a></li>
+                    <?php
+                    $entrada++;
+                }
+                ?>
+                <li><a href="#">Anterior</a></li>
+            </ul>
+        </div>
+        <?php
+    }
 }
 ?>
 </div>

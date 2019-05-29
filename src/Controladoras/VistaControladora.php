@@ -42,7 +42,7 @@ class VistaControladora
 
 	public function index()
 	{
-		
+		$cliente = $this->daoCliente->traerTodo();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "inicio.php");
 		include URL_VISTA . 'footer.php';
@@ -111,7 +111,7 @@ class VistaControladora
 
 	public function registrarusuario()
 	{
-		$roles = $this->daoRol->traerTodo();
+		$role = $this->daoRol->traerPorId(1);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "registrarusuario.php");
 		include URL_VISTA . 'footer.php';

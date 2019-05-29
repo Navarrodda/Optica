@@ -38,6 +38,7 @@ class RegistrarControladora
 
 			$nombre = ucwords($nombre); 
 			$apellido = ucwords($apellido);
+			$calle = ucwords($calle);
 
 			if( ! $this->daoUsuario->verificarEmail( $email ) ) {
 				$userInstance = new Usuario($nombre, $apellido, $email, $calle, $telefono, $pass, $this->daoRol->traerPorId( $id_rol ));
@@ -71,13 +72,14 @@ class RegistrarControladora
 		}
 	}
 
-	public function registrarcliente($nombre, $apellido, $telefono){
+	public function registrarcliente($nombre, $apellido,$calle, $telefono){
 		try{
 			if(!empty($_SESSION)){
 				$regCompleted = FALSE;
 
 				$nombre = ucwords($nombre); 
-				$apellido = ucwords($apellido); 
+				$apellido = ucwords($apellido);
+				$calle = ucwords($calle);  
 
 				$verificacion = 0;
 
@@ -115,7 +117,7 @@ class RegistrarControladora
 				}
 
 				if($verificacion === 0){
-					$userInstance = new Cliente($nombre, $apellido, $telefono);
+					$userInstance = new Cliente($nombre, $apellido, $calle, $telefono);
 					$idClie = $this->daoCliente->agregar( $userInstance );
 					$userInstance->setId( $idClie );
 					$regCompleted = TRUE;

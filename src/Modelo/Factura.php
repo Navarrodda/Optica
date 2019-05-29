@@ -6,29 +6,33 @@ class Factura
 {
 
 private $id;
-private $nombre;
-private $fecha;
-private $monto;
-private $descripcion;
+private $saldo_armazo_l;
+private $saldo_armazon_c;
+private $saldo_lejoso_d;
+private $saldo_lejoso_i; 
+private $saldo_cerca_od; 
+private $saldo_cerca_oi; 
 
 
     /**
      * Class Constructor
-     * @param    $nombre   
-     * @param    $fecha   
-     * @param    $monto   
-     * @param    $descripcion   
+     * @param    $id   
+     * @param    $saldo_armazo_l   
+     * @param    $saldo_armazon_c   
+     * @param    $saldo_lejoso_d   
+     * @param    $saldo_lejoso_i   
+     * @param    $saldo_cerca_od   
+     * @param    $saldo_cerca_oi   
      */
-    public function __construct($nombre, $fecha, $monto, $descripcion)
+    public function __construct($saldo_armazo_l, $saldo_armazon_c, $saldo_lejoso_d, $saldo_lejoso_i, $saldo_cerca_od, $saldo_cerca_oi)
     {
-        $this->nombre = $nombre;
-        $this->fecha = $fecha;
-        $this->monto = $monto;
-        $this->descripcion = $descripcion;
+        $this->saldo_armazo_l = $saldo_armazo_l;
+        $this->saldo_armazon_c = $saldo_armazon_c;
+        $this->saldo_lejoso_d = $saldo_lejoso_d;
+        $this->saldo_lejoso_i = $saldo_lejoso_i;
+        $this->saldo_cerca_od = $saldo_cerca_od;
+        $this->saldo_cerca_oi = $saldo_cerca_oi;
     }
-
-
- 
 
     /**
      * @return mixed
@@ -53,19 +57,19 @@ private $descripcion;
     /**
      * @return mixed
      */
-    public function getNombre()
+    public function getSaldoArmazoL()
     {
-        return $this->nombre;
+        return $this->saldo_armazo_l;
     }
 
     /**
-     * @param mixed $nombre
+     * @param mixed $saldo_armazo_l
      *
      * @return self
      */
-    public function setNombre($nombre)
+    public function setSaldoArmazoL($saldo_armazo_l)
     {
-        $this->nombre = $nombre;
+        $this->saldo_armazo_l = $saldo_armazo_l;
 
         return $this;
     }
@@ -73,19 +77,19 @@ private $descripcion;
     /**
      * @return mixed
      */
-    public function getFecha()
+    public function getSaldoArmazonC()
     {
-        return $this->fecha;
+        return $this->saldo_armazon_c;
     }
 
     /**
-     * @param mixed $fecha
+     * @param mixed $saldo_armazon_c
      *
      * @return self
      */
-    public function setFecha($fecha)
+    public function setSaldoArmazonC($saldo_armazon_c)
     {
-        $this->fecha = $fecha;
+        $this->saldo_armazon_c = $saldo_armazon_c;
 
         return $this;
     }
@@ -93,19 +97,19 @@ private $descripcion;
     /**
      * @return mixed
      */
-    public function getMonto()
+    public function getSaldoLejosoD()
     {
-        return $this->monto;
+        return $this->saldo_lejoso_d;
     }
 
     /**
-     * @param mixed $monto
+     * @param mixed $saldo_lejoso_d
      *
      * @return self
      */
-    public function setMonto($monto)
+    public function setSaldoLejosoD($saldo_lejoso_d)
     {
-        $this->monto = $monto;
+        $this->saldo_lejoso_d = $saldo_lejoso_d;
 
         return $this;
     }
@@ -113,19 +117,59 @@ private $descripcion;
     /**
      * @return mixed
      */
-    public function getDescripcion()
+    public function getSaldoLejosoI()
     {
-        return $this->descripcion;
+        return $this->saldo_lejoso_i;
     }
 
     /**
-     * @param mixed $descripcion
+     * @param mixed $saldo_lejoso_i
      *
      * @return self
      */
-    public function setDescripcion($descripcion)
+    public function setSaldoLejosoI($saldo_lejoso_i)
     {
-        $this->descripcion = $descripcion;
+        $this->saldo_lejoso_i = $saldo_lejoso_i;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSaldoCercaOd()
+    {
+        return $this->saldo_cerca_od;
+    }
+
+    /**
+     * @param mixed $saldo_cerca_od
+     *
+     * @return self
+     */
+    public function setSaldoCercaOd($saldo_cerca_od)
+    {
+        $this->saldo_cerca_od = $saldo_cerca_od;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSaldoCercaOi()
+    {
+        return $this->saldo_cerca_oi;
+    }
+
+    /**
+     * @param mixed $saldo_cerca_oi
+     *
+     * @return self
+     */
+    public function setSaldoCercaOi($saldo_cerca_oi)
+    {
+        $this->saldo_cerca_oi = $saldo_cerca_oi;
 
         return $this;
     }

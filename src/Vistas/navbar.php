@@ -81,6 +81,11 @@
                         <li>
                             <a class="page-scroll" style="color:white" href="/">Inicio</a>
                         </li>
+                        <?php if(empty($_SESSION['nombre']) ){ ?>
+                            <li>
+                                <a class="page-scroll" style="color:white" href="/vista/registrarusuario/">Registrarse</a>
+                            </li>
+                        <?php } ?>
                         <li>
                             <a class="page-scroll" style="color:white" href="/vista/iniciar">Iniciar Sesion</a>
                         </li>

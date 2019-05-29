@@ -2,11 +2,11 @@
 
 namespace Dao;
 
-use Modelo\Senias_x_lentes;
+use Modelo\Senias_x_cliente;
 
-class Seniaxlente
+class Seniasxcliente
 {
-    protected $tabla = "senias_x_lentes";
+    protected $tabla = "senias_x_clientes";
     protected $listado;
     private static $instancia;
 
@@ -23,24 +23,24 @@ class Seniaxlente
     }
 
 
-    public function agregar(Senias_x_lentes $seniasxlentes)
+    public function agregar(Senias_x_cliente $seniasxlentes)
     {
         try{
             /** @noinspection SqlResolve */
-            $sql = ("INSERT INTO $this->tabla (id_lente , id_senia) VALUES (:id_lente, :id_senia)");
+            $sql = ("INSERT INTO $this->tabla (id_cuenta_saldo  , id_cliente ) VALUES (:id_cuenta_saldo, :id_cliente)");
 
             $conexion = Conexion::conectar();
 
             $sentencia = $conexion->prepare($sql);
 
-            $l = $seniasxlentes->getIdLente();
-            $id_lente = $l->getId();
+            $l = $seniasxlentes->getIdCuentaSaldo();
+            $id_cuenta_saldo = $l->getId();
 
-            $s = $seniasxlentes->getIdSenia();
-            $id_senia = $s->getIdSenia();
+            $c = $seniasxlentes->getIdCliente();
+            $id_cliente = $c->getId();;
 
-            $sentencia->bindParam(":id_lente",$id_lente);
-            $sentencia->bindParam(":id_senia", $id_senia);
+            $sentencia->bindParam(":id_cuenta_saldo",$id_cuenta_saldo);
+            $sentencia->bindParam(":id_cliente", $id_cliente);
 
             $sentencia->execute();
 
@@ -55,7 +55,7 @@ class Seniaxlente
     public function eliminarPorId($id)
     {
         
-        $sql = "DELETE FROM $this->tabla WHERE id_cuenta = \"$id\"";
+        $sql = "DELETE FROM $this->tabla WHERE id_senia_x_cliente = \"$id\"";
 
         $conexion = Conexion::conectar();
 
@@ -64,30 +64,6 @@ class Seniaxlente
         $sentencia->execute();
     }
 
-
-    public function actualizar(Cuenta $usuario)
-    {
-        /** @noinspection SqlResolve */
-
-        $id = $usuario->getId();
-
-        $sql = ("UPDATE $this->tabla SET id_lente=:id_lente,id_senia=:id_senia WHERE senias_x_lentes=\"$id\"");
-
-        $conexion = Conexion::conectar();
-
-        $sentencia = $conexion->prepare($sql);
-
-        $l = $seniasxlentes->getIdLente();
-        $id_lente = $l->getId();
-
-        $s = $seniasxlentes->getIdSenia();
-        $id_senia = $s->getIdSenia();
-
-        $sentencia->bindParam(":id_lente",$id_lente);
-        $sentencia->bindParam(":id_senia", $id_senia);
-
-        $sentencia->execute();
-    }
 
     public function traerTodo()
     {
@@ -113,7 +89,7 @@ class Seniaxlente
     {
 
         /** @noinspection SqlResolve */
-        $sql = "SELECT * FROM $this->tabla WHERE id_cuenta =  \"$id\" LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE id_senia_x_cliente =  \"$id\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -136,13 +112,13 @@ class Seniaxlente
         $dataSet = is_array($dataSet) ? $dataSet : false;
         if($dataSet){
             $this->listado = array_map(function ($p) {
-                $daoLente = LenteBdDao::getInstancia();
-                $daoSenia = BdDao::getInstancia();
+                $daoCuenta_saldo  = CuentasaldosBdDao::getInstancia();
+                $daoCliente = ClienteBdDao::getInstancia();
                 $sxl = new Senias_x_lentes(
-                    $daoLente->traerPorId($p['id_lente']),
-                    $daoSenia->traerPorId($p['id_senia'])
+                    $daoLente->traerPorId($p['id_cuenta_saldo']),
+                    $daoSenia->traerPorId($p['id_cliente'])
                 );
-                $sxl->getIdSeniaXLente()($p['id_senia_x_lente']);
+                $sxl->getIdSeniaXLente()($p['id_senia_x_cliente']);
                 return $sxl;
             }, $dataSet);
         }

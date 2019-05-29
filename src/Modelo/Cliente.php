@@ -7,6 +7,7 @@ class Cliente
 	private $id;
 	private $nombre;
 	private $apellido;
+    private $calle;
 	private $telefono;
 
 
@@ -17,10 +18,11 @@ class Cliente
      * @param    $apellido   
      * @param    $telefono   
      */
-    public function __construct($nombre, $apellido, $telefono)
+    public function __construct($nombre, $apellido, $calle, $telefono)
     {
         $this->nombre = $nombre;
         $this->apellido = $apellido;
+        $this->calle = $calle;
         $this->telefono = $telefono;
     }
 
@@ -83,6 +85,26 @@ class Cliente
     public function setApellido($apellido)
     {
         $this->apellido = $apellido;
+
+        return $this;
+    }
+
+        /**
+     * @return mixed
+     */
+    public function getCalle()
+    {
+        return $this->calle;
+    }
+
+    /**
+     * @param mixed $calle
+     *
+     * @return self
+     */
+    public function setCalle($calle)
+    {
+        $this->calle = $calle;
 
         return $this;
     }

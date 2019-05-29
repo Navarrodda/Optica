@@ -28,6 +28,7 @@
 
 					<input required name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Ingresa Nombre del Cliente">
 					<input required name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
+					<input name="calle" type="text" class="col-md-12 norightborder btn2" placeholder="Direccion">
 					<input required name="telefono" type="text" class="col-md-12 norightborder btn2" placeholder="Telefono">
 					<button type="submit" class="contact submit btn-primary btn-xl pull-right">Cargar</button>
 				</form>

@@ -21,12 +21,7 @@ include (URL_VISTA . 'navbar.php');
                     <input required name="telefono" type="text" class="col-md-6 btn2" placeholder="Telefono">
                     <input required name="email" type="email" class="col-md-6 btn2" placeholder="Correo electronico">
                     <input name="pass" autocomplete="off" type="password" class="col-md-6 norightborder btn2" placeholder="Contraseña" required>
-
-                    <select style="height: 40px;" name="id_rol" class="col-md-6 norightborder btn2">
-                        <?php foreach ($roles as $key => $value) { ?>
-                            <option value="<?= $value->getId();  ?>"><?= $value->getPrioridad();  ?></option> 
-                        <?php } ?> 
-                    </select>
+                    <input  name="id_rol" type=hidden value="<?= $role->getId();?>">
 
                     <button type="submit" class="contact submit btn-primary btn-xl pull-right">Cargar</button>
                 </form>

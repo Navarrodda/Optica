@@ -26,6 +26,7 @@ CREATE TABLE clientes(
 id_cliente BIGINT AUTO_INCREMENT NOT NULL,
 nombre VARCHAR(30) NOT NULL,
 apellido VARCHAR(39) NOT NULL,
+calle VARCHAR(40) NOT NULL,
 telefono VARCHAR(15) NOT NULL,
 CONSTRAINT pk_id_clientes PRIMARY KEY (id_cliente)    
 );
@@ -61,33 +62,37 @@ CONSTRAINT fk_de_lentes_lente FOREIGN KEY (id_lente) REFERENCES lentes (id_lente
 
 CREATE TABLE facturas(
 id_factura BIGINT AUTO_INCREMENT NOT NULL,
-nombre VARCHAR(30),
-fecha DATE NOT NULL,
-monto VARCHAR(20) NOT NULL,
-descripcion VARCHAR(50) NOT NULL,
+saldo_armazo_l FLOAT UNSIGNED NOT NULL,
+saldo_armazon_c FLOAT UNSIGNED NOT NULL,
+saldo_lejoso_d FLOAT UNSIGNED NOT NULL,
+saldo_lejoso_i FLOAT UNSIGNED NOT NULL,
+saldo_cerca_od FLOAT UNSIGNED NOT NULL,
+saldo_cerca_oi FLOAT UNSIGNED NOT NULL,   
 CONSTRAINT pk_id_factura PRIMARY KEY (id_factura)    
 );
 
-CREATE TABLE facturas_x_clientes(
-id_factura_x_cliente BIGINT AUTO_INCREMENT NOT NULL,
-id_cliente BIGINT,
+CREATE TABLE facturas_x_lentes(
+id_facturas_x_lentes BIGINT AUTO_INCREMENT NOT NULL,
 id_factura BIGINT,
-CONSTRAINT pk_id_factura_x_cliente PRIMARY KEY (id_factura_x_cliente)    
-);
-
-CREATE TABLE senias(
-id_senia BIGINT AUTO_INCREMENT NOT NULL,
-senia VARCHAR(20),
-fecha DATE,
-CONSTRAINT pk_id_senia PRIMARY KEY (id_senia)   
-);
-
-CREATE TABLE senias_x_lentes(
-id_senia_x_lente BIGINT AUTO_INCREMENT NOT NULL,
 id_lente BIGINT,
-id_senia BIGINT,
-CONSTRAINT pk_senias_x_lentes PRIMARY KEY (id_senia_x_lente),
-CONSTRAINT fk_senias_x_lentes_lente FOREIGN KEY (id_lente) REFERENCES lentes (id_lente),
-CONSTRAINT fk_senias_X_lentes_senia FOREIGN KEY (id_senia) REFERENCES senias (id_senia)    
+CONSTRAINT pk_id_factura_x_cliente PRIMARY KEY (id_facturas_x_lentes),
+CONSTRAINT fk_id_factura_x_lentes_factura FOREIGN KEY (id_factura) REFERENCES facturas (id_factura),
+CONSTRAINT fk_id_factura_x_lentes_lentes FOREIGN KEY (id_lente) REFERENCES lentes (id_lente)    
 );
 
+CREATE TABLE cuenta_saldos(
+id_cuenta_saldo BIGINT AUTO_INCREMENT NOT NULL,
+a_cuenta FLOAT UNSIGNED NOT NULL,
+saldo FLOAT UNSIGNED,
+fecha DATE,
+CONSTRAINT pk_id_cuenta_saldos PRIMARY KEY (id_cuenta_saldo)   
+);
+
+CREATE TABLE senias_x_clientes(
+id_senia_x_cliente BIGINT AUTO_INCREMENT NOT NULL,
+id_cuenta_saldo BIGINT,
+id_cliente BIGINT,     
+CONSTRAINT pk_senias_x_cliente PRIMARY KEY (id_senia_x_cliente),
+CONSTRAINT fk_senias_x_cliente_senia FOREIGN KEY (id_cuenta_saldo) REFERENCES cuenta_saldos (id_cuenta_saldo),
+CONSTRAINT fk_senias_x_cliente_cliente FOREIGN KEY (id_cliente) REFERENCES clientes (id_cliente)    
+);
