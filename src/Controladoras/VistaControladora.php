@@ -42,7 +42,6 @@ class VistaControladora
 
 	public function index()
 	{
-		$cliente = $this->daoCliente->traerTodo();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "inicio.php");
 		include URL_VISTA . 'footer.php';
