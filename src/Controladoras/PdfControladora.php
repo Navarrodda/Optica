@@ -498,7 +498,7 @@ class PdfControladora
 		}
 	}
 
-	function pdfcargamanual($fecha, $entrega_c,$observaciones, $a_cuenta, $saldo, $r_fecha, $doctor, $proc, $armason_l, $lejos_pesos, $armason_c, $cerca_pesos, $lejos_od,  $cilindri_l_od, $l_en_grados_od, $l_pesos_od, $lejos_oi, $cilindri_l_oi,  $l_en_grados_oi,  $l_color, $l_pesos_oi, $cerca_od, $c_cerca_od, $c_en_grados_od, $c_pesos_od, $cerca_oi, $cilindri_c_oi, $c_en_grados_oi, $c_color, $c_pesos_oi, $di, $calibre, $puente, $subtotal, $senia, $saldo_total)
+	function pdfcargamanual($fecha, $entrega_c,$observaciones, $a_cuenta, $saldo, $r_fecha,$senior, $calle, $telefono, $doctor, $proc, $armason_l, $lejos_pesos, $armason_c, $cerca_pesos, $lejos_od,  $cilindri_l_od, $l_en_grados_od, $l_pesos_od, $lejos_oi, $cilindri_l_oi,  $l_en_grados_oi,  $l_color, $l_pesos_oi, $cerca_od, $c_cerca_od, $c_en_grados_od, $c_pesos_od, $cerca_oi, $cilindri_c_oi, $c_en_grados_oi, $c_color, $c_pesos_oi, $di, $calibre, $puente, $subtotal, $senia, $saldo_total)
 	{
 		if(!empty($_SESSION))
 		{
@@ -613,25 +613,22 @@ class PdfControladora
 				//Fecha}
 				//Senior{ 
 				//Nombre{
-			$pdf->SetY(92.5);
-			$pdf->SetX(29.5);
-			$pdf->MultiCell(135,15,$usuario->getNombre());
-				//Nombre}
 				//Apellido{
 			$pdf->SetY(92.5);
-			$pdf->SetX(38);
-			$pdf->MultiCell(135,15,$usuario->getApellido());
+			$pdf->SetX(29.5);
+			$pdf->MultiCell(135,15,$senior);
+				//Nombre}
 				//Apellido}
 				//Senior}
 				//Calle{
 			$pdf->SetY(92.5);
 			$pdf->SetX(110.5);
-			$pdf->MultiCell(135,15,$usuario->getCalle());
+			$pdf->MultiCell(135,15,$calle);
 				//Calle}
 				//Telefono{
 			$pdf->SetY(92.5);
 			$pdf->SetX(165.5);
-			$pdf->MultiCell(135,15,$usuario->getTelefono());
+			$pdf->MultiCell(135,15,$telefono);
 				//Telefono}
 				//Reseta con fecha{
 			if (!empty($r_fecha)) {

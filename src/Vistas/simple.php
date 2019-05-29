@@ -33,6 +33,9 @@
 					<label for="r_fecha" class="col-md-2.3" style="background-color:black">Receta con Fecha:</label>
 					<input name="r_fecha" type="date" class="norightborder btn2">	
 					</div>
+					<input name="senior" type="text" class="col-md-4 norightborder btn2" placeholder="Senior">
+					<input name="calle" type="text" class="col-md-4 norightborder btn2" placeholder="Calle">
+					<input name="telefono" type="text" class="col-md-4 norightborder btn2" placeholder="Telefono">
 					<input name="doctor" type="text" class="col-md-6 norightborder btn2" placeholder="Doctor">
 					<input name="proc" type="text" class="col-md-6 norightborder btn2" placeholder="Proc">
 					
