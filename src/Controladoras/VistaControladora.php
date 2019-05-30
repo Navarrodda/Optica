@@ -3,12 +3,15 @@
 namespace Controladoras;
 
 //Modelo
-use Modelo\Mensaje;
+use Modelo\Mensaje as Mensaje;
 use Modelo\Rol as Rol;
 use Modelo\Usuario as Usuario;
 use Modelo\Cliente as Cliente;
 use Modelo\Lente as Lente;
-use Modelo\Lente_x_cliente as Lentexcliente;
+use Modelo\Factura as Factura;
+use Modelo\Cuenta_saldos as Cuenta_saldos;
+use Modelo\Lente_x_cliente as Lente_x_cliente;
+use Modelo\Senias_x_cliente_lente as Senias_x_cliente_lente;
 
 //Dao
 use Dao\RolBdDao as RolBdDao;
@@ -16,6 +19,9 @@ use Dao\UsuarioBdDao as UsuarioBdDao;
 use Dao\ClienteBdDao as ClienteBdDao;
 use Dao\LenteBdDao as LenteBdDao;
 use Dao\LentexclienteBdDao as LentexclienteBdDao;
+use Dao\FacturaBdDao as FacturaBdDao;
+use Dao\CuentsaldosBdDao as CuentsaldosBdDao;
+use Dao\SeniasxclientelenteBdDao as SeniasxclientelenteBdDao;
 
 class VistaControladora
 {
@@ -23,12 +29,16 @@ class VistaControladora
 	protected $daoCliente;
 	protected $daoUsuario;
 	protected $daoLentexcliente;
+	protected $daoFactura;
+	protected $daoSenia;
 	
 	private $mensaje;
 	private $cliente;
 	private $usuario;
 	private $lentexcliente;
 	private $lente;
+	private $factura;
+	private $senia;
 
 	public function __construct()
 	{
@@ -38,6 +48,7 @@ class VistaControladora
 		$this->daoUsuario = UsuarioBdDao::getInstancia();
 		$this->daoLente = LenteBdDao::getInstancia();
 		$this->daoLentexcliente = LentexclienteBdDao::getInstancia();
+		$this->daoFactura = FacturaBdDao::getInstancia();
 	}
 
 	public function index()
@@ -175,6 +186,30 @@ class VistaControladora
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "modificarlente.php");
 		include URL_VISTA . 'footer.php';
+	}
+
+	public function factura($id_lente,$id_cliente)
+	{
+		if(!empty($id_lente))
+		{
+			$lente = $this->daoLente->traerPorId($id_lente);
+			$cliente = $this->daoCliente->traerPorId($id_cliente);
+			$factura = $this->daoFactura->traerPorIdLente($id_lente);
+			if(empty($factura))
+			{
+
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "registrarfactura.php");
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$factura = $factura[0];
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "factura.php");
+				include URL_VISTA . 'footer.php';
+			}
+		}
 	}
 
 }

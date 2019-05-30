@@ -80,7 +80,7 @@
                                         </td>
                                         <td>
                                             <a type="submit" method="post"  name="id_cliente"  href="/vista/modificarcliente/<?= $objeto->getId(); ?>" class="disabled">
-                                                <span class="glyphicon glyphicon-pencil" title="No implementado..."
+                                                <span class="glyphicon glyphicon-pencil" title="Modificar"
                                                 data-toggle="tooltip" data-placement="right">
                                             </span>
                                         </a>

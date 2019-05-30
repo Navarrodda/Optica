@@ -6,14 +6,20 @@ use Modelo\Rol as Rol;
 use Modelo\Usuario as Usuario;
 use Modelo\Cliente as Cliente;
 use Modelo\Lente as Lente;
+use Modelo\Factura as Factura;
+use Modelo\Cuenta_saldos as Cuenta_saldos;
 use Modelo\Lente_x_cliente as Lente_x_cliente;
 use Modelo\Mensaje as Mensaje;
+use Modelo\Senias_x_cliente_lente as Senias_x_cliente_lente;
 
 use Dao\RolBdDao as RolBdDao;
 use Dao\UsuarioBdDao as UsuarioBdDao;
 use Dao\ClienteBdDao as ClienteBdDao;
 use Dao\LenteBdDao as LenteBdDao;
 use Dao\LentexclienteBdDao as LentexclienteBdDao;
+use Dao\FacturaBdDao as FacturaBdDao;
+use Dao\CuentasaldosBdDao as CuentasaldosBdDao;
+use Dao\SeniasxclientelenteBdDao as SeniasxclientelenteBdDao;
 
 class RegistrarControladora
 {
@@ -22,6 +28,9 @@ class RegistrarControladora
 	protected $daoCliente;
 	protected $daoLente;
 	protected $daoLentexcliente;
+	protected $daoCuentasaldos;
+	protected $daoFactura;
+	protected $daoSenia;
 
 	public function __construct() {
 
@@ -30,6 +39,9 @@ class RegistrarControladora
 		$this->daoCliente = ClienteBdDao::getInstancia();
 		$this->daoLente = LenteBdDao::getInstancia();
 		$this->daoLentexcliente = LentexclienteBdDao::getInstancia();
+		$this->daoFactura = FacturaBdDao::getInstancia();
+		$this->daoCuentasaldos = CuentasaldosBdDao::getInstancia();
+		$this->daoSenia = SeniasxclientelenteBdDao::getInstancia();
 	}
 
 	public function registrarse($nombre, $apellido, $calle, $telefono, $email, $pass, $id_rol){
@@ -161,7 +173,7 @@ class RegistrarControladora
 			if(!empty($_SESSION)){
 				$regCompleted = FALSE;
 				$medico = ucwords($medico);
-			    $color = ucwords($color);
+				$color = ucwords($color);
 				if(!empty($id_cliente)){
 					$lentInstance = new Lente($medico, $armazon_cerca, $armazon_lejos, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $cilindrico, $en_grados, $distancia, $calibre, $puente, $color, $fecha);
 					$idLent= $this->daoLente->agregar( $lentInstance );
@@ -206,6 +218,70 @@ class RegistrarControladora
 			echo $error->getMessage();
 		}
 	}
+
+	public function registrarfactura($id_lente, $id_cliente, $armasonl, $armazonc, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $senia){
+		try{
+			$regCompleted = FALSE;
+
+			if(!empty($_SESSION)){
+
+				if(!empty($id_lente)){
+
+					$sub_total = $armasonl + $armazonc + $lejos_od + $lejos_oi + $cerca_od + $cerca_oi;
+					if(!empty($senia)){
+					$saldo_total = $sub_total - $senia;
+					}
+					else{
+						$saldo_total = $sub_total;
+					}
+					$factInstance = new Factura($armasonl, $armazonc, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
+					$idfact = $this->daoFactura->agregar( $factInstance );
+					$factInstance->setId( $idfact );
+
+					$fecha = date('Y-m-d');
+
+					$a_cuenta = $senia; 
+					$saldo = $saldo_total;
+					$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
+					$idsaldo = $this->daoCuentasaldos->agregar( $salInstance );
+					$salInstance->setId( $idsaldo );
+
+					$id_cliente = $this->daoCliente->traerPorId($id_cliente);
+
+					$id_cuentasaldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+
+					$id_lente = $this->daoLente->traerPorId($id_lente);
+					$clisald = new Senias_x_cliente_lente($id_cuentasaldos, $id_cliente, $id_lente);
+					$idclsald = $this->daoSenia->agregar( $clisald );
+					$clisald->setIdSeniaXCliente( $idclsald );
+					$regCompleted = TRUE;
+					$this->mensaje = new Mensaje( "success", "El costo del lente fue registrado con exito!" );
+				}
+			}
+
+			switch ($regCompleted) {
+				case TRUE:
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+				break;
+
+				case FALSE:
+				$this->mensaje = new Mensaje( "success", "error!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "registrarfactura.php");
+				include URL_VISTA . 'footer.php';
+				break;
+			}
+
+		}catch(\PDOException $pdo_error){
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'error.php');
+			include URL_VISTA . 'footer.php';
+		}catch(\Exception $error){
+			echo $error->getMessage();
+		}
+	}	
 
 
 }

@@ -551,7 +551,7 @@ class PdfControladora
 			//Apellido}
 			//Senior}
 			//Observaciones{
-				$pdf->SetY(23);
+				$pdf->SetY(23.3);
 				$pdf->SetX(89);
 			$pdf->MultiCell(145,15,$observaciones);//Observacion
 			//Observaciones}

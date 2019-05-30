@@ -2,11 +2,11 @@
 
 namespace Dao;
 
-use Modelo\Senias_x_cliente;
+use Modelo\Senias_x_cliente_lente;
 
-class Seniasxcliente
+class SeniasxclientelenteBdDao
 {
-    protected $tabla = "senias_x_clientes";
+    protected $tabla = "senias_x_clientes_lente";
     protected $listado;
     private static $instancia;
 
@@ -23,24 +23,28 @@ class Seniasxcliente
     }
 
 
-    public function agregar(Senias_x_cliente $seniasxlentes)
+    public function agregar(Senias_x_cliente_lente $seniasxlentes)
     {
         try{
             /** @noinspection SqlResolve */
-            $sql = ("INSERT INTO $this->tabla (id_cuenta_saldo  , id_cliente ) VALUES (:id_cuenta_saldo, :id_cliente)");
+            $sql = ("INSERT INTO $this->tabla (id_cuenta_saldo  , id_cliente, id_lente ) VALUES (:id_cuenta_saldo, :id_cliente, :id_lente)");
 
             $conexion = Conexion::conectar();
 
             $sentencia = $conexion->prepare($sql);
 
-            $l = $seniasxlentes->getIdCuentaSaldo();
-            $id_cuenta_saldo = $l->getId();
+            $s = $seniasxlentes->getIdCuentaSaldo();
+            $id_cuenta_saldo = $s->getId();
 
             $c = $seniasxlentes->getIdCliente();
-            $id_cliente = $c->getId();;
+            $id_cliente = $c->getId();
+
+            $l = $seniasxlentes->getIdLente();
+            $id_lente = $l->getId();
 
             $sentencia->bindParam(":id_cuenta_saldo",$id_cuenta_saldo);
             $sentencia->bindParam(":id_cliente", $id_cliente);
+            $sentencia->bindParam(":id_lente", $id_lente);
 
             $sentencia->execute();
 
@@ -55,7 +59,7 @@ class Seniasxcliente
     public function eliminarPorId($id)
     {
         
-        $sql = "DELETE FROM $this->tabla WHERE id_senia_x_cliente = \"$id\"";
+        $sql = "DELETE FROM $this->tabla WHERE id_senia_x_cliente_lente = \"$id\"";
 
         $conexion = Conexion::conectar();
 
@@ -89,7 +93,7 @@ class Seniasxcliente
     {
 
         /** @noinspection SqlResolve */
-        $sql = "SELECT * FROM $this->tabla WHERE id_senia_x_cliente =  \"$id\" LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE id_senia_x_cliente_lente =  \"$id\" LIMIT 1";
 
         $conexion = Conexion::conectar();
 
@@ -114,11 +118,13 @@ class Seniasxcliente
             $this->listado = array_map(function ($p) {
                 $daoCuenta_saldo  = CuentasaldosBdDao::getInstancia();
                 $daoCliente = ClienteBdDao::getInstancia();
+                $daoLente   = LenteBdDao::getInstancia();
                 $sxl = new Senias_x_lentes(
-                    $daoLente->traerPorId($p['id_cuenta_saldo']),
-                    $daoSenia->traerPorId($p['id_cliente'])
+                    $daoCuenta_saldo->traerPorId($p['id_cuenta_saldo']),
+                    $daoCliente->traerPorId($p['id_cliente']),
+                    $daoLente->traerPorId($p['id_lente'])
                 );
-                $sxl->getIdSeniaXLente()($p['id_senia_x_cliente']);
+                $sxl->getIdSeniaXLente($p['id_senia_x_cliente_lente']);
                 return $sxl;
             }, $dataSet);
         }

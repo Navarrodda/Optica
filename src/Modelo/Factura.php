@@ -5,34 +5,47 @@ namespace Modelo;
 class Factura
 {
 
-private $id;
-private $saldo_armazo_l;
-private $saldo_armazon_c;
-private $saldo_lejoso_d;
-private $saldo_lejoso_i; 
-private $saldo_cerca_od; 
-private $saldo_cerca_oi; 
+    private $id;
+    private $id_lente;
+    private $saldo_armazo_l;
+    private $saldo_armazon_c;
+    private $saldo_lejoso_d;
+    private $saldo_lejoso_i; 
+    private $saldo_cerca_od; 
+    private $saldo_cerca_oi; 
+    private $sub_total;
+    private $senia;
+    private $saldo_total;
 
 
     /**
      * Class Constructor
-     * @param    $id   
+     * @param    $id_lente   
      * @param    $saldo_armazo_l   
      * @param    $saldo_armazon_c   
      * @param    $saldo_lejoso_d   
      * @param    $saldo_lejoso_i   
      * @param    $saldo_cerca_od   
      * @param    $saldo_cerca_oi   
+     * @param    $sub_total   
+     * @param    $senia   
+     * @param    $saldo_total   
      */
-    public function __construct($saldo_armazo_l, $saldo_armazon_c, $saldo_lejoso_d, $saldo_lejoso_i, $saldo_cerca_od, $saldo_cerca_oi)
+    public function __construct($saldo_armazo_l, $saldo_armazon_c, $saldo_lejoso_d, $saldo_lejoso_i, $saldo_cerca_od, $saldo_cerca_oi, $sub_total, $senia, $saldo_total,Lente $id_lente)
     {
+        $this->id_lente = $id_lente;
         $this->saldo_armazo_l = $saldo_armazo_l;
         $this->saldo_armazon_c = $saldo_armazon_c;
         $this->saldo_lejoso_d = $saldo_lejoso_d;
         $this->saldo_lejoso_i = $saldo_lejoso_i;
         $this->saldo_cerca_od = $saldo_cerca_od;
         $this->saldo_cerca_oi = $saldo_cerca_oi;
+        $this->sub_total = $sub_total;
+        $this->senia = $senia;
+        $this->saldo_total = $saldo_total;
     }
+
+    
 
     /**
      * @return mixed
@@ -50,6 +63,26 @@ private $saldo_cerca_oi;
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdLente()
+    {
+        return $this->id_lente;
+    }
+
+    /**
+     * @param mixed $id_lente
+     *
+     * @return self
+     */
+    public function setIdLente($id_lente)
+    {
+        $this->id_lente = $id_lente;
 
         return $this;
     }
@@ -170,6 +203,66 @@ private $saldo_cerca_oi;
     public function setSaldoCercaOi($saldo_cerca_oi)
     {
         $this->saldo_cerca_oi = $saldo_cerca_oi;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubTotal()
+    {
+        return $this->sub_total;
+    }
+
+    /**
+     * @param mixed $sub_total
+     *
+     * @return self
+     */
+    public function setSubTotal($sub_total)
+    {
+        $this->sub_total = $sub_total;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSenia()
+    {
+        return $this->senia;
+    }
+
+    /**
+     * @param mixed $senia
+     *
+     * @return self
+     */
+    public function setSenia($senia)
+    {
+        $this->senia = $senia;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSaldoTotal()
+    {
+        return $this->saldo_total;
+    }
+
+    /**
+     * @param mixed $saldo_total
+     *
+     * @return self
+     */
+    public function setSaldoTotal($saldo_total)
+    {
+        $this->saldo_total = $saldo_total;
 
         return $this;
     }

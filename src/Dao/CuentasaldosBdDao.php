@@ -2,11 +2,11 @@
 
 namespace Dao;
 
-use \Modelo\Senia;
+use Modelo\Cuenta_saldos;
 
-class SeniaBdDao{
+class CuentasaldosBdDao{
 
-	protected $tabla = "cuentas_saldos";
+	protected $tabla = "cuenta_saldos";
 	protected static $instancia;
 	protected $listado;
 
@@ -43,7 +43,7 @@ class SeniaBdDao{
 	}
 
 
-	public function agregar(Cuentas_saldos $Cuentas){
+	public function agregar(Cuenta_saldos $Cuenta){
 
 		try{
 
@@ -53,12 +53,12 @@ class SeniaBdDao{
 
 			$sentencia = $conexion->prepare($sql);
 
-			$a_cuenta = $Cuentas->getACuenta();
-			$saldo = $Cuentas->getSaldo();
-			$fecha = $Cuentas->getFecha();
+			$a_cuenta = $Cuenta->getACuenta();
+			$saldo = $Cuenta->getSaldo();
+			$fecha = $Cuenta->getFecha();
 
 			$sentencia->bindParam(":a_cuenta",$a_cuenta);
-			sentencia->bindParam(":saldo",$saldo);
+			$sentencia->bindParam(":saldo",$saldo);
 			$sentencia->bindParam(":fecha",$fecha);
 
 			$sentencia->execute();
@@ -71,7 +71,7 @@ class SeniaBdDao{
 		}
 	}
 
-	public function actualizar(Cuentas_saldos $Cuentas){
+	public function actualizar($id_cuenta_saldo){
 
 		try{
 			/** @noinspection SqlResolve */
@@ -90,7 +90,7 @@ class SeniaBdDao{
 			$fecha = $Cuentas->getFecha();
 
 			$sentencia->bindParam(":a_cuenta",$a_cuenta);
-			sentencia->bindParam(":saldo",$saldo);
+			$sentencia->bindParam(":saldo",$saldo);
 			$sentencia->bindParam(":fecha",$fecha);
 
 
@@ -127,14 +127,14 @@ class SeniaBdDao{
 		$dataSet = is_array($dataSet) ? $dataSet : false;
 		if($dataSet){
 			$this->listado = array_map(function ($p) {
-				$senia1 = new Cuentas_saldos
+				$cuentas = new Cuenta_saldos
 				(
 					$p['a_cuenta'],
 					$p['saldo'],
 					$p['fecha']
 				);
-				$senia1->setIdSenia($p['id_cuenta_saldo']);
-				return $senia1;
+				$cuentas->setId($p['id_cuenta_saldo']);
+				return $cuentas;
 			}, $dataSet);
 		}
 	}

@@ -9,7 +9,7 @@
 <div class="container mh-400" style="margin-top:30px;">
     <div class="container lower-box box-primary" style="text-align: center;">
         <?php if($lente!= null ) { ?>
-            <h2 class="section-heading">Lentes registrados en el Sistema del CLeinte: <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?>  </h2>
+            <h2 class="section-heading">Lentes registrados en el Sistema del Cliente: <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?>  </h2>
             <a  class="glyphicon glyphicon-plus" style="color:black" method="post" name="id_cliente" href="/vista/registrlente/<?= $cliente->getId(); ?>">Registrar Lente+</a>
             <hr class="primary"> <?php }
             else{ ?>
@@ -74,7 +74,7 @@
                                     Fec.
                                 </th>
                                 <th>
-                                    PDF
+                                    Factura
                                 </th>
                                 <th>
                                     Mod.
@@ -135,21 +135,21 @@
                                         <?= $objeto->getFecha(); ?>
                                     </td>
                                     <td>
-                                        <a href="#" class="disabled">         
-                                            <span class="glyphicon glyphicon-plus" title="Lentes"
+                                        <a href="/vista/factura/<?= $objeto->getId(); ?>/<?= $cliente->getId()?>" class="disabled">         
+                                            <span class="glyphicon glyphicon-list-alt" title="Factura"
                                             data-toggle="tooltip" data-placement="right">
                                         </span>
                                     </td>
                                     <td>
                                         <a href="/vista/modificarlente/<?= $cliente->getId()?>/<?=$objeto->getId(); ?>" class="disabled">
-                                            <span class="glyphicon glyphicon-pencil" title="No implementado..."
+                                            <span class="glyphicon glyphicon-pencil" title="Modificar"
                                             data-toggle="tooltip" data-placement="right">
                                         </span>
                                     </a>
                                 </td>
                                 <td>
                                     <a type="submit" method="post"  name="id_cliente" href="/administrar/eliminarlente/<?= $objeto->getId(); ?>/<?= $cliente->getId(); ?>" class="disabled">
-                                        <span class="glyphicon glyphicon-trash"  title="Eliminar Cliente"
+                                        <span class="glyphicon glyphicon-trash"  title="Eliminar Lente"
                                         data-toggle="tooltip" data-placement="right">
                                     </span>
                                 </a>
