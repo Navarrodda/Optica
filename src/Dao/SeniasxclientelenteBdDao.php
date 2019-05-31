@@ -111,6 +111,28 @@ class SeniasxclientelenteBdDao
         return null;
     }
 
+       public function traerPorIdCliente($id_cliente)
+    {
+
+        /** @noinspection SqlResolve */
+        $sql = "SELECT * FROM $this->tabla WHERE id_cliente =  \"$id_cliente\" LIMIT 1";
+
+        $conexion = Conexion::conectar();
+
+        $sentencia = $conexion->prepare($sql);
+
+        $sentencia->execute();
+
+        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->listado[0])) {
+            return $this->listado[0];
+        }
+        return null;
+    }
+
     public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : false;

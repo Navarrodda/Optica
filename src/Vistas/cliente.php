@@ -18,11 +18,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 texto-chico">
-                     <div class="table-responsive">
-                       <table class="table table-hover">
-                         <?php 
-                         if($cliente!= null )
-                         {
+                       <div class="table-responsive">
+                         <table class="table table-hover">
+                           <?php 
+                           if($cliente!= null )
+                           {
                             ?>
                             <thead>
                                 <tr style="color:white">
@@ -43,6 +43,9 @@
                                     </th>
                                     <th>
                                         Lentes
+                                    </th>
+                                    <th>
+                                        Saldos
                                     </th>
                                     <th>
                                         Modificar
@@ -75,6 +78,12 @@
                                         <td>
                                             <a href="/vista/lentecliente/<?= $objeto->getId(); ?>" class="disabled">         
                                                 <span class="glyphicon glyphicon-open-file" title="Lentes"
+                                                data-toggle="tooltip" data-placement="right">
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="/" class="disabled">         
+                                                <span class="glyphicon glyphicon-folder-open" title="Lentes"
                                                 data-toggle="tooltip" data-placement="right">
                                             </span>
                                         </td>

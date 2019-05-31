@@ -49,6 +49,7 @@ class VistaControladora
 		$this->daoLente = LenteBdDao::getInstancia();
 		$this->daoLentexcliente = LentexclienteBdDao::getInstancia();
 		$this->daoFactura = FacturaBdDao::getInstancia();
+		$this->daoSenia = SeniasxclientelenteBdDao::getInstancia();
 	}
 
 	public function index()
