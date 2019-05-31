@@ -97,9 +97,10 @@ class RegistrarControladora
 
 
 				if( ! $this->daoCliente->verificarNombre($nombre)){
-					if( ! $this->daoCliente->verificarApellido($apellido))
+					if(  $this->daoCliente->verificarApellido($apellido))
 					{
 						$verificacion = 0;
+
 					}
 				}
 				else{
@@ -112,7 +113,7 @@ class RegistrarControladora
 					}
 				}
 				if(  ! $this->daoCliente->verificarApellido($apellido)){
-					if( ! $this->daoCliente->verificarNombre($nombre))
+					if(  $this->daoCliente->verificarNombre($nombre))
 					{
 						$verificacion = 0;
 					}
