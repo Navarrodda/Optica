@@ -28,7 +28,7 @@
 					<input  name="id_cliente" type=hidden value="<?= $cliente->getId()?>">
 					<input  name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Ingresa Nombre del Cliente">
 					<input  name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
-					<input  name="calle" type="text" class="col-md-12norightborder btn2" placeholder="Direccion">
+					<input  name="calle" type="text" class="col-md-12 norightborder btn2" placeholder="Direccion">
 					<input  name="telefono" type="text" class="col-md-12 norightborder btn2" placeholder="Telefono">
 					<button type="submit" class="contact submit btn-primary btn-xl pull-right">Modificar</button>
 				</form>
