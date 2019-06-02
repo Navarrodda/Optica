@@ -112,27 +112,24 @@
 <?php
 if(!empty($longitud))
 {
-    if($longitud > 10) {
         ?>
         <div id="navegador">
             <ul>
-                <li><a href="#">Siguiente</a></li>
+                <li><a href="/vista/clienteslimit/<?= $entrada + $entrada ; ?>/<?= $longitud; ?>/<?= $entrada + $entrada; ?>/">Siguiente</a></li>
                 <?php
-                for ($contador = 9; $contador < $longitud; $contador++){
-                    $limit = $limit + 9;
-                    $contador = $contador + 9;
+                for ($contador = 1; $contador < $longitud; $contador++){
+                    $contador = $contador + 7 + $entrada;
                     ?>
-                    <li><a href="/vista/clienteslimit/<?= $limit; ?>/<?= $longitud; ?>/<?= $entrada; ?>"><?php print_r($entrada); ?></a></li>
+                    <li><a href="/vista/clienteslimit/<?= $entrada; ?>/<?= $longitud; ?>/<?= $entrada; ?>/"><?php print_r($entrada); ?></a></li>
                     <?php
                     $entrada++;
                 }
                 ?>
-                <li><a href="#">Anterior</a></li>
+                <li><a href="/vista/clienteslimit/<?= $entrada - 2; ?>/<?= $longitud; ?>/<?= $entrada - 2; ?>/">Anterior</a></li>
             </ul>
         </div>
         <?php
     }
-}
 ?>
 </div>
 </div>
