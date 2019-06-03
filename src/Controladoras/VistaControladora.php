@@ -77,35 +77,46 @@ class VistaControladora
 	{
 		$limit = 0;
 		$entrada = 1; 
+		$pantalla = 1;
 		$cliente = $this->daoCliente->traerTodoLimit($limit);
 		$medir = $this->daoCliente->traerTodo();
 		$longitud = count($medir);
-		$longitud = $longitud + 6;
-		$longitud = $longitud / 7.5;
+		$longitud = $longitud + 9;
+		$longitud = $longitud / 9;
+		$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
+		print_r($longitud);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
 		include URL_VISTA . 'footer.php';
 	}
 
-	public function clienteslimit($limit, $longitud, $entrada)
+	public function clienteslimit($limit, $longitud, $entrada, $pantalla)
 	{
 
 		if (!empty($limit)) {
+			if ($limit == -1) {
+				if ($entrada >= $longitud) {
+					$limit = $limit - 2;
+					$entrada = $entrada -1;
+				}
+
+			}
+			if ($limit == -2) {
+				if ($limit < 1) {
+					$entrada = 1;
+				}
+			}
 			if($limit == 1){
 				$limit = 0;
-				$entrada = 1; 
 			}
 			else
 			{
-				if ($entrada > $longitud) {
-					$entrada = 1;
-				}
-				$limit = $entrada * 10;
-				$limit = $limit -1;
 
+				$limit = 9 * $entrada;
+				$limit = $limit - 8;
 			}
-
 			$cliente = $this->daoCliente->traerTodoLimit($limit);
+			$pantalla = 1; 
 		}
 		
 		include URL_VISTA . 'header.php';

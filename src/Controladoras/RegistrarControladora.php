@@ -95,8 +95,7 @@ class RegistrarControladora
 
 				$verificacion = 0;
 
-
-				if( ! $this->daoCliente->verificarNombre($nombre)){
+					if( ! $this->daoCliente->verificarNombre($nombre)){
 					if(  $this->daoCliente->verificarApellido($apellido))
 					{
 						$verificacion = 0;
@@ -128,6 +127,7 @@ class RegistrarControladora
 						$verificacion = 1;
 					}
 				}
+
 
 				if($verificacion === 0){
 					$userInstance = new Cliente($nombre, $apellido, $calle, $telefono);
@@ -230,7 +230,7 @@ class RegistrarControladora
 
 					$sub_total = $armasonl + $armazonc + $lejos_od + $lejos_oi + $cerca_od + $cerca_oi;
 					if(!empty($senia)){
-					$saldo_total = $sub_total - $senia;
+						$saldo_total = $sub_total - $senia;
 					}
 					else{
 						$saldo_total = $sub_total;
