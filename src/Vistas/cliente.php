@@ -125,7 +125,7 @@ if(!empty($longitud))
                     $pantalla++;
                 }
                 ?>
-                <li><a href="/vista/clienteslimit/<?= -2; ?>/<?= $longitud; ?>/<?= $entrada; ?>/<?= $entrada; ?>/">Anterior</a></li>
+                <li><a href="/vista/clienteslimit/<?= -2; ?>/<?= $longitud; ?>/<?= $entrada; ?>/<?= $pantalla; ?>/">Anterior</a></li>
             </ul>
         </div>
         <?php

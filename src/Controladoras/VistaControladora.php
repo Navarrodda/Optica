@@ -103,7 +103,7 @@ class VistaControladora
 			}
 
 				if ($limit == -2) {
-					$entrada = $entrada - 6;
+					$entrada = $entrada - $pantalla;
 					if ($entrada <= 1){
 						$entrada = 1;
 						$pantalla = 1;
