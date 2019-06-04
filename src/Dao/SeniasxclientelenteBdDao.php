@@ -58,14 +58,38 @@ class SeniasxclientelenteBdDao
 
     public function eliminarPorId($id)
     {
-        
-        $sql = "DELETE FROM $this->tabla WHERE id_senia_x_cliente_lente = \"$id\"";
+        try{
+            
+            $sql = "DELETE FROM $this->tabla WHERE id_senia_x_cliente_lente = \"$id\"";
 
-        $conexion = Conexion::conectar();
+            $conexion = Conexion::conectar();
 
-        $sentencia = $conexion->prepare($sql);
+            $sentencia = $conexion->prepare($sql);
 
-        $sentencia->execute();
+            $sentencia->execute();
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
+    public function eliminarPorIdCliente($id)
+    {
+        try{
+            
+            $sql = "DELETE FROM $this->tabla WHERE id_cliente = \"$id\"";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
     }
 
 
@@ -111,11 +135,11 @@ class SeniasxclientelenteBdDao
         return null;
     }
 
-       public function traerPorIdCliente($id_cliente)
+    public function traerPorIdCliente($id_cliente)
     {
 
         /** @noinspection SqlResolve */
-        $sql = "SELECT * FROM $this->tabla WHERE id_cliente =  \"$id_cliente\" LIMIT 1";
+        $sql = "SELECT * FROM $this->tabla WHERE id_cliente =  \"$id_cliente\"";
 
         $conexion = Conexion::conectar();
 
@@ -141,12 +165,12 @@ class SeniasxclientelenteBdDao
                 $daoCuenta_saldo  = CuentasaldosBdDao::getInstancia();
                 $daoCliente = ClienteBdDao::getInstancia();
                 $daoLente   = LenteBdDao::getInstancia();
-                $sxl = new Senias_x_lentes(
+                $sxl = new Senias_x_cliente_lente(
                     $daoCuenta_saldo->traerPorId($p['id_cuenta_saldo']),
                     $daoCliente->traerPorId($p['id_cliente']),
                     $daoLente->traerPorId($p['id_lente'])
                 );
-                $sxl->getIdSeniaXLente($p['id_senia_x_cliente_lente']);
+                $sxl->setIdSeniaXCliente($p['id_senia_x_cliente_lente']);
                 return $sxl;
             }, $dataSet);
         }

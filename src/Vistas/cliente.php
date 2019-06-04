@@ -18,11 +18,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 texto-chico">
-                       <div class="table-responsive">
-                         <table class="table table-hover">
-                           <?php 
-                           if($cliente!= null )
-                           {
+                     <div class="table-responsive">
+                       <table class="table table-hover">
+                         <?php 
+                         if($cliente!= null )
+                         {
                             ?>
                             <thead>
                                 <tr style="color:white">
@@ -81,12 +81,24 @@
                                                 data-toggle="tooltip" data-placement="right">
                                             </span>
                                         </td>
-                                        <td>
-                                            <a href="/" class="disabled">         
-                                                <span class="glyphicon glyphicon-folder-open" title="Lentes"
-                                                data-toggle="tooltip" data-placement="right">
-                                            </span>
-                                        </td>
+                                        <?php  foreach ($saldos as $objeto) {
+                                            if (!empty($saldos)) {?>
+                                                <td>
+                                                    <a href="/" class="disabled">         
+                                                        <span class="glyphicon glyphicon-folder-open" title="Lentes"
+                                                        data-toggle="tooltip" data-placement="right">
+                                                    </span>
+                                                </td>
+                                                
+                                            <?php }else { ?>
+                                                <td>
+                                                    <a href="/" class="disabled">         
+                                                        <span class="glyphicon glyphicon-folder-close" title="Lentes"
+                                                        data-toggle="tooltip" data-placement="right">
+                                                    </span>
+                                                </td>
+                                            <?php } 
+                                        }?>
                                         <td>
                                             <a type="submit" method="post"  name="id_cliente"  href="/vista/modificarcliente/<?= $objeto->getId(); ?>" class="disabled">
                                                 <span class="glyphicon glyphicon-pencil" title="Modificar"
@@ -112,24 +124,24 @@
 <?php
 if(!empty($longitud))
 {
-        ?>
-        <div id="navegador">
-            <ul>
-                <li><a href="/vista/clienteslimit/<?= -1; ?>/<?= $longitud; ?>/<?= $entrada; ?>/<?= $entrada; ?>/">Siguiente</a></li>
-                <?php
-                for ($contador = 1; $contador < $longitud; $contador++){
-                    ?>
-                    <li><a href="/vista/clienteslimit/<?= $pantalla; ?>/<?= $longitud; ?>/<?= $pantalla; ?>/<?= $pantalla; ?>/"><?php print_r($pantalla); ?></a></li>
-                    <?php
-                    $entrada++;
-                    $pantalla++;
-                }
+    ?>
+    <div id="navegador">
+        <ul>
+            <li><a href="/vista/clienteslimit/<?= -1; ?>/<?= $longitud; ?>/<?= $entrada; ?>/<?= $entrada; ?>/">Siguiente</a></li>
+            <?php
+            for ($contador = 1; $contador < $longitud; $contador++){
                 ?>
-                <li><a href="/vista/clienteslimit/<?= -2; ?>/<?= $longitud; ?>/<?= $entrada; ?>/<?= $pantalla; ?>/">Anterior</a></li>
-            </ul>
-        </div>
-        <?php
-    }
+                <li><a href="/vista/clienteslimit/<?= $pantalla; ?>/<?= $longitud; ?>/<?= $pantalla; ?>/<?= $pantalla; ?>/"><?php print_r($pantalla); ?></a></li>
+                <?php
+                $entrada++;
+                $pantalla++;
+            }
+            ?>
+            <li><a href="/vista/clienteslimit/<?= -2; ?>/<?= $longitud; ?>/<?= $entrada; ?>/<?= $pantalla; ?>/">Anterior</a></li>
+        </ul>
+    </div>
+    <?php
+}
 ?>
 </div>
 </div>

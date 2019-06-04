@@ -79,17 +79,13 @@ class PdfControladora
 				//}
 				//Senior{ 
 				//Nombre{
+				//Apellido{
 				$pdf->SetY(16);
 				$pdf->SetX(124);
-				$pdf->MultiCell(145,15,$usuario->getNombre());
-				//Nombre}
-				//Apellido{
-				$str = $usuario->getNombre();
-				$posicion = strlen($str) + 128;
-				$pdf->SetY(16);
-				$pdf->SetX($posicion);
-				$pdf->MultiCell(145,15,$usuario->getApellido());
+				$resultado = $usuario->getNombre() .' '. $usuario->getApellido();
+				$pdf->MultiCell(145,15,$resultado);
 				//Apellido}
+				//Nombre}
 				//Senior}
 				//}
 				//2 Parte{
@@ -114,23 +110,23 @@ class PdfControladora
 				//Nombre{
 				$pdf->SetY(92.5);
 				$pdf->SetX(29);
-				$pdf->MultiCell(135,15,$usuario->getNombre());
+				$pdf->MultiCell(135,15,'');
 				//Nombre}
 				//Apellido{
 				$pdf->SetY(92.5);
 				$pdf->SetX(37);
-				$pdf->MultiCell(135,15,$usuario->getApellido());
+				$pdf->MultiCell(135,15,'');
 				//Apellido}
 				//Senior}
 				//Calle{
 				$pdf->SetY(92.5);
 				$pdf->SetX(110.5);
-				$pdf->MultiCell(135,15,$usuario->getCalle());
+				$pdf->MultiCell(135,15,'');
 				//Calle}
 				//Telefono{
 				$pdf->SetY(92.5);
 				$pdf->SetX(165.5);
-				$pdf->MultiCell(135,15,$usuario->getTelefono());
+				$pdf->MultiCell(135,15,'');
 				//Telefono}
 				//}
 				$pdf->Output();
@@ -537,18 +533,14 @@ class PdfControladora
 				}
 			//}
 			//Senior{ 
+			//Apellido}
 			//Nombre{
 				$pdf->SetY(16);
 				$pdf->SetX(124);
-				$pdf->MultiCell(145,15,$usuario->getNombre());
+				$resultado = $usuario->getNombre() .' '. $usuario->getApellido();
+				$pdf->MultiCell(145,15,$resultado);
 			//Nombre}
 			//Apellido{
-				$str = $usuario->getNombre();
-				$posicion = strlen($str) + 128;
-				$pdf->SetY(16);
-				$pdf->SetX($posicion);
-				$pdf->MultiCell(145,15,$usuario->getApellido());
-			//Apellido}
 			//Senior}
 			//Observaciones{
 				$pdf->SetY(23.3);

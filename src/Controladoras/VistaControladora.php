@@ -81,6 +81,14 @@ class VistaControladora
 		$cliente = $this->daoCliente->traerTodoLimit($limit);
 		$medir = $this->daoCliente->traerTodo();
 		$longitud = count($medir);
+
+		if(!empty($cliente)){
+			for ($i =0; $i < $longitud; $i++) { 
+				if(!empty($cliente[$i])){
+					$senia[$i] = $this->daoSenia->traerPorIdCliente($cliente[$i]->getId());
+				}
+			}
+		}
 		$longitud = $longitud + 9;
 		$longitud = $longitud / 9;
 		$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
@@ -102,14 +110,14 @@ class VistaControladora
 
 			}
 
-				if ($limit == -2) {
-					$entrada = $entrada - $pantalla;
-					if ($entrada <= 1){
-						$entrada = 1;
-						$pantalla = 1;
-						$limit = 1;
-					}
+			if ($limit == -2) {
+				$entrada = $entrada - $pantalla;
+				if ($entrada <= 1){
+					$entrada = 1;
+					$pantalla = 1;
+					$limit = 1;
 				}
+			}
 
 
 			if($limit == 1){
