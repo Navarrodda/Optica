@@ -84,7 +84,6 @@ class VistaControladora
 		$longitud = $longitud + 9;
 		$longitud = $longitud / 9;
 		$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
-		print_r($longitud);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
 		include URL_VISTA . 'footer.php';
@@ -95,17 +94,24 @@ class VistaControladora
 
 		if (!empty($limit)) {
 			if ($limit == -1) {
+				$entrada = $entrada + 1;
 				if ($entrada >= $longitud) {
 					$limit = $limit - 2;
 					$entrada = $entrada -1;
 				}
 
 			}
-			if ($limit == -2) {
-				if ($limit < 1) {
-					$entrada = 1;
+
+				if ($limit == -2) {
+					$entrada = $entrada - 6;
+					if ($entrada <= 1){
+						$entrada = 1;
+						$pantalla = 1;
+						$limit = 1;
+					}
 				}
-			}
+
+
 			if($limit == 1){
 				$limit = 0;
 			}
@@ -118,7 +124,7 @@ class VistaControladora
 			$cliente = $this->daoCliente->traerTodoLimit($limit);
 			$pantalla = 1; 
 		}
-		
+
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
 		include URL_VISTA . 'footer.php';
@@ -139,7 +145,7 @@ class VistaControladora
 		require(URL_VISTA . "modificarcliente.php");
 		include URL_VISTA . 'footer.php';
 	}
-	
+
 	public function facturasimple()
 	{
 		include URL_VISTA . 'header.php';
@@ -192,7 +198,7 @@ class VistaControladora
 				if(!empty($lentexcliente))
 				{
 					$longitud = count($lentexcliente);
-					
+
 					for ($contador = 0; $contador <= $longitud; $contador++) 
 					{
 						if(!empty($lentexcliente[$contador]))
