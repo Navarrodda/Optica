@@ -81,24 +81,22 @@
                                                 data-toggle="tooltip" data-placement="right">
                                             </span>
                                         </td>
-                                        <?php  foreach ($saldos as $objeto) {
-                                            if (!empty($saldos)) {?>
+                                        <?php 
+                                            if (!empty($objeto->codigo )) {?>
                                                 <td>
                                                     <a href="/" class="disabled">         
                                                         <span class="glyphicon glyphicon-folder-open" title="Lentes"
                                                         data-toggle="tooltip" data-placement="right">
                                                     </span>
                                                 </td>
-                                                
-                                            <?php }else { ?>
+                                            <?php } else { ?>
                                                 <td>
                                                     <a href="/" class="disabled">         
                                                         <span class="glyphicon glyphicon-folder-close" title="Lentes"
                                                         data-toggle="tooltip" data-placement="right">
                                                     </span>
                                                 </td>
-                                            <?php } 
-                                        }?>
+                                            <?php } ?>
                                         <td>
                                             <a type="submit" method="post"  name="id_cliente"  href="/vista/modificarcliente/<?= $objeto->getId(); ?>" class="disabled">
                                                 <span class="glyphicon glyphicon-pencil" title="Modificar"

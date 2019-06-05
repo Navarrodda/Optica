@@ -134,27 +134,33 @@ class SeniasxclientelenteBdDao
         }
         return null;
     }
-
     public function traerPorIdCliente($id_cliente)
     {
+        try{
 
-        /** @noinspection SqlResolve */
-        $sql = "SELECT * FROM $this->tabla WHERE id_cliente =  \"$id_cliente\"";
+            $sql = "SELECT * FROM $this->tabla WHERE id_cliente = \"$id_cliente\" ";
 
-        $conexion = Conexion::conectar();
+            $conexion = Conexion::conectar();
 
-        $sentencia = $conexion->prepare($sql);
+            $sentencia = $conexion->prepare($sql);
 
-        $sentencia->execute();
+            $sentencia->execute();
 
-        $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+            $dataSet =  $sentencia->fetchAll(\PDO::FETCH_ASSOC);
 
-        $this->mapear($dataSet);
+            $this->mapear($dataSet);
 
-        if (!empty($this->listado[0])) {
-            return $this->listado[0];
+            if(!empty($this->listado))
+            {
+                return $this->listado;
+            }
+
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
         }
-        return null;
     }
 
     public function mapear($dataSet)

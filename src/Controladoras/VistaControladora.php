@@ -81,12 +81,27 @@ class VistaControladora
 		$cliente = $this->daoCliente->traerTodoLimit($limit);
 		$medir = $this->daoCliente->traerTodo();
 		$longitud = count($medir);
+		$contador = count($cliente);
+		if(!empty($cliente))
+		{
+			for ($i =0; $i < $contador; $i++) { 
 
-		if(!empty($cliente)){
-			for ($i =0; $i < $longitud; $i++) { 
-				if(!empty($cliente[$i])){
-					$senia[$i] = $this->daoSenia->traerPorIdCliente($cliente[$i]->getId());
+				$senia = $this->daoSenia->traerPorIdCliente($cliente[$i]->getId());
+				print_r('/');
+				
+				if (!empty($senia[$i])) 
+				{
+					$senias[$i] = $senia[$i]->getIdCuentaSaldo();
+
+					print_r($senias[$i]->getId());
+
+					if (!empty($senias[$i]->getId())) 
+					{
+						$cliente[$i]->codigo = $senias[$i]->getId();
+						
+					}
 				}
+
 			}
 		}
 		$longitud = $longitud + 9;
@@ -130,8 +145,32 @@ class VistaControladora
 				$limit = $limit - 8;
 			}
 			$cliente = $this->daoCliente->traerTodoLimit($limit);
+			$contador =count($cliente);
+
+			if(!empty($cliente)){
+
+				for ($i =0; $i < $contador; $i++) 
+				{ 
+
+					if(!empty($cliente[$i]))
+					{
+						$senia = $this->daoSenia->traerPorIdCliente($cliente[$i]->getId());
+
+						if (empty($senia[$i])) 
+						{
+
+							$cliente[$i]->codigo =1;
+						}
+						else
+						{
+							$cliente[$i]->codigo =0;
+						}
+					}
+				}
+			}
 			$pantalla = 1; 
 		}
+
 
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
