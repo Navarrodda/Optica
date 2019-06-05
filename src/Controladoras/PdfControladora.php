@@ -205,16 +205,14 @@ class PdfControladora
 				$pdf->MultiCell(145,15,$timey);
 				//Anio}
 				//}
-				//Senior{ 
+				//Senior{
+				//Apellido{ 
 				//Nombre{
 				$pdf->SetY(16);
 				$pdf->SetX(124);
-				$pdf->MultiCell(145,15,$usuario->getNombre());
+				$resultado = $usuario->getNombre() .' '. $usuario->getApellido();
+				$pdf->MultiCell(145,15,$resultado);
 				//Nombre}
-				//Apellido{
-				$pdf->SetY(16);
-				$pdf->SetX(132);
-				$pdf->MultiCell(145,15,$usuario->getApellido());
 				//Apellido}
 				//Senior}
 				//Observaciones{
@@ -271,23 +269,23 @@ class PdfControladora
 				//Nombre{
 				$pdf->SetY(92.5);
 				$pdf->SetX(29.5);
-				$pdf->MultiCell(135,15,$usuario->getNombre());
+				$pdf->MultiCell(135,15,'');
 				//Nombre}
 				//Apellido{
 				$pdf->SetY(92.5);
 				$pdf->SetX(38);
-				$pdf->MultiCell(135,15,$usuario->getApellido());
+				$pdf->MultiCell(135,15,'');
 				//Apellido}
 				//Senior}
 				//Calle{
 				$pdf->SetY(92.5);
 				$pdf->SetX(110.5);
-				$pdf->MultiCell(135,15,$usuario->getCalle());
+				$pdf->MultiCell(135,15,'');
 				//Calle}
 				//Telefono{
 				$pdf->SetY(92.5);
 				$pdf->SetX(165.5);
-				$pdf->MultiCell(135,15,$usuario->getTelefono());
+				$pdf->MultiCell(135,15,'');
 				//Telefono}
 				//Reseta con fecha{
 				//Dia{
