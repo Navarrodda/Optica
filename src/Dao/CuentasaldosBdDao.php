@@ -139,6 +139,7 @@ class CuentasaldosBdDao{
 			echo $e->getMessage();die();
 		}
 	}
+
 	public function mapear($dataSet)
 	{
 		$dataSet = is_array($dataSet) ? $dataSet : false;

@@ -444,6 +444,21 @@ class AdministrarControladora
 				if(isset($id_lente)){
 					$cliente= $this->daoCliente->traerPorId($id_cliente);
 					$nombre = $cliente->getNombre();
+					$senia = $this->daoSeniasaldos->traerPorIdLente($id_lente);
+					$this->daoSeniasaldos->eliminarPorIdLente($id_lente);
+					$longitud = count($senia);
+					if(!empty($senia))
+					{
+						for ($i=0; $i < $longitud ; $i++) { 
+							$cuenta = $senia[$i]->getIdCuentaSaldo();
+							if(!empty($cuenta))
+							{
+								$id_cuenta = $cuenta->getId();
+								$this->daoCuentasaldos->eliminarPorId($id_cuenta);	
+							}
+						}
+					}
+					$this->daoFactura->eliminarPorIdLente($id_lente);
 					$this->daoLentexcliente->eliminarPorIdLente($id_lente);
 					$this->daoLente->eliminarPorId($id_lente);
 					$regCompleted = TRUE;

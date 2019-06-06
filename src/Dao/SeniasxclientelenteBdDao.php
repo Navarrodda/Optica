@@ -59,7 +59,7 @@ class SeniasxclientelenteBdDao
     public function eliminarPorId($id)
     {
         try{
-            
+
             $sql = "DELETE FROM $this->tabla WHERE id_senia_x_cliente_lente = \"$id\"";
 
             $conexion = Conexion::conectar();
@@ -77,7 +77,7 @@ class SeniasxclientelenteBdDao
     public function eliminarPorIdCliente($id_cliente)
     {
         try{
-            
+
             $sql = "DELETE FROM $this->tabla WHERE id_cliente = \"$id_cliente\"";
 
             $conexion = Conexion::conectar();
@@ -91,7 +91,6 @@ class SeniasxclientelenteBdDao
             echo $e->getMessage();die();
         }
     }
-
 
     public function traerTodo()
     {
@@ -156,6 +155,53 @@ class SeniasxclientelenteBdDao
             }
 
             return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
+    public function traerPorIdLente($id_lente)
+    {
+        try{
+
+            $sql = "SELECT * FROM $this->tabla WHERE id_lente = \"$id_lente\" LIMIT 1";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+
+            $dataSet =  $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+
+            $this->mapear($dataSet);
+
+            if(!empty($this->listado))
+            {
+                return $this->listado;
+            }
+
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
+    public function eliminarPorIdLente($id_lente)
+    {
+        try{
+            
+            $sql = "DELETE FROM $this->tabla WHERE id_lente = \"$id_lente\"";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
         }catch(\PDOException $e){
             echo $e->getMessage();die();
         }catch(\Exception $e){
