@@ -82,27 +82,26 @@ class VistaControladora
 		$medir = $this->daoCliente->traerTodo();
 		$longitud = count($medir);
 		$contador = count($cliente);
-		if(!empty($cliente))
-		{
-			for ($i =0; $i < $contador; $i++) { 
+		$i = 0;
+		foreach ($cliente as $clie) {
 
-				$senia = $this->daoSenia->traerPorIdCliente($cliente[$i]->getId());
-				print_r('/');
-				
-				if (!empty($senia[$i])) 
+			$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
+
+			if (!empty($senia)) {
+
+				if (!empty($senia[0])) 
 				{
-					$senias[$i] = $senia[$i]->getIdCuentaSaldo();
+					$senias = $senia[0]->getIdCuentaSaldo();
+					$cl = $senia[0]->getIdCliente();
 
-					print_r($senias[$i]->getId());
-
-					if (!empty($senias[$i]->getId())) 
-					{
-						$cliente[$i]->codigo = $senias[$i]->getId();
+					if ($clie->getId() == $cl->getId()){
 						
-					}
+						$cliente[$i]->codigo = $senias->getId();
+					}	
 				}
-
+				$senia = NULL;
 			}
+			$i++;
 		}
 		$longitud = $longitud + 9;
 		$longitud = $longitud / 9;
