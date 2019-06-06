@@ -95,7 +95,7 @@ class RegistrarControladora
 
 				$verificacion = 0;
 
-					if( ! $this->daoCliente->verificarNombre($nombre)){
+				if( ! $this->daoCliente->verificarNombre($nombre)){
 					if(  $this->daoCliente->verificarApellido($apellido))
 					{
 						$verificacion = 0;
@@ -229,8 +229,12 @@ class RegistrarControladora
 				if(!empty($id_lente)){
 
 					$sub_total = $armasonl + $armazonc + $lejos_od + $lejos_oi + $cerca_od + $cerca_oi;
+
 					if(!empty($senia)){
 						$saldo_total = $sub_total - $senia;
+						if ($saldo_total < 0) {
+							$saldo_total = 0;
+						}
 					}
 					else{
 						$saldo_total = $sub_total;
