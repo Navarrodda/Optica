@@ -139,7 +139,7 @@ class FacturaBdDao{
 	public function eliminarPorIdLente($id_lente)
 	{
 		try{
-			
+
 			$sql = "DELETE FROM $this->tabla WHERE id_lente = \"$id_lente\"";
 
 			$conexion = Conexion::conectar();
@@ -153,10 +153,11 @@ class FacturaBdDao{
 			echo $e->getMessage();die();
 		}
 	}
+	
 	public function eliminarPorId($id)
 	{
 		try{
-			
+
 			$sql = "DELETE FROM $this->tabla WHERE id_senia_x_cliente_lente = \"$id\"";
 
 			$conexion = Conexion::conectar();
