@@ -136,6 +136,41 @@ class FacturaBdDao{
 		}
 	}
 
+	public function eliminarPorIdLente($id_lente)
+	{
+		try{
+			
+			$sql = "DELETE FROM $this->tabla WHERE id_lente = \"$id_lente\"";
+
+			$conexion = Conexion::conectar();
+
+			$sentencia = $conexion->prepare($sql);
+
+			$sentencia->execute();
+		}catch(\PDOException $e){
+			echo $e->getMessage();die();
+		}catch(\Exception $e){
+			echo $e->getMessage();die();
+		}
+	}
+	public function eliminarPorId($id)
+	{
+		try{
+			
+			$sql = "DELETE FROM $this->tabla WHERE id_senia_x_cliente_lente = \"$id\"";
+
+			$conexion = Conexion::conectar();
+
+			$sentencia = $conexion->prepare($sql);
+
+			$sentencia->execute();
+		}catch(\PDOException $e){
+			echo $e->getMessage();die();
+		}catch(\Exception $e){
+			echo $e->getMessage();die();
+		}
+	}
+
 	public function mapear($dataSet){
 		$dataSet = is_array($dataSet) ? $dataSet : false;
 		if($dataSet){

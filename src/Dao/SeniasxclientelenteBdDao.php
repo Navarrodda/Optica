@@ -74,11 +74,11 @@ class SeniasxclientelenteBdDao
         }
     }
 
-    public function eliminarPorIdCliente($id)
+    public function eliminarPorIdCliente($id_cliente)
     {
         try{
             
-            $sql = "DELETE FROM $this->tabla WHERE id_cliente = \"$id\"";
+            $sql = "DELETE FROM $this->tabla WHERE id_cliente = \"$id_cliente\"";
 
             $conexion = Conexion::conectar();
 

@@ -8,13 +8,18 @@ use Modelo\Cliente as Cliente;
 use Modelo\Usuario as Usuario;
 use Modelo\Lente as Lente;
 use Modelo\Lente_x_cliente as Lente_x_cliente;
-
+use Modelo\Senias_x_cliente_lente as Senias_x_cliente_lente;
+use Modelo\Cuenta_saldos as Cuenta_saldos;
+use Modelo\Factura as Factura;
 
 //Dao
 use Dao\ClienteBdDao as ClienteBdDao;
 use Dao\UsuarioBdDao as UsuarioBdDao;
 use Dao\LenteBdDao as LenteBdDao;
 use Dao\LentexclienteBdDao as LentexclienteBdDao;
+use Dao\SeniasxclientelenteBdDao as SeniasxclientelenteBdDao;
+use Dao\CuentasaldosBdDao as CuentasaldosBdDao;
+use Dao\FacturaBdDao as FacturaBdDao;
 
 class AdministrarControladora
 {
@@ -22,11 +27,15 @@ class AdministrarControladora
 	protected $daoUsuario;
 	protected $daoLente;
 	protected $daoLentexcliente;
+	protected $daoSeniasaldos;
+	protected $daoCuentasaldos;
+	protected $daoFactura;
 
 	private $cliente;
 	private $usuario;
 	private $lente;
 	private $lentexcliente;
+	private $senia;
 
 
 
@@ -36,6 +45,9 @@ class AdministrarControladora
 		$this->daoUsuario = UsuarioBdDao::getInstancia();
 		$this->daoLente = LenteBdDao::getInstancia();
 		$this->daoLentexcliente = LentexclienteBdDao::getInstancia();
+		$this->daoSeniasaldos = SeniasxclientelenteBdDao::getInstancia();
+		$this->daoCuentasaldos =CuentasaldosBdDao::getInstancia();
+		$this->daoFactura =FacturaBdDao::getInstancia();
 	}
 
 	function eliminarcliente($id_cliente){
@@ -48,6 +60,23 @@ class AdministrarControladora
 					$cliente= $this->daoCliente->traerPorId($id_cliente);
 					$nombre = $cliente->getNombre();
 					$apellido = $cliente->getApellido();
+					$senia = $this->daoSeniasaldos->traerPorIdCliente($id_cliente);
+					$this->daoSeniasaldos->eliminarPorIdCliente($id_cliente);
+
+					if(!empty($senia))
+					{
+						$long = count($senia);
+
+						for ($contador = 0; $contador <= $long; $contador++) 
+						{
+							if(!empty($senia[$contador]))
+							{
+								$senias[$contador] = $senia[$contador]->getIdCuentaSaldo();
+								$id_ceunta = $senias[$contador]->getId();
+								$this->daoCuentasaldos->eliminarPorId($id_ceunta);
+							}
+						}
+					}
 					$lentexcliente = $this->daoLentexcliente->traerPorIdCliente($id_cliente);
 					$this->daoLentexcliente->eliminarPorIdCliente($id_cliente);
 					if(!empty($lentexcliente))
@@ -59,7 +88,11 @@ class AdministrarControladora
 							if(!empty($lentexcliente[$contador]))
 							{
 								$lente[$contador] = $lentexcliente[$contador]->getIdLente();
-								$id_lente = $lente[$contador]->getId();
+								if(!empty($lente[$contador]))
+								{
+									$id_lente = $lente[$contador]->getId();
+									$this->daoFactura->eliminarPorIdLente($id_lente);
+								}
 								$this->daoLente->eliminarPorId($id_lente);
 							}
 						}
@@ -210,7 +243,7 @@ class AdministrarControladora
 		}
 	}
 
-		function modificarusuario($id_usuario, $nombre, $apellido, $calle, $telefono, $email, $pass){
+	function modificarusuario($id_usuario, $nombre, $apellido, $calle, $telefono, $email, $pass){
 		try{
 
 			if(!empty($_SESSION)){
