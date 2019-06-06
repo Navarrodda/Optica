@@ -84,14 +84,14 @@
                                         <?php 
                                             if (!empty($objeto->codigo )) {?>
                                                 <td>
-                                                    <a href="/" class="disabled">         
+                                                    <a href="/vista/cuentasaldos/<?= $objeto->getId(); ?>/" class="disabled">         
                                                         <span class="glyphicon glyphicon-folder-open" title="Lentes"
                                                         data-toggle="tooltip" data-placement="right">
                                                     </span>
                                                 </td>
                                             <?php } else { ?>
                                                 <td>
-                                                    <a href="/" class="disabled">         
+                                                    <a href="" class="disabled">         
                                                         <span class="glyphicon glyphicon-folder-close" title="Lentes"
                                                         data-toggle="tooltip" data-placement="right">
                                                     </span>

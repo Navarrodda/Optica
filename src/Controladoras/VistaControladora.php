@@ -73,6 +73,28 @@ class VistaControladora
 		include URL_VISTA . 'footer.php';
 	}
 
+	public function cuentasaldos($id_cliente)
+	{
+		if(!empty($id_cliente))
+		{
+			$cliente = $this->daoCliente->traerPorId($id_cliente);
+			$saldocuenta =$this->daoSenia->traerPorIdCliente($id_cliente);
+			$longitud = count($saldocuenta);
+			if(!empty($saldocuenta))
+			{
+				for ($i=0; $i <= $longitud ; $i++)
+				{ 
+					if (!empty($saldocuenta[$i])) {
+						$cuentasaldos[$i] = $saldocuenta[$i]->getIdCuentaSaldo();
+					}
+				}
+			}
+		}
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "cuentasaldos.php");
+		include URL_VISTA . 'footer.php';
+	}
+
 	public function clientes()
 	{
 		$limit = 0;
@@ -147,27 +169,27 @@ class VistaControladora
 			$contador =count($cliente);
 			$pantalla = 1; 
 		}
-			$i = 0;
-			foreach ($cliente as $clie) {
+		$i = 0;
+		foreach ($cliente as $clie) {
 
-				$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
-				$cliente[$i]->codigo = NULL;
-				if (!empty($senia)) {
+			$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
+			$cliente[$i]->codigo = NULL;
+			if (!empty($senia)) {
 
-					if (!empty($senia[0])) 
-					{
-						$senias = $senia[0]->getIdCuentaSaldo();
-						$cl = $senia[0]->getIdCliente();
+				if (!empty($senia[0])) 
+				{
+					$senias = $senia[0]->getIdCuentaSaldo();
+					$cl = $senia[0]->getIdCliente();
 
-						if ($clie->getId() == $cl->getId()){
+					if ($clie->getId() == $cl->getId()){
 
-							$cliente[$i]->codigo = $senias->getId();
-						}	
-					}
-					$senia = NULL;
+						$cliente[$i]->codigo = $senias->getId();
+					}	
 				}
-				$i++;
+				$senia = NULL;
 			}
+			$i++;
+		}
 
 
 
