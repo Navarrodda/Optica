@@ -93,41 +93,35 @@ class RegistrarControladora
 				$apellido = ucwords($apellido);
 				$calle = ucwords($calle);  
 
-				$verificacion = 0;
+				$verificacion = 1;
 
 				if( ! $this->daoCliente->verificarNombre($nombre)){
-					if(  $this->daoCliente->verificarApellido($apellido))
+					if( $this->daoCliente->verificarApellido($apellido))
 					{
 						$verificacion = 0;
-
+					}
+					else
+					{
+						$verificacion = 0;
 					}
 				}
 				else{
-					if( ! $this->daoCliente->verificarApellido($apellido))
-					{
-						$verificacion = 0;
-					}
-					else{
-						$verificacion = 1;
+					if( $this->daoCliente->verificarNombre($nombre)){
+						if( ! $this->daoCliente->verificarApellido($apellido))
+						{
+							$verificacion = 0;
+						}
+						else{
+							$verificacion = 1;
+						}
 					}
 				}
-				if(  ! $this->daoCliente->verificarApellido($apellido)){
-					if(  $this->daoCliente->verificarNombre($nombre))
-					{
-						$verificacion = 0;
-					}
-
-				}
-				else{
+				if( ! $this->daoCliente->verificarApellido($apellido)){
 					if( ! $this->daoCliente->verificarNombre($nombre))
 					{
-						$verificacion = 0;
-					}
-					else{
 						$verificacion = 1;
 					}
 				}
-
 
 				if($verificacion === 0){
 					$userInstance = new Cliente($nombre, $apellido, $calle, $telefono);
