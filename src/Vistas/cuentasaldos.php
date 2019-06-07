@@ -10,7 +10,7 @@
 	<div class="container lower-box box-primary" style="text-align: center;">
 		<?php if($cuentasaldos!= null ) { ?>
 			<h2 class="section-heading">Saldos registrados del Cliente es : <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?>  </h2>
-						<h3 class="section-heading">El monto total es de: $<?= $monto ?></h3>
+						<h3 class="section-heading">El monto total asta la fecha: <?= $fecha ?>  es de: $<?= $monto ?></h3>
 			<hr class="primary"> <?php }
 			else{ ?>
 				<h2 class="section-heading">No ahi saldos registrados del Cliente: <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?> </h2>
@@ -63,7 +63,7 @@
 													$<?= $objeto->getSaldo(); ?>
 												</td>
 												<td>
-													<?= $objeto->getFecha(); ?>
+													<?= date('d-m-Y',strtotime($objeto->getFecha()));?>
 												</td>
 												<td>
 													<a href="/" class="disabled">

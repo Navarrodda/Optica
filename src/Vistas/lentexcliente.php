@@ -132,7 +132,7 @@
                                         <?= $objeto->getColor(); ?>
                                     </td> 
                                     <td>
-                                        <?= $objeto->getFecha(); ?>
+                                        <?= date('d-m-Y',strtotime($objeto->getFecha())); ?>
                                     </td>
                                     <td>
                                         <a href="/vista/factura/<?= $objeto->getId(); ?>/<?= $cliente->getId()?>" class="disabled">         

@@ -92,6 +92,7 @@ class VistaControladora
 				}
 			}
 		}
+		$fecha = date('d-m-Y');
 
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cuentasaldos.php");

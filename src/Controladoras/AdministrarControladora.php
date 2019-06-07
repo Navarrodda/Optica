@@ -545,7 +545,7 @@ class AdministrarControladora
 					}
 					if(empty($fecha))
 					{
-						$fecha = date('Y-m-d');;
+						$fecha = date('Y-m-d');
 					}
 
 					$sub_total = $armasonl + $armazonc + $lejos_od + $lejos_oi + $cerca_od + $cerca_oi;
