@@ -122,13 +122,14 @@ class RegistrarControladora
 						$verificacion = 1;
 					}
 				}
-
+				$nombreapellido = $nombre .' '. $apellido;
 				if($verificacion === 0){
 					$userInstance = new Cliente($nombre, $apellido, $calle, $telefono);
 					$idClie = $this->daoCliente->agregar( $userInstance );
 					$userInstance->setId( $idClie );
 					$regCompleted = TRUE;
-					$this->mensaje = new Mensaje( "success", "El Cliente fue registrado con exito!" );
+					$this->mensaje = new Mensaje( "success", 'El Cliente:' .' '.'<i><strong>' .  $nombreapellido
+						. '</strong></i>fue registrado con exito!' );
 				}
 
 				switch ($regCompleted){

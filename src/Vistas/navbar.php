@@ -8,7 +8,12 @@
                     <div class="flexsearch--wrapper">
                         <form class="flexsearch--form" action="#" method="post">
                             <div class="flexsearch--input-wrapper">
+                                <?php if($_SESSION['rol'] == 'Administrador') {?>
                                 <input class="flexsearch--input" type="search" placeholder="search">
+                                <?php  }?>
+                                 <?php if($_SESSION['rol'] == 'Usuario') {?>
+                                <input class="flexsearch--input" type="search" placeholder="search">
+                                <?php  }?>
                             </div>
                             <input class="flexsearch--submit" type="submit" value="&#10140;">
                         </form>
@@ -27,47 +32,99 @@
                         <li>
                             <a class="page-scroll" style="color:orange" href="/"><?= $_SESSION['nombre'],' ', $_SESSION['apellido'] ?> </a>
                             <ul>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/vista/usuario/">Cuenta</a>
-                                </li>
+                                <?php if($_SESSION['rol'] == 'Administrador') {?>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/vista/usuario/">Cuentas</a>
+                                    </li>
+                                <?php } ?>
+                                <?php if($_SESSION['rol'] == 'Usuario') {?>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/vista/usuario/">Cuenta</a>
+                                    </li>
+                                <?php  }?>
+                                <?php if($_SESSION['rol'] == 'Cliente') {?>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/vista/usuario/">Cuenta</a>
+                                    </li>
+                                <?php  }?>
                             </ul>   
                         </li>
-                        <li>
-                            <a class="page-scroll" style="color:white" href="/">Clientes</a>
-                            <ul>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/vista/registrar/">Registrar Cliente</a>
-                                </li>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/vista/clientes/">Vista Clientes</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="page-scroll" style="color:white" href="/">PDF</a>
-                            <ul>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/pdf/pdfplantilla"  target="_blank">Plantilla</a>
-                                </li>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/pdf/pdfvista"  target="_blank">Plantilla Con datos actuales</a>
-                                </li>
-                            </ul>
-                        </li>  
-                        <li>
-                            <a class="page-scroll" style="color:white" href="">Facturacion</a>
-                            <ul>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/vista/facturasimple/">Cargar Manual</a>
-                                </li>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="/pdf/pdfsimple">Simple1</a>
-                                </li>
-                                <li>
-                                    <a class="page-scroll" style="color:white" href="">Cliente Registrado</a>
-                                </li>
-                            </ul>
-                        </li>              
+                        <?php if($_SESSION['rol'] == 'Administrador') {?>
+                            <li>
+                                <a class="page-scroll" style="color:white" href="/">Clientes</a>
+                                <ul>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/vista/registrar/">Registrar Cliente</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/vista/clientes/">Vista Clientes</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="page-scroll" style="color:white" href="/">PDF</a>
+                                <ul>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/pdf/pdfplantilla"  target="_blank">Plantilla</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/pdf/pdfvista"  target="_blank">Plantilla Con datos actuales</a>
+                                    </li>
+                                </ul>
+                            </li>  
+                            <li>
+                                <a class="page-scroll" style="color:white" href="">Facturacion</a>
+                                <ul>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/vista/facturasimple/">Cargar Manual</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/pdf/pdfsimple">Simple1</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="">Cliente Registrado</a>
+                                    </li>
+                                </ul>
+                            </li> 
+                        <?php } ?>
+                        <?php if($_SESSION['rol'] == 'Usuario') {?>
+                            <li>
+                                <a class="page-scroll" style="color:white" href="/">Clientes</a>
+                                <ul>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/vista/registrar/">Registrar Cliente</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/vista/clientes/">Vista Clientes</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="page-scroll" style="color:white" href="/">PDF</a>
+                                <ul>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/pdf/pdfplantilla"  target="_blank">Plantilla</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/pdf/pdfvista"  target="_blank">Plantilla Con datos actuales</a>
+                                    </li>
+                                </ul>
+                            </li>  
+                            <li>
+                                <a class="page-scroll" style="color:white" href="">Facturacion</a>
+                                <ul>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/vista/facturasimple/">Cargar Manual</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="/pdf/pdfsimple">Simple1</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-scroll" style="color:white" href="">Cliente Registrado</a>
+                                    </li>
+                                </ul>
+                            </li> 
+                        <?php }  ?>                          
                         <li>
                             <a class="page-scroll" style="color:white" href="/sesion/terminar">salir</a>
                         </li>

@@ -4,6 +4,7 @@ namespace Controladoras;
 
 //Modelo
 use Modelo\Mensaje as Mensaje;
+use Modelo\Rol as Rol;
 use Modelo\Cliente as Cliente;
 use Modelo\Usuario as Usuario;
 use Modelo\Lente as Lente;
@@ -13,6 +14,7 @@ use Modelo\Cuenta_saldos as Cuenta_saldos;
 use Modelo\Factura as Factura;
 
 //Dao
+use Dao\RolBdDao as RolBdDao;
 use Dao\ClienteBdDao as ClienteBdDao;
 use Dao\UsuarioBdDao as UsuarioBdDao;
 use Dao\LenteBdDao as LenteBdDao;
@@ -23,6 +25,7 @@ use Dao\FacturaBdDao as FacturaBdDao;
 
 class AdministrarControladora
 {
+	protected $daoRol;
 	protected $daoCliente;
 	protected $daoUsuario;
 	protected $daoLente;
@@ -41,6 +44,7 @@ class AdministrarControladora
 
 	public function __construct()
 	{
+		$this->daoRol = RolBdDao::getInstancia();
 		$this->daoCliente = ClienteBdDao::getInstancia();
 		$this->daoUsuario = UsuarioBdDao::getInstancia();
 		$this->daoLente = LenteBdDao::getInstancia();
@@ -58,7 +62,7 @@ class AdministrarControladora
 				$regCompleted = FALSE;
 				if(isset($id_cliente)){
 					$cliente= $this->daoCliente->traerPorId($id_cliente);
-					$nombre = $cliente->getNombre();
+					$nombreapellido = $cliente->getNombre() .' '. $cliente->getApellido();
 					$apellido = $cliente->getApellido();
 					$senia = $this->daoSeniasaldos->traerPorIdCliente($id_cliente);
 					$this->daoSeniasaldos->eliminarPorIdCliente($id_cliente);
@@ -100,7 +104,7 @@ class AdministrarControladora
 					$this->daoCliente->eliminarPorId($id_cliente);
 					$regCompleted = TRUE;
 					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente al cliente
-						! El CLiente eliminado fue:' .' '.'<i><strong>' .  $nombre
+						! El CLiente eliminado fue:' .' '.'<i><strong>' .  $nombreapellido
 						. '</strong></i>');
 				}
 
@@ -314,6 +318,129 @@ class AdministrarControladora
 			echo $error->getMessage();
 		}
 	}
+
+	function modificarpreousuario($id_usuario, $preoridad){
+		try{
+
+			if(!empty($_SESSION)){
+
+				if ($_SESSION['rol'] == 'Administrador') {
+					if(!empty($preoridad)){
+
+					$rol = $this->daoRol->traerPorIdPreoridad($preoridad);
+
+					$id_rol = $rol->getId();
+					}
+					else
+					{
+						$id_rol = $usuario->getIdRol();
+					}
+
+
+					$regCompleted = FALSE;
+
+					$usuario = $this->daoUsuario->traerPorId($id_usuario);
+
+					$nombre = $usuario->getNombre();			
+					$apellido =  $usuario->getApellido();
+					$email =  $usuario->getEmail();
+					$pass =  $usuario->getPassword();
+					$calle =  $usuario->getCalle();
+					$telefono =  $usuario->getTelefono();
+
+					if(!empty($id_usuario)){
+						$usuarioInstance = new Usuario($nombre, $apellido, $email, $calle, $telefono, $pass, $this->daoRol->traerPorId( $id_rol ));
+						$idUse = $this->daoUsuario->actualizar( $usuarioInstance, $id_usuario);
+						$regCompleted = TRUE;
+						$this->mensaje = new Mensaje( "success", "La cuenta fue modificada con exito!" );
+					}
+
+					switch ($regCompleted){
+						case TRUE:
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "inicio.php");
+						include URL_VISTA . 'footer.php';
+						break;
+
+						case FALSE:
+						$this->mensaje = new Mensaje( "success", "Error!" );
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "modificarpreoridadusuario.php");
+						include URL_VISTA . 'footer.php';
+						break;
+					}
+				}
+			}
+			else{
+				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}catch(\PDOException $pdo_error){
+			$this->mensaje = new \Modelo\Mensaje("danger","Ocurrio un error con la Base de Datos: " . $pdo_error);
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'error.php');
+			include URL_VISTA . 'footer.php';
+		}catch(\Exception $error){
+			echo $error->getMessage();
+		}
+	}
+
+function eliminarusuario($id_usuario){
+		try{
+			
+			if(!empty($_SESSION)){
+
+				if ($_SESSION['rol'] == 'Administrador') {
+
+				$regCompleted = FALSE;
+
+				if(isset($id_usuario)){
+					$usuario= $this->daoUsuario->traerPorId($id_usuario);
+					$nombreapellido = $usuario->getNombre() .' '. $usuario->getApellido();
+					$this->daoUsuario->eliminarPorId($id_usuario);
+					$regCompleted = TRUE;
+					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente al Usuario
+						! El Usuario eliminado fue:' .' '.'<i><strong>' .  $nombreapellido
+						. '</strong></i>');
+				}
+
+
+				switch ($regCompleted){
+					case TRUE:
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "inicio.php");
+					include URL_VISTA . 'footer.php';
+					break;
+
+					case FALSE:
+					$this->mensaje = new Mensaje( "success", "Error" );
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "usuarios.php");
+					include URL_VISTA . 'footer.php';
+					break;
+				}
+			}
+		}
+			else{
+				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}catch(\PDOException $pdo_error){
+			$this->mensaje = new \Modelo\Mensaje("danger","Ocurrio un error con la Base de Datos: " . $pdo_error);
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'error.php');
+			include URL_VISTA . 'footer.php';
+		}catch(\Exception $error){
+			echo $error->getMessage();
+		}
+	}
+
 	function modificarlente($id_lente, $medico, $fecha, $armazon_lejos, $armazon_cerca, $lejos_od, $cerca_od, $lejos_oi, $cerca_oi, $cilindrico, $en_grados, $color, $distancia, $calibre, $puente){
 
 		try{
@@ -435,7 +562,7 @@ class AdministrarControladora
 				$regCompleted = FALSE;
 				if(isset($id_lente)){
 					$cliente= $this->daoCliente->traerPorId($id_cliente);
-					$nombre = $cliente->getNombre();
+					$nombreapellido = $cliente->getNombre() .' '. $cliente->getApellido();
 					$senia = $this->daoSeniasaldos->traerPorIdLente($id_lente);
 					$this->daoSeniasaldos->eliminarPorIdLente($id_lente);
 					$longitud = count($senia);
@@ -455,7 +582,7 @@ class AdministrarControladora
 					$this->daoLente->eliminarPorId($id_lente);
 					$regCompleted = TRUE;
 					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente el lente del cliente
-						! El Cliente es:' .' '.'<i><strong>' .  $nombre
+						! El Cliente es:' .' '.'<i><strong>' .  $nombreapellido
 						. '</strong></i>');
 				}
 

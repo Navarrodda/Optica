@@ -81,16 +81,22 @@ class UsuarioBdDao{
     }
 }
 
-public function eliminarPorId($id){
+   public function eliminarPorId($id_usuario ){
+        try{
 
-    $sql = "DELETE FROM $this->tabla WHERE id= \"$id\"";
+            $sql = "DELETE FROM $this->tabla WHERE id_usuario = \"$id_usuario \"";
 
-    $conexion = Conexion::conectar();
+            $conexion = Conexion::conectar();
 
-    $sentencia = $conexion->prepare($sql);
+            $sentencia = $conexion->prepare($sql);
 
-    $sentencia->execute();
-}
+            $sentencia->execute();
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
 
 public function eliminarPorMail($mail){
     /** @noinspection SqlResolve */
@@ -176,11 +182,11 @@ public function verificarEmail($email){
     return FALSE;
 }
 
-public function traerPorId($id)
+public function traerPorId($id_usuario)
 {   
     try{
-        if ($id != null) {
-            $sql = ("SELECT * FROM $this->tabla WHERE id_usuario = \"$id\" LIMIT 1" );
+        if ($id_usuario != null) {
+            $sql = ("SELECT * FROM $this->tabla WHERE id_usuario = \"$id_usuario\"" );
 
             $conexion = Conexion::conectar();
 

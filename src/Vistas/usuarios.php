@@ -39,56 +39,71 @@
 												Email
 											</th>
 											<th>
-												Password
-											</th>
-											<th>
-												Calle
+												Direccion
 											</th>
 											<th>
 												Telefono
 											</th>
 											<th>
+												Preoridad
+											</th>
+											<th>
 												Modificar
+											</th>
+											<th>
+												Eliminar
 											</th>
 										</tr>
 									</thead>
 									<tbody>
+										<?php
+										foreach ($usuario as $objeto) {
+											?>
 											<tr style="color:white">
 												<td>
-													<?= $usuario->getId(); ?>
+													<?= $objeto->getId(); ?>
 												</td>
 												<td>
-													<?= $usuario->getNombre(); ?>
+													<?= $objeto->getNombre(); ?>
 												</td>
 												<td>
-													<?= $usuario->getApellido(); ?>
+													<?= $objeto->getApellido(); ?>
 												</td>
 												<td>
-													<?= $usuario->getEmail(); ?>
+													<?= $objeto->getEmail(); ?>
 												</td>
 												<td>
-													<?= $usuario->getPassword(); ?>
+													<?= $objeto->getCalle(); ?>
 												</td>
 												<td>
-													<?= $usuario->getCalle(); ?>
+													<?= $objeto->getTelefono(); ?>
 												</td>
 												<td>
-													<?= $usuario->getTelefono(); ?>
+													<?php $preoridad = $objeto->getIdRol();
+													echo $preoridad->getPrioridad(); ?>
 												</td>
 												<td>
-													<a type="submit" method="post"  name="id_cliente"  href="/vista/modificarusuario/<?= $usuario->getId(); ?>/" class="disabled">
+													<a type="submit" method="post"  name="id_cliente"  href="/vista/modificarusuario/<?= $objeto->getId(); ?>/" class="disabled">
 														<span class="glyphicon glyphicon-pencil" title="No implementado..."
 														data-toggle="tooltip" data-placement="right">
 													</span>
 												</a>
 											</td>
-										</tr>
-										<?php 
-								} ?>
-							</tbody>
-						</table>
-					</div>
+											<td>
+												<a type="submit" method="post"  name="id_cliente" href="/administrar/eliminarusuario/<?= $objeto->getId(); ?>" class="disabled">
+													<span class="glyphicon glyphicon-trash"  title="Eliminar Cliente"
+													data-toggle="tooltip" data-placement="right">
+												</span>
+											</a>
+										</td>
+									</tr>
+									<?php 
+								}
+							} ?>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>

@@ -110,6 +110,26 @@ public function traerPorId($id_rol)
     }
     return null;
 }
+public function traerPorIdPreoridad($preoridad)
+{
+    /** @noinspection SqlResolve */
+    $sql = "SELECT * FROM $this->tabla WHERE nombre = \"$preoridad\" LIMIT 1";
+
+    $conexion = Conexion::conectar();
+
+    $sentencia = $conexion->prepare($sql);
+
+    $sentencia->execute();
+
+    $dataSet[] = $sentencia->fetch(\PDO::FETCH_ASSOC);
+
+    $this->mapear($dataSet);
+
+    if (!empty($this->listado[0])) {
+        return $this->listado[0];
+    }
+    return null;
+}
 
 public function mapear($dataSet)
 {

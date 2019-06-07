@@ -227,7 +227,7 @@ class VistaControladora
 
 	public function registrarusuario()
 	{
-		$role = $this->daoRol->traerPorId(1);
+		$role = $this->daoRol->traerPorIdPreoridad('Cliente');
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "registrarusuario.php");
 		include URL_VISTA . 'footer.php';
@@ -235,21 +235,59 @@ class VistaControladora
 
 	public function usuario()
 	{
-		$id = $_SESSION["id"];
-		$usuario = $this->daoUsuario->traerPorId($id);
-		print_r($usuario->getNombre());
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "usuario.php");
-		include URL_VISTA . 'footer.php';
+		if(!empty($_SESSION)){
+			if ($_SESSION['rol'] == 'Administrador') {
+				$usuario = $this->daoUsuario->traerTodo();
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "usuarios.php");
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$id = $_SESSION["id"];
+				$usuario = $this->daoUsuario->traerPorId($id);
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "usuario.php");
+				include URL_VISTA . 'footer.php';
+			}
+		}
+		else
+		{
+			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "inicio.php");
+			include URL_VISTA . 'footer.php';
+		}
+		
+		
 	}
 
-	public function modificarusuario()
+
+	public function modificarusuario($id)
 	{
-		$id = $_SESSION["id"];
-		$usuario = $this->daoUsuario->traerPorId($id);
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "modificarusuario.php");
-		include URL_VISTA . 'footer.php';
+		if(!empty($_SESSION)){
+			if ($_SESSION['rol'] == 'Administrador') {
+				$usuario = $this->daoUsuario->traerPorId($id);
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "modificarpreoridadusuario.php");
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$usuario = $this->daoUsuario->traerPorId($id);
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "modificarusuario.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}
+		else
+		{
+			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "inicio.php");
+			include URL_VISTA . 'footer.php';
+		}
 	}
 
 	public function pdf()
@@ -318,7 +356,7 @@ class VistaControladora
 		}
 	}
 
-		public function modificarfactura($id_factura, $id_cliente, $id_lente)
+	public function modificarfactura($id_factura, $id_cliente, $id_lente)
 	{
 		$cliente = $this->daoCliente->traerPorId($id_cliente);
 		$lente = $this->daoLente->traerPorId($id_lente);
