@@ -9,7 +9,7 @@
 <div class="container mh-400" style="margin-top:30px;">
 	<div class="container lower-box box-primary" style="text-align: center;">
 		<?php if($factura!= null ) { ?>
-			<h2 class="section-heading">Costos del lente del Cliente: <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?>  </h2>
+			<h2 class="section-heading">Costos del lente ID:<?= $lente->getId() ?> del Cliente: <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?>  </h2>
 			<hr class="primary"> <?php }
 			else{ ?>
 				<h2 class="section-heading">No hay Saldos cargados en el Sistema del Cliente: <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?> </h2>
@@ -30,22 +30,22 @@
 												id
 											</th>
 											<th>
-												$ A Lejos
+												 A Lejos
 											</th>
 											<th>
-												$ A Cerca
+												 A Cerca
 											</th>
 											<th>
-												$ L OD
+												 L OD
 											</th>
 											<th>
-												$ L OI
+												 L OI
 											</th>
 											<th>
-												$ C OD
+												 C OD
 											</th>
 											<th>
-												$ C OI
+												 C OI
 											</th>
 											<th>
 												Sub Total
@@ -70,34 +70,34 @@
 												<?= $factura->getId(); ?>
 											</td>
 											<td>
-												<?= $factura->getSaldoArmazoL(); ?>
+												$<?= $factura->getSaldoArmazoL(); ?>
 											</td>
 											<td>
-												<?= $factura->getSaldoArmazonC(); ?>
+												$<?= $factura->getSaldoArmazonC(); ?>
 											</td>
 											<td>
-												<?= $factura->getSaldoLejosoD(); ?>
+												$<?= $factura->getSaldoLejosoD(); ?>
 											</td>
 											<td>
-												<?= $factura->getSaldoLejosoI(); ?>
+												$<?= $factura->getSaldoLejosoI(); ?>
 											</td>
 											<td>
-												<?= $factura->getSaldoCercaOd(); ?>
+												$<?= $factura->getSaldoCercaOd(); ?>
 											</td>
 											<td>
-												<?= $factura->getSaldoCercaOi(); ?>
+												$<?= $factura->getSaldoCercaOi(); ?>
 											</td>
 											<td>
-												<?= $factura->getSubTotal(); ?>
+												$<?= $factura->getSubTotal(); ?>
 											</td>
 											<td> 
-												<?= $factura->getSenia(); ?>
+												$<?= $factura->getSenia(); ?>
 											</td>
 											<td>
-												<?= $factura->getSaldoTotal(); ?>
+												$<?= $factura->getSaldoTotal(); ?>
 											</td>
 											<td>
-												<a href="" class="disabled">
+												<a href="/vista/modificarfactura/<?= $factura->getId(); ?>/<?= $lente->getId(); ?>/<?= $lente->getId(); ?>/" class="disabled">
 													<span class="glyphicon glyphicon-pencil" title="Modificar"
 													data-toggle="tooltip" data-placement="right">
 												</span>

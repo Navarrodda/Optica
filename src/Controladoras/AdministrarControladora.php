@@ -491,4 +491,118 @@ class AdministrarControladora
 			echo $error->getMessage();
 		}
 	}
+	
+	function modificarfactura($id_lente, $id_factura, $armasonl, $armazonc, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $senia, $fecha){
+		try{
+			
+			if(!empty($_SESSION)){
+				if(!empty($id_factura)){
+
+					$regCompleted = FALSE;
+
+					$factura = $this->daoFactura->traerPorId($id_factura);
+					$cuenta = $this->daoSeniasaldos->traerPorIdLente($id_lente);
+
+					$longitud = count($cuenta);
+					if(!empty($cuenta))
+					{
+						for ($i=0; $i <= $longitud ; $i++)
+						{ 
+							if (!empty($cuenta[$i])) {
+
+								$cuentasaldos[$i] = $cuenta[$i]->getIdCuentaSaldo();
+							}
+						}
+					}
+
+					if(empty($armasonl))
+					{
+						$armasonl = $factura->getSaldoArmazoL();
+					}
+					if(empty($armazonc))
+					{
+						$armazonc =  $factura->getSaldoArmazonC();
+					}
+					if(empty($lejos_od))
+					{
+						$lejos_od =  $factura->getSaldoLejosoD();
+					}
+					if(empty($lejos_oi))
+					{
+						$lejos_oi =  $factura->getSaldoLejosoI();
+					}
+					if(empty($cerca_od))
+					{
+						$cerca_od =  $factura->getSaldoCercaOd();
+					}
+					if(empty($cerca_oi))
+					{
+						$cerca_oi =  $factura->getSaldoCercaOi();
+					}
+					if(empty($senia))
+					{
+						$senia =  $factura->getSenia();
+					}
+					if(empty($fecha))
+					{
+						$fecha = date('Y-m-d');;
+					}
+
+					$sub_total = $armasonl + $armazonc + $lejos_od + $lejos_oi + $cerca_od + $cerca_oi;
+
+					if(!empty($senia)){
+						$saldo_total = $sub_total - $senia;
+						if ($saldo_total < 0) {
+							$saldo_total = 0;
+						}
+					}
+					else{
+						$saldo_total = $sub_total;
+					}
+
+					$factInstance = new Factura($armasonl, $armazonc, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
+					$idfact = $this->daoFactura->actualizar( $factInstance, $id_factura );
+
+					$a_cuenta = $senia; 
+					$saldo = $saldo_total;
+					$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
+					$idsaldo = $this->daoCuentasaldos->actualizar( $salInstance, $cuentasaldos[0]->getId());
+					$regCompleted = TRUE;
+					$this->mensaje = new Mensaje( "success", "El costo del lente fue modificado con exito!" );
+				}
+
+
+				switch ($regCompleted){
+					case TRUE:
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "inicio.php");
+					include URL_VISTA . 'footer.php';
+					break;
+
+					case FALSE:
+					$this->mensaje = new Mensaje( "success", "Error!" );
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "modificarusuario.php");
+					include URL_VISTA . 'footer.php';
+					break;
+				}
+
+			}
+			else{
+				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}catch(\PDOException $pdo_error){
+			$this->mensaje = new \Modelo\Mensaje("danger","Ocurrio un error con la Base de Datos: " . $pdo_error);
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'error.php');
+			include URL_VISTA . 'footer.php';
+		}catch(\Exception $error){
+			echo $error->getMessage();
+		}
+
+	}
 }

@@ -75,6 +75,7 @@ class VistaControladora
 
 	public function cuentasaldos($id_cliente)
 	{
+		$monto = 0;
 		if(!empty($id_cliente))
 		{
 			$cliente = $this->daoCliente->traerPorId($id_cliente);
@@ -86,10 +87,12 @@ class VistaControladora
 				{ 
 					if (!empty($saldocuenta[$i])) {
 						$cuentasaldos[$i] = $saldocuenta[$i]->getIdCuentaSaldo();
+						$monto = $monto + $cuentasaldos[$i]->getSaldo();
 					}
 				}
 			}
 		}
+
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cuentasaldos.php");
 		include URL_VISTA . 'footer.php';
@@ -312,6 +315,16 @@ class VistaControladora
 				include URL_VISTA . 'footer.php';
 			}
 		}
+	}
+
+		public function modificarfactura($id_factura, $id_cliente, $id_lente)
+	{
+		$cliente = $this->daoCliente->traerPorId($id_cliente);
+		$lente = $this->daoLente->traerPorId($id_lente);
+		$factura = $this->daoFactura->traerPorId($id_factura);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarfactura.php");
+		include URL_VISTA . 'footer.php';
 	}
 
 }

@@ -87,6 +87,49 @@ class FacturaBdDao{
 		}
 	}
 
+
+	public function actualizar(Factura $factura, $id_factura){
+
+		try{
+
+            $sql = ("UPDATE $this->tabla SET  saldo_armazo_l=:saldo_armazo_l, saldo_armazon_c=:saldo_armazon_c, saldo_lejoso_d=:saldo_lejoso_d, saldo_lejoso_i=:saldo_lejoso_i, saldo_cerca_od=:saldo_cerca_od, saldo_cerca_oi=:saldo_cerca_oi, sub_total=:sub_total, senia=:senia, saldo_total=:saldo_total, id_lente=:id_lente WHERE id_factura=\"$id_factura\"");
+
+            $conexion = Conexion::conectar();
+
+			$sentencia = $conexion->prepare($sql);
+
+			$l = $factura->getIdLente();
+			$id_lente = $l->getId();
+
+			$saldo_armazo_l = $factura->getSaldoArmazoL();
+			$saldo_armazon_c = $factura->getSaldoArmazonC();
+			$saldo_lejoso_d = $factura->getSaldoLejosoD();
+			$saldo_lejoso_i = $factura->getSaldoLejosoI();
+			$saldo_cerca_od = $factura->getSaldoCercaOd();
+			$saldo_cerca_oi = $factura->getSaldoCercaOi();
+			$sub_total = $factura->getSubTotal();
+			$senia = $factura->getSenia();
+			$saldo_total = $factura->getSaldoTotal();
+
+			$sentencia->bindParam(":id_lente",$id_lente);
+			$sentencia->bindParam(":saldo_armazo_l",$saldo_armazo_l);
+			$sentencia->bindParam(":saldo_armazon_c",$saldo_armazon_c);
+			$sentencia->bindParam(":saldo_lejoso_d",$saldo_lejoso_d);
+			$sentencia->bindParam(":saldo_lejoso_i",$saldo_lejoso_i);
+			$sentencia->bindParam(":saldo_cerca_od",$saldo_cerca_od);
+			$sentencia->bindParam(":saldo_cerca_oi",$saldo_cerca_oi);
+			$sentencia->bindParam(":sub_total",$sub_total);
+			$sentencia->bindParam(":senia",$senia);
+			$sentencia->bindParam(":saldo_total",$saldo_total);
+
+            $sentencia->execute();
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
 	public function traerPorId($id)
 	{
 		$sql = "SELECT * FROM $this->tabla WHERE id_factura = \"$id\" LIMIT 1";

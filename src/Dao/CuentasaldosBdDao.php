@@ -43,7 +43,7 @@ class CuentasaldosBdDao{
 	}
 
 
-	public function agregar(Cuenta_saldos $Cuenta){
+	public function agregar(Cuenta_saldos $cuenta){
 
 		try{
 
@@ -53,9 +53,9 @@ class CuentasaldosBdDao{
 
 			$sentencia = $conexion->prepare($sql);
 
-			$a_cuenta = $Cuenta->getACuenta();
-			$saldo = $Cuenta->getSaldo();
-			$fecha = $Cuenta->getFecha();
+			$a_cuenta = $cuenta->getACuenta();
+			$saldo = $cuenta->getSaldo();
+			$fecha = $cuenta->getFecha();
 
 			$sentencia->bindParam(":a_cuenta",$a_cuenta);
 			$sentencia->bindParam(":saldo",$saldo);
@@ -71,30 +71,29 @@ class CuentasaldosBdDao{
 		}
 	}
 
-	public function actualizar($id_cuenta_saldo){
+	public function actualizar(Cuenta_saldos $cuenta, $id_cuenta_saldo){
 
 		try{
 			/** @noinspection SqlResolve */
 
-			$id = $senia1->getIdSenia();
-
 			$sql = ("UPDATE $this->tabla SET  a_cuenta=:a_cuenta, saldo=:saldo,  fecha=:fecha 
-				WHERE id_cuenta_saldo=\"$id\"");
+				WHERE id_cuenta_saldo=\"$id_cuenta_saldo\"");
+
 
 			$conexion = Conexion::conectar();
 
 			$sentencia = $conexion->prepare($sql);
 
-			$a_cuenta = $Cuentas->getACuenta();
-			$saldo = $Cuentas->getSaldo();
-			$fecha = $Cuentas->getFecha();
+			$a_cuenta = $cuenta->getACuenta();
+			$saldo = $cuenta->getSaldo();
+			$fecha = $cuenta->getFecha();
 
 			$sentencia->bindParam(":a_cuenta",$a_cuenta);
 			$sentencia->bindParam(":saldo",$saldo);
 			$sentencia->bindParam(":fecha",$fecha);
 
-
 			$sentencia->execute();
+
 		}catch(\PDOException $e){
 			echo $e->getMessage();die();
 		}catch(\Exception $e){
