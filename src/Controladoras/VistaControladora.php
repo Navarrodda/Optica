@@ -105,7 +105,7 @@ class VistaControladora
 		$entrada = 1; 
 		$pantalla = 1;
 		$calcular = $this->daoCliente->traerTodo();
-		$calcular = count($calcular);
+		$calcular = count($calcular) +1;
 		$cliente = $this->daoCliente->traerTodoLimit($limit);
 		$medir = $this->daoCliente->traerTodo();
 		$longitud = count($medir);
@@ -144,7 +144,7 @@ class VistaControladora
 	{	
 
 		$calcular = $this->daoCliente->traerTodo();
-		$calcular = count($calcular);
+		$calcular = count($calcular) +1;
 
 		if (!empty($limit)) {
 			if ($limit == -1) {
