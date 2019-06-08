@@ -104,6 +104,8 @@ class VistaControladora
 		$limit = 0;
 		$entrada = 1; 
 		$pantalla = 1;
+		$calcular = $this->daoCliente->traerTodo();
+		$calcular = count($calcular);
 		$cliente = $this->daoCliente->traerTodoLimit($limit);
 		$medir = $this->daoCliente->traerTodo();
 		$longitud = count($medir);
@@ -129,8 +131,9 @@ class VistaControladora
 			}
 			$i++;
 		}
-		$longitud = $longitud + 9;
-		$longitud = $longitud / 9;
+		$longitud = $longitud + 10;
+		$longitud = $longitud / 10;
+	
 		$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
@@ -138,7 +141,10 @@ class VistaControladora
 	}
 
 	public function clienteslimit($limit, $longitud, $entrada, $pantalla)
-	{
+	{	
+
+		$calcular = $this->daoCliente->traerTodo();
+		$calcular = count($calcular);
 
 		if (!empty($limit)) {
 			if ($limit == -1) {
@@ -174,6 +180,7 @@ class VistaControladora
 			$pantalla = 1; 
 		}
 		$i = 0;
+
 		foreach ($cliente as $clie) {
 
 			$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
@@ -194,8 +201,6 @@ class VistaControladora
 			}
 			$i++;
 		}
-
-
 
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");

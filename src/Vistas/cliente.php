@@ -10,6 +10,7 @@
     <div class="container lower-box box-primary" style="text-align: center;">
         <?php if($cliente!= null ) { ?>
             <h2 class="section-heading">Clientes registrados en el Sistema</h2>
+            <h2 class="section-heading">Hay un total de: <?= $calcular ?> Clientes registrados</h2>
             <hr class="primary"> <?php }
             else{ ?>
                 <h2 class="section-heading">No hay Clientes cargados en el Sistema</h2>
@@ -18,11 +19,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 texto-chico">
-                     <div class="table-responsive">
-                       <table class="table table-hover">
-                         <?php 
-                         if($cliente!= null )
-                         {
+                       <div class="table-responsive">
+                         <table class="table table-hover">
+                           <?php 
+                           if($cliente!= null )
+                           {
                             ?>
                             <thead>
                                 <tr style="color:white">
@@ -82,21 +83,21 @@
                                             </span>
                                         </td>
                                         <?php 
-                                            if (!empty($objeto->codigo )) {?>
-                                                <td>
-                                                    <a href="/vista/cuentasaldos/<?= $objeto->getId(); ?>/" class="disabled">         
-                                                        <span class="glyphicon glyphicon-folder-open" title="Lentes"
-                                                        data-toggle="tooltip" data-placement="right">
-                                                    </span>
-                                                </td>
-                                            <?php } else { ?>
-                                                <td>
-                                                    <a href="" class="disabled">         
-                                                        <span class="glyphicon glyphicon-folder-close" title="Lentes"
-                                                        data-toggle="tooltip" data-placement="right">
-                                                    </span>
-                                                </td>
-                                            <?php } ?>
+                                        if (!empty($objeto->codigo )) {?>
+                                            <td>
+                                                <a href="/vista/cuentasaldos/<?= $objeto->getId(); ?>/" class="disabled">         
+                                                    <span class="glyphicon glyphicon-folder-open" title="Lentes"
+                                                    data-toggle="tooltip" data-placement="right">
+                                                </span>
+                                            </td>
+                                        <?php } else { ?>
+                                            <td>
+                                                <a href="" class="disabled">         
+                                                    <span class="glyphicon glyphicon-folder-close" title="Lentes"
+                                                    data-toggle="tooltip" data-placement="right">
+                                                </span>
+                                            </td>
+                                        <?php } ?>
                                         <td>
                                             <a type="submit" method="post"  name="id_cliente"  href="/vista/modificarcliente/<?= $objeto->getId(); ?>" class="disabled">
                                                 <span class="glyphicon glyphicon-pencil" title="Modificar"
@@ -121,25 +122,28 @@
 </div>
 <?php
 if(!empty($longitud))
-{
-    ?>
-    <div id="navegador">
-        <ul>
-            <li><a href="/vista/clienteslimit/<?= -1; ?>/<?= $longitud; ?>/<?= $entrada; ?>/<?= $entrada; ?>/">Siguiente</a></li>
-            <?php
-            for ($contador = 1; $contador < $longitud; $contador++){
-                ?>
-                <li><a href="/vista/clienteslimit/<?= $pantalla; ?>/<?= $longitud; ?>/<?= $pantalla; ?>/<?= $pantalla; ?>/"><?php print_r($pantalla); ?></a></li>
-                <?php
-                $entrada++;
-                $pantalla++;
-            }
+    if($longitud != 1)
+    {
+        {
             ?>
-            <li><a href="/vista/clienteslimit/<?= -2; ?>/<?= $longitud; ?>/<?= $entrada; ?>/<?= $pantalla; ?>/">Anterior</a></li>
-        </ul>
-    </div>
-    <?php
-}
-?>
+            <div id="navegador">
+                <ul>
+                    <li><a href="/vista/clienteslimit/<?= -1; ?>/<?= $longitud; ?>/<?= $entrada; ?>/<?= $entrada; ?>/">Siguiente</a></li>
+                    <?php
+                    for ($contador = 1; $contador < $longitud; $contador++){
+                        ?>
+                        <li><a href="/vista/clienteslimit/<?= $pantalla; ?>/<?= $longitud; ?>/<?= $pantalla; ?>/<?= $pantalla; ?>/"><?php print_r($pantalla); ?></a></li>
+                        <?php
+                        $entrada++;
+                        $pantalla++;
+                    }
+                    ?>
+                    <li><a href="/vista/clienteslimit/<?= -2; ?>/<?= $longitud; ?>/<?= $entrada; ?>/<?= $pantalla; ?>/">Anterior</a></li>
+                </ul>
+            </div>
+            <?php
+        }
+    }
+    ?>
 </div>
 </div>
