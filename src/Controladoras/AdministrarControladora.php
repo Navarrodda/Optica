@@ -63,7 +63,7 @@ class AdministrarControladora
 				if(isset($id_cliente)){
 					$cliente= $this->daoCliente->traerPorId($id_cliente);
 					$nombreapellido = $cliente->getNombre() .' '. $cliente->getApellido();
-					$apellido = $cliente->getApellido();
+					//$apellido = $cliente->getApellido();
 					$senia = $this->daoSeniasaldos->traerPorIdCliente($id_cliente);
 					$this->daoSeniasaldos->eliminarPorIdCliente($id_cliente);
 

@@ -1385,7 +1385,7 @@ input.error,textarea.error {
   -webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
- 	height: 30px;
+ 	height: 40px;
   padding: 0 26px 0 10px;
 	border-color: #888;
   border-radius: 25px; /* (height/2) + border-width */
@@ -1470,4 +1470,9 @@ input:-moz-placeholder {
 #navegador li a:hover{
    background-color: #333333;
    color: #ffffff;
+}
+
+.h1 {color: white;
+color: white; 
+text-shadow: black 0.6em 0.6em 0.8em;
 }

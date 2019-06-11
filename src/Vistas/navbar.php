@@ -3,23 +3,6 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <a class="navbar-brand page-scroll" href="/">Optica Santa Rita</a>
-            <?php if(isset($_SESSION['rol'])) {?>
-                <div class="flexsearch">
-                    <div class="flexsearch--wrapper">
-                        <form class="flexsearch--form" action="#" method="post">
-                            <div class="flexsearch--input-wrapper">
-                                <?php if($_SESSION['rol'] == 'Administrador') {?>
-                                <input class="flexsearch--input" type="search" placeholder="search">
-                                <?php  }?>
-                                 <?php if($_SESSION['rol'] == 'Usuario') {?>
-                                <input class="flexsearch--input" type="search" placeholder="search">
-                                <?php  }?>
-                            </div>
-                            <input class="flexsearch--submit" type="submit" value="&#10140;">
-                        </form>
-                    </div>
-                </div>
-            <?php } ?>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <?php if(isset($_SESSION['rol'])) {?>
@@ -30,7 +13,7 @@
                             <a class="page-scroll" style="color:white" href="/">Inicio</a>
                         </li>
                         <li>
-                            <a class="page-scroll" style="color:orange" href="/"><?= $_SESSION['nombre'],' ', $_SESSION['apellido'] ?> </a>
+                            <a class="page-scroll" style="color:orange"><?= $_SESSION['nombre'],' ', $_SESSION['apellido'] ?> </a>
                             <ul>
                                 <?php if($_SESSION['rol'] == 'Administrador') {?>
                                     <li>
@@ -51,7 +34,7 @@
                         </li>
                         <?php if($_SESSION['rol'] == 'Administrador') {?>
                             <li>
-                                <a class="page-scroll" style="color:white" href="/">Clientes</a>
+                                <a class="page-scroll" style="color:white" >Clientes</a>
                                 <ul>
                                     <li>
                                         <a class="page-scroll" style="color:white" href="/vista/registrar/">Registrar Cliente</a>
@@ -62,7 +45,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a class="page-scroll" style="color:white" href="/">PDF</a>
+                                <a class="page-scroll" style="color:white">PDF</a>
                                 <ul>
                                     <li>
                                         <a class="page-scroll" style="color:white" href="/pdf/pdfplantilla"  target="_blank">Plantilla</a>
@@ -73,7 +56,7 @@
                                 </ul>
                             </li>  
                             <li>
-                                <a class="page-scroll" style="color:white" href="">Facturacion</a>
+                                <a class="page-scroll" style="color:white">Facturacion</a>
                                 <ul>
                                     <li>
                                         <a class="page-scroll" style="color:white" href="/vista/facturasimple/">Cargar Manual</a>
