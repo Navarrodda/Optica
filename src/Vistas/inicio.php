@@ -28,9 +28,9 @@
                       </form>
                     </div>
                   </div>
-                  <h2 class="section-heading h1 h1.a">Bienvenido</h2>
+                  
                   <img src="/img/underline.png" class="img-fluid mb-1">
-                  <p class="h1 h1.a" style="color:white"><?= $_SESSION['nombre'],' ', $_SESSION['apellido']?></p> 
+                  
                 </div>
               </div>
               <?php } ?>

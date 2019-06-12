@@ -52,9 +52,11 @@ class SesionControladora
 						$_SESSION["apellido"] = $usuario->getApellido();
 						$_SESSION["pass"] = $pass;
 						$_SESSION["rol"] = $rol->getPrioridad();
+						$resultado = $usuario->getNombre() . ' ' . $usuario->getApellido();
                         //Mensaje de success
-						$this->mensaje = new Mensaje('success', 'Ha iniciado sesión satisfactoriamente 
-							! Se ha logueado como' . ' ' . '<i><strong>' .  $usuario->getEmail()
+						$this->mensaje = new Mensaje('success', ' Bienvenido:' . ' ' . '<i><strong>' .  $resultado 
+							. '</strong>. Ha iniciado sesión satisfactoriamente 
+							! Se ha logueado como' . ' ' . '<i><strong>' .  $usuario->getEmail() 
 							. '</strong></i>');
 						$ir_a_inicio = TRUE;
 					} else {
