@@ -20,11 +20,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 texto-chico">
-                       <div class="table-responsive">
-                         <table class="table table-hover">
-                           <?php 
-                           if($lente!= null )
-                           {
+                     <div class="table-responsive">
+                       <table class="table table-hover">
+                         <?php 
+                         if($lente!= null )
+                         {
                             ?>
                             <thead>
                                 <tr style="color:white">
@@ -34,7 +34,7 @@
                                     <th>
                                         Dr.
                                     </th>
-                                     <th>
+                                    <th>
                                         Arm. Lejos
                                     </th>
                                     <th>
@@ -59,9 +59,9 @@
                                         En G°
                                     </th>
                                     <th>
-                                       D.I.
-                                   </th>
-                                   <th>
+                                     D.I.
+                                 </th>
+                                 <th>
                                     Cal.
                                 </th>
                                 <th>
@@ -75,6 +75,9 @@
                                 </th>
                                 <th>
                                     Factura
+                                </th>
+                                <th>
+                                    PDF
                                 </th>
                                 <th>
                                     Mod.
@@ -135,8 +138,14 @@
                                         <?= date('d-m-Y',strtotime($objeto->getFecha())); ?>
                                     </td>
                                     <td>
-                                        <a href="/vista/factura/<?= $objeto->getId(); ?>/<?= $cliente->getId()?>" class="disabled">         
+                                        <a  href="/vista/factura/<?= $objeto->getId(); ?>/<?= $cliente->getId()?>" class="disabled">         
                                             <span class="glyphicon glyphicon-list-alt" title="Factura"
+                                            data-toggle="tooltip" data-placement="right">
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="/pdf/pdfclientelente/<?= $objeto->getId(); ?>/<?= $cliente->getId(); ?>/" target="_blank" class="disabled">         
+                                            <span class="glyphicon glyphicon-cloud-upload" title="PDF"
                                             data-toggle="tooltip" data-placement="right">
                                         </span>
                                     </td>

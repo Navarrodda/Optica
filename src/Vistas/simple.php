@@ -17,7 +17,7 @@
 						<button type="button" class="close" data-dismiss="alert"></button>
 					</div>
 				</div>
-				<form id="form_r" method="post" action="/pdf/pdfcargamanual/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
+				<form id="form_r" method="post" action="/pdf/pdfcargamanual/" target="_blank" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
 					<div class="col-md-4">
 						<label for="fecha" class="col-md-1.5" style="background-color:black">Fecha:</label>
 						<input name="fecha" type="date" class="col-md-3.5 norightborder btn2">
@@ -67,7 +67,7 @@
 					<input name="subtotal" type="number" class="col-md-4 norightborder btn2" placeholder="$ Subtotal">
 					<input name="senia" type="number" class="col-md-4 norightborder btn2" placeholder="$ Seña">
 					<input name="saldo_total" type="number" class="col-md-4 norightborder btn2" placeholder="$ Saldo Total">
-					<button type="submit" class="contact submit btn-primary btn-xl pull-right">Cargar</button>
+					<button  type="submit" class="contact submit btn-primary btn-xl pull-right">Cargar</button>
 				</form>
 			</div>
 		</div>
