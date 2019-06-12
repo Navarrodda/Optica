@@ -104,7 +104,7 @@
 											</a>
 										</td>
 										<td>
-											<a type="submit" method="post"  name="id_cliente" href="/" class="disabled">
+											<a type="submit" method="post" href="/administrar/eliminarfactura/<?= $lente->getId() ?>/<?= $factura->getId() ?> ?>/<?= $cliente->getId() ?>/" class="disabled">
 												<span class="glyphicon glyphicon-trash"  title="Eliminar Lente"
 												data-toggle="tooltip" data-placement="right">
 											</span>

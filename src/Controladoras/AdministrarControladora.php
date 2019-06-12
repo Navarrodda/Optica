@@ -732,4 +732,67 @@ function eliminarusuario($id_usuario){
 		}
 
 	}
+
+	function eliminarfactura($id_lente, $id_factura, $id_cliente){
+		try{
+			
+			if(!empty($_SESSION)){
+
+				$regCompleted = FALSE;
+				if(isset($id_factura)){
+					$cliente= $this->daoCliente->traerPorId($id_cliente);
+					$nombreapellido = $cliente->getNombre() .' '. $cliente->getApellido();
+					$senia = $this->daoSeniasaldos->traerPorIdLente($id_lente);
+					$this->daoSeniasaldos->eliminarPorIdLente($id_lente);
+					$longitud = count($senia);
+					if(!empty($senia))
+					{
+						for ($i=0; $i < $longitud ; $i++) { 
+							$cuenta = $senia[$i]->getIdCuentaSaldo();
+							if(!empty($cuenta))
+							{
+								$id_cuenta = $cuenta->getId();
+								$this->daoCuentasaldos->eliminarPorId($id_cuenta);	
+							}
+						}
+					}
+					$this->daoFactura->eliminarPorIdLente($id_lente);
+					$regCompleted = TRUE;
+					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente la Factura del cliente
+						! El Cliente es:' .' '.'<i><strong>' .  $nombreapellido
+						. '</strong></i>');
+				}
+
+
+				switch ($regCompleted){
+					case TRUE:
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "inicio.php");
+					include URL_VISTA . 'footer.php';
+					break;
+
+					case FALSE:
+					$cliente = $this->daoCliente->traerTodo();
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "cliente.php");
+					include URL_VISTA . 'footer.php';
+					break;
+				}
+			}
+			else{
+				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}catch(\PDOException $pdo_error){
+			$this->mensaje = new \Modelo\Mensaje("danger","Ocurrio un error con la Base de Datos: " . $pdo_error);
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'error.php');
+			include URL_VISTA . 'footer.php';
+		}catch(\Exception $error){
+			echo $error->getMessage();
+		}
+	}
 }
