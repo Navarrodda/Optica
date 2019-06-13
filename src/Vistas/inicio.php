@@ -21,7 +21,8 @@
                   <h1 class="section-heading h1 h1.a">Buscador de Datos</h1>
                   <div class="flexsearch">
                     <div class="flexsearch--wrapper">
-                      <select name="valor" class="btn flexsearch--form">
+                      <div class="center">
+                      <select name="valor" class="btn2 flexsearch--form">
                        <option value="0">Elija una Opcion</option> 
                        <option value="1">Nombre</option> 
                        <option value="2">Apellido</option> 
@@ -29,9 +30,10 @@
                        <option value="10">Fecha Factura</option> 
                        <option value="11">Medico</option> 
                      </select>
+                     </div>
                      <form class="flexsearch--form" action="" method="post">
                       <div class="flexsearch--input-wrapper">
-                        <input class="flexsearch--input" type="search" placeholder="search">
+                        <input class="flexsearch--input btn2" type="search" href="/vista/serch/dato/" placeholder="Buscador">
                       </div>          
                     </form>
                   </div>

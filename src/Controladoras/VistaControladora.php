@@ -215,6 +215,11 @@ class VistaControladora
 		include URL_VISTA . 'footer.php';
 	}
 
+	public function serch($valor)
+	{
+		print_r($valor);
+	}
+
 	public function modificarcliente($id_cliente)
 	{
 		$cliente = $this->daoCliente->traerPorId($id_cliente);
