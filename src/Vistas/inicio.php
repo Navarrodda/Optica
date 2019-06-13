@@ -21,78 +21,85 @@
                   <h1 class="section-heading h1 h1.a">Buscador de Datos</h1>
                   <div class="flexsearch">
                     <div class="flexsearch--wrapper">
-                      <form class="flexsearch--form" action="" method="post">
-                        <div class="flexsearch--input-wrapper">
-                          <input class="flexsearch--input" type="search" placeholder="search">
-                        </div>          
-                      </form>
-                    </div>
+                      <select name="valor" class="btn flexsearch--form">
+                       <option value="0">Elija una Opcion</option> 
+                       <option value="1">Windows Vista</option> 
+                       <option value="2">Windows 7</option> 
+                       <option value="3">Windows XP</option>
+                       <option value="10">Fedora</option> 
+                       <option value="11">Debian</option> 
+                       <option value="12">Suse</option> 
+                     </select>
+                     <form class="flexsearch--form" action="" method="post">
+                      <div class="flexsearch--input-wrapper">
+                        <input class="flexsearch--input" type="search" placeholder="search">
+                      </div>          
+                    </form>
                   </div>
-                  
-                  <img src="/img/underline.png" class="img-fluid mb-1">
-                  
+                </div>
+                <img src="/img/underline.png" class="img-fluid mb-1">  
+              </div>
+            </div>
+          <?php } ?>
+          <?php if(($_SESSION['rol'] == 'Usuario')) {?>
+            <div class="tm-site-header">
+              <div class="container lower-box box-primary" style="text-align: center;">
+                <h1 class="section-heading">Buscador de Datos</h1>
+              </div>
+              <div class="flexsearch">
+                <div class="flexsearch--wrapper">
+                  <form class="flexsearch--form" action="#" method="post">
+                    <div class="flexsearch--input-wrapper">
+                      <input class="flexsearch--input" type="search" placeholder="search">
+                    </div>          
+                  </form>
                 </div>
               </div>
-              <?php } ?>
-              <?php if(($_SESSION['rol'] == 'Usuario')) {?>
-                <div class="tm-site-header">
-                  <div class="container lower-box box-primary" style="text-align: center;">
-                    <h1 class="section-heading">Buscador de Datos</h1>
-                  </div>
-                  <div class="flexsearch">
-                    <div class="flexsearch--wrapper">
-                      <form class="flexsearch--form" action="#" method="post">
-                        <div class="flexsearch--input-wrapper">
-                          <input class="flexsearch--input" type="search" placeholder="search">
-                        </div>          
-                      </form>
-                    </div>
-                  </div>
-                  <h2 style="color:black" class="mb-12">Bienvenido</h2>
-                  <img src="/img/underline.png" class="img-fluid mb-1">
-                  <p style="color:black"><?= $_SESSION['nombre'],' ', $_SESSION['apellido']?></p> 
-                </div> 
-              <?php } ?>
-            <?php }else{ ?>
-              <div class="tm-site-header">
-                <h1 style="color:black" class="mb-12">Programación‎</h1>
-                <img src="/img/underline.png" class="img-fluid mb-1">
-                <p style="color:black">David Navarro &copy;GC</p>        
-              </div> 
-            <?php } ?>                       
-          </div>                
-        </div>
-      </div>  
+              <h2 style="color:black" class="mb-12">Bienvenido</h2>
+              <img src="/img/underline.png" class="img-fluid mb-1">
+              <p style="color:black"><?= $_SESSION['nombre'],' ', $_SESSION['apellido']?></p> 
+            </div> 
+          <?php } ?>
+        <?php }else{ ?>
+          <div class="tm-site-header">
+            <h1 style="color:black" class="mb-12">Programación‎</h1>
+            <img src="/img/underline.png" class="img-fluid mb-1">
+            <p style="color:black">David Navarro &copy;GC</p>        
+          </div> 
+        <?php } ?>                       
+      </div>                
     </div>
-  </div>
+  </div>  
+</div>
+</div>
 
 
 
 
-  <script type="text/javascript">
+<script type="text/javascript">
 
-    $(".alert").delay(200).addClass("in").fadeOut(3500);
+  $(".alert").delay(200).addClass("in").fadeOut(3500);
 
-  </script>
-  <script src="js/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->    
-  <script src="slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->  
-  <script src="js/anime.min.js"></script>                     <!-- http://animejs.com/ -->
-  <script src="js/main.js"></script>  
-  <script>  
+</script>
+<script src="js/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->    
+<script src="slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->  
+<script src="js/anime.min.js"></script>                     <!-- http://animejs.com/ -->
+<script src="js/main.js"></script>  
+<script>  
 
 
-    function setupFooter() {
-      var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
+  function setupFooter() {
+    var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
 
-      var main = $('.tm-main-content');
+    var main = $('.tm-main-content');
 
-      if($(window).height() < pageHeight) {
-        main.addClass('tm-footer-relative');
-      }
-      else {
-        main.removeClass('tm-footer-relative');   
-      }
+    if($(window).height() < pageHeight) {
+      main.addClass('tm-footer-relative');
     }
+    else {
+      main.removeClass('tm-footer-relative');   
+    }
+  }
 
         /* DOM is ready
         ------------------------------------------------*/
