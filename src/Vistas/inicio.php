@@ -23,12 +23,11 @@
                     <div class="flexsearch--wrapper">
                       <select name="valor" class="btn flexsearch--form">
                        <option value="0">Elija una Opcion</option> 
-                       <option value="1">Windows Vista</option> 
-                       <option value="2">Windows 7</option> 
-                       <option value="3">Windows XP</option>
-                       <option value="10">Fedora</option> 
-                       <option value="11">Debian</option> 
-                       <option value="12">Suse</option> 
+                       <option value="1">Nombre</option> 
+                       <option value="2">Apellido</option> 
+                       <option value="3">Direccion</option>
+                       <option value="10">Fecha Factura</option> 
+                       <option value="11">Medico</option> 
                      </select>
                      <form class="flexsearch--form" action="" method="post">
                       <div class="flexsearch--input-wrapper">
