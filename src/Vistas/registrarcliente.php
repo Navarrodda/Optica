@@ -1,16 +1,16 @@
-<?php  include(URL_VISTA . 'navbar.php') ; ?>
-
+<?php  include(URL_VISTA . 'navbar.php') ;
 ?>
+
 <?php if(isset($this->mensaje)) {?>
-    <div class="container">
-        <h1> <?= $this->mensaje->cartelAlert($this->mensaje->getMensaje(),$this->mensaje->getTipo()) ?></h1>
-    </div>
+	<div class="container">
+		<h1> <?= $this->mensaje->cartelAlert($this->mensaje->getMensaje(),$this->mensaje->getTipo()) ?></h1>
+	</div>
 <?php } ?>
 
-<div class="container mh-400" style="margin-top:40px;">
+<div class="container mh-400" style="margin-top:30px;">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2 text-center">
-			<h2 class="section-heading" style="color:black">Registrar Cliente</h2>
+			<h2 class="section-heading" style="color:black">Registre Cliente</h2>
 			<hr class="primary">
 			<p>
 				<strong style="color:black">
@@ -21,16 +21,44 @@
 				<div class="done">
 					<div class="alert alert-success">
 						<button type="button" class="close" data-dismiss="alert"></button>
-						Your message has been sent. Thank you!
 					</div>
 				</div>
-				<form id="form_r" method="post" action="/registrar/registrarcliente/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
+				<form id="form_r" method="post" action="/pdf/pdfcargamanual/" target="_blank" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
+					<input required name="senior" type="text" class="col-md-6 norightborder btn2" placeholder="Senior">
+					<input required name="telefono" type="text" class="col-md-6 norightborder btn2" placeholder="Telefono">
+					<input required name="doctor" type="text" class="col-md-6 norightborder btn2" placeholder="Doctor">
+					<input name="observaciones" type="text" class="col-md-6 norightborder btn2" placeholder="Observaciones">
+					<input name="a_cuenta" type="number" class="col-md-6 norightborder btn2" placeholder="$ A Cuenta">
+					<input name="saldo" type="number" class="col-md-6 norightborder btn2" placeholder="$ Saldo">
+					<input name="armason_l" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Lejos">	
+					<input name="armason_c" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Cerca">	
+					<input name="lejos_od" type="text" class="col-md-4 norightborder btn2" placeholder="Lejos OD EFC">
+					<input name="cilindri_l_od" type="text" class="col-md-4 norightborder btn2" placeholder="Ci l OD">
+					<input name="l_en_grados_od" type="text" class="col-md-4 norightborder btn2" placeholder="En Grados">		
+					<input name="lejos_oi" type="text" class="col-md-4 norightborder btn2" placeholder="Lejos OI EFC">
+					<input name="cilindri_l_oi" type="text" class="col-md-4 norightborder btn2" placeholder="Ci l OD">
+					<input name="l_en_grados_oi" type="text" class="col-md-2 norightborder btn2" placeholder="En Grados">
+					<input name="l_color" type="text" class="col-md-2 norightborder btn2" placeholder="Color">
+					<div>
+						<label class="col-md-1 content-input">
+							<input type="checkbox" name="complit" id="si" value="autopista">
+							<i></i>
+						</label>
+					</div>
+					<div class="col-md-9">
+					<p style="background-color:black">Duplicar los campos siguientes: Cilindrico y En Grados</p>
+					</div>				
+					<input name="cerca_od" type="text" class="col-md-4 norightborder btn2" placeholder="Cerca OD EFC">
+					<input name="c_cerca_od" type="text" class="col-md-4 norightborder btn2" placeholder="Ci c OD">
+					<input name="c_en_grados_od" type="text" class="col-md-4 norightborder btn2" placeholder="En Grados">
 
-					<input required name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Ingresa Nombre del Cliente">
-					<input required name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
-					<input name="calle" type="text" class="col-md-12 norightborder btn2" placeholder="Direccion">
-					<input required name="telefono" type="text" class="col-md-12 norightborder btn2" placeholder="Telefono">
-					<button type="submit" class="contact submit btn-primary btn-xl pull-right">Cargar</button>
+					<input name="cerca_oi" type="text" class="col-md-4 norightborder btn2" placeholder="Cerca OI EFC">
+					<input name="cilindri_c_oi" type="text" class="col-md-4 norightborder btn2" placeholder="Ci c OI">
+					<input name="c_en_grados_oi" type="text" class="col-md-2 norightborder btn2" placeholder="En Grados">
+					<input name="c_color" type="text" class="col-md-2 norightborder btn2" placeholder="Color">
+					<input name="subtotal" type="number" class="col-md-6 norightborder btn2" placeholder="$ Subtotal">
+					<input name="senia" type="number" class="col-md-6 norightborder btn2" placeholder="$ Seña">
+					<button  type="submit" class="contact submit btn-primary btn-xl pull-right">Guardar</button>
 				</form>
 			</div>
 		</div>
