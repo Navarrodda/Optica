@@ -28,8 +28,6 @@
 					<input required name="telefono" type="text" class="col-md-6 norightborder btn2" placeholder="Telefono">
 					<input required name="doctor" type="text" class="col-md-6 norightborder btn2" placeholder="Doctor">
 					<input name="observaciones" type="text" class="col-md-6 norightborder btn2" placeholder="Observaciones">
-					<input name="a_cuenta" type="number" class="col-md-6 norightborder btn2" placeholder="$ A Cuenta">
-					<input name="saldo" type="number" class="col-md-6 norightborder btn2" placeholder="$ Saldo">
 					<input name="armason_l" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Lejos">	
 					<input name="armason_c" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Cerca">	
 					<input name="lejos_od" type="text" class="col-md-4 norightborder btn2" placeholder="Lejos OD EFC">

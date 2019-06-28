@@ -215,9 +215,10 @@ class VistaControladora
 		include URL_VISTA . 'footer.php';
 	}
 
-	public function serch($valor)
+	public function serch($valor, $dato)
 	{
 		print_r($valor);
+		print_r($dato);
 	}
 
 	public function modificarcliente($id_cliente)
@@ -327,6 +328,7 @@ class VistaControladora
 						}
 					}
 				}
+				$contar = count($lentexcliente);
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "lentexcliente.php");
 				include URL_VISTA . 'footer.php';

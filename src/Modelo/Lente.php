@@ -5,39 +5,72 @@ namespace Modelo;
 class Lente
 {
     private $id;
-    private $medico;
-    private $armazon_cerca; 
+    private $doctor; 
     private $armazon_lejos;
-    private $lejos_od;
-    private $lejos_oi;
-    private $cerca_od;
-    private $cerca_oi;
-    private $cilindrico;
-    private $en_grados;
-    private $distancia;
-    private $calibre;
-    private $puente;
-    private $color;
-    private $fecha;
+    private $armazon_cerca; 
+    private $lejos_od_esferico; 
+    private $lejos_od_cilindrico; 
+    private $lejos_od_grados; 
+    private $lejos_oi_esferico; 
+    private $lejos_oi_cilindrico; 
+    private $lejos_oi_grados; 
+    private $lejos_color; 
+    private $cerca_od_esferico; 
+    private $cerca_od_cilindrico; 
+    private $cerca_od_grados; 
+    private $cerca_oi_esferico; 
+    private $cerca_oi_cilindrico; 
+    private $cerca_oi_grados; 
+    private $cerca_color; 
+    private $fecha; 
 
-    public function __construct($medico, $armazon_cerca, $armazon_lejos, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $cilindrico, $en_grados, $distancia, $calibre, $puente, $color, $fecha)
+
+    /**
+     * Class Constructor
+     * @param    $doctor   
+     * @param    $armazon_lejos   
+     * @param    $armazon_cerca   
+     * @param    $lejos_od_esferico   
+     * @param    $lejos_od_cilindrico   
+     * @param    $lejos_od_grados   
+     * @param    $lejos_oi_esferico   
+     * @param    $lejos_oi_cilindrico   
+     * @param    $lejos_oi_grados   
+     * @param    $lejos_color   
+     * @param    $cerca_od_esferico   
+     * @param    $cerca_od_cilindrico   
+     * @param    $cerca_od_grados   
+     * @param    $cerca_oi_esferico   
+     * @param    $cerca_oi_cilindrico   
+     * @param    $cerca_oi_grados   
+     * @param    $cerca_color   
+     * @param    $fecha   
+     */
+    public function __construct($doctor, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha)
     {
-        $this->medico = $medico;
-        $this->armazon_cerca = $armazon_cerca;
+        $this->doctor = $doctor;
         $this->armazon_lejos = $armazon_lejos;
-        $this->lejos_od = $lejos_od;
-        $this->lejos_oi = $lejos_oi;
-        $this->cerca_od = $cerca_od;
-        $this->cerca_oi = $cerca_oi;
-        $this->cilindrico = $cilindrico;
-        $this->en_grados = $en_grados;
-        $this->distancia = $distancia;
-        $this->calibre = $calibre;
-        $this->puente = $puente;
-        $this->color = $color;
+        $this->armazon_cerca = $armazon_cerca;
+        $this->lejos_od_esferico = $lejos_od_esferico;
+        $this->lejos_od_cilindrico = $lejos_od_cilindrico;
+        $this->lejos_od_grados = $lejos_od_grados;
+        $this->lejos_oi_esferico = $lejos_oi_esferico;
+        $this->lejos_oi_cilindrico = $lejos_oi_cilindrico;
+        $this->lejos_oi_grados = $lejos_oi_grados;
+        $this->lejos_color = $lejos_color;
+        $this->cerca_od_esferico = $cerca_od_esferico;
+        $this->cerca_od_cilindrico = $cerca_od_cilindrico;
+        $this->cerca_od_grados = $cerca_od_grados;
+        $this->cerca_oi_esferico = $cerca_oi_esferico;
+        $this->cerca_oi_cilindrico = $cerca_oi_cilindrico;
+        $this->cerca_oi_grados = $cerca_oi_grados;
+        $this->cerca_color = $cerca_color;
         $this->fecha = $fecha;
     }
-    
+
+
+
+
     /**
      * @return mixed
      */
@@ -61,19 +94,19 @@ class Lente
     /**
      * @return mixed
      */
-    public function getMedico()
+    public function getDoctor()
     {
-        return $this->medico;
+        return $this->doctor;
     }
 
     /**
-     * @param mixed $medico
+     * @param mixed $doctor
      *
      * @return self
      */
-    public function setMedico($medico)
+    public function setDoctor($doctor)
     {
-        $this->medico = $medico;
+        $this->doctor = $doctor;
 
         return $this;
     }
@@ -121,19 +154,19 @@ class Lente
     /**
      * @return mixed
      */
-    public function getLejosOd()
+    public function getLejosOdEsferico()
     {
-        return $this->lejos_od;
+        return $this->lejos_od_esferico;
     }
 
     /**
-     * @param mixed $lejos_od
+     * @param mixed $lejos_od_esferico
      *
      * @return self
      */
-    public function setLejosOd($lejos_od)
+    public function setLejosOdEsferico($lejos_od_esferico)
     {
-        $this->lejos_od = $lejos_od;
+        $this->lejos_od_esferico = $lejos_od_esferico;
 
         return $this;
     }
@@ -141,19 +174,19 @@ class Lente
     /**
      * @return mixed
      */
-    public function getLejosOi()
+    public function getLejosOdCilindrico()
     {
-        return $this->lejos_oi;
+        return $this->lejos_od_cilindrico;
     }
 
     /**
-     * @param mixed $lejos_oi
+     * @param mixed $lejos_od_cilindrico
      *
      * @return self
      */
-    public function setLejosOi($lejos_oi)
+    public function setLejosOdCilindrico($lejos_od_cilindrico)
     {
-        $this->lejos_oi = $lejos_oi;
+        $this->lejos_od_cilindrico = $lejos_od_cilindrico;
 
         return $this;
     }
@@ -161,19 +194,19 @@ class Lente
     /**
      * @return mixed
      */
-    public function getCercaOd()
+    public function getLejosOdGrados()
     {
-        return $this->cerca_od;
+        return $this->lejos_od_grados;
     }
 
     /**
-     * @param mixed $cerca_od
+     * @param mixed $lejos_od_grados
      *
      * @return self
      */
-    public function setCercaOd($cerca_od)
+    public function setLejosOdGrados($lejos_od_grados)
     {
-        $this->cerca_od = $cerca_od;
+        $this->lejos_od_grados = $lejos_od_grados;
 
         return $this;
     }
@@ -181,19 +214,219 @@ class Lente
     /**
      * @return mixed
      */
-    public function getCercaOi()
+    public function getLejosOiEsferico()
     {
-        return $this->cerca_oi;
+        return $this->lejos_oi_esferico;
     }
 
     /**
-     * @param mixed $cerca_oi
+     * @param mixed $lejos_oi_esferico
      *
      * @return self
      */
-    public function setCercaOi($cerca_oi)
+    public function setLejosOiEsferico($lejos_oi_esferico)
     {
-        $this->cerca_oi = $cerca_oi;
+        $this->lejos_oi_esferico = $lejos_oi_esferico;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLejosOiCilindrico()
+    {
+        return $this->lejos_oi_cilindrico;
+    }
+
+    /**
+     * @param mixed $lejos_oi_cilindrico
+     *
+     * @return self
+     */
+    public function setLejosOiCilindrico($lejos_oi_cilindrico)
+    {
+        $this->lejos_oi_cilindrico = $lejos_oi_cilindrico;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLejosOiGrados()
+    {
+        return $this->lejos_oi_grados;
+    }
+
+    /**
+     * @param mixed $lejos_oi_grados
+     *
+     * @return self
+     */
+    public function setLejosOiGrados($lejos_oi_grados)
+    {
+        $this->lejos_oi_grados = $lejos_oi_grados;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLejosColor()
+    {
+        return $this->lejos_color;
+    }
+
+    /**
+     * @param mixed $lejos_color
+     *
+     * @return self
+     */
+    public function setLejosColor($lejos_color)
+    {
+        $this->lejos_color = $lejos_color;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCercaOdEsferico()
+    {
+        return $this->cerca_od_esferico;
+    }
+
+    /**
+     * @param mixed $cerca_od_esferico
+     *
+     * @return self
+     */
+    public function setCercaOdEsferico($cerca_od_esferico)
+    {
+        $this->cerca_od_esferico = $cerca_od_esferico;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCercaOdCilindrico()
+    {
+        return $this->cerca_od_cilindrico;
+    }
+
+    /**
+     * @param mixed $cerca_od_cilindrico
+     *
+     * @return self
+     */
+    public function setCercaOdCilindrico($cerca_od_cilindrico)
+    {
+        $this->cerca_od_cilindrico = $cerca_od_cilindrico;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCercaOdGrados()
+    {
+        return $this->cerca_od_grados;
+    }
+
+    /**
+     * @param mixed $cerca_od_grados
+     *
+     * @return self
+     */
+    public function setCercaOdGrados($cerca_od_grados)
+    {
+        $this->cerca_od_grados = $cerca_od_grados;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCercaOiEsferico()
+    {
+        return $this->cerca_oi_esferico;
+    }
+
+    /**
+     * @param mixed $cerca_oi_esferico
+     *
+     * @return self
+     */
+    public function setCercaOiEsferico($cerca_oi_esferico)
+    {
+        $this->cerca_oi_esferico = $cerca_oi_esferico;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCercaOiCilindrico()
+    {
+        return $this->cerca_oi_cilindrico;
+    }
+
+    /**
+     * @param mixed $cerca_oi_cilindrico
+     *
+     * @return self
+     */
+    public function setCercaOiCilindrico($cerca_oi_cilindrico)
+    {
+        $this->cerca_oi_cilindrico = $cerca_oi_cilindrico;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCercaOiGrados()
+    {
+        return $this->cerca_oi_grados;
+    }
+
+    /**
+     * @param mixed $cerca_oi_grados
+     *
+     * @return self
+     */
+    public function setCercaOiGrados($cerca_oi_grados)
+    {
+        $this->cerca_oi_grados = $cerca_oi_grados;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCercaColor()
+    {
+        return $this->cerca_color;
+    }
+
+    /**
+     * @param mixed $cerca_color
+     *
+     * @return self
+     */
+    public function setCercaColor($cerca_color)
+    {
+        $this->cerca_color = $cerca_color;
 
         return $this;
     }
@@ -214,126 +447,6 @@ class Lente
     public function setFecha($fecha)
     {
         $this->fecha = $fecha;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCilindrico()
-    {
-        return $this->cilindrico;
-    }
-
-    /**
-     * @param mixed $cilindrico
-     *
-     * @return self
-     */
-    public function setCilindrico($cilindrico)
-    {
-        $this->cilindrico = $cilindrico;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEnGrados()
-    {
-        return $this->en_grados;
-    }
-
-    /**
-     * @param mixed $en_grados
-     *
-     * @return self
-     */
-    public function setEnGrados($en_grados)
-    {
-        $this->en_grados = $en_grados;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getColor()
-    {
-        return $this->color;
-    }
-
-    /**
-     * @param mixed $color
-     *
-     * @return self
-     */
-    public function setColor($color)
-    {
-        $this->color = $color;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDistancia()
-    {
-        return $this->distancia;
-    }
-
-    /**
-     * @param mixed $distancia
-     *
-     * @return self
-     */
-    public function setDistancia($distancia)
-    {
-        $this->distancia = $distancia;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCalibre()
-    {
-        return $this->calibre;
-    }
-
-    /**
-     * @param mixed $calibre
-     *
-     * @return self
-     */
-    public function setCalibre($calibre)
-    {
-        $this->calibre = $calibre;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPuente()
-    {
-        return $this->puente;
-    }
-
-    /**
-     * @param mixed $puente
-     *
-     * @return self
-     */
-    public function setPuente($puente)
-    {
-        $this->puente = $puente;
 
         return $this;
     }

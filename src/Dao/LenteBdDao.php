@@ -48,43 +48,51 @@ class LenteBdDao{
 		}
 	}
 
-	public function agregar(Lente $lente){
+	public function agregar(Lente $lente){ 
 
 		try{
-			$sql = ("INSERT INTO $this->tabla (medico, armazon_cerca, armazon_lejos, lejos_od, lejos_oi, cerca_od, cerca_oi, cilindrico, en_grados, distancia, calibre, puente, color, fecha) VALUES (:medico, :armazon_cerca, :armazon_lejos, :lejos_od, :lejos_oi, :cerca_od, :cerca_oi, :cilindrico, :en_grados, :distancia, :calibre, :puente, :color, :fecha) ");
+			$sql = ("INSERT INTO $this->tabla (doctor, armazon_lejos, armazon_cerca,  lejos_od_esferico, lejos_od_cilindrico, lejos_od_grados, lejos_oi_esferico, lejos_oi_cilindrico, lejos_oi_grados, lejos_color, cerca_od_esferico, cerca_od_cilindrico, cerca_od_grados, cerca_oi_esferico, cerca_oi_cilindrico, cerca_oi_grados, cerca_color, fecha) VALUES (:doctor, :armazon_lejos, :armazon_cerca, :lejos_od_esferico, :lejos_od_cilindrico, :lejos_od_grados, :lejos_oi_esferico, :lejos_oi_cilindrico, :lejos_oi_grados, :lejos_color, :cerca_od_esferico, :cerca_od_cilindrico, :cerca_od_grados, :cerca_oi_esferico,:cerca_oi_cilindrico, :cerca_oi_grados, :cerca_color, :fecha) ");
 
 			$conexion = Conexion::conectar();
 
 			$sentencia = $conexion->prepare($sql);
 
-			$medico = $lente->getMedico();
-			$armazon_cerca = $lente->getArmazonCerca();
-			$armazon_lejos = $lente->getArmazonLejos();
-			$lejos_od = $lente->getLejosOd();
-			$lejos_oi = $lente->getLejosOi();
-			$cerca_od = $lente->getCercaOd();
-			$cerca_oi = $lente->getCercaOi();
-			$cilindrico = $lente->getCilindrico();
-			$en_grados = $lente->getEnGrados();
-			$distancia = $lente->getDistancia();
-			$calibre = $lente->getCalibre();
-			$puente = $lente->getPuente();
-			$color = $lente->getColor();
-			$fecha = $lente->getFecha();
+			$doctor              = $lente->getDoctor();
+			$armazon_lejos       = $lente->getArmazonLejos();
+			$armazon_cerca       = $lente->getArmazonCerca();
+			$lejos_od_esferico   = $lente->getLejosOdEsferico();
+			$lejos_od_cilindrico = $lente->getLejosOdCilindrico();
+			$lejos_od_grados     = $lente->getLejosOdGrados();
+			$lejos_oi_esferico   = $lente->getLejosOiEsferico();
+			$lejos_oi_cilindrico = $lente->getLejosOiCilindrico();
+			$lejos_oi_grados     = $lente->getLejosOiGrados();
+			$lejos_color         = $lente->getLejosColor();
+			$cerca_od_esferico   = $lente->getCercaOdEsferico();
+			$cerca_od_cilindrico = $lente->getCercaOdCilindrico();
+			$cerca_od_grados     = $lente->getCercaOdGrados();
+			$cerca_oi_esferico   = $lente->getCercaOiEsferico();
+			$cerca_oi_cilindrico = $lente->getCercaOiCilindrico();
+			$cerca_oi_grados     = $lente->getCercaOiGrados();
+			$cerca_color         = $lente->getCercaColor();
+			$fecha               = $lente->getFecha();
 
-			$sentencia->bindParam(":medico",$medico);
-			$sentencia->bindParam(":armazon_cerca",$armazon_cerca);
+			$sentencia->bindParam(":doctor",$doctor);
 			$sentencia->bindParam(":armazon_lejos",$armazon_lejos);
-			$sentencia->bindParam(":lejos_od",$lejos_od);
-			$sentencia->bindParam(":lejos_oi",$lejos_oi);
-			$sentencia->bindParam(":cerca_od",$cerca_od);
-			$sentencia->bindParam(":cerca_oi",$cerca_oi);
-			$sentencia->bindParam(":cilindrico",$cilindrico);
-			$sentencia->bindParam(":en_grados",$en_grados);
-			$sentencia->bindParam(":distancia",$distancia);
-			$sentencia->bindParam(":calibre",$calibre);
-			$sentencia->bindParam(":puente",$puente);
-			$sentencia->bindParam(":color",$color);
+			$sentencia->bindParam(":armazon_cerca",$armazon_cerca);
+			$sentencia->bindParam(":lejos_od_esferico",$lejos_od_esferico);
+			$sentencia->bindParam(":lejos_od_cilindrico",$lejos_od_cilindrico);
+			$sentencia->bindParam(":lejos_od_grados",$lejos_od_grados);
+			$sentencia->bindParam(":lejos_oi_esferico",$lejos_oi_esferico);
+			$sentencia->bindParam(":lejos_oi_cilindrico",$lejos_oi_cilindrico);
+			$sentencia->bindParam(":lejos_oi_grados",$lejos_oi_grados);
+			$sentencia->bindParam(":lejos_color",$lejos_color);
+			$sentencia->bindParam(":cerca_od_esferico",$cerca_od_esferico);
+			$sentencia->bindParam(":cerca_od_cilindrico",$cerca_od_cilindrico);
+			$sentencia->bindParam(":cerca_od_grados",$cerca_od_grados);
+			$sentencia->bindParam(":cerca_oi_esferico",$cerca_oi_esferico);
+			$sentencia->bindParam(":cerca_oi_cilindrico",$cerca_oi_cilindrico);
+			$sentencia->bindParam(":cerca_oi_grados",$cerca_oi_grados);
+			$sentencia->bindParam(":cerca_color",$cerca_color);
 			$sentencia->bindParam(":fecha",$fecha);
 
 			$sentencia->execute();
@@ -100,7 +108,7 @@ class LenteBdDao{
 	public function actualizar(Lente $lente, $id){
 		try{
 
-			$sql = ("UPDATE $this->tabla SET medico=:medico, armazon_cerca=:armazon_cerca, armazon_lejos=:armazon_lejos, lejos_od=:lejos_od, lejos_oi=:lejos_oi, cerca_od=:cerca_od, cerca_oi=:cerca_oi, cilindrico=:cilindrico, en_grados=:en_grados, distancia=:distancia, calibre=:calibre, puente=:puente, color=:color, fecha=:fecha WHERE id_lente=\"$id\"");
+			$sql = ("UPDATE $this->tabla SET doctor=:doctor, armazon_lejos=:armazon_lejos, armazon_cerca=:armazon_cerca, lejos_od_esferico=:lejos_od_esferico, lejos_od_cilindrico=:lejos_od_cilindrico, lejos_od_grados=:lejos_od_grados, lejos_oi_esferico=:lejos_oi_esferico, cilindrico=:cilindrico, en_grados=:en_grados, distancia=:distancia, calibre=:calibre, puente=:puente, color=:color, fecha=:fecha WHERE id_lente=\"$id\"");
 
 			$conexion = Conexion::conectar();
 

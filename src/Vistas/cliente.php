@@ -92,7 +92,7 @@
                                             </td>
                                         <?php } else { ?>
                                             <td>
-                                                <a href="" class="disabled">         
+                                                <a class="disabled">         
                                                     <span class="glyphicon glyphicon-folder-close" title="Lentes"
                                                     data-toggle="tooltip" data-placement="right">
                                                 </span>

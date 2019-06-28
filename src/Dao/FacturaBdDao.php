@@ -47,7 +47,7 @@ class FacturaBdDao{
 
 		try{
 
-			$sql = ("INSERT INTO $this->tabla (id_lente, saldo_armazo_l, saldo_armazon_c, saldo_lejoso_d, saldo_lejoso_i, saldo_cerca_od, saldo_cerca_oi, sub_total, senia, saldo_total) VALUES (:id_lente, :saldo_armazo_l, :saldo_armazon_c, :saldo_lejoso_d, :saldo_lejoso_i, :saldo_cerca_od, :saldo_cerca_oi, :sub_total, :senia, :saldo_total) ");
+			$sql = ("INSERT INTO $this->tabla (id_lente, sub_total, senia, saldo_total) VALUES (:id_lente, :sub_total, :senia, :saldo_total) ");
 
 			$conexion = Conexion::conectar();
 
@@ -56,23 +56,11 @@ class FacturaBdDao{
 			$l = $factura->getIdLente();
 			$id_lente = $l->getId();
 
-			$saldo_armazo_l = $factura->getSaldoArmazoL();
-			$saldo_armazon_c = $factura->getSaldoArmazonC();
-			$saldo_lejoso_d = $factura->getSaldoLejosoD();
-			$saldo_lejoso_i = $factura->getSaldoLejosoI();
-			$saldo_cerca_od = $factura->getSaldoCercaOd();
-			$saldo_cerca_oi = $factura->getSaldoCercaOi();
 			$sub_total = $factura->getSubTotal();
 			$senia = $factura->getSenia();
 			$saldo_total = $factura->getSaldoTotal();
 
 			$sentencia->bindParam(":id_lente",$id_lente);
-			$sentencia->bindParam(":saldo_armazo_l",$saldo_armazo_l);
-			$sentencia->bindParam(":saldo_armazon_c",$saldo_armazon_c);
-			$sentencia->bindParam(":saldo_lejoso_d",$saldo_lejoso_d);
-			$sentencia->bindParam(":saldo_lejoso_i",$saldo_lejoso_i);
-			$sentencia->bindParam(":saldo_cerca_od",$saldo_cerca_od);
-			$sentencia->bindParam(":saldo_cerca_oi",$saldo_cerca_oi);
 			$sentencia->bindParam(":sub_total",$sub_total);
 			$sentencia->bindParam(":senia",$senia);
 			$sentencia->bindParam(":saldo_total",$saldo_total);
@@ -92,7 +80,7 @@ class FacturaBdDao{
 
 		try{
 
-            $sql = ("UPDATE $this->tabla SET  saldo_armazo_l=:saldo_armazo_l, saldo_armazon_c=:saldo_armazon_c, saldo_lejoso_d=:saldo_lejoso_d, saldo_lejoso_i=:saldo_lejoso_i, saldo_cerca_od=:saldo_cerca_od, saldo_cerca_oi=:saldo_cerca_oi, sub_total=:sub_total, senia=:senia, saldo_total=:saldo_total, id_lente=:id_lente WHERE id_factura=\"$id_factura\"");
+            $sql = ("UPDATE $this->tabla SET sub_total=:sub_total, senia=:senia, saldo_total=:saldo_total, id_lente=:id_lente WHERE id_factura=\"$id_factura\"");
 
             $conexion = Conexion::conectar();
 
@@ -101,23 +89,11 @@ class FacturaBdDao{
 			$l = $factura->getIdLente();
 			$id_lente = $l->getId();
 
-			$saldo_armazo_l = $factura->getSaldoArmazoL();
-			$saldo_armazon_c = $factura->getSaldoArmazonC();
-			$saldo_lejoso_d = $factura->getSaldoLejosoD();
-			$saldo_lejoso_i = $factura->getSaldoLejosoI();
-			$saldo_cerca_od = $factura->getSaldoCercaOd();
-			$saldo_cerca_oi = $factura->getSaldoCercaOi();
 			$sub_total = $factura->getSubTotal();
 			$senia = $factura->getSenia();
 			$saldo_total = $factura->getSaldoTotal();
 
 			$sentencia->bindParam(":id_lente",$id_lente);
-			$sentencia->bindParam(":saldo_armazo_l",$saldo_armazo_l);
-			$sentencia->bindParam(":saldo_armazon_c",$saldo_armazon_c);
-			$sentencia->bindParam(":saldo_lejoso_d",$saldo_lejoso_d);
-			$sentencia->bindParam(":saldo_lejoso_i",$saldo_lejoso_i);
-			$sentencia->bindParam(":saldo_cerca_od",$saldo_cerca_od);
-			$sentencia->bindParam(":saldo_cerca_oi",$saldo_cerca_oi);
 			$sentencia->bindParam(":sub_total",$sub_total);
 			$sentencia->bindParam(":senia",$senia);
 			$sentencia->bindParam(":saldo_total",$saldo_total);
@@ -222,12 +198,6 @@ class FacturaBdDao{
 				$daoLente = LenteBdDao::getInstancia();
 				$factura = new Factura
 				(
-					$p['saldo_armazo_l'],
-					$p['saldo_armazon_c'],
-					$p['saldo_lejoso_d'],
-					$p['saldo_lejoso_i'],
-					$p['saldo_cerca_od'],
-					$p['saldo_cerca_oi'],
 					$p['sub_total'],
 					$p['senia'],
 					$p['saldo_total'],
