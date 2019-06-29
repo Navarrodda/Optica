@@ -72,10 +72,8 @@ class PdfControladora
 	{
 		if(!empty($_SESSION))
 		{
-			$email = $_SESSION["email"];
-			$usuario = $this->daoUsuario->traerPorMail($email);
-			if($usuario != NULL )
-			{
+	
+			
 				$pdf = new pdf();
 				$pdf->AddPage();
 				$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
@@ -108,8 +106,7 @@ class PdfControladora
 				//Apellido{
 				$pdf->SetY(16);
 				$pdf->SetX(124);
-				$resultado = $usuario->getNombre() .' '. $usuario->getApellido();
-				$pdf->MultiCell(145,15,$resultado);
+				$pdf->MultiCell(145,15,'');
 				//Apellido}
 				//Nombre}
 				//Senior}
@@ -156,15 +153,6 @@ class PdfControladora
 				//Telefono}
 				//}
 				$pdf->Output();
-
-			}
-			else
-			{
-				$this->mensaje = new Mensaje('warning', 'No se pudo mostrar el PDF hubo un error!');
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "pdf.php");
-				include URL_VISTA . 'footer.php';
-			}
 
 		}
 		else

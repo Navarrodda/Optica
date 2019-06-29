@@ -84,7 +84,7 @@ class RegistrarControladora
 		}
 	}
 
-	public function registrarcliente($nombre, $apellido,$calle, $telefono){
+	public function registrarclientelente($nombre, $apellido, $telefono){
 		try{
 			if(!empty($_SESSION)){
 				$regCompleted = FALSE;
@@ -93,35 +93,6 @@ class RegistrarControladora
 				$apellido = ucwords($apellido);
 				$calle = ucwords($calle);  
 
-				$verificacion = 1;
-
-				if( ! $this->daoCliente->verificarNombre($nombre)){
-					if( $this->daoCliente->verificarApellido($apellido))
-					{
-						$verificacion = 0;
-					}
-					else
-					{
-						$verificacion = 0;
-					}
-				}
-				else{
-					if( $this->daoCliente->verificarNombre($nombre)){
-						if( ! $this->daoCliente->verificarApellido($apellido))
-						{
-							$verificacion = 0;
-						}
-						else{
-							$verificacion = 1;
-						}
-					}
-				}
-				if( ! $this->daoCliente->verificarApellido($apellido)){
-					if( ! $this->daoCliente->verificarNombre($nombre))
-					{
-						$verificacion = 1;
-					}
-				}
 				$nombreapellido = $nombre .' '. $apellido;
 				if($verificacion === 0){
 					$userInstance = new Cliente($nombre, $apellido, $calle, $telefono);
@@ -130,21 +101,6 @@ class RegistrarControladora
 					$regCompleted = TRUE;
 					$this->mensaje = new Mensaje( "success", 'El Cliente:' .' '.'<i><strong>' .  $nombreapellido
 						. '</strong></i>fue registrado con exito!' );
-				}
-
-				switch ($regCompleted){
-					case TRUE:
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "inicio.php");
-					include URL_VISTA . 'footer.php';
-					break;
-
-					case FALSE:
-					$this->mensaje = new Mensaje( "success", "El Cliente ya esta registrado con ese Nombre y Apellido!" );
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "registrarcliente.php");
-					include URL_VISTA . 'footer.php';
-					break;
 				}
 			}
 			else{

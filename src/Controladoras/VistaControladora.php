@@ -111,30 +111,33 @@ class VistaControladora
 		$longitud = count($medir);
 		$contador = count($cliente);
 		$i = 0;
-		foreach ($cliente as $clie) {
+		if (!empty($cliente)) {
+			
+			foreach ($cliente as $clie) {
 
-			$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
+				$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
 
-			if (!empty($senia)) {
+				if (!empty($senia)) {
 
-				if (!empty($senia[0])) 
-				{
-					$senias = $senia[0]->getIdCuentaSaldo();
-					$cl = $senia[0]->getIdCliente();
+					if (!empty($senia[0])) 
+					{
+						$senias = $senia[0]->getIdCuentaSaldo();
+						$cl = $senia[0]->getIdCliente();
 
-					if ($clie->getId() == $cl->getId()){
+						if ($clie->getId() == $cl->getId()){
 
-						$cliente[$i]->codigo = $senias->getId();
-					}	
+							$cliente[$i]->codigo = $senias->getId();
+						}	
+					}
+					$senia = NULL;
 				}
-				$senia = NULL;
+				$i++;
 			}
-			$i++;
+			$longitud = $longitud + 10;
+			$longitud = $longitud / 10;
+			
+			$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
 		}
-		$longitud = $longitud + 10;
-		$longitud = $longitud / 10;
-	
-		$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
 		include URL_VISTA . 'footer.php';
