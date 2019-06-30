@@ -139,19 +139,21 @@ class RegistrarControladora
 					$this->mensaje = new Mensaje( "success", "El Lente del Cliente fue registrado con exito!" );
 				}
 
-				switch ($regCompleted){
-					case TRUE:
+				if ($regCompleted == TRUE) {
+				 	# code...
+					
+					
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "inicio.php");
 					include URL_VISTA . 'footer.php';
-					break;
+				}
 
-					case FALSE:
+				else
+				{
 					$this->mensaje = new Mensaje( "success", "Hubo un error pruebe mas tarde cargar los datos!" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "registrarlente.php");
 					include URL_VISTA . 'footer.php';
-					break;
 				}
 			}
 			else{
