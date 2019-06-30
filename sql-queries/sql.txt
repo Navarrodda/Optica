@@ -26,7 +26,6 @@ CREATE TABLE clientes(
 id_cliente BIGINT AUTO_INCREMENT NOT NULL,
 nombre VARCHAR(30) NOT NULL,
 apellido VARCHAR(39) NOT NULL,
-calle VARCHAR(40) NOT NULL,
 telefono VARCHAR(15) NOT NULL,
 CONSTRAINT pk_id_clientes PRIMARY KEY (id_cliente)    
 );
@@ -34,6 +33,7 @@ CONSTRAINT pk_id_clientes PRIMARY KEY (id_cliente)
 CREATE TABLE lentes(
 id_lente BIGINT AUTO_INCREMENT NOT NULL,
 doctor VARCHAR(30) NOT NULL,
+observacion VARCHAR(30),
 armazon_lejos VARCHAR(5) NOT NULL,
 armazon_cerca VARCHAR(5) NOT NULL,
 lejos_od_esferico VARCHAR(5) NOT NULL,

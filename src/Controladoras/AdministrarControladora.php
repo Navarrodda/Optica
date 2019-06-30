@@ -141,7 +141,7 @@ class AdministrarControladora
 		}
 	}
 
-	function modificarcliente($id_cliente, $nombre, $apellido, $calle, $telefono){
+	function modificarcliente($id_cliente, $nombre, $apellido, $telefono){
 		try{
 
 			if(!empty($_SESSION)){
@@ -151,36 +151,7 @@ class AdministrarControladora
 
 				$nombre = ucwords($nombre); 
 				$apellido = ucwords($apellido); 
-				$calle = ucwords($calle);
-				$verificacion = 1;
-
-				if( ! $this->daoCliente->verificarNombre($nombre)){
-					if( $this->daoCliente->verificarApellido($apellido))
-					{
-						$verificacion = 0;
-					}
-					else
-					{
-						$verificacion = 0;
-					}
-				}
-				else{
-					if( $this->daoCliente->verificarNombre($nombre)){
-						if( ! $this->daoCliente->verificarApellido($apellido))
-						{
-							$verificacion = 0;
-						}
-						else{
-							$verificacion = 1;
-						}
-					}
-				}
-				if( ! $this->daoCliente->verificarApellido($apellido)){
-					if( ! $this->daoCliente->verificarNombre($nombre))
-					{
-						$verificacion = 1;
-					}
-				}
+				
 				$cliente = $this->daoCliente->traerPorId($id_cliente);
 
 				if(empty($nombre))
@@ -195,13 +166,10 @@ class AdministrarControladora
 				{
 					$telefono =  $cliente->getTelefono();
 				}
-				if (empty($calle)) {
-					$calle = $cliente->getCalle();
-				}
 
 				if($verificacion === 0){
 
-					$clientInstance = new Cliente($nombre, $apellido, $calle, $telefono);
+					$clientInstance = new Cliente($nombre, $apellido, $telefono);
 					$idClie = $this->daoCliente->actualizar( $clientInstance, $id_cliente );
 					$regCompleted = TRUE;
 					$this->mensaje = new Mensaje( "success", "El Cliente fue Modificaco con exito!" );

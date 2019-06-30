@@ -24,7 +24,7 @@ class ClienteBdDao{
 
         try{
             /** @noinspection SqlResolve */
-            $sql = ("INSERT INTO $this->tabla (nombre,apellido,calle,telefono) VALUES (:nombre, :apellido,:calle, :telefono)");
+            $sql = ("INSERT INTO $this->tabla (nombre,apellido,telefono) VALUES (:nombre, :apellido, :telefono)");
 
             $conexion = Conexion::conectar();
 
@@ -32,12 +32,10 @@ class ClienteBdDao{
 
             $nombre           = $cliente->getNombre();
             $apellido         = $cliente->getApellido();
-            $calle            = $cliente->getCalle();
             $telefono        = $cliente->getTelefono();
 
             $sentencia->bindParam(":nombre", $nombre);
             $sentencia->bindParam(":apellido", $apellido);
-            $sentencia->bindParam(":calle", $calle);
             $sentencia->bindParam(":telefono",$telefono);
 
             $sentencia->execute();
@@ -53,8 +51,7 @@ class ClienteBdDao{
     public function actualizar(Cliente $cliente, $id){
         try{
 
-            $sql = ("UPDATE $this->tabla SET  nombre=:nombre,  apellido=:apellido, calle=:calle,
-                telefono=:telefono WHERE id_cliente=\"$id\"");
+            $sql = ("UPDATE $this->tabla SET  nombre=:nombre,  apellido=:apellido, telefono=:telefono WHERE id_cliente=\"$id\"");
 
             $conexion = Conexion::conectar();
 
@@ -62,12 +59,10 @@ class ClienteBdDao{
 
             $nombre           = $cliente->getNombre();
             $apellido         = $cliente->getApellido();
-            $calle            = $cliente->getCalle();
             $telefono        = $cliente->getTelefono();
 
             $sentencia->bindParam(":nombre", $nombre);
             $sentencia->bindParam(":apellido", $apellido);
-            $sentencia->bindParam(":calle", $calle);
             $sentencia->bindParam(":telefono",$telefono);
 
             $sentencia->execute();
@@ -255,7 +250,6 @@ class ClienteBdDao{
                 $cliente = new Cliente(
                     $p['nombre'],
                     $p['apellido'],
-                    $p['calle'],
                     $p['telefono']);
                 $cliente->setId($p['id_cliente']);
                 return $cliente;

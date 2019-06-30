@@ -21,152 +21,80 @@
                 <div class="row">
                     <div class="col-xs-12 texto-chico">
                        <div class="table-responsive">
-                         <table class="table table-hover">
+                        <table class="table table-hover ta1">
                            <?php 
                            if($lente!= null )
                            {
                             ?>
-                            <thead>
+                            <tbody>
+                                <?php
+                                foreach ($lente as $objeto) {
+                                    ?>
+                                     <tr style="color:white">
+                                        <td rowspan="10" valign="middle">ID: <?= $objeto->getId(); ?></td>
+                                     </tr>
+                                     <tr style="color:white">
+                                        <td colspan="2" >Doctor: <?= $objeto->getDoctor(); ?></td>
+                                        <td colspan="2">Observación: <?= $objeto->getObservacion(); ?></td>
+                                    </tr>
+                                    <tr style="color:white"> 
+                                        <td colspan="12">Armazon Lejos: <?= $objeto->getArmazonLejos(); ?></td>
+                                    </tr>
+                                    <tr style="color:white"> 
+                                        <td colspan="12">Armazon Cerca: <?= $objeto->getArmazonCerca() ?></td>
+                                    </tr style="color:white"> 
+                                    <tr style="color:white">
+                                        <td colspan="2">Lejos O.D.Esf: <?= $objeto->getLejosOdEsferico(); ?></td>
+                                        <td colspan="2">Cilindrico:<?= $objeto->getLejosOdCilindrico(); ?></td>
+                                        <td colspan="2">Grados°:<?= $objeto->getLejosOdGrados(); ?></td>
+                                    </tr >
+                                    <tr style="color:white">
+                                       <td colspan="2">Lejos O.I. Esf: <?= $objeto->getLejosOiEsferico(); ?></td>
+                                       <td colspan="2">Cilindrico:<?= $objeto->getLejosOiCilindrico(); ?></td>
+                                       <td colspan="2">Grados°: <?= $objeto->getLejosOiGrados(); ?></td>
+                                       <td colspan="2">Color: <?= $objeto->getLejosColor(); ?></td>
+                                   </tr>
+                                   <tr style="color:white">
+                                    <td colspan="2">Cerca O.D. Esf: <?= $objeto->getCercaOdEsferico(); ?></td>
+                                    <td colspan="2">Cilindrico:<?= $objeto->getCercaOdCilindrico(); ?></td>
+                                    <td colspan="2">Grados°: <?= $objeto->getCercaOdGrados(); ?></td>
+                                </tr>
                                 <tr style="color:white">
-                                    
-                                   <tr>
-                                    <th rowspan="2">Armazon Lejos</th>
-                                    <th>Armazon Cerca</th>
-                                 </tr>
-                                <th>
-                                    Dr.
-                                </th>
-                                <th>
-                                    Arm. Lejos
-                                </th>
-                                <th>
-                                    Arm. Cerca
-                                </th>
-                                <th>
-                                    L OD
-                                </th>
-                                <th>
-                                    L OI
-                                </th>
-                                <th>
-                                    C OD
-                                </th>
-                                <th>
-                                    C OI
-                                </th>
-                                <th>
-                                    Cil
-                                </th>
-                                <th>
-                                    En G°
-                                </th>
-                                <th>
-                                   D.I.
-                               </th>
-                               <th>
-                                Cal.
-                            </th>
-                            <th>
-                                Pue.
-                            </th>
-                            <th>
-                                Co.
-                            </th>
-                            <th>
-                                Fec.
-                            </th>
-                            <th>
-                                Factura
-                            </th>
-                            <th>
-                                PDF
-                            </th>
-                            <th>
-                                Mod.
-                            </th>
-                            <th>
-                                Eli.
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($lente as $objeto) {
-                            ?>
-                            <tr style="color:white">
-                                <td>
-                                    id
-                                    <?= $objeto->getId(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getMedico(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getArmazonLejos(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getArmazonCerca(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getLejosOd(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getLejosOi(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getCercaOd(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getCercaOi(); ?>
-                                </td>
-                                <td> 
-                                    <?= $objeto->getCilindrico(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getEnGrados(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getDistancia(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getCalibre(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getPuente(); ?>
-                                </td>
-                                <td>
-                                    <?= $objeto->getColor(); ?>
-                                </td> 
-                                <td>
-                                    <?= date('d-m-Y',strtotime($objeto->getFecha())); ?>
-                                </td>
-                                <td>
+                                    <td colspan="2">Cerca O.I. Esf:  <?= $objeto->getCercaOiEsferico(); ?></td>
+                                    <td colspan="2">Cilindrico: <?= $objeto->getCercaOiCilindrico(); ?></td>
+                                    <td colspan="2">Grados°: <?= $objeto->getCercaOiGrados(); ?></td>
+                                    <td colspan="2">Color: <?= $objeto->getCercaColor(); ?></td>
+                                </tr>
+
+                                <tr style="color:white"> 
+                                    <td colspan="12">Fecha: <?= date('d-m-Y',strtotime($objeto->getFecha())); ?></td>
+                                </tr>
+                                <td colspan="2" style="color:white">:Factura
                                     <a  href="/vista/factura/<?= $objeto->getId(); ?>/<?= $cliente->getId()?>" class="disabled">         
                                         <span class="glyphicon glyphicon-list-alt" title="Factura"
                                         data-toggle="tooltip" data-placement="right">
                                     </span>
                                 </td>
-                                <td>
+                                <td colspan="2" style="color:white">PDF:
                                     <a href="/pdf/pdfclientelente/<?= $objeto->getId(); ?>/<?= $cliente->getId(); ?>/" target="_blank" class="disabled">         
                                         <span class="glyphicon glyphicon-cloud-upload" title="PDF"
                                         data-toggle="tooltip" data-placement="right">
                                     </span>
                                 </td>
-                                <td>
+                                <td colspan="2" style="color:white">Modificar:
                                     <a href="/vista/modificarlente/<?= $cliente->getId()?>/<?=$objeto->getId(); ?>" class="disabled">
                                         <span class="glyphicon glyphicon-pencil" title="Modificar"
                                         data-toggle="tooltip" data-placement="right">
                                     </span>
                                 </a>
                             </td>
-                            <td>
+                            <td colspan="2" style="color:white">Eliminar:
                                 <a type="submit" method="post"  name="id_cliente" href="/administrar/eliminarlente/<?= $objeto->getId(); ?>/<?= $cliente->getId(); ?>" class="disabled">
                                     <span class="glyphicon glyphicon-trash"  title="Eliminar Lente"
                                     data-toggle="tooltip" data-placement="right">
                                 </span>
                             </a>
                         </td>
-                    </tr>
                 <?php } 
             } ?>
         </tbody>

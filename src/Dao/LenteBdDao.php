@@ -51,13 +51,14 @@ class LenteBdDao{
 	public function agregar(Lente $lente){ 
 
 		try{
-			$sql = ("INSERT INTO $this->tabla (doctor, armazon_lejos, armazon_cerca,  lejos_od_esferico, lejos_od_cilindrico, lejos_od_grados, lejos_oi_esferico, lejos_oi_cilindrico, lejos_oi_grados, lejos_color, cerca_od_esferico, cerca_od_cilindrico, cerca_od_grados, cerca_oi_esferico, cerca_oi_cilindrico, cerca_oi_grados, cerca_color, fecha) VALUES (:doctor, :armazon_lejos, :armazon_cerca, :lejos_od_esferico, :lejos_od_cilindrico, :lejos_od_grados, :lejos_oi_esferico, :lejos_oi_cilindrico, :lejos_oi_grados, :lejos_color, :cerca_od_esferico, :cerca_od_cilindrico, :cerca_od_grados, :cerca_oi_esferico,:cerca_oi_cilindrico, :cerca_oi_grados, :cerca_color, :fecha) ");
+			$sql = ("INSERT INTO $this->tabla (doctor, observacion, armazon_lejos, armazon_cerca,  lejos_od_esferico, lejos_od_cilindrico, lejos_od_grados, lejos_oi_esferico, lejos_oi_cilindrico, lejos_oi_grados, lejos_color, cerca_od_esferico, cerca_od_cilindrico, cerca_od_grados, cerca_oi_esferico, cerca_oi_cilindrico, cerca_oi_grados, cerca_color, fecha) VALUES (:doctor, :observacion, :armazon_lejos, :armazon_cerca, :lejos_od_esferico, :lejos_od_cilindrico, :lejos_od_grados, :lejos_oi_esferico, :lejos_oi_cilindrico, :lejos_oi_grados, :lejos_color, :cerca_od_esferico, :cerca_od_cilindrico, :cerca_od_grados, :cerca_oi_esferico,:cerca_oi_cilindrico, :cerca_oi_grados, :cerca_color, :fecha) ");
 
 			$conexion = Conexion::conectar();
 
 			$sentencia = $conexion->prepare($sql);
 
 			$doctor              = $lente->getDoctor();
+			$observacion		 = $lente->getObservacion();
 			$armazon_lejos       = $lente->getArmazonLejos();
 			$armazon_cerca       = $lente->getArmazonCerca();
 			$lejos_od_esferico   = $lente->getLejosOdEsferico();
@@ -77,6 +78,7 @@ class LenteBdDao{
 			$fecha               = $lente->getFecha();
 
 			$sentencia->bindParam(":doctor",$doctor);
+			$sentencia->bindParam(":observacion",$observacion);
 			$sentencia->bindParam(":armazon_lejos",$armazon_lejos);
 			$sentencia->bindParam(":armazon_cerca",$armazon_cerca);
 			$sentencia->bindParam(":lejos_od_esferico",$lejos_od_esferico);
@@ -95,6 +97,7 @@ class LenteBdDao{
 			$sentencia->bindParam(":cerca_color",$cerca_color);
 			$sentencia->bindParam(":fecha",$fecha);
 
+
 			$sentencia->execute();
 
 			return $conexion->lastInsertId();
@@ -108,13 +111,14 @@ class LenteBdDao{
 	public function actualizar(Lente $lente, $id){
 		try{
 
-			$sql = ("UPDATE $this->tabla SET doctor=:doctor, armazon_lejos=:armazon_lejos, armazon_cerca=:armazon_cerca, lejos_od_esferico=:lejos_od_esferico, lejos_od_cilindrico=:lejos_od_cilindrico, lejos_od_grados=:lejos_od_grados, lejos_oi_esferico=:lejos_oi_esferico, lejos_oi_cilindrico=:lejos_oi_cilindrico, lejos_oi_grados=:lejos_oi_grados, lejos_color=:lejos_color, cerca_od_esferico=:cerca_od_esferico, cerca_od_cilindrico=:cerca_od_cilindrico, cerca_od_grados=:cerca_od_grados, cerca_oi_esferico=:cerca_oi_esferico, cerca_oi_cilindrico=:cerca_oi_cilindrico, cerca_oi_grados=:cerca_oi_grados, cerca_color=:cerca_color, fecha=:fecha WHERE id_lente=\"$id\"");
+			$sql = ("UPDATE $this->tabla SET doctor=:doctor, observacion=:observacion, armazon_lejos=:armazon_lejos, armazon_cerca=:armazon_cerca, lejos_od_esferico=:lejos_od_esferico, lejos_od_cilindrico=:lejos_od_cilindrico, lejos_od_grados=:lejos_od_grados, lejos_oi_esferico=:lejos_oi_esferico, lejos_oi_cilindrico=:lejos_oi_cilindrico, lejos_oi_grados=:lejos_oi_grados, lejos_color=:lejos_color, cerca_od_esferico=:cerca_od_esferico, cerca_od_cilindrico=:cerca_od_cilindrico, cerca_od_grados=:cerca_od_grados, cerca_oi_esferico=:cerca_oi_esferico, cerca_oi_cilindrico=:cerca_oi_cilindrico, cerca_oi_grados=:cerca_oi_grados, cerca_color=:cerca_color, fecha=:fecha WHERE id_lente=\"$id\"");
 
 			$conexion = Conexion::conectar();
 
 			$sentencia = $conexion->prepare($sql);
 
 			$doctor              = $lente->getDoctor();
+			$observacion		 = $lente->getObservacion();
 			$armazon_lejos       = $lente->getArmazonLejos();
 			$armazon_cerca       = $lente->getArmazonCerca();
 			$lejos_od_esferico   = $lente->getLejosOdEsferico();
@@ -134,6 +138,7 @@ class LenteBdDao{
 			$fecha               = $lente->getFecha();
 
 			$sentencia->bindParam(":doctor",$doctor);
+			$sentencia->bindParam(":observacion",$observacion);
 			$sentencia->bindParam(":armazon_lejos",$armazon_lejos);
 			$sentencia->bindParam(":armazon_cerca",$armazon_cerca);
 			$sentencia->bindParam(":lejos_od_esferico",$lejos_od_esferico);
@@ -214,6 +219,7 @@ class LenteBdDao{
 			$this->listado = array_map( function ($l){
 				$lente = new Lente(
 					$l['doctor'],
+					$l['observacion'],
 					$l['armazon_lejos'],
 					$l['armazon_cerca'],
 					$l['lejos_od_esferico'],

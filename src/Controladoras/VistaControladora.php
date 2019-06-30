@@ -105,7 +105,7 @@ class VistaControladora
 		$entrada = 1; 
 		$pantalla = 1;
 		$calcular = $this->daoCliente->traerTodo();
-		$calcular = count($calcular) +1;
+		$calcular = count($calcular);
 		$cliente = $this->daoCliente->traerTodoLimit($limit);
 		$medir = $this->daoCliente->traerTodo();
 		$longitud = count($medir);
@@ -148,23 +148,36 @@ class VistaControladora
 
 		$calcular = $this->daoCliente->traerTodo();
 		$calcular = count($calcular) +1;
-
 		if (!empty($limit)) {
-			if ($limit == -1) {
-				$entrada = $entrada + 1;
-				if ($entrada >= $longitud) {
-					$limit = $limit - 2;
-					$entrada = $entrada -1;
-				}
 
+			if ($limit == -1) {
+				if($longitud > 9)
+				{
+					$entrada = $entrada + 1;
+					if ($entrada >= $longitud) {
+						$limit = $limit - 2;
+						$entrada = $entrada -1;
+					}
+
+				}
+				else
+				{
+					$limit = 0;
+				}
 			}
 
 			if ($limit == -2) {
-				$entrada = $entrada - $pantalla;
-				if ($entrada <= 1){
-					$entrada = 1;
-					$pantalla = 1;
-					$limit = 1;
+				if($longitud > 9){
+					$entrada = $entrada - $pantalla;
+					if ($entrada <= 1){
+						$entrada = 1;
+						$pantalla = 1;
+						$limit = 1;
+					}
+				}
+				else
+				{
+					$limit = 0;
 				}
 			}
 
@@ -174,9 +187,14 @@ class VistaControladora
 			}
 			else
 			{
-
-				$limit = 9 * $entrada;
-				$limit = $limit - 8;
+				if ($longitud > 9) {
+					$limit = 9 * $entrada;
+					$limit = $limit - 8;
+				}
+				else
+				{
+					$limit = 0;
+				}
 			}
 			$cliente = $this->daoCliente->traerTodoLimit($limit);
 			$contador =count($cliente);

@@ -84,24 +84,81 @@ class RegistrarControladora
 		}
 	}
 
-	public function registrarclientelente($nombre, $apellido, $telefono){
+	public function registrarclientelente($nombre, $apellido, $telefono, $doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $complit, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $subtotal, $senia){
 		try{
 			if(!empty($_SESSION)){
 				$regCompleted = FALSE;
 
 				$nombre = ucwords($nombre); 
 				$apellido = ucwords($apellido);
-				$calle = ucwords($calle);  
+				$doctor = ucwords($doctor);
+				$lejos_color = ucwords($lejos_color);
+				$cerca_color = ucwords($cerca_color);
 
 				$nombreapellido = $nombre .' '. $apellido;
-				if($verificacion === 0){
-					$userInstance = new Cliente($nombre, $apellido, $calle, $telefono);
-					$idClie = $this->daoCliente->agregar( $userInstance );
-					$userInstance->setId( $idClie );
-					$regCompleted = TRUE;
-					$this->mensaje = new Mensaje( "success", 'El Cliente:' .' '.'<i><strong>' .  $nombreapellido
-						. '</strong></i>fue registrado con exito!' );
+				if($complit=='SI')
+				{
+					$cerca_od_cilindrico = $lejos_od_cilindrico;
+					$cerca_od_grados = $lejos_od_grados;
+					$cerca_oi_cilindrico =	$lejos_oi_cilindrico;
+					$cerca_oi_grados =	$lejos_oi_grados;
 				}
+				if(empty($cerca_color))
+				{
+					$cerca_color = $lejos_color
+				}
+				if(!empty($senia))
+				{
+					$saldo_total = $subtotal - $senia;
+				}
+				$fecha = date('Y-m-d');
+				$userInstance = new Cliente($nombre, $apellido, $telefono);
+				$idClie = $this->daoCliente->agregar( $userInstance );
+				$userInstance->setId( $idClie );
+				$lentInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
+				$idLent= $this->daoLente->agregar( $lentInstance );
+				$lentInstance->setId( $idLent );
+				$id_cliente = $this->daoCliente->traerPorId($idClie);
+				$id_lente = $this->daoLente->traerPorId($idLent);
+				$lentxclientInstance = new Lente_x_cliente($id_cliente, $id_lente);
+				$idLentxclient = $this->daoLentexcliente->agregar( $lentxclientInstance );
+				$lentxclientInstance->setIdLenteXCliente($idLentxclient);
+				if(!empty($senia)){
+					$saldo_total = $sub_total - $senia;
+					if ($saldo_total < 0) {
+						$saldo_total = 0;
+					}
+				}
+				else{
+					$saldo_total = $sub_total;
+				}
+				$factInstance = new Factura($subtotal, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
+				$idfact = $this->daoFactura->agregar( $factInstance );
+				$factInstance->setId( $idfact );
+
+				$a_cuenta = $senia; 
+				$saldo = $saldo_total;
+				$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
+				$idsaldo = $this->daoCuentasaldos->agregar( $salInstance );
+				$salInstance->setId( $idsaldo );
+
+				$id_cliente = $this->daoCliente->traerPorId($id_cliente);
+
+				$id_cuentasaldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+
+				$id_lente = $this->daoLente->traerPorId($id_lente);
+				$clisald = new Senias_x_cliente_lente($id_cuentasaldos, $id_cliente, $id_lente);
+				$idclsald = $this->daoSenia->agregar( $clisald );
+				$clisald->setIdSeniaXCliente( $idclsald );
+				
+
+				$regCompleted = TRUE;
+				$this->mensaje = new Mensaje( "success", 'El Cliente:' .' '.'<i><strong>' .  $nombreapellido
+					. '</strong></i> fue registrado con exito!' );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+				
 			}
 			else{
 				$this->mensaje = new Mensaje( "success", "Deve iniciar sesion" );
@@ -120,17 +177,17 @@ class RegistrarControladora
 		}
 	}
 
-	public function registrarlente($id_cliente, $medico, $fecha, $armazon_lejos, $armazon_cerca, $lejos_od, $cerca_od, $lejos_oi, $cerca_oi, $cilindrico, $en_grados, $color, $distancia, $calibre, $puente){
+	public function registrarlente($id_cliente,$doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha){
 		try{
 			if(!empty($_SESSION)){
 				$regCompleted = FALSE;
 				$medico = ucwords($medico);
 				$color = ucwords($color);
 				if(!empty($id_cliente)){
-					$lentInstance = new Lente($medico, $armazon_cerca, $armazon_lejos, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $cilindrico, $en_grados, $distancia, $calibre, $puente, $color, $fecha);
+					$lentInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
 					$idLent= $this->daoLente->agregar( $lentInstance );
 					$lentInstance->setId( $idLent );
-					$id_cliente = $this->daoCliente->traerPorId($id_cliente);
+					$id_cliente = $this->daoCliente->traerPorId($idClie);
 					$id_lente = $this->daoLente->traerPorId($idLent);
 					$lentxclientInstance = new Lente_x_cliente($id_cliente, $id_lente);
 					$idLentxclient = $this->daoLentexcliente->agregar( $lentxclientInstance );

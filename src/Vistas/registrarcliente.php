@@ -23,11 +23,12 @@
 						<button type="button" class="close" data-dismiss="alert"></button>
 					</div>
 				</div>
-				<form id="form_r" method="post" action="/pdf/pdfcargamanual/" target="_blank" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
-					<input required name="senior" type="text" class="col-md-6 norightborder btn2" placeholder="Senior">
-					<input required name="telefono" type="text" class="col-md-6 norightborder btn2" placeholder="Telefono">
-					<input required name="doctor" type="text" class="col-md-6 norightborder btn2" placeholder="Doctor">
-					<input name="observaciones" type="text" class="col-md-6 norightborder btn2" placeholder="Observaciones">
+				<form id="form_r" method="post" action="/registrar/registrarclientelente/" target="_blank" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
+					<input required name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Nombre">
+					<input required name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
+					<input required name="telefono" type="text" class="col-md-4 norightborder btn2" placeholder="Telefono">
+					<input required name="doctor" type="text" class="col-md-4 norightborder btn2" placeholder="Doctor">
+					<input name="observaciones" type="text" class="col-md-4 norightborder btn2" placeholder="Observaciones">
 					<input name="armason_l" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Lejos">	
 					<input name="armason_c" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Cerca">	
 					<input name="lejos_od" type="text" class="col-md-4 norightborder btn2" placeholder="Lejos OD EFC">
@@ -39,12 +40,12 @@
 					<input name="l_color" type="text" class="col-md-2 norightborder btn2" placeholder="Color">
 					<div>
 						<label class="col-md-1 content-input">
-							<input type="checkbox" name="complit" id="si" value="autopista">
+							<input type="checkbox" name="complit" id="si" value="SI">
 							<i></i>
 						</label>
 					</div>
 					<div class="col-md-9">
-					<p style="background-color:black">Duplicar los campos siguientes: Cilindrico y En Grados</p>
+						<p style="background-color:black">Duplicar los campos siguientes: Cilindrico y En Grados</p>
 					</div>				
 					<input name="cerca_od" type="text" class="col-md-4 norightborder btn2" placeholder="Cerca OD EFC">
 					<input name="c_cerca_od" type="text" class="col-md-4 norightborder btn2" placeholder="Ci c OD">

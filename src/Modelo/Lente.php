@@ -6,6 +6,7 @@ class Lente
 {
     private $id;
     private $doctor; 
+    private $observacion;
     private $armazon_lejos;
     private $armazon_cerca; 
     private $lejos_od_esferico; 
@@ -28,6 +29,7 @@ class Lente
     /**
      * Class Constructor
      * @param    $doctor   
+     * @param    $observacion   
      * @param    $armazon_lejos   
      * @param    $armazon_cerca   
      * @param    $lejos_od_esferico   
@@ -46,9 +48,10 @@ class Lente
      * @param    $cerca_color   
      * @param    $fecha   
      */
-    public function __construct($doctor, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha)
+    public function __construct($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha)
     {
         $this->doctor = $doctor;
+        $this->observacion = $observacion;
         $this->armazon_lejos = $armazon_lejos;
         $this->armazon_cerca = $armazon_cerca;
         $this->lejos_od_esferico = $lejos_od_esferico;
@@ -67,9 +70,6 @@ class Lente
         $this->cerca_color = $cerca_color;
         $this->fecha = $fecha;
     }
-
-
-
 
     /**
      * @return mixed
@@ -107,6 +107,26 @@ class Lente
     public function setDoctor($doctor)
     {
         $this->doctor = $doctor;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getObservacion()
+    {
+        return $this->observacion;
+    }
+
+    /**
+     * @param mixed $observacion
+     *
+     * @return self
+     */
+    public function setObservacion($observacion)
+    {
+        $this->observacion = $observacion;
 
         return $this;
     }
