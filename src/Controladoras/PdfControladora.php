@@ -68,7 +68,7 @@ class PdfControladora
 	//Text texto Text($x, $y, $txt) top:45.300;left:436.152
 	//MultiCell($w, $h, $txt);
 
-	function pdfvista()
+public	function pdfvista()
 	{
 		if(!empty($_SESSION))
 		{

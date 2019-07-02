@@ -1590,5 +1590,18 @@ después de cualquier input*/
 
 }
 
+.ta2
+{
+	background:rgba(153, 235, 163,0.5);
+	-webkit-border-radius: 80; 
+	-moz-border-radius: 80;
+	border-radius: 40px;
+	font-family: Arial;
+	color: #727272;
+	font-size: 17px;
+	padding: 0px 8px 0px 8px;
+	text-decoration: none;
+
+}
 
 

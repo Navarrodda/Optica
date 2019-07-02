@@ -139,7 +139,7 @@ class RegistrarControladora
 
 
 					$a_cuenta = $senia; 
-					$saldo = $subtotal;
+					$saldo = $saldo_total;
 					$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
 					$idsaldo = $this->daoCuentasaldos->agregar( $salInstance );
 					$salInstance->setId( $idsaldo );
@@ -153,12 +153,22 @@ class RegistrarControladora
 					$idclsald = $this->daoSenia->agregar( $clisald );
 					$clisald->setIdSeniaXCliente( $idclsald );
 
+					$factura =$this->daoFactura->traerPorId($idfact);
+					$cuenta_saldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+
 				}
-				$regCompleted = TRUE;
+				else
+				{
+					$factura = null;
+					$cuenta_saldos = null;
+				}
+				$lente = $this->daoLente->traerPorId($idLent);
+				$cliente = $this->daoCliente->traerPorId($idClie);
+				
 				$this->mensaje = new Mensaje( "success", 'El Cliente:' .' '.'<i><strong>' .  $nombreapellido
 					. '</strong></i> fue registrado con exito!' );
 				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "inicio.php");
+				require(URL_VISTA . "pdf.php");
 				include URL_VISTA . 'footer.php';
 				
 			}
