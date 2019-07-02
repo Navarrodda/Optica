@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">.</title>
+	<link rel="shortcut icon" href="img/Iconos/icon.png">
 	<!-- Bootstrap Core CSS -->
 	<link rel="stylesheet" href="<?= URL_CSS .'bootstrap.min.css' ?>" type="text/css">
 	<!-- Plugin CSS -->
