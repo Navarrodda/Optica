@@ -192,6 +192,111 @@ class AdministrarControladora
 		}
 	}
 
+	public function registrarclientelente($nombre, $apellido, $telefono, $doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $complit, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $subtotal, $senia){
+		try{
+			if(!empty($_SESSION)){
+				$regCompleted = FALSE;
+
+				$nombre = ucwords($nombre); 
+				$apellido = ucwords($apellido);
+				$doctor = ucwords($doctor);
+				$lejos_color = ucwords($lejos_color);
+				$cerca_color = ucwords($cerca_color);
+				$observacion = ucwords($observacion);
+
+
+				$nombreapellido = $nombre .' '. $apellido;
+				if($complit=='SI')
+				{
+					$cerca_od_cilindrico = $lejos_od_cilindrico;
+					$cerca_od_grados = $lejos_od_grados;
+					$cerca_oi_cilindrico =	$lejos_oi_cilindrico;
+					$cerca_oi_grados =	$lejos_oi_grados;
+				}
+				if(empty($cerca_color))
+				{
+					$cerca_color = $lejos_color;
+				}
+				$fecha = date('Y-m-d');
+				$userInstance = new Cliente($nombre, $apellido, $telefono);
+				$idClie = $this->daoCliente->actualizar( $userInstance );
+				$userInstance->setId( $idClie );
+				$lentInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
+				$idLent= $this->daoLente->actualizar( $lentInstance );
+				$lentInstance->setId( $idLent );
+				$id_cliente = $this->daoCliente->traerPorId($idClie);
+				$id_lente = $this->daoLente->traerPorId($idLent);
+				$lentxclientInstance = new Lente_x_cliente($id_cliente, $id_lente);
+				$idLentxclient = $this->daoLentexcliente->actualizar( $lentxclientInstance );
+				$lentxclientInstance->setIdLenteXCliente($idLentxclient);
+				if(!empty($subtotal)){
+					if(!empty($senia)){
+						$saldo_total = $subtotal - $senia;
+						if ($saldo_total < 0) {
+							$saldo_total = 0;
+						}
+					}
+					else{
+						$saldo_total = $subtotal;
+					}
+					$sub_total = $subtotal;
+					$factInstance = new Factura($sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($idLent));
+					$idfact = $this->daoFactura->actualizar( $factInstance );
+					$factInstance->setId( $idfact );
+
+
+
+					$a_cuenta = $senia; 
+					$saldo = $saldo_total;
+					$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
+					$idsaldo = $this->daoCuentasaldos->actualizar( $salInstance );
+					$salInstance->setId( $idsaldo );
+
+					$id_cliente = $this->daoCliente->traerPorId($idClie);
+
+					$id_cuentasaldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+
+					$id_lente = $this->daoLente->traerPorId($idLent);
+					$clisald = new Senias_x_cliente_lente($id_cuentasaldos, $id_cliente, $id_lente);
+					$idclsald = $this->daoSenia->actualizar( $clisald );
+					$clisald->setIdSeniaXCliente( $idclsald );
+
+					$factura =$this->daoFactura->traerPorId($idfact);
+					$cuenta_saldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+
+				}
+				else
+				{
+					$factura = null;
+					$cuenta_saldos = null;
+				}
+				$lente = $this->daoLente->traerPorId($idLent);
+				$cliente = $this->daoCliente->traerPorId($idClie);
+				
+				$this->mensaje = new Mensaje( "success", 'El Cliente:' .' '.'<i><strong>' .  $nombreapellido
+					. '</strong></i> fue registrado con exito!' );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "pdf.php");
+				include URL_VISTA . 'footer.php';
+				
+			}
+			else{
+				$this->mensaje = new Mensaje( "success", "Deve iniciar sesion" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}catch(\PDOException $pdo_error){
+			$this->mensaje = new \Modelo\Mensaje("danger","Ocurrio un error con la Base de Datos: " . $pdo_error);
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'error.php');
+			include URL_VISTA . 'footer.php';
+		}catch(\Exception $error){
+			echo $error->getMessage();
+		}
+	}
+
 	public function modificarusuario($id_usuario, $nombre, $apellido, $calle, $telefono, $email, $pass){
 		try{
 
