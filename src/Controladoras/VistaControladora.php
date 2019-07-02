@@ -172,8 +172,8 @@ class VistaControladora
 			else
 			{
 
-				$limit = 9 * $entrada;
-				$limit = $limit - 8;
+				$limit = 10 * $entrada;
+				$limit = $limit - 10;
 			}
 			$cliente = $this->daoCliente->traerTodoLimit($limit);
 			$contador =count($cliente);
