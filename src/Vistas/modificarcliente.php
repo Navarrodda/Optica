@@ -24,11 +24,10 @@
 					</div>
 				</div>
 				<form id="form_r" method="post" action="/administrar/modificarcliente/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
-
 					<input  name="id_cliente" type=hidden value="<?= $cliente->getId()?>">
-					<input  name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Ingresa Nombre del Cliente">
-					<input  name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
-					<input  name="calle" type="text" class="col-md-12 norightborder btn2" placeholder="Direccion">
+					<input  name="nombre" type="text" class="col-md-12 norightborder btn2" placeholder="Nombre">
+					<input  name="apellido" type="text" class="col-md-12 norightborder btn2" placeholder="Apellido">
+					<input  name="telefono" type="text" class="col-md-12 norightborder btn2" placeholder="Telefono">
 					<button type="submit" class="contact submit btn-primary btn-xl pull-right">Modificar</button>
 				</form>
 			</div>

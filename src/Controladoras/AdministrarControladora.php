@@ -54,7 +54,7 @@ class AdministrarControladora
 		$this->daoFactura =FacturaBdDao::getInstancia();
 	}
 
-	function eliminarcliente($id_cliente){
+	public function eliminarcliente($id_cliente){
 		try{
 			
 			if(!empty($_SESSION)){
@@ -141,19 +141,16 @@ class AdministrarControladora
 		}
 	}
 
-	function modificarcliente($id_cliente, $nombre, $apellido, $telefono){
+	public function modificarcliente($id_cliente, $nombre, $apellido, $telefono){
 		try{
 
 			if(!empty($_SESSION)){
-
-				$regCompleted = FALSE;
-				
 
 				$nombre = ucwords($nombre); 
 				$apellido = ucwords($apellido); 
 				
 				$cliente = $this->daoCliente->traerPorId($id_cliente);
-
+				$nombreapellido = $cliente->getNombre() .' '. $cliente->getApellido();
 				if(empty($nombre))
 				{
 					$nombre = $cliente->getNombre();
@@ -167,29 +164,17 @@ class AdministrarControladora
 					$telefono =  $cliente->getTelefono();
 				}
 
-				if($verificacion === 0){
-
-					$clientInstance = new Cliente($nombre, $apellido, $telefono);
-					$idClie = $this->daoCliente->actualizar( $clientInstance, $id_cliente );
-					$regCompleted = TRUE;
-					$this->mensaje = new Mensaje( "success", "El Cliente fue Modificaco con exito!" );
-				}
-
-				switch ($regCompleted){
-					case TRUE:
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "inicio.php");
-					include URL_VISTA . 'footer.php';
-					break;
-
-					case FALSE:
-					$this->mensaje = new Mensaje( "success", "Ya hay Cliente registrado con ese Nombre y Apellido!" );
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "modificarcliente.php");
-					include URL_VISTA . 'footer.php';
-					break;
-				}
+				$clientInstance = new Cliente($nombre, $apellido, $telefono);
+				$idClie = $this->daoCliente->actualizar( $clientInstance, $id_cliente );
+				$regCompleted = TRUE;
+				$this->mensaje = new Mensaje('success', '!El Cliente 
+					' .' '.'<i><strong>' .  $nombreapellido
+					. '</strong> fue Modificaco con exito!</i>');
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
 			}
+
 			else{
 				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
 				include URL_VISTA . 'header.php';
@@ -207,13 +192,13 @@ class AdministrarControladora
 		}
 	}
 
-	function modificarusuario($id_usuario, $nombre, $apellido, $calle, $telefono, $email, $pass){
+	public function modificarusuario($id_usuario, $nombre, $apellido, $calle, $telefono, $email, $pass){
 		try{
 
 			if(!empty($_SESSION)){
 
 				$regCompleted = FALSE;
-				
+
 
 				$nombre = ucwords($nombre); 
 				$apellido = ucwords($apellido); 
@@ -287,7 +272,7 @@ class AdministrarControladora
 		}
 	}
 
-	function modificarpreousuario($id_usuario, $preoridad){
+	public	function modificarpreousuario($id_usuario, $preoridad){
 		try{
 
 			if(!empty($_SESSION)){
@@ -295,9 +280,9 @@ class AdministrarControladora
 				if ($_SESSION['rol'] == 'Administrador') {
 					if(!empty($preoridad)){
 
-					$rol = $this->daoRol->traerPorIdPreoridad($preoridad);
+						$rol = $this->daoRol->traerPorIdPreoridad($preoridad);
 
-					$id_rol = $rol->getId();
+						$id_rol = $rol->getId();
 					}
 					else
 					{
@@ -356,42 +341,42 @@ class AdministrarControladora
 		}
 	}
 
-function eliminarusuario($id_usuario){
+	public	function eliminarusuario($id_usuario){
 		try{
-			
+
 			if(!empty($_SESSION)){
 
 				if ($_SESSION['rol'] == 'Administrador') {
 
-				$regCompleted = FALSE;
+					$regCompleted = FALSE;
 
-				if(isset($id_usuario)){
-					$usuario= $this->daoUsuario->traerPorId($id_usuario);
-					$nombreapellido = $usuario->getNombre() .' '. $usuario->getApellido();
-					$this->daoUsuario->eliminarPorId($id_usuario);
-					$regCompleted = TRUE;
-					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente al Usuario
-						! El Usuario eliminado fue:' .' '.'<i><strong>' .  $nombreapellido
-						. '</strong></i>');
-				}
+					if(isset($id_usuario)){
+						$usuario= $this->daoUsuario->traerPorId($id_usuario);
+						$nombreapellido = $usuario->getNombre() .' '. $usuario->getApellido();
+						$this->daoUsuario->eliminarPorId($id_usuario);
+						$regCompleted = TRUE;
+						$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente al Usuario
+							! El Usuario eliminado fue:' .' '.'<i><strong>' .  $nombreapellido
+							. '</strong></i>');
+					}
 
 
-				switch ($regCompleted){
-					case TRUE:
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "inicio.php");
-					include URL_VISTA . 'footer.php';
-					break;
+					switch ($regCompleted){
+						case TRUE:
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "inicio.php");
+						include URL_VISTA . 'footer.php';
+						break;
 
-					case FALSE:
-					$this->mensaje = new Mensaje( "success", "Error" );
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "usuarios.php");
-					include URL_VISTA . 'footer.php';
-					break;
+						case FALSE:
+						$this->mensaje = new Mensaje( "success", "Error" );
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "usuarios.php");
+						include URL_VISTA . 'footer.php';
+						break;
+					}
 				}
 			}
-		}
 			else{
 				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
 				include URL_VISTA . 'header.php';
@@ -409,26 +394,32 @@ function eliminarusuario($id_usuario){
 		}
 	}
 
-	function modificarlente($id_lente, $medico, $fecha, $armazon_lejos, $armazon_cerca, $lejos_od, $cerca_od, $lejos_oi, $cerca_oi, $cilindrico, $en_grados, $color, $distancia, $calibre, $puente){
-
+	public	function modificarlente($id_lente, $doctor, $fecha, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $complit, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color){
 		try{
 			if(!empty($_SESSION)){
 
-				$regCompleted = FALSE;
-				
+
 				$lente = $this->daoLente->traerPorId($id_lente);
 
-				if(empty($medico))
+				if(empty($doctor))
 				{
-					$medico = $lente->getMedico();
+					$doctor = $lente->getDoctor();
 				}
 				else
 				{
-					$medico = ucwords($medico); 
+					$doctor = ucwords($doctor); 
 				}
 				if(empty($fecha))
 				{
-					$fecha =  $lente->getFecha();
+					$fecha = date('Y-m-d');
+				}
+				if(empty($observacion))
+				{
+					$observacion =  $lente->getObservacion();
+				}
+				else
+				{
+					$observacion = ucwords($observacion);
 				}
 				if(empty($armazon_lejos))
 				{
@@ -438,72 +429,100 @@ function eliminarusuario($id_usuario){
 				{
 					$armazon_cerca =  $lente->getArmazonCerca();
 				}
-				if(empty($lejos_od))
+				if(empty($lejos_od_esferico))
 				{
-					$lejos_od =  $lente->getLejosOd();
+					$lejos_od_esferico =  $lente->getLejosOdEsferico();
 				}
-				if(empty($cerca_od))
+				if(empty($lejos_od_cilindrico))
 				{
-					$cerca_od =  $lente->getCercaOd();
+					$lejos_od_cilindrico =  $lente->getLejosOdCilindrico();
 				}
-				if(empty($lejos_oi))
+				if(empty($lejos_od_grados))
 				{
-					$lejos_oi =  $lente->getLejosOi();
+					$lejos_od_grados =  $lente->getLejosOdGrados();
 				}
-				if(empty($cerca_oi))
+				if(empty($lejos_oi_esferico))
 				{
-					$cerca_oi =  $lente->getCercaOi();
+					$lejos_oi_esferico =  $lente->getLejosOiEsferico();
 				}
-				if(empty($cilindrico))
+				if(empty($lejos_oi_cilindrico))
 				{
-					$cilindrico =  $lente->getCilindrico();
+					$lejos_oi_cilindrico =  $lente->getLejosOiCilindrico();
 				}
-				if(empty($en_grados))
+				if(empty($lejos_oi_grados))
 				{
-					$en_grados =  $lente->getEnGrados();
+					$lejos_oi_grados =  $lente->getLejosOiGrados();
 				}
-				if(empty($color))
+				if(empty($lejos_color))
 				{
-					$color =  $lente->getColor();
+					$lejos_color =  $lente->getLejosColor();
 				}
 				else
 				{
-					$color = ucwords($color); 
+					$lejos_color = ucwords($lejos_color);
 				}
-				if(empty($distancia))
+				if(empty($cerca_od_esferico))
 				{
-					$distancia =  $lente->getDistancia();
+					$cerca_od_esferico =  $lente->getCercaOdEsferico();
 				}
-				if(empty($calibre))
+				if(empty($cerca_od_cilindrico))
 				{
-					$calibre =  $lente->getCalibre();
+					$cerca_od_cilindrico =  $lente->getCercaOdCilindrico();
 				}
-				if(empty($puente))
+				if(empty($cerca_od_grados))
 				{
-					$puente =  $lente->getPuente();
+					$cerca_od_grados =  $lente->getCercaOdGrados();
+				}
+				if(empty($cerca_oi_esferico))
+				{
+					$cerca_oi_esferico =  $lente->getCercaOiEsferico();
+				}
+				if(empty($cerca_oi_cilindrico))
+				{
+					$cerca_oi_cilindrico =  $lente->getCercaOiCilindrico();
+				}
+				if(empty($cerca_oi_grados))
+				{
+					$cerca_oi_grados =  $lente->getCercaOiGrados();
+				}
+				if(empty($cerca_color))
+				{
+					$cerca_color =  $lente->getCercaColor();
+				}
+				else
+				{
+					$cerca_color = ucwords($cerca_color); 
+				}
+
+				if($complit=='SI')
+				{
+					$cerca_od_cilindrico = $lejos_od_cilindrico;
+					$cerca_od_grados = $lejos_od_grados;
+					$cerca_oi_cilindrico =	$lejos_oi_cilindrico;
+					$cerca_oi_grados =	$lejos_oi_grados;
+				}
+				if(empty($cerca_color))
+				{
+					$cerca_color = $lejos_color;
 				}
 
 				if(!empty($id_lente)){
-					$lenteInstance = new Lente($medico, $armazon_cerca, $armazon_lejos, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $cilindrico, $en_grados, $distancia, $calibre, $puente, $color, $fecha);
+					$lenteInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
 					$idLent = $this->daoLente->actualizar( $lenteInstance, $id_lente );
-					$regCompleted = TRUE;
-					$this->mensaje = new Mensaje( "success", "El Lente fue Modificaco con exito!" );
-				}
 
-				switch ($regCompleted){
-					case TRUE:
+					$this->mensaje = new Mensaje( "success", "El Lente fue Modificaco con exito!" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "inicio.php");
 					include URL_VISTA . 'footer.php';
-					break;
-
-					case FALSE:
+				}
+				else
+				{
 					$this->mensaje = new Mensaje( "success", "Ocurrio un Problema" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "modificarlente.php");
 					include URL_VISTA . 'footer.php';
-					break;
 				}
+
 			}
 			else{
 				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
@@ -522,9 +541,9 @@ function eliminarusuario($id_usuario){
 		}
 	}
 
-	function eliminarlente($id_lente, $id_cliente){
+	public	function eliminarlente($id_lente, $id_cliente){
 		try{
-			
+
 			if(!empty($_SESSION)){
 
 				$regCompleted = FALSE;
@@ -586,10 +605,10 @@ function eliminarusuario($id_usuario){
 			echo $error->getMessage();
 		}
 	}
-	
-	function modificarfactura($id_lente, $id_factura, $armasonl, $armazonc, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $senia, $fecha){
+
+	public	function modificarfactura($id_lente, $id_factura, $armasonl, $armazonc, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $senia, $fecha){
 		try{
-			
+
 			if(!empty($_SESSION)){
 				if(!empty($id_factura)){
 
@@ -701,9 +720,9 @@ function eliminarusuario($id_usuario){
 
 	}
 
-	function eliminarfactura($id_lente, $id_factura, $id_cliente){
+	public	function eliminarfactura($id_lente, $id_factura, $id_cliente){
 		try{
-			
+
 			if(!empty($_SESSION)){
 
 				$regCompleted = FALSE;

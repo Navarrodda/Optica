@@ -9,7 +9,7 @@
 <div class="container mh-400" style="margin-top:30px;">
 	<div class="container lower-box box-primary" style="text-align: center;">
 		<?php if($factura!= null ) { ?>
-			<h2 class="section-heading">Costos del lente ID:<?= $lente->getId() ?> del Cliente: <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?>  </h2>
+			<h2 class="section-heading">Costos del lente ID:<?= $lente->getId() ?> del Cliente: <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?> es de:  </h2>
 			<hr class="primary"> <?php }
 			else{ ?>
 				<h2 class="section-heading">No hay Saldos cargados en el Sistema del Cliente: <?= $cliente->getNombre() ,' ', $cliente->getApellido() ?> </h2>
@@ -28,24 +28,6 @@
 										<tr style="color:white">
 											<th>
 												id
-											</th>
-											<th>
-												 A Lejos
-											</th>
-											<th>
-												 A Cerca
-											</th>
-											<th>
-												 L OD
-											</th>
-											<th>
-												 L OI
-											</th>
-											<th>
-												 C OD
-											</th>
-											<th>
-												 C OI
 											</th>
 											<th>
 												Sub Total
@@ -68,24 +50,6 @@
 										<tr style="color:white">
 											<td>
 												<?= $factura->getId(); ?>
-											</td>
-											<td>
-												$<?= $factura->getSaldoArmazoL(); ?>
-											</td>
-											<td>
-												$<?= $factura->getSaldoArmazonC(); ?>
-											</td>
-											<td>
-												$<?= $factura->getSaldoLejosoD(); ?>
-											</td>
-											<td>
-												$<?= $factura->getSaldoLejosoI(); ?>
-											</td>
-											<td>
-												$<?= $factura->getSaldoCercaOd(); ?>
-											</td>
-											<td>
-												$<?= $factura->getSaldoCercaOi(); ?>
 											</td>
 											<td>
 												$<?= $factura->getSubTotal(); ?>

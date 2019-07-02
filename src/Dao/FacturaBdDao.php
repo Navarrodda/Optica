@@ -44,12 +44,11 @@ class FacturaBdDao{
 
 
 	public function agregar(Factura $factura){
-
 		try{
-
+			
 			$sql = ("INSERT INTO $this->tabla (id_lente, sub_total, senia, saldo_total) VALUES (:id_lente, :sub_total, :senia, :saldo_total) ");
 
-			$conexion = Conexion::conectar();
+            $conexion = Conexion::conectar();
 
 			$sentencia = $conexion->prepare($sql);
 

@@ -38,15 +38,16 @@
 					<input name="cilindri_l_oi" type="text" class="col-md-4 norightborder btn2" placeholder="Ci l OD">
 					<input name="l_en_grados_oi" type="text" class="col-md-2 norightborder btn2" placeholder="En Grados">
 					<input name="l_color" type="text" class="col-md-2 norightborder btn2" placeholder="Color">
+					<input type=hidden name="complit" id="NO" value="NO">
 					<div>
 						<label class="col-md-1 content-input">
-							<input type="checkbox" name="complit" id="si" value="SI">
+							<input type="checkbox" name="complit" id="SI" value="SI">
 							<i></i>
 						</label>
 					</div>
 					<div class="col-md-9">
 						<p style="background-color:black">Duplicar los campos siguientes: Cilindrico y En Grados</p>
-					</div>				
+					</div>							
 					<input name="cerca_od" type="text" class="col-md-4 norightborder btn2" placeholder="Cerca OD EFC">
 					<input name="c_cerca_od" type="text" class="col-md-4 norightborder btn2" placeholder="Ci c OD">
 					<input name="c_en_grados_od" type="text" class="col-md-4 norightborder btn2" placeholder="En Grados">

@@ -19,12 +19,12 @@ class Factura
      * @param    $senia   
      * @param    $saldo_total   
      */
-    public function __construct($id_lente, $sub_total, $senia, $saldo_total)
+    public function __construct($sub_total, $senia, $saldo_total, $id_lente)
     {
-        $this->id_lente = $id_lente;
         $this->sub_total = $sub_total;
         $this->senia = $senia;
         $this->saldo_total = $saldo_total;
+        $this->id_lente = $id_lente;
     }
 
     /**

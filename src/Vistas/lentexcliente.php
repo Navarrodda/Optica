@@ -45,18 +45,18 @@
                                     </tr style="color:white"> 
                                     <tr style="color:white">
                                         <td colspan="2">Lejos O.D.Esf: <?= $objeto->getLejosOdEsferico(); ?></td>
-                                        <td colspan="2">Cilindrico:<?= $objeto->getLejosOdCilindrico(); ?></td>
-                                        <td colspan="2">Grados°:<?= $objeto->getLejosOdGrados(); ?></td>
+                                        <td colspan="2">Cilindrico: <?= $objeto->getLejosOdCilindrico(); ?></td>
+                                        <td colspan="2">Grados°: <?= $objeto->getLejosOdGrados(); ?></td>
                                     </tr >
                                     <tr style="color:white">
                                        <td colspan="2">Lejos O.I. Esf: <?= $objeto->getLejosOiEsferico(); ?></td>
-                                       <td colspan="2">Cilindrico:<?= $objeto->getLejosOiCilindrico(); ?></td>
+                                       <td colspan="2">Cilindrico: <?= $objeto->getLejosOiCilindrico(); ?></td>
                                        <td colspan="2">Grados°: <?= $objeto->getLejosOiGrados(); ?></td>
                                        <td colspan="2">Color: <?= $objeto->getLejosColor(); ?></td>
                                    </tr>
                                    <tr style="color:white">
                                     <td colspan="2">Cerca O.D. Esf: <?= $objeto->getCercaOdEsferico(); ?></td>
-                                    <td colspan="2">Cilindrico:<?= $objeto->getCercaOdCilindrico(); ?></td>
+                                    <td colspan="2">Cilindrico: <?= $objeto->getCercaOdCilindrico(); ?></td>
                                     <td colspan="2">Grados°: <?= $objeto->getCercaOdGrados(); ?></td>
                                 </tr>
                                 <tr style="color:white">

@@ -117,7 +117,7 @@
 <?php
 if(!empty($longitud))
     if($longitud != 1)
-        if($longitud > 9)   
+        if($longitud > 1)   
        {
         {
             {

@@ -94,6 +94,8 @@ class RegistrarControladora
 				$doctor = ucwords($doctor);
 				$lejos_color = ucwords($lejos_color);
 				$cerca_color = ucwords($cerca_color);
+				$observacion = ucwords($observacion);
+
 
 				$nombreapellido = $nombre .' '. $apellido;
 				if($complit=='SI')
@@ -105,11 +107,7 @@ class RegistrarControladora
 				}
 				if(empty($cerca_color))
 				{
-					$cerca_color = $lejos_color
-				}
-				if(!empty($senia))
-				{
-					$saldo_total = $subtotal - $senia;
+					$cerca_color = $lejos_color;
 				}
 				$fecha = date('Y-m-d');
 				$userInstance = new Cliente($nombre, $apellido, $telefono);
@@ -123,35 +121,39 @@ class RegistrarControladora
 				$lentxclientInstance = new Lente_x_cliente($id_cliente, $id_lente);
 				$idLentxclient = $this->daoLentexcliente->agregar( $lentxclientInstance );
 				$lentxclientInstance->setIdLenteXCliente($idLentxclient);
-				if(!empty($senia)){
-					$saldo_total = $sub_total - $senia;
-					if ($saldo_total < 0) {
-						$saldo_total = 0;
+				if(!empty($subtotal)){
+					if(!empty($senia)){
+						$saldo_total = $subtotal - $senia;
+						if ($saldo_total < 0) {
+							$saldo_total = 0;
+						}
 					}
+					else{
+						$saldo_total = $subtotal;
+					}
+					$sub_total = $subtotal;
+					$factInstance = new Factura($sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($idLent));
+					$idfact = $this->daoFactura->agregar( $factInstance );
+					$factInstance->setId( $idfact );
+
+
+
+					$a_cuenta = $senia; 
+					$saldo = $subtotal;
+					$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
+					$idsaldo = $this->daoCuentasaldos->agregar( $salInstance );
+					$salInstance->setId( $idsaldo );
+
+					$id_cliente = $this->daoCliente->traerPorId($idClie);
+
+					$id_cuentasaldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+
+					$id_lente = $this->daoLente->traerPorId($idLent);
+					$clisald = new Senias_x_cliente_lente($id_cuentasaldos, $id_cliente, $id_lente);
+					$idclsald = $this->daoSenia->agregar( $clisald );
+					$clisald->setIdSeniaXCliente( $idclsald );
+
 				}
-				else{
-					$saldo_total = $sub_total;
-				}
-				$factInstance = new Factura($subtotal, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
-				$idfact = $this->daoFactura->agregar( $factInstance );
-				$factInstance->setId( $idfact );
-
-				$a_cuenta = $senia; 
-				$saldo = $saldo_total;
-				$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
-				$idsaldo = $this->daoCuentasaldos->agregar( $salInstance );
-				$salInstance->setId( $idsaldo );
-
-				$id_cliente = $this->daoCliente->traerPorId($id_cliente);
-
-				$id_cuentasaldos = $this->daoCuentasaldos->traerPorId($idsaldo);
-
-				$id_lente = $this->daoLente->traerPorId($id_lente);
-				$clisald = new Senias_x_cliente_lente($id_cuentasaldos, $id_cliente, $id_lente);
-				$idclsald = $this->daoSenia->agregar( $clisald );
-				$clisald->setIdSeniaXCliente( $idclsald );
-				
-
 				$regCompleted = TRUE;
 				$this->mensaje = new Mensaje( "success", 'El Cliente:' .' '.'<i><strong>' .  $nombreapellido
 					. '</strong></i> fue registrado con exito!' );
@@ -230,15 +232,13 @@ class RegistrarControladora
 		}
 	}
 
-	public function registrarfactura($id_lente, $id_cliente, $armasonl, $armazonc, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $senia){
+	public function registrarfactura($id_lente, $id_cliente, $sub_total, $senia){
 		try{
 			$regCompleted = FALSE;
 
 			if(!empty($_SESSION)){
 
 				if(!empty($id_lente)){
-
-					$sub_total = $armasonl + $armazonc + $lejos_od + $lejos_oi + $cerca_od + $cerca_oi;
 
 					if(!empty($senia)){
 						$saldo_total = $sub_total - $senia;
@@ -249,7 +249,7 @@ class RegistrarControladora
 					else{
 						$saldo_total = $sub_total;
 					}
-					$factInstance = new Factura($armasonl, $armazonc, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
+					$factInstance = new Factura($sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
 					$idfact = $this->daoFactura->agregar( $factInstance );
 					$factInstance->setId( $idfact );
 

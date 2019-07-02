@@ -111,33 +111,30 @@ class VistaControladora
 		$longitud = count($medir);
 		$contador = count($cliente);
 		$i = 0;
-		if (!empty($cliente)) {
-			
-			foreach ($cliente as $clie) {
+		foreach ($cliente as $clie) {
 
-				$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
+			$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
 
-				if (!empty($senia)) {
+			if (!empty($senia)) {
 
-					if (!empty($senia[0])) 
-					{
-						$senias = $senia[0]->getIdCuentaSaldo();
-						$cl = $senia[0]->getIdCliente();
+				if (!empty($senia[0])) 
+				{
+					$senias = $senia[0]->getIdCuentaSaldo();
+					$cl = $senia[0]->getIdCliente();
 
-						if ($clie->getId() == $cl->getId()){
+					if ($clie->getId() == $cl->getId()){
 
-							$cliente[$i]->codigo = $senias->getId();
-						}	
-					}
-					$senia = NULL;
+						$cliente[$i]->codigo = $senias->getId();
+					}	
 				}
-				$i++;
+				$senia = NULL;
 			}
-			$longitud = $longitud + 10;
-			$longitud = $longitud / 10;
-			
-			$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
+			$i++;
 		}
+		$longitud = $longitud + 10;
+		$longitud = $longitud / 10;
+	
+		$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
 		include URL_VISTA . 'footer.php';
@@ -147,37 +144,24 @@ class VistaControladora
 	{	
 
 		$calcular = $this->daoCliente->traerTodo();
-		$calcular = count($calcular) +1;
+		$calcular = count($calcular);
+
 		if (!empty($limit)) {
-
 			if ($limit == -1) {
-				if($longitud > 9)
-				{
-					$entrada = $entrada + 1;
-					if ($entrada >= $longitud) {
-						$limit = $limit - 2;
-						$entrada = $entrada -1;
-					}
+				$entrada = $entrada + 1;
+				if ($entrada >= $longitud) {
+					$limit = $limit - 2;
+					$entrada = $entrada -1;
+				}
 
-				}
-				else
-				{
-					$limit = 0;
-				}
 			}
 
 			if ($limit == -2) {
-				if($longitud > 9){
-					$entrada = $entrada - $pantalla;
-					if ($entrada <= 1){
-						$entrada = 1;
-						$pantalla = 1;
-						$limit = 1;
-					}
-				}
-				else
-				{
-					$limit = 0;
+				$entrada = $entrada - $pantalla;
+				if ($entrada <= 1){
+					$entrada = 1;
+					$pantalla = 1;
+					$limit = 1;
 				}
 			}
 
@@ -187,14 +171,9 @@ class VistaControladora
 			}
 			else
 			{
-				if ($longitud > 9) {
-					$limit = 9 * $entrada;
-					$limit = $limit - 8;
-				}
-				else
-				{
-					$limit = 0;
-				}
+
+				$limit = 9 * $entrada;
+				$limit = $limit - 8;
 			}
 			$cliente = $this->daoCliente->traerTodoLimit($limit);
 			$contador =count($cliente);
