@@ -70,36 +70,36 @@
 									</tr>
 									<?php 
 									if($factura!= null )
-									{?>
-										<tr style="color:white">
-											<td colspan="2">Sub Total: <?= $factura->getSubTotal(); ?></td>
-											<td colspan="2">Seña: <?= $factura->getSenia(); ?></td>
-											<td colspan="2">Saldo Total: <?= $factura->getSaldoTotal(); ?></td>
-										</tr >
+										{?>
+											<tr style="color:white">
+												<td colspan="2">Sub Total: <?= $factura->getSubTotal(); ?></td>
+												<td colspan="2">Seña: <?= $factura->getSenia(); ?></td>
+												<td colspan="2">Saldo Total: <?= $factura->getSaldoTotal(); ?></td>
+											</tr >
 
-										<?php 
-									} ?>
-									<td colspan="2" style="color:white">.
+											<?php 
+										} ?>
+										<td colspan="2" style="color:white">.
+										</td>
+										<td colspan="2" style="color:white">Modificar:
+											<a href="/vista/modificaclienterlente/<?= $cliente->getId(); ?>/<?= $lente->getId(); ?>/<?= $factura->getId(); ?>/<?= $cuenta_saldos->getId();?>/" class="disabled">
+												<span class="glyphicon glyphicon-pencil" title="Modificar"
+												data-toggle="tooltip" data-placement="right">
+											</span>
+										</a>
 									</td>
-									<td colspan="2" style="color:white">Modificar:
-										<a href="/vista/modificarlente/<?= $cliente->getId()?>/<?=$lente->getId(); ?>" class="disabled">
-											<span class="glyphicon glyphicon-pencil" title="Modificar"
+									<td colspan="2" style="color:white">PDF:
+										<a href="/pdf/pdfclientelente/<?= $lente->getId(); ?>/<?= $cliente->getId(); ?>/" target="_blank" class="disabled">         
+											<span class="glyphicon glyphicon-cloud-upload" title="PDF"
 											data-toggle="tooltip" data-placement="right">
 										</span>
-									</a>
-								</td>
-								<td colspan="2" style="color:white">PDF:
-									<a href="/pdf/pdfclientelente/<?= $lente->getId(); ?>/<?= $cliente->getId(); ?>/" target="_blank" class="disabled">         
-										<span class="glyphicon glyphicon-cloud-upload" title="PDF"
-										data-toggle="tooltip" data-placement="right">
-									</span>
-								</td>
-								<?php  
-							} ?>
-						</tbody>
-					</table>
+									</td>
+									<?php  
+								} ?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>

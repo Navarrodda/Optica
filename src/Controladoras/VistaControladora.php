@@ -20,7 +20,7 @@ use Dao\ClienteBdDao as ClienteBdDao;
 use Dao\LenteBdDao as LenteBdDao;
 use Dao\LentexclienteBdDao as LentexclienteBdDao;
 use Dao\FacturaBdDao as FacturaBdDao;
-use Dao\CuentsaldosBdDao as CuentsaldosBdDao;
+use Dao\CuentasaldosBdDao as CuentasaldosBdDao;
 use Dao\SeniasxclientelenteBdDao as SeniasxclientelenteBdDao;
 
 class VistaControladora
@@ -31,6 +31,7 @@ class VistaControladora
 	protected $daoLentexcliente;
 	protected $daoFactura;
 	protected $daoSenia;
+	protected $daoCuenta_saldos;
 	
 	private $mensaje;
 	private $cliente;
@@ -50,6 +51,7 @@ class VistaControladora
 		$this->daoLentexcliente = LentexclienteBdDao::getInstancia();
 		$this->daoFactura = FacturaBdDao::getInstancia();
 		$this->daoSenia = SeniasxclientelenteBdDao::getInstancia();
+		$this->daoCuenta_saldos = CuentasaldosBdDao::getInstancia();
 	}
 
 	public function index()
@@ -133,7 +135,7 @@ class VistaControladora
 		}
 		$longitud = $longitud + 10;
 		$longitud = $longitud / 10;
-	
+
 		$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
@@ -375,6 +377,29 @@ class VistaControladora
 		$factura = $this->daoFactura->traerPorId($id_factura);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "modificarfactura.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function modificaclienterlente($id_cliente, $id_lente, $id_factura, $id_cuenta_saldos)
+	{
+		if(!empty($id_cliente))
+		{
+			$cliente = $this->daoCliente->traerPorId($id_cliente);
+		}
+		if(!empty($id_lente))
+		{
+			$lente = $this->daoLente->traerPorId($id_lente);
+		}
+		if(!empty($id_factura))
+		{
+			$factura = $this->daoFactura->traerPorId($id_factura);
+		}
+		if(!empty($id_cuenta_saldos))
+		{
+			$cuenta_saldos = $this->daoCuenta_saldos->traerPorId($id_cuenta_saldos);
+		}
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarclientelente.php");
 		include URL_VISTA . 'footer.php';
 	}
 

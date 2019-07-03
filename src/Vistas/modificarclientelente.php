@@ -23,11 +23,15 @@
 						<button type="button" class="close" data-dismiss="alert"></button>
 					</div>
 				</div>
-				<form id="form_r" method="post" action="/registrar/registrarclientelente/" target="_blank" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
-					<input required name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Nombre">
-					<input required name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
-					<input required name="telefono" type="text" class="col-md-4 norightborder btn2" placeholder="Telefono">
-					<input required name="doctor" type="text" class="col-md-4 norightborder btn2" placeholder="Doctor">
+				<form id="form_r" method="post" action="/administrar/modificarclientelente/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
+					<input  name="id_cliente" type=hidden value="<?= $cliente->getId()?>">
+					<input  name="id_lente" type=hidden value="<?= $lente->getId()?>">
+					<input  name="id_factura" type=hidden value="<?= $factura->getId()?>">
+					<input  name="id_cuenta_saldos" type=hidden value="<?= $cuenta_saldos->getId()?>">
+					<input  name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Nombre">
+					<input  name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
+					<input  name="telefono" type="text" class="col-md-4 norightborder btn2" placeholder="Telefono">
+					<input  name="doctor" type="text" class="col-md-4 norightborder btn2" placeholder="Doctor">
 					<input name="observaciones" type="text" class="col-md-4 norightborder btn2" placeholder="Observaciones">
 					<input name="armason_l" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Lejos">	
 					<input name="armason_c" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Cerca">	
@@ -58,7 +62,7 @@
 					<input name="c_color" type="text" class="col-md-2 norightborder btn2" placeholder="Color">
 					<input name="subtotal" type="number" class="col-md-6 norightborder btn2" placeholder="$ Subtotal">
 					<input name="senia" type="number" class="col-md-6 norightborder btn2" placeholder="$ Seña">
-					<button  type="submit" class="contact submit btn-primary btn-xl pull-right">Guardar</button>
+					<button  type="submit" class="contact submit btn-primary btn-xl pull-right">Modificar</button>
 				</form>
 			</div>
 		</div>
