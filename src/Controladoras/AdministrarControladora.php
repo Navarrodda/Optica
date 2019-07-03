@@ -828,7 +828,7 @@ class AdministrarControladora
 		}
 	}
 
-	public	function modificarfactura($id_lente, $id_factura, $armasonl, $armazonc, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $senia, $fecha){
+	public	function modificarfactura($id_lente, $id_factura, $subtotal, $senia, $fecha){
 		try{
 
 			if(!empty($_SESSION)){
@@ -851,29 +851,9 @@ class AdministrarControladora
 						}
 					}
 
-					if(empty($armasonl))
+					if(empty($subtotal))
 					{
-						$armasonl = $factura->getSaldoArmazoL();
-					}
-					if(empty($armazonc))
-					{
-						$armazonc =  $factura->getSaldoArmazonC();
-					}
-					if(empty($lejos_od))
-					{
-						$lejos_od =  $factura->getSaldoLejosoD();
-					}
-					if(empty($lejos_oi))
-					{
-						$lejos_oi =  $factura->getSaldoLejosoI();
-					}
-					if(empty($cerca_od))
-					{
-						$cerca_od =  $factura->getSaldoCercaOd();
-					}
-					if(empty($cerca_oi))
-					{
-						$cerca_oi =  $factura->getSaldoCercaOi();
+						$subtotal = $factura->getSubTotal();
 					}
 					if(empty($senia))
 					{
@@ -884,45 +864,34 @@ class AdministrarControladora
 						$fecha = date('Y-m-d');
 					}
 
-					$sub_total = $armasonl + $armazonc + $lejos_od + $lejos_oi + $cerca_od + $cerca_oi;
+					if(!empty($id_factura)){
 
-					if(!empty($senia)){
-						$saldo_total = $sub_total - $senia;
-						if ($saldo_total < 0) {
-							$saldo_total = 0;
+						if(!empty($senia)){
+							$saldo_total = $subtotal - $senia;
+							if ($saldo_total < 0) {
+								$saldo_total = 0;
+							}
 						}
+						else{
+							$saldo_total = $subtotal;
+						}
+
+						$factInstance = new Factura($subtotal, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
+						$idfact = $this->daoFactura->actualizar( $factInstance, $id_factura );
+
+						$a_cuenta = $senia; 
+						$saldo = $saldo_total;
+						$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
+						$idsaldo = $this->daoCuentasaldos->actualizar( $salInstance, $cuentasaldos[0]->getId());
+						$this->mensaje = new Mensaje( "success", "El costo del lente fue modificado con exito!" );
+
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "inicio.php");
+						include URL_VISTA . 'footer.php';
+						break;
 					}
-					else{
-						$saldo_total = $sub_total;
-					}
 
-					$factInstance = new Factura($armasonl, $armazonc, $lejos_od, $lejos_oi, $cerca_od, $cerca_oi, $sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
-					$idfact = $this->daoFactura->actualizar( $factInstance, $id_factura );
-
-					$a_cuenta = $senia; 
-					$saldo = $saldo_total;
-					$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
-					$idsaldo = $this->daoCuentasaldos->actualizar( $salInstance, $cuentasaldos[0]->getId());
-					$regCompleted = TRUE;
-					$this->mensaje = new Mensaje( "success", "El costo del lente fue modificado con exito!" );
 				}
-
-
-				switch ($regCompleted){
-					case TRUE:
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "inicio.php");
-					include URL_VISTA . 'footer.php';
-					break;
-
-					case FALSE:
-					$this->mensaje = new Mensaje( "success", "Error!" );
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "modificarusuario.php");
-					include URL_VISTA . 'footer.php';
-					break;
-				}
-
 			}
 			else{
 				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
