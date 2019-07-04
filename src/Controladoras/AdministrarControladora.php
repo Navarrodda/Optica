@@ -973,4 +973,57 @@ class AdministrarControladora
 			echo $error->getMessage();
 		}
 	}
+
+	public	function eliminarcuenta($id_cuenta, $id_cliente){
+		try{
+			if(!empty($_SESSION)){
+				if(!empty($id_cliente))
+				{
+					$cliente = $this->daoCliente->traerPorId($id_cliente);
+					$saldocuenta =$this->daoSeniasaldos->traerPorIdcuentasaldo($id_cuenta);
+					$nombreapellido = $cliente->getNombre() .' '. $cliente->getApellido();
+					$lente = $saldocuenta[0]->getIdLente();
+					$final = "id" .' '. $lente->getId() . ' ' . 'Del Cliente'.' ' . $nombreapellido;	
+					$senia = $this->daoSeniasaldos->traerPorIdLente($lente->getId());
+					$this->daoSeniasaldos->eliminarPorIdLente($lente->getId());
+					$longitud = count($senia);
+					if(!empty($senia))
+					{
+						for ($i=0; $i < $longitud ; $i++) { 
+							$cuenta = $senia[$i]->getIdCuentaSaldo();
+							if(!empty($cuenta))
+							{
+								$id_cuenta = $cuenta->getId();
+								$this->daoCuentasaldos->eliminarPorId($id_cuenta);	
+							}
+						}
+					}
+					$this->daoFactura->eliminarPorIdLente($lente->getId());
+					$this->mensaje = new Mensaje('success', 'Se a pagado sactifactoriamente el pago del lente
+						! ID' .' '.'<i><strong>' .  $final
+						. '</strong></i>');
+
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "inicio.php");
+					include URL_VISTA . 'footer.php';
+				}
+
+
+			}
+			else{
+				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}catch(\PDOException $pdo_error){
+			$this->mensaje = new \Modelo\Mensaje("danger","Ocurrio un error con la Base de Datos: " . $pdo_error);
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'error.php');
+			include URL_VISTA . 'footer.php';
+		}catch(\Exception $error){
+			echo $error->getMessage();
+		}
+	}
 }

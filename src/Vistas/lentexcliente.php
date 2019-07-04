@@ -27,80 +27,105 @@
                            {
                             ?>
                             <tbody>
-                                <?php
-                                foreach ($lente as $objeto) {
-                                    ?>
                                      <tr style="color:white">
-                                        <td rowspan="10" valign="middle">ID: <?= $objeto->getId(); ?></td>
+                                        <td rowspan="10" valign="middle">ID: <?= $lente->getId(); ?></td>
                                      </tr>
                                      <tr style="color:white">
-                                        <td colspan="2" >Doctor: <?= $objeto->getDoctor(); ?></td>
-                                        <td colspan="2">Observación: <?= $objeto->getObservacion(); ?></td>
+                                        <td colspan="2" >Doctor: <?= $lente->getDoctor(); ?></td>
+                                        <td colspan="2">Observación: <?= $lente->getObservacion(); ?></td>
                                     </tr>
                                     <tr style="color:white"> 
-                                        <td colspan="12">Armazon Lejos: <?= $objeto->getArmazonLejos(); ?></td>
+                                        <td colspan="12">Armazon Lejos: <?= $lente->getArmazonLejos(); ?></td>
                                     </tr>
                                     <tr style="color:white"> 
-                                        <td colspan="12">Armazon Cerca: <?= $objeto->getArmazonCerca() ?></td>
+                                        <td colspan="12">Armazon Cerca: <?= $lente->getArmazonCerca() ?></td>
                                     </tr style="color:white"> 
                                     <tr style="color:white">
-                                        <td colspan="2">Lejos O.D.Esf: <?= $objeto->getLejosOdEsferico(); ?></td>
-                                        <td colspan="2">Cilindrico: <?= $objeto->getLejosOdCilindrico(); ?></td>
-                                        <td colspan="2">Grados°: <?= $objeto->getLejosOdGrados(); ?></td>
+                                        <td colspan="2">Lejos O.D.Esf: <?= $lente->getLejosOdEsferico(); ?></td>
+                                        <td colspan="2">Cilindrico: <?= $lente->getLejosOdCilindrico(); ?></td>
+                                        <td colspan="2">Grados°: <?= $lente->getLejosOdGrados(); ?></td>
                                     </tr >
                                     <tr style="color:white">
-                                       <td colspan="2">Lejos O.I. Esf: <?= $objeto->getLejosOiEsferico(); ?></td>
-                                       <td colspan="2">Cilindrico: <?= $objeto->getLejosOiCilindrico(); ?></td>
-                                       <td colspan="2">Grados°: <?= $objeto->getLejosOiGrados(); ?></td>
-                                       <td colspan="2">Color: <?= $objeto->getLejosColor(); ?></td>
+                                       <td colspan="2">Lejos O.I. Esf: <?= $lente->getLejosOiEsferico(); ?></td>
+                                       <td colspan="2">Cilindrico: <?= $lente->getLejosOiCilindrico(); ?></td>
+                                       <td colspan="2">Grados°: <?= $lente->getLejosOiGrados(); ?></td>
+                                       <td colspan="2">Color: <?= $lente->getLejosColor(); ?></td>
                                    </tr>
                                    <tr style="color:white">
-                                    <td colspan="2">Cerca O.D. Esf: <?= $objeto->getCercaOdEsferico(); ?></td>
-                                    <td colspan="2">Cilindrico: <?= $objeto->getCercaOdCilindrico(); ?></td>
-                                    <td colspan="2">Grados°: <?= $objeto->getCercaOdGrados(); ?></td>
+                                    <td colspan="2">Cerca O.D. Esf: <?= $lente->getCercaOdEsferico(); ?></td>
+                                    <td colspan="2">Cilindrico: <?= $lente->getCercaOdCilindrico(); ?></td>
+                                    <td colspan="2">Grados°: <?= $lente->getCercaOdGrados(); ?></td>
                                 </tr>
                                 <tr style="color:white">
-                                    <td colspan="2">Cerca O.I. Esf:  <?= $objeto->getCercaOiEsferico(); ?></td>
-                                    <td colspan="2">Cilindrico: <?= $objeto->getCercaOiCilindrico(); ?></td>
-                                    <td colspan="2">Grados°: <?= $objeto->getCercaOiGrados(); ?></td>
-                                    <td colspan="2">Color: <?= $objeto->getCercaColor(); ?></td>
+                                    <td colspan="2">Cerca O.I. Esf:  <?= $lente->getCercaOiEsferico(); ?></td>
+                                    <td colspan="2">Cilindrico: <?= $lente->getCercaOiCilindrico(); ?></td>
+                                    <td colspan="2">Grados°: <?= $lente->getCercaOiGrados(); ?></td>
+                                    <td colspan="2">Color: <?= $lente->getCercaColor(); ?></td>
                                 </tr>
 
                                 <tr style="color:white"> 
-                                    <td colspan="12">Fecha: <?= date('d-m-Y',strtotime($objeto->getFecha())); ?></td>
+                                    <td colspan="12">Fecha: <?= date('d-m-Y',strtotime($lente->getFecha())); ?></td>
                                 </tr>
                                 <td colspan="2" style="color:white">:Factura
-                                    <a  href="/vista/factura/<?= $objeto->getId(); ?>/<?= $cliente->getId()?>" class="disabled">         
+                                    <a  href="/vista/factura/<?= $lente->getId(); ?>/<?= $cliente->getId()?>" class="disabled">         
                                         <span class="glyphicon glyphicon-list-alt" title="Factura"
                                         data-toggle="tooltip" data-placement="right">
                                     </span>
                                 </td>
                                 <td colspan="2" style="color:white">PDF:
-                                    <a href="/pdf/pdfclientelente/<?= $objeto->getId(); ?>/<?= $cliente->getId(); ?>/" target="_blank" class="disabled">         
+                                    <a href="/pdf/pdfclientelente/<?= $lente->getId(); ?>/<?= $cliente->getId(); ?>/" target="_blank" class="disabled">         
                                         <span class="glyphicon glyphicon-cloud-upload" title="PDF"
                                         data-toggle="tooltip" data-placement="right">
                                     </span>
                                 </td>
                                 <td colspan="2" style="color:white">Modificar:
-                                    <a href="/vista/modificarlente/<?= $cliente->getId()?>/<?=$objeto->getId(); ?>" class="disabled">
+                                    <a href="/vista/modificarlente/<?= $cliente->getId()?>/<?=$lente->getId(); ?>" class="disabled">
                                         <span class="glyphicon glyphicon-pencil" title="Modificar"
                                         data-toggle="tooltip" data-placement="right">
                                     </span>
                                 </a>
                             </td>
                             <td colspan="2" style="color:white">Eliminar:
-                                <a type="submit" method="post"  name="id_cliente" href="/administrar/eliminarlente/<?= $objeto->getId(); ?>/<?= $cliente->getId(); ?>" class="disabled">
+                                <a type="submit" method="post"  name="id_cliente" href="/administrar/eliminarlente/<?= $lente->getId(); ?>/<?= $cliente->getId(); ?>" class="disabled">
                                     <span class="glyphicon glyphicon-trash"  title="Eliminar Lente"
                                     data-toggle="tooltip" data-placement="right">
                                 </span>
                             </a>
-                        </td>
-                <?php } 
+                      </td>
+                      <?php  
             } ?>
         </tbody>
     </table>
 </div>
 </div>
 </div>
+<?php
+if(!empty($longitud))
+    if($longitud != 1)
+        if($longitud > 1)   
+       {
+        {
+            {
+                ?>
+                <div id="navegador">
+                    <ul>
+                        <li><a href="/vista/lentesclienteslimit/<?= $cliente->getId(); ?>/<?= -1; ?>/<?= $longitud - 1; ?>/<?= $entrada; ?>/<?= $entrada; ?>/">Siguiente</a></li>
+                        <?php
+                        for ($contador = 1; $contador < $longitud; $contador++){
+                            ?>
+                            <li><a href="/vista/lentesclienteslimit/<?= $cliente->getId(); ?>/<?= $pantalla; ?>/<?= $longitud - 1; ?>/<?= $pantalla; ?>/<?= $pantalla; ?>/"><?php print_r($pantalla); ?></a></li>
+                            <?php
+                            $entrada++;
+                            $pantalla++;
+                        }
+                        ?>
+                        <li><a href="/vista/lentesclienteslimit/<?= $cliente->getId(); ?>/<?= -2; ?>/<?= $longitud - 1; ?>/<?= $entrada; ?>/<?= $pantalla; ?>/">Anterior</a></li>
+                    </ul>
+                </div>
+                <?php
+            }
+        }
+    }
+    ?>
 </div>
 </div>

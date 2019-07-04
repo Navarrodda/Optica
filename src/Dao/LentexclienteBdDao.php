@@ -134,6 +134,32 @@ class LentexclienteBdDao{
 		}
 	}
 
+	public function traerLenteLimit($id_cliente, $limit)
+    {
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE id_cliente = \"$id_cliente\" LIMIT $limit, 1";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+
+            $this->mapear($dataSet);
+
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
 		public function eliminarPorIdLente($id_lente ){
         try{
 

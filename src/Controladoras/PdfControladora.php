@@ -506,7 +506,7 @@ class PdfControladora
 		}
 	}
 
-	/*function pdfcargamanual($fecha, $entrega_c,$observaciones, $a_cuenta, $saldo, $r_fecha,$senior, $calle, $telefono, $doctor, $proc, $armason_l, $lejos_pesos, $armason_c, $cerca_pesos, $lejos_od,  $cilindri_l_od, $l_en_grados_od, $l_pesos_od, $lejos_oi, $cilindri_l_oi,  $l_en_grados_oi,  $l_color, $l_pesos_oi, $cerca_od, $c_cerca_od, $c_en_grados_od, $c_pesos_od, $cerca_oi, $cilindri_c_oi, $c_en_grados_oi, $c_color, $c_pesos_oi, $di, $calibre, $puente, $subtotal, $senia, $saldo_total)
+	function pdfcargamanual($nombre, $apellido, $telefono, $doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $complit, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $subtotal, $senia)
 	{
 		if(!empty($_SESSION))
 		{
