@@ -380,7 +380,6 @@ class VistaControladora
 					$limit= $limit -1;
 				}
 			}
-print_r($limit);
 			if(!empty($id_cliente)){
 				{
 					$cunt = $this->daoLentexcliente->traerPorIdCliente($id_cliente);
@@ -402,79 +401,79 @@ print_r($limit);
 			}
 		}
 
-	else
-	{
-		$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "inicio.php");
-		include URL_VISTA . 'footer.php';
-	}
-}
-
-public function modificarlente($id_cliente, $id_lente)
-{
-	$cliente = $this->daoCliente->traerPorId($id_cliente);
-	$lente = $this->daoLente->traerPorId($id_lente);
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . "modificarlente.php");
-	include URL_VISTA . 'footer.php';
-}
-
-public function factura($id_lente,$id_cliente)
-{
-	if(!empty($id_lente))
-	{
-		$lente = $this->daoLente->traerPorId($id_lente);
-		$cliente = $this->daoCliente->traerPorId($id_cliente);
-		$factura = $this->daoFactura->traerPorIdLente($id_lente);
-		if(empty($factura))
-		{
-
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "registrarfactura.php");
-			include URL_VISTA . 'footer.php';
-		}
 		else
 		{
-			$factura = $factura[0];
+			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
 			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "factura.php");
+			require(URL_VISTA . "inicio.php");
 			include URL_VISTA . 'footer.php';
 		}
 	}
-}
 
-public function modificarfactura($id_factura, $id_cliente, $id_lente)
-{
-	$cliente = $this->daoCliente->traerPorId($id_cliente);
-	$lente = $this->daoLente->traerPorId($id_lente);
-	$factura = $this->daoFactura->traerPorId($id_factura);
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . "modificarfactura.php");
-	include URL_VISTA . 'footer.php';
-}
-
-public function modificaclienterlente($id_cliente, $id_lente, $id_factura, $id_cuenta_saldos)
-{
-	if(!empty($id_cliente))
+	public function modificarlente($id_cliente, $id_lente)
 	{
 		$cliente = $this->daoCliente->traerPorId($id_cliente);
-	}
-	if(!empty($id_lente))
-	{
 		$lente = $this->daoLente->traerPorId($id_lente);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarlente.php");
+		include URL_VISTA . 'footer.php';
 	}
-	if(!empty($id_factura))
+
+	public function factura($id_lente,$id_cliente)
 	{
+		if(!empty($id_lente))
+		{
+			$lente = $this->daoLente->traerPorId($id_lente);
+			$cliente = $this->daoCliente->traerPorId($id_cliente);
+			$factura = $this->daoFactura->traerPorIdLente($id_lente);
+			if(empty($factura))
+			{
+
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "registrarfactura.php");
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$factura = $factura[0];
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "factura.php");
+				include URL_VISTA . 'footer.php';
+			}
+		}
+	}
+
+	public function modificarfactura($id_factura, $id_cliente, $id_lente)
+	{
+		$cliente = $this->daoCliente->traerPorId($id_cliente);
+		$lente = $this->daoLente->traerPorId($id_lente);
 		$factura = $this->daoFactura->traerPorId($id_factura);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarfactura.php");
+		include URL_VISTA . 'footer.php';
 	}
-	if(!empty($id_cuenta_saldos))
+
+	public function modificaclienterlente($id_cliente, $id_lente, $id_factura, $id_cuenta_saldos)
 	{
-		$cuenta_saldos = $this->daoCuenta_saldos->traerPorId($id_cuenta_saldos);
+		if(!empty($id_cliente))
+		{
+			$cliente = $this->daoCliente->traerPorId($id_cliente);
+		}
+		if(!empty($id_lente))
+		{
+			$lente = $this->daoLente->traerPorId($id_lente);
+		}
+		if(!empty($id_factura))
+		{
+			$factura = $this->daoFactura->traerPorId($id_factura);
+		}
+		if(!empty($id_cuenta_saldos))
+		{
+			$cuenta_saldos = $this->daoCuenta_saldos->traerPorId($id_cuenta_saldos);
+		}
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarclientelente.php");
+		include URL_VISTA . 'footer.php';
 	}
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . "modificarclientelente.php");
-	include URL_VISTA . 'footer.php';
-}
 
 }
