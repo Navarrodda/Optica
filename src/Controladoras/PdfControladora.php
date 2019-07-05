@@ -847,7 +847,7 @@ class PdfControladora
 		require(URL_VISTA . "inicio.php");
 		include URL_VISTA . 'footer.php';
 	}
-}		*/
+}		
 function pdfclientelente($id_lente, $id_cliente)
 {
 	if(!empty($_SESSION))

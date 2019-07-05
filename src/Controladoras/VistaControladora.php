@@ -219,274 +219,521 @@ class VistaControladora
 
 	public function serch($valor, $dato)
 	{
+		if(!empty($_SESSION)){
 
-		$rest = substr($dato, -1); 
-		   // devuelve "f"
-		print_r('/Ultima letra :');
-		print_r($rest);
-		print_r('/Contador :');
-		$cont = strlen($dato);
-		print_r('/');
-		print_r($cont);
-		print_r('/Primera Letra: ');
-		Select * from cliente where nombre like 'a%'
-		$rest = substr($dato, - $cont, 1);
-		print_r($rest);
-		print_r('/');
-		print_r($dato);
-	}
+			if (!empty($dato)) {
 
-public function modificarcliente($id_cliente)
-{
-	$cliente = $this->daoCliente->traerPorId($id_cliente);
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . "modificarcliente.php");
-	include URL_VISTA . 'footer.php';
-}
+				if($valor == 0)
+				{
+					print_r("aseasdsad");
+					$this->mensaje = new Mensaje( "success", "Seleccionar algun Opcion!" );
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "inicio.php");
+					include URL_VISTA . 'footer.php';
+				}
+				if($valor == 1) {
+					$limit = 0;
+					$nombre = $this->daoCliente->traerTodoLimitNombre($dato,$limit);
 
-public function facturasimple()
-{
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . "simple.php");
-	include URL_VISTA . 'footer.php'; 
-}
+					if(!empty($nombre))
+					{
+						$numero = count($nombre);
+						$parametro = 'Nombre';
+						$palabra = ucwords($dato);
+						$cliente = $nombre;
+						$entrada = 1; 
+						$pantalla = 1;
+						$medir = $this->daoCliente->traerPorNombre($dato);
+						$longitud = count($medir);
+						$contador = count($cliente);
+						$i = 0;
+						foreach ($cliente as $clie) {
 
-public function registrarusuario()
-{
-	$role = $this->daoRol->traerPorIdPreoridad('Cliente');
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . "registrarusuario.php");
-	include URL_VISTA . 'footer.php';
-}
+							$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
 
-public function usuario()
-{
-	if(!empty($_SESSION)){
-		if ($_SESSION['rol'] == 'Administrador') {
-			$usuario = $this->daoUsuario->traerTodo();
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "usuarios.php");
-			include URL_VISTA . 'footer.php';
-		}
-		else
-		{
-			$id = $_SESSION["id"];
-			$usuario = $this->daoUsuario->traerPorId($id);
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "usuario.php");
-			include URL_VISTA . 'footer.php';
-		}
-	}
-	else
-	{
-		$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "inicio.php");
-		include URL_VISTA . 'footer.php';
-	}
+							if (!empty($senia)) {
 
+								if (!empty($senia[0])) 
+								{
+									$senias = $senia[0]->getIdCuentaSaldo();
+									$cl = $senia[0]->getIdCliente();
 
-}
+									if ($clie->getId() == $cl->getId()){
 
+										$cliente[$i]->codigo = $senias->getId();
+									}	
+								}
+								$senia = NULL;
+							}
+							$i++;
+						}
+						$longitud = $longitud + 10;
+						$longitud = $longitud / 10;
 
-public function modificarusuario($id)
-{
-	if(!empty($_SESSION)){
-		if ($_SESSION['rol'] == 'Administrador') {
-			$usuario = $this->daoUsuario->traerPorId($id);
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "modificarpreoridadusuario.php");
-			include URL_VISTA . 'footer.php';
-		}
-		else
-		{
-			$usuario = $this->daoUsuario->traerPorId($id);
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "modificarusuario.php");
-			include URL_VISTA . 'footer.php';
-		}
+						$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "serchclientes.php");
+						include URL_VISTA . 'footer.php';
+					}
+					else
+					{
+						$parametro = 'Nombre';
+						$palabra = ucwords($dato);
+						$cliente = null;
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "serchclientes.php");
+						include URL_VISTA . 'footer.php';
+					}
+				}
+				if($valor == 2){
+					$limit = 0;
+					$apellido = $this->daoCliente->traerTodoLimitApellido($dato,$limit);
+					if(!empty($apellido))
+					{
+						$numero = count($apellido);
+						$parametro = 'Apellido';
+						$palabra = ucwords($dato);
+						$cliente = $apellido;
+						$entrada = 1; 
+						$pantalla = 1;
+						$medir = $this->daoCliente->traerPorApellido($dato);
+						$longitud = count($medir);
+						$contador = count($cliente);
+						$i = 0;
+						foreach ($cliente as $clie) {
 
-	}
-	else
-	{
-		$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "inicio.php");
-		include URL_VISTA . 'footer.php';
-	}
-}
+							$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
 
-public function pdf()
-{
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . "llamarpdf.php");
-	include URL_VISTA . 'footer.php';
-}
+							if (!empty($senia)) {
 
-public function lentecliente($id_cliente)
-{
-	if(!empty($_SESSION)){
-		$lente = NULL;
-		$limit = 0;
-		$entrada = 1; 
-		$pantalla = 1;
-		$cliente = $this->daoCliente->traerPorId($id_cliente);
+								if (!empty($senia[0])) 
+								{
+									$senias = $senia[0]->getIdCuentaSaldo();
+									$cl = $senia[0]->getIdCliente();
 
-		if(!empty($id_cliente)){
+									if ($clie->getId() == $cl->getId()){
 
-			$cunt = $this->daoLentexcliente->traerPorIdCliente($id_cliente);
-			$lentexcliente = $this->daoLentexcliente->traerLenteLimit($id_cliente,$limit);
-			if(!empty($lentexcliente))
-			{
-				$longitud = count($lentexcliente);
-				$lente = $lentexcliente[0]->getIdLente();
-			}
-			$longitud = count($cunt) + 1;
-			$contar = count($cunt);
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "lentexcliente.php");
-			include URL_VISTA . 'footer.php';
+										$cliente[$i]->codigo = $senias->getId();
+									}	
+								}
+								$senia = NULL;
+							}
+							$i++;
+						}
+						$longitud = $longitud + 10;
+						$longitud = $longitud / 10;
 
-		}
-	}
-	else
-	{
-		$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "inicio.php");
-		include URL_VISTA . 'footer.php';
-	}
-
-}
-
-public function lentesclienteslimit($id_cliente, $limit, $longitud, $entrada, $pantalla)
-{	
-	if(!empty($_SESSION)){
-
-		if (!empty($limit)) {
-			if ($limit == -1) {
-				$limit = $entrada + 1; 
-				$entrada = $entrada + 1;
-				if ($limit > $longitud) {
-					$limit = $entrada - 1;
-					$entrada = $entrada -1;
+						$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "serchclientes.php");
+						include URL_VISTA . 'footer.php';
+					}
+					else
+					{
+						$parametro = 'Apellido';
+						$palabra = ucwords($dato);
+						$cliente = null;
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "serchclientes.php");
+						include URL_VISTA . 'footer.php';
+					}
 
 				}
 
-			}
+				if($valor == 3){
 
-			if ($limit == -2) {
-				$entrada = $entrada - $pantalla;
-				if ($entrada <= 1){
-					$entrada = 1;
-					$pantalla = 1;
-					$limit = 1;
 				}
-			}
+
+				if($valor == 4){
+
+				}
 
 
-			if($limit == 1){
-				$limit = 0;
+
+
+
 			}
 			else
 			{
-				$limit= $limit -1;
+				$this->mensaje = new Mensaje( "success", "Ningun dato enviado por el buscador!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "inicio.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+			$rest = substr($dato, -1); 
+		   // devuelve "f"
+			print_r('/Ultima letra :');
+			print_r($rest);
+			print_r('/Contador :');
+			$cont = strlen($dato);
+			print_r('/');
+			print_r($cont);
+			print_r('/Primera Letra: ');
+		//Select * from cliente where nombre like 'a%';
+			$rest = substr($dato, - $cont, 1);
+			print_r($rest);
+			print_r('/');
+			print_r($dato);
+		}
+		else
+		{
+			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "inicio.php");
+			include URL_VISTA . 'footer.php';
+		}
+
+	}
+	public function clientesparametrolimit($parametro, $numero,$palabra, $parametro, $limit, $longitud, $entrada, $pantalla)
+	{	
+		if (!empty($_SESSION)) {
+			
+			if($parametro == 'Nombre') 
+			{
+				$calcular = $this->daoCliente->traerPorNombre($palabra);
+				$calcular = count($calcular);
+			}
+			if($parametro == 'Apellido') 
+			{
+				$calcular = $this->daoCliente->traerPorApellido($palabra);
+				$calcular = count($calcular);
+			}
+			
+
+			
+
+			if (!empty($limit)) {
+				if ($limit == -1) {
+					$entrada = $entrada + 1;
+					if ($entrada >= $longitud) {
+						$limit = $limit - 2;
+						$entrada = $entrada -1;
+					}
+
+				}
+
+				if ($limit == -2) {
+					$entrada = $entrada - $pantalla;
+					if ($entrada <= 1){
+						$entrada = 1;
+						$pantalla = 1;
+						$limit = 1;
+					}
+				}
+
+
+				if($limit == 1){
+					$limit = 0;
+				}
+				else
+				{
+
+					$limit = 10 * $entrada;
+					$limit = $limit - 10;
+				}
+
+				if($parametro == 'Nombre') 
+				{
+					$cliente = $this->daoCliente->traerTodoLimitNombre($palabra,$limit);
+					$contador =count($cliente);
+					$pantalla = 1; 
+				}
+				if($parametro == 'Apellido') 
+				{
+					$cliente = $this->daoCliente->traerTodoLimitApellido($palabra,$limit);
+					$contador =count($cliente);
+					$pantalla = 1; 
+				}
+				
+			}
+			$i = 0;
+
+			foreach ($cliente as $clie) {
+
+				$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
+				$cliente[$i]->codigo = NULL;
+				if (!empty($senia)) {
+
+					if (!empty($senia[0])) 
+					{
+						$senias = $senia[0]->getIdCuentaSaldo();
+						$cl = $senia[0]->getIdCliente();
+
+						if ($clie->getId() == $cl->getId()){
+
+							$cliente[$i]->codigo = $senias->getId();
+						}	
+					}
+					$senia = NULL;
+				}
+				$i++;
+			}
+
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "serchclientes.php");
+			include URL_VISTA . 'footer.php';
+		}
+		else
+		{
+			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "inicio.php");
+			include URL_VISTA . 'footer.php';
+		}
+	}
+
+	public function modificarcliente($id_cliente)
+	{
+		$cliente = $this->daoCliente->traerPorId($id_cliente);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarcliente.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function facturasimple()
+	{
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "simple.php");
+		include URL_VISTA . 'footer.php'; 
+	}
+
+	public function registrarusuario()
+	{
+		$role = $this->daoRol->traerPorIdPreoridad('Cliente');
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "registrarusuario.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function usuario()
+	{
+		if(!empty($_SESSION)){
+			if ($_SESSION['rol'] == 'Administrador') {
+				$usuario = $this->daoUsuario->traerTodo();
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "usuarios.php");
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$id = $_SESSION["id"];
+				$usuario = $this->daoUsuario->traerPorId($id);
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "usuario.php");
+				include URL_VISTA . 'footer.php';
 			}
 		}
-		if(!empty($id_cliente)){
+		else
+		{
+			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "inicio.php");
+			include URL_VISTA . 'footer.php';
+		}
+
+
+	}
+
+
+	public function modificarusuario($id)
+	{
+		if(!empty($_SESSION)){
+			if ($_SESSION['rol'] == 'Administrador') {
+				$usuario = $this->daoUsuario->traerPorId($id);
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "modificarpreoridadusuario.php");
+				include URL_VISTA . 'footer.php';
+			}
+			else
 			{
+				$usuario = $this->daoUsuario->traerPorId($id);
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "modificarusuario.php");
+				include URL_VISTA . 'footer.php';
+			}
+
+		}
+		else
+		{
+			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "inicio.php");
+			include URL_VISTA . 'footer.php';
+		}
+	}
+
+	public function pdf()
+	{
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "llamarpdf.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function lentecliente($id_cliente)
+	{
+		if(!empty($_SESSION)){
+			$lente = NULL;
+			$limit = 0;
+			$entrada = 1; 
+			$pantalla = 1;
+			$cliente = $this->daoCliente->traerPorId($id_cliente);
+
+			if(!empty($id_cliente)){
+
 				$cunt = $this->daoLentexcliente->traerPorIdCliente($id_cliente);
-				$cliente = $this->daoCliente->traerPorId($id_cliente);
 				$lentexcliente = $this->daoLentexcliente->traerLenteLimit($id_cliente,$limit);
 				if(!empty($lentexcliente))
 				{
 					$longitud = count($lentexcliente);
 					$lente = $lentexcliente[0]->getIdLente();
 				}
-				$longitud = count($cunt)+1;
+				$longitud = count($cunt) + 1;
 				$contar = count($cunt);
-				$pantalla = 1; 
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "lentexcliente.php");
 				include URL_VISTA . 'footer.php';
+
 			}
-
-		}
-	}
-
-	else
-	{
-		$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "inicio.php");
-		include URL_VISTA . 'footer.php';
-	}
-}
-
-public function modificarlente($id_cliente, $id_lente)
-{
-	$cliente = $this->daoCliente->traerPorId($id_cliente);
-	$lente = $this->daoLente->traerPorId($id_lente);
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . "modificarlente.php");
-	include URL_VISTA . 'footer.php';
-}
-
-public function factura($id_lente,$id_cliente)
-{
-	if(!empty($id_lente))
-	{
-		$lente = $this->daoLente->traerPorId($id_lente);
-		$cliente = $this->daoCliente->traerPorId($id_cliente);
-		$factura = $this->daoFactura->traerPorIdLente($id_lente);
-		if(empty($factura))
-		{
-
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "registrarfactura.php");
-			include URL_VISTA . 'footer.php';
 		}
 		else
 		{
-			$factura = $factura[0];
+			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
 			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "factura.php");
+			require(URL_VISTA . "inicio.php");
+			include URL_VISTA . 'footer.php';
+		}
+
+	}
+
+	public function lentesclienteslimit($id_cliente, $limit, $longitud, $entrada, $pantalla)
+	{	
+		if(!empty($_SESSION)){
+
+			if (!empty($limit)) {
+				if ($limit == -1) {
+					$limit = $entrada + 1; 
+					$entrada = $entrada + 1;
+					if ($limit > $longitud) {
+						$limit = $entrada - 1;
+						$entrada = $entrada -1;
+
+					}
+
+				}
+
+				if ($limit == -2) {
+					$entrada = $entrada - $pantalla;
+					if ($entrada <= 1){
+						$entrada = 1;
+						$pantalla = 1;
+						$limit = 1;
+					}
+				}
+
+
+				if($limit == 1){
+					$limit = 0;
+				}
+				else
+				{
+					$limit= $limit -1;
+				}
+			}
+			if(!empty($id_cliente)){
+				{
+					$cunt = $this->daoLentexcliente->traerPorIdCliente($id_cliente);
+					$cliente = $this->daoCliente->traerPorId($id_cliente);
+					$lentexcliente = $this->daoLentexcliente->traerLenteLimit($id_cliente,$limit);
+					if(!empty($lentexcliente))
+					{
+						$longitud = count($lentexcliente);
+						$lente = $lentexcliente[0]->getIdLente();
+					}
+					$longitud = count($cunt)+1;
+					$contar = count($cunt);
+					$pantalla = 1; 
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "lentexcliente.php");
+					include URL_VISTA . 'footer.php';
+				}
+
+			}
+		}
+
+		else
+		{
+			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "inicio.php");
 			include URL_VISTA . 'footer.php';
 		}
 	}
-}
 
-public function modificarfactura($id_factura, $id_cliente, $id_lente)
-{
-	$cliente = $this->daoCliente->traerPorId($id_cliente);
-	$lente = $this->daoLente->traerPorId($id_lente);
-	$factura = $this->daoFactura->traerPorId($id_factura);
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . "modificarfactura.php");
-	include URL_VISTA . 'footer.php';
-}
-
-public function modificaclienterlente($id_cliente, $id_lente, $id_factura, $id_cuenta_saldos)
-{
-	if(!empty($id_cliente))
+	public function modificarlente($id_cliente, $id_lente)
 	{
 		$cliente = $this->daoCliente->traerPorId($id_cliente);
-	}
-	if(!empty($id_lente))
-	{
 		$lente = $this->daoLente->traerPorId($id_lente);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarlente.php");
+		include URL_VISTA . 'footer.php';
 	}
-	if(!empty($id_factura))
+
+	public function factura($id_lente,$id_cliente)
 	{
+		if(!empty($id_lente))
+		{
+			$lente = $this->daoLente->traerPorId($id_lente);
+			$cliente = $this->daoCliente->traerPorId($id_cliente);
+			$factura = $this->daoFactura->traerPorIdLente($id_lente);
+			if(empty($factura))
+			{
+
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "registrarfactura.php");
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$factura = $factura[0];
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "factura.php");
+				include URL_VISTA . 'footer.php';
+			}
+		}
+	}
+
+	public function modificarfactura($id_factura, $id_cliente, $id_lente)
+	{
+		$cliente = $this->daoCliente->traerPorId($id_cliente);
+		$lente = $this->daoLente->traerPorId($id_lente);
 		$factura = $this->daoFactura->traerPorId($id_factura);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarfactura.php");
+		include URL_VISTA . 'footer.php';
 	}
-	if(!empty($id_cuenta_saldos))
+
+	public function modificaclienterlente($id_cliente, $id_lente, $id_factura, $id_cuenta_saldos)
 	{
-		$cuenta_saldos = $this->daoCuenta_saldos->traerPorId($id_cuenta_saldos);
+		if(!empty($id_cliente))
+		{
+			$cliente = $this->daoCliente->traerPorId($id_cliente);
+		}
+		if(!empty($id_lente))
+		{
+			$lente = $this->daoLente->traerPorId($id_lente);
+		}
+		if(!empty($id_factura))
+		{
+			$factura = $this->daoFactura->traerPorId($id_factura);
+		}
+		if(!empty($id_cuenta_saldos))
+		{
+			$cuenta_saldos = $this->daoCuenta_saldos->traerPorId($id_cuenta_saldos);
+		}
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificarclientelente.php");
+		include URL_VISTA . 'footer.php';
 	}
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . "modificarclientelente.php");
-	include URL_VISTA . 'footer.php';
-}
 
 }

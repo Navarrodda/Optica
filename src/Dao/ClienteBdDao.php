@@ -129,6 +129,109 @@ class ClienteBdDao{
         }
     }
 
+    public function traerPorNombre($nombre)
+    {
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE nombre = \"$nombre\"";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+
+            $this->mapear($dataSet);
+
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+     public function traerTodoLimitNombre($nombre, $limit)
+    {
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE nombre = \"$nombre\" LIMIT $limit, 10";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+
+            $this->mapear($dataSet);
+
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
+     public function traerTodoLimitApellido($apellido, $limit)
+    {
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE apellido = \"$apellido\" LIMIT $limit, 10";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+
+            $this->mapear($dataSet);
+
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
+    public function traerPorApellido($apellido)
+    {
+        try{
+            $sql = "SELECT * FROM $this->tabla WHERE apellido = \"$apellido\"";
+
+            $conexion = Conexion::conectar();
+
+            $sentencia = $conexion->prepare($sql);
+
+            $sentencia->execute();
+
+            $dataSet = $sentencia->fetchAll(\PDO::FETCH_ASSOC);
+
+            $this->mapear($dataSet);
+
+            if (!empty($this->listado)) {
+                return $this->listado;
+            }
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
     public function traerTodoLimit($limit)
     {
         try{
