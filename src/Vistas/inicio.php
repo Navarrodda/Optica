@@ -25,9 +25,10 @@
                             <select name="select" class="btn2">
                              <option value="0">Elija una Opcion</option> 
                              <option value="1">Nombre</option> 
-                             <option value="2">Apellido</option> 
-                             <option value="3">Fecha Factura</option> 
-                             <option value="4">Medico</option> 
+                             <option value="2">Apellido</option>
+                             <option value="3">Nombre Apellido</option>  
+                             <option value="4">Fecha Factura</option> 
+                             <option value="5">Medico</option> 
                            </select>
                          </div>
                          <input class="flexsearch--input btn2" name="searc" type="search" placeholder="Buscador">

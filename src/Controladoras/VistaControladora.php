@@ -341,7 +341,49 @@ class VistaControladora
 				}
 
 				if($valor == 3){
+					$palabra = ucwords($dato);
+					$final = explode(" ", $dato);
+					$limit = 0;
+					$nombreapellido = $this->daoCliente->traerTodoLimitNombreApellido($final[0], $final[1],$limit);
+					if(!empty($nombreapellido))
+					{
+						$numero = count($nombreapellido);
+						$parametro = 'Nombre Apellido';
+						$cliente = $nombreapellido;
+						$entrada = 1; 
+						$pantalla = 1;
+						$medir = $this->daoCliente->traerTodoNombreApellido($final[0], $final[1]);
+						$longitud = count($medir);
+						$contador = count($cliente);
+						$i = 0;
+						foreach ($cliente as $clie) {
 
+							$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
+
+							if (!empty($senia)) {
+
+								if (!empty($senia[0])) 
+								{
+									$senias = $senia[0]->getIdCuentaSaldo();
+									$cl = $senia[0]->getIdCliente();
+
+									if ($clie->getId() == $cl->getId()){
+
+										$cliente[$i]->codigo = $senias->getId();
+									}	
+								}
+								$senia = NULL;
+							}
+							$i++;
+						}
+						$longitud = $longitud + 10;
+						$longitud = $longitud / 10;
+
+						$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "serchclientes.php");
+						include URL_VISTA . 'footer.php';
+					}
 				}
 
 				if($valor == 4){
@@ -399,9 +441,26 @@ class VistaControladora
 				$calcular = $this->daoCliente->traerPorApellido($palabra);
 				$calcular = count($calcular);
 			}
-			
-
-			
+			//Filtrar Parametros de la url
+			$strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
+				"}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
+				"â€”", "â€“", ",", "<", ".", ">", "/", "?","20");
+			$parametro = trim(str_replace($strip, " ", strip_tags($parametro)));
+			$parametro = preg_replace('/\s+/', " ", $parametro);
+			//Filtrar Parametros de la url
+			$strip = array("~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
+				"}", "\\", "|", ";", ":", "\"", "'", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;",
+				"â€”", "â€“", ",", "<", ".", ">", "/", "?","20");
+			$palabra = trim(str_replace($strip, " ", strip_tags($palabra)));
+			$palabra = preg_replace('/\s+/', " ", $palabra);
+			if($parametro == 'Nombre Apellido') 
+			{
+	
+				$final = explode(" ", $palabra);
+				$palabra = $final[0] . ' ' . $final[1];
+				$calcular = $this->daoCliente->traerTodoNombreApellido($final[0], $final[1]);
+				$calcular = count($calcular);
+			}
 
 			if (!empty($limit)) {
 				if ($limit == -1) {
@@ -442,6 +501,13 @@ class VistaControladora
 				if($parametro == 'Apellido') 
 				{
 					$cliente = $this->daoCliente->traerTodoLimitApellido($palabra,$limit);
+					$contador =count($cliente);
+					$pantalla = 1; 
+				}
+				if($parametro == 'Nombre Apellido') 
+				{
+					$final = explode(" ", $palabra);
+					$cliente = $this->daoCliente->traerTodoLimitNombreApellido($final[0], $final[1], $limit);
 					$contador =count($cliente);
 					$pantalla = 1; 
 				}
