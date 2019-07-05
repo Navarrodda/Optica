@@ -113,26 +113,31 @@ class VistaControladora
 		$longitud = count($medir);
 		$contador = count($cliente);
 		$i = 0;
-		foreach ($cliente as $clie) {
+		if (!empty($cliente)) {
+			
+			
+			foreach ($cliente as $clie) {
 
-			$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
+				$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
 
-			if (!empty($senia)) {
+				if (!empty($senia)) {
 
-				if (!empty($senia[0])) 
-				{
-					$senias = $senia[0]->getIdCuentaSaldo();
-					$cl = $senia[0]->getIdCliente();
+					if (!empty($senia[0])) 
+					{
+						$senias = $senia[0]->getIdCuentaSaldo();
+						$cl = $senia[0]->getIdCliente();
 
-					if ($clie->getId() == $cl->getId()){
+						if ($clie->getId() == $cl->getId()){
 
-						$cliente[$i]->codigo = $senias->getId();
-					}	
+							$cliente[$i]->codigo = $senias->getId();
+						}	
+					}
+					$senia = NULL;
 				}
-				$senia = NULL;
+				$i++;
 			}
-			$i++;
 		}
+
 		$longitud = $longitud + 10;
 		$longitud = $longitud / 10;
 
@@ -455,7 +460,7 @@ class VistaControladora
 			$palabra = preg_replace('/\s+/', " ", $palabra);
 			if($parametro == 'Nombre Apellido') 
 			{
-	
+				
 				$final = explode(" ", $palabra);
 				$palabra = $final[0] . ' ' . $final[1];
 				$calcular = $this->daoCliente->traerTodoNombreApellido($final[0], $final[1]);
