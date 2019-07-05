@@ -23,7 +23,7 @@
 						<button type="button" class="close" data-dismiss="alert"></button>
 					</div>
 				</div>
-				<form id="form_r" method="post" action="/registrar/registrarclientelente/" target="_blank" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
+				<form id="form_r" method="post" action="/registrar/registrarclientelente/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
 					<input required name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Nombre">
 					<input required name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
 					<input required name="telefono" type="text" class="col-md-4 norightborder btn2" placeholder="Telefono">

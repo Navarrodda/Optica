@@ -113,6 +113,60 @@ class RegistrarControladora
 				$userInstance = new Cliente($nombre, $apellido, $telefono);
 				$idClie = $this->daoCliente->agregar( $userInstance );
 				$userInstance->setId( $idClie );
+				if (empty($observacion)) {
+					$observacion = '';
+				}
+				if (empty($armazon_lejos)) {
+					$armazon_lejos = '';
+				}
+				if (empty($armazon_cerca)) {
+					$armazon_cerca= '';
+				}
+				if (empty($lejos_od_esferico)) {
+					$lejos_od_esferico = '';
+				}
+				if (empty($lejos_od_cilindrico)) {
+					$lejos_od_cilindrico = '';
+				}
+				if (empty($lejos_od_grados)) {
+					$lejos_od_grados = '';
+				}
+				if (empty($lejos_oi_esferico)) {
+					$lejos_oi_esferico = '';
+				}
+				if (empty($lejos_oi_cilindrico)) {
+					$lejos_oi_cilindrico = '';
+				}
+				if (empty($lejos_oi_grados)) {
+					$lejos_oi_grados = '';
+				}
+				if (empty($lejos_color)) {
+					$lejos_color = '';
+					if(empty($cerca_color))
+					{
+						$cerca_color = $lejos_color;
+					}
+				}
+				if (empty($cerca_od_esferico)) {
+					$cerca_od_esferico = '';
+				}
+				if (empty($cerca_od_cilindrico)) {
+					$cerca_od_cilindrico = '';
+				}
+				if (empty($cerca_od_grados)) {
+					$cerca_od_grados = '';
+				}
+				if (empty($cerca_oi_esferico)) {
+					$cerca_oi_esferico = '';
+				}
+				if (empty($cerca_oi_cilindrico)) {
+					$cerca_oi_cilindrico = '';
+				}
+				if (empty($cerca_oi_grados)) {
+					$cerca_oi_grados = '';
+				}
+
+				
 				$lentInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
 				$idLent= $this->daoLente->agregar( $lentInstance );
 				$lentInstance->setId( $idLent );
@@ -221,7 +275,7 @@ class RegistrarControladora
 					$lentxclientInstance->setIdLenteXCliente($idLentxclient);
 					$regCompleted = TRUE;
 					$this->mensaje = new Mensaje( "success", "El Lente del Cliente fue registrado con exito!" );
-				
+
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "inicio.php");
 					include URL_VISTA . 'footer.php';

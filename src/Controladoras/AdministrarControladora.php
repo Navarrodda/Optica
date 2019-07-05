@@ -376,11 +376,16 @@ class AdministrarControladora
 
 						$factInstance = new Factura($subtotal, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
 						$idfact = $this->daoFactura->actualizar( $factInstance, $id_factura );
-
 						$a_cuenta = $senia; 
 						$saldo = $saldo_total;
 						$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
 						$idsaldo = $this->daoCuentasaldos->actualizar( $salInstance, $cuenta_saldos->getId());
+						$regla = 'true'; 
+
+						if ($regla == 'true') {
+							$factura = $this->daoFactura->traerPorId($id_factura);
+							$cuenta_saldos = $this->daoCuentasaldos->traerPorId($id_cuenta_saldos);
+						}
 					}
 				}
 				else

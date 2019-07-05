@@ -31,6 +31,10 @@
 									<td colspan="2">Señor: <?= $nombreapellido ?></td>
 									<td colspan="2">Telefono: <?= $cliente->getTelefono(); ?></td>
 								</tr>
+								<tr style="color:white">
+                                        <td colspan="2" >Doctor: <?= $lente->getDoctor(); ?></td>
+                                        <td colspan="2">Observación: <?= $lente->getObservacion(); ?></td>
+                                    </tr>
 								<?php 
 								if($cuenta_saldos!= null )
 									{?>
@@ -81,25 +85,41 @@
 										} ?>
 										<td colspan="2" style="color:white">.
 										</td>
-										<td colspan="2" style="color:white">Modificar:
-											<a href="/vista/modificaclienterlente/<?= $cliente->getId(); ?>/<?= $lente->getId(); ?>/<?= $factura->getId(); ?>/<?= $cuenta_saldos->getId();?>/" class="disabled">
-												<span class="glyphicon glyphicon-pencil" title="Modificar"
+										<?php 
+										if($factura!= null )
+											{?>		
+												<td colspan="2" style="color:white">Modificar:
+													<a href="/vista/modificaclienterlente/<?= $cliente->getId(); ?>/<?= $lente->getId(); ?>/<?= $factura->getId(); ?>/<?= $cuenta_saldos->getId();?>/" class="disabled">
+														<span class="glyphicon glyphicon-pencil" title="Modificar"
+														data-toggle="tooltip" data-placement="right">
+													</span>
+												</a>
+											</td>
+											<?php 
+										}
+										else{
+											?>
+											<td colspan="2" style="color:white">Modificar:
+													<a href="/vista/modificaclienterlente/<?= $cliente->getId(); ?>/<?= $lente->getId(); ?>/<?= null ?>/<?= null ?>/" class="disabled">
+														<span class="glyphicon glyphicon-pencil" title="Modificar"
+														data-toggle="tooltip" data-placement="right">
+													</span>
+												</a>
+											</td>
+											<?php 
+										}?>
+										<td colspan="2" style="color:white">PDF:
+											<a href="/pdf/pdfclientelente/<?= $lente->getId(); ?>/<?= $cliente->getId(); ?>/" target="_blank" class="disabled">         
+												<span class="glyphicon glyphicon-cloud-upload" title="PDF"
 												data-toggle="tooltip" data-placement="right">
 											</span>
-										</a>
-									</td>
-									<td colspan="2" style="color:white">PDF:
-										<a href="/pdf/pdfclientelente/<?= $lente->getId(); ?>/<?= $cliente->getId(); ?>/" target="_blank" class="disabled">         
-											<span class="glyphicon glyphicon-cloud-upload" title="PDF"
-											data-toggle="tooltip" data-placement="right">
-										</span>
-									</td>
-									<?php  
-								} ?>
-							</tbody>
-						</table>
+										</td>
+										<?php  
+									} ?>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
