@@ -391,14 +391,6 @@ class VistaControladora
 					}
 				}
 
-				if($valor == 4){
-
-				}
-
-
-
-
-
 			}
 			else
 			{
@@ -407,21 +399,6 @@ class VistaControladora
 				require(URL_VISTA . "inicio.php");
 				include URL_VISTA . 'footer.php';
 			}
-
-			$rest = substr($dato, -1); 
-		   // devuelve "f"
-			print_r('/Ultima letra :');
-			print_r($rest);
-			print_r('/Contador :');
-			$cont = strlen($dato);
-			print_r('/');
-			print_r($cont);
-			print_r('/Primera Letra: ');
-		//Select * from cliente where nombre like 'a%';
-			$rest = substr($dato, - $cont, 1);
-			print_r($rest);
-			print_r('/');
-			print_r($dato);
 		}
 		else
 		{
@@ -813,7 +790,7 @@ class VistaControladora
 		{
 			$factura = NULL;
 		}
-		
+
 		if($id_cuenta_saldos != -1)
 		{
 			if(!empty($id_cuenta_saldos))
