@@ -201,9 +201,11 @@ class AdministrarControladora
 				$lejos_color = ucwords($lejos_color);
 				$cerca_color = ucwords($cerca_color);
 				$observacion = ucwords($observacion);
-
+				$cliente = $this->daoCliente->traerPorId($id_cliente);
 
 				$nombreapellido = $nombre .' '. $apellido;
+
+				
 				if($complit=='SI')
 				{
 					$cerca_od_cilindrico = $lejos_od_cilindrico;
@@ -215,12 +217,10 @@ class AdministrarControladora
 				{
 					$cerca_color = $lejos_color;
 				}
-				$fecha = date('Y-m-d');
-				$nombre = ucwords($nombre); 
-				$apellido = ucwords($apellido); 
+
 				
-				$cliente = $this->daoCliente->traerPorId($id_cliente);
-				
+
+
 				if(empty($nombre))
 				{
 					$nombre = $cliente->getNombre();
@@ -233,137 +233,261 @@ class AdministrarControladora
 				{
 					$telefono =  $cliente->getTelefono();
 				}
+
 				$nombreapellido = $nombre .' '. $apellido;
 				$clientInstance = new Cliente($nombre, $apellido, $telefono);
 				$idClie = $this->daoCliente->actualizar( $clientInstance, $id_cliente );
-
-				$lente = $this->daoLente->traerPorId($id_lente);
-
-				if(empty($doctor))
+				
+				if($id_lente!= -1)
 				{
-					$doctor = $lente->getDoctor();
+					$lente = $this->daoLente->traerPorId($id_lente);
+
+					if(empty($doctor))
+					{
+						$doctor = $lente->getDoctor();
+					}
+					else
+					{
+						$doctor = ucwords($doctor); 
+					}
+					if(empty($fecha))
+					{
+						$fecha = date('Y-m-d');
+					}
+					if(empty($observacion))
+					{
+						$observacion =  $lente->getObservacion();
+					}
+					else
+					{
+						$observacion = ucwords($observacion);
+					}
+					if(empty($armazon_lejos))
+					{
+						$armazon_lejos =  $lente->getArmazonLejos();
+					}
+					if(empty($armazon_cerca))
+					{
+						$armazon_cerca =  $lente->getArmazonCerca();
+					}
+					if(empty($lejos_od_esferico))
+					{
+						$lejos_od_esferico =  $lente->getLejosOdEsferico();
+					}
+					if(empty($lejos_od_cilindrico))
+					{
+						$lejos_od_cilindrico =  $lente->getLejosOdCilindrico();
+					}
+					if(empty($lejos_od_grados))
+					{
+						$lejos_od_grados =  $lente->getLejosOdGrados();
+					}
+					if(empty($lejos_oi_esferico))
+					{
+						$lejos_oi_esferico =  $lente->getLejosOiEsferico();
+					}
+					if(empty($lejos_oi_cilindrico))
+					{
+						$lejos_oi_cilindrico =  $lente->getLejosOiCilindrico();
+					}
+					if(empty($lejos_oi_grados))
+					{
+						$lejos_oi_grados =  $lente->getLejosOiGrados();
+					}
+					if(empty($lejos_color))
+					{
+						$lejos_color =  $lente->getLejosColor();
+					}
+					else
+					{
+						$lejos_color = ucwords($lejos_color);
+					}
+					if(empty($cerca_od_esferico))
+					{
+						$cerca_od_esferico =  $lente->getCercaOdEsferico();
+					}
+					if(empty($cerca_od_cilindrico))
+					{
+						$cerca_od_cilindrico =  $lente->getCercaOdCilindrico();
+					}
+					if(empty($cerca_od_grados))
+					{
+						$cerca_od_grados =  $lente->getCercaOdGrados();
+					}
+					if(empty($cerca_oi_esferico))
+					{
+						$cerca_oi_esferico =  $lente->getCercaOiEsferico();
+					}
+					if(empty($cerca_oi_cilindrico))
+					{
+						$cerca_oi_cilindrico =  $lente->getCercaOiCilindrico();
+					}
+					if(empty($cerca_oi_grados))
+					{
+						$cerca_oi_grados =  $lente->getCercaOiGrados();
+					}
+					if(empty($cerca_color))
+					{
+						$cerca_color =  $lente->getCercaColor();
+					}
+					else
+					{
+						$cerca_color = ucwords($cerca_color); 
+					}
+
+					if($complit=='SI')
+					{
+						$cerca_od_cilindrico = $lejos_od_cilindrico;
+						$cerca_od_grados = $lejos_od_grados;
+						$cerca_oi_cilindrico =	$lejos_oi_cilindrico;
+						$cerca_oi_grados =	$lejos_oi_grados;
+					}
+					if(empty($cerca_color))
+					{
+						$cerca_color = $lejos_color;
+					}
+
+					if(!empty($id_lente)){
+						$lenteInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
+						$idLent = $this->daoLente->actualizar( $lenteInstance, $id_lente );
+						if(!empty($id_factura)){
+
+							$regCompleted = FALSE;
+
+							$factura = $this->daoFactura->traerPorId($id_factura);
+							$cuenta_saldos = null;
+							$cuenta_saldos = $this->daoCuentasaldos->traerPorId($id_cuenta_saldos);
+
+							if(empty($subtotal))
+							{
+								$subtotal =  $factura->getSubTotal();
+							}
+							if(empty($senia))
+							{
+								$senia =  $factura->getSenia();
+							}
+
+							if(!empty($senia)){
+								$saldo_total = $subtotal - $senia;
+								if ($saldo_total < 0) {
+									$saldo_total = 0;
+								}
+							}
+							else{
+								$saldo_total = $subtotal;
+							}
+
+							$factInstance = new Factura($subtotal, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
+							$idfact = $this->daoFactura->actualizar( $factInstance, $id_factura );
+							$a_cuenta = $senia; 
+							$saldo = $saldo_total;
+							$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
+							$idsaldo = $this->daoCuentasaldos->actualizar( $salInstance, $cuenta_saldos->getId());
+							$regla = 'true'; 
+
+							if ($regla == 'true') {
+								$factura = $this->daoFactura->traerPorId($id_factura);
+								$cuenta_saldos = $this->daoCuentasaldos->traerPorId($id_cuenta_saldos);
+							}
+						}
+					}
+					else
+					{
+						$factura = null;
+						$cuenta_saldos = null;
+					}
 				}
 				else
-				{
-					$doctor = ucwords($doctor); 
-				}
-				if(empty($fecha))
 				{
 					$fecha = date('Y-m-d');
-				}
-				if(empty($observacion))
-				{
-					$observacion =  $lente->getObservacion();
-				}
-				else
-				{
-					$observacion = ucwords($observacion);
-				}
-				if(empty($armazon_lejos))
-				{
-					$armazon_lejos =  $lente->getArmazonLejos();
-				}
-				if(empty($armazon_cerca))
-				{
-					$armazon_cerca =  $lente->getArmazonCerca();
-				}
-				if(empty($lejos_od_esferico))
-				{
-					$lejos_od_esferico =  $lente->getLejosOdEsferico();
-				}
-				if(empty($lejos_od_cilindrico))
-				{
-					$lejos_od_cilindrico =  $lente->getLejosOdCilindrico();
-				}
-				if(empty($lejos_od_grados))
-				{
-					$lejos_od_grados =  $lente->getLejosOdGrados();
-				}
-				if(empty($lejos_oi_esferico))
-				{
-					$lejos_oi_esferico =  $lente->getLejosOiEsferico();
-				}
-				if(empty($lejos_oi_cilindrico))
-				{
-					$lejos_oi_cilindrico =  $lente->getLejosOiCilindrico();
-				}
-				if(empty($lejos_oi_grados))
-				{
-					$lejos_oi_grados =  $lente->getLejosOiGrados();
-				}
-				if(empty($lejos_color))
-				{
-					$lejos_color =  $lente->getLejosColor();
-				}
-				else
-				{
-					$lejos_color = ucwords($lejos_color);
-				}
-				if(empty($cerca_od_esferico))
-				{
-					$cerca_od_esferico =  $lente->getCercaOdEsferico();
-				}
-				if(empty($cerca_od_cilindrico))
-				{
-					$cerca_od_cilindrico =  $lente->getCercaOdCilindrico();
-				}
-				if(empty($cerca_od_grados))
-				{
-					$cerca_od_grados =  $lente->getCercaOdGrados();
-				}
-				if(empty($cerca_oi_esferico))
-				{
-					$cerca_oi_esferico =  $lente->getCercaOiEsferico();
-				}
-				if(empty($cerca_oi_cilindrico))
-				{
-					$cerca_oi_cilindrico =  $lente->getCercaOiCilindrico();
-				}
-				if(empty($cerca_oi_grados))
-				{
-					$cerca_oi_grados =  $lente->getCercaOiGrados();
-				}
-				if(empty($cerca_color))
-				{
-					$cerca_color =  $lente->getCercaColor();
-				}
-				else
-				{
-					$cerca_color = ucwords($cerca_color); 
-				}
 
-				if($complit=='SI')
-				{
-					$cerca_od_cilindrico = $lejos_od_cilindrico;
-					$cerca_od_grados = $lejos_od_grados;
-					$cerca_oi_cilindrico =	$lejos_oi_cilindrico;
-					$cerca_oi_grados =	$lejos_oi_grados;
-				}
-				if(empty($cerca_color))
-				{
-					$cerca_color = $lejos_color;
-				}
+					if($complit=='SI')
+					{
+						$cerca_od_cilindrico = $lejos_od_cilindrico;
+						$cerca_od_grados = $lejos_od_grados;
+						$cerca_oi_cilindrico =	$lejos_oi_cilindrico;
+						$cerca_oi_grados =	$lejos_oi_grados;
+					}
+					if (!empty($doctor)) 
+					{
+						$regCompleted = TRUE;
+						$doctor = ucwords($doctor);
+					}
+					if (!empty($observacion)) {
+						$regCompleted = TRUE;
+						$observacion = ucwords($observacion);
+					}
+					if (!empty($armazon_lejos)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($armazon_cerca)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($lejos_od_esferico)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($lejos_od_cilindrico)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($lejos_od_grados)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($lejos_oi_esferico)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($lejos_oi_cilindrico)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($lejos_oi_grados)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($lejos_color)) {
+						$regCompleted = TRUE;
+						$lejos_color = ucwords($lejos_color);
+						$cerca_color = $lejos_color;
+					}
+					if(!empty($cerca_color))
+					{
+						$cerca_color = ucwords($cerca_color);
+						$regCompleted = TRUE;
+						$lejos_color = $cerca_color;
+					}
+					if (!empty($cerca_od_esferico)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($cerca_od_cilindrico)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($cerca_od_grados)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($cerca_oi_esferico)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($cerca_oi_cilindrico)) {
+						$regCompleted = TRUE;
+					}
+					if (!empty($cerca_oi_grados)) {
+						$regCompleted = TRUE;
+					}
 
-				if(!empty($id_lente)){
-					$lenteInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
-					$idLent = $this->daoLente->actualizar( $lenteInstance, $id_lente );
-					if(!empty($id_factura)){
-
-						$regCompleted = FALSE;
-
-						$factura = $this->daoFactura->traerPorId($id_factura);
-						$cuenta_saldos = null;
-						$cuenta_saldos = $this->daoCuentasaldos->traerPorId($id_cuenta_saldos);
-
-						if(empty($subtotal))
-						{
-							$subtotal =  $factura->getSubTotal();
-						}
-						if(empty($senia))
-						{
-							$senia =  $factura->getSenia();
-						}
-
+					if($regCompleted == TRUE)
+					{
+						$lentInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
+						$idLent= $this->daoLente->agregar( $lentInstance );
+						$lentInstance->setId( $idLent );
+						$id_cliente = $this->daoCliente->traerPorId($id_cliente);
+						$id_lente = $this->daoLente->traerPorId($idLent);
+						$lentxclientInstance = new Lente_x_cliente($id_cliente, $id_lente);
+						$idLentxclient = $this->daoLentexcliente->agregar( $lentxclientInstance );
+						$lentxclientInstance->setIdLenteXCliente($idLentxclient);
+						$lente = $this->daoLente->traerPorId($idLent);
+					}
+					else
+					{
+						$lente = null;
+					}
+					if(!empty($subtotal)){
 						if(!empty($senia)){
 							$saldo_total = $subtotal - $senia;
 							if ($saldo_total < 0) {
@@ -373,25 +497,36 @@ class AdministrarControladora
 						else{
 							$saldo_total = $subtotal;
 						}
+						$sub_total = $subtotal;
+						$factInstance = new Factura($sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($idLent));
+						$idfact = $this->daoFactura->agregar( $factInstance );
+						$factInstance->setId( $idfact );
 
-						$factInstance = new Factura($subtotal, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
-						$idfact = $this->daoFactura->actualizar( $factInstance, $id_factura );
 						$a_cuenta = $senia; 
 						$saldo = $saldo_total;
 						$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
-						$idsaldo = $this->daoCuentasaldos->actualizar( $salInstance, $cuenta_saldos->getId());
-						$regla = 'true'; 
+						$idsaldo = $this->daoCuentasaldos->agregar( $salInstance );
+						$salInstance->setId( $idsaldo );
 
-						if ($regla == 'true') {
-							$factura = $this->daoFactura->traerPorId($id_factura);
-							$cuenta_saldos = $this->daoCuentasaldos->traerPorId($id_cuenta_saldos);
-						}
+						$id_cliente = $this->daoCliente->traerPorId($id_cliente);
+
+						$id_cuentasaldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+
+						$id_lente = $this->daoLente->traerPorId($idLent);
+						$clisald = new Senias_x_cliente_lente($id_cuentasaldos, $id_cliente, $id_lente);
+						$idclsald = $this->daoSenia->agregar( $clisald );
+						$clisald->setIdSeniaXCliente( $idclsald );
+
+						$factura =$this->daoFactura->traerPorId($idfact);
+						$cuenta_saldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+
 					}
-				}
-				else
-				{
-					$factura = null;
-					$cuenta_saldos = null;
+					else
+					{
+						$factura = null;
+						$cuenta_saldos = null;
+					}
+
 				}
 
 

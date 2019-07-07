@@ -512,60 +512,60 @@ class PdfControladora
 		{
 			$email = $_SESSION["email"];
 			$usuario = $this->daoUsuario->traerPorMail($email);
-		
-			
-				$pdf = new pdf();
-				$pdf->AddPage();
-				$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
-				$pdf->SetTextColor(0,0,0);
-				$pdf->SetFont('Arial','B',8);
-				ini_set('date.timezone','America/Buenos_Aires');
-			//1 Parte{
-				$fecha = date('Y-m-d');
-				if (!empty($fecha)) {
 
-					$timed= date("d", strtotime($fecha));  
-					$timem= date("m", strtotime($fecha));  
-					$timey= date("y", strtotime($fecha)); 
+			
+			$pdf = new pdf();
+			$pdf->AddPage();
+			$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
+			$pdf->SetTextColor(0,0,0);
+			$pdf->SetFont('Arial','B',8);
+			ini_set('date.timezone','America/Buenos_Aires');
+			//1 Parte{
+			$fecha = date('Y-m-d');
+			if (!empty($fecha)) {
+
+				$timed= date("d", strtotime($fecha));  
+				$timem= date("m", strtotime($fecha));  
+				$timey= date("y", strtotime($fecha)); 
 			//Fecha{
 			//Dia{
-					$pdf->SetY(16);
-					$pdf->SetX(83.5);
-					$pdf->MultiCell(145,15,$timed);
+				$pdf->SetY(16);
+				$pdf->SetX(83.5);
+				$pdf->MultiCell(145,15,$timed);
 			//Dia}
 			//Mes{
-					$pdf->SetY(16);
-					$pdf->SetX(93.5);
-					$pdf->MultiCell(145,15,$timem);
+				$pdf->SetY(16);
+				$pdf->SetX(93.5);
+				$pdf->MultiCell(145,15,$timem);
 			//Mes}
 			//Anio{
-					$pdf->SetY(16);
-					$pdf->SetX(103.5);
-					$pdf->MultiCell(145,15,$timey);
+				$pdf->SetY(16);
+				$pdf->SetX(103.5);
+				$pdf->MultiCell(145,15,$timey);
 			//Anio}
 			//}
-				}
-				if($complit=='SI')
-				{
-					$cerca_od_cilindrico = $lejos_od_cilindrico;
-					$cerca_od_grados = $lejos_od_grados;
-					$cerca_oi_cilindrico =	$lejos_oi_cilindrico;
-					$cerca_oi_grados =	$lejos_oi_grados;
-				}
+			}
+			if($complit=='SI')
+			{
+				$cerca_od_cilindrico = $lejos_od_cilindrico;
+				$cerca_od_grados = $lejos_od_grados;
+				$cerca_oi_cilindrico =	$lejos_oi_cilindrico;
+				$cerca_oi_grados =	$lejos_oi_grados;
+			}
 			//}
 			//Senior{ 
 			//Apellido}
 			//Nombre{
-				$pdf->SetY(16);
-				$pdf->SetX(124);
-				$resultado =  $nombre.' '.$apellido;
-				$pdf->MultiCell(145,15,$resultado);
+			$pdf->SetY(16);
+			$pdf->SetX(124);
+			$resultado =  $nombre.' '.$apellido;
+			$pdf->MultiCell(145,15,$resultado);
 			//Nombre}
 			//Apellido{
 			//Senior}
 			//Observaciones{
-				$pdf->SetY(23.3);
-				$pdf->SetX(89);
+			$pdf->SetY(23.3);
+			$pdf->SetX(89);
 			$pdf->MultiCell(145,15,$observacion);//Observacion
 			//Observaciones}
 				//A cuenta{
@@ -729,86 +729,96 @@ class PdfControladora
 				//Saldo Total $}
 				//}
 			$pdf->Output();
-	}
-	else
-	{
-		$this->mensaje = new Mensaje('warning', 'Debe iniciar secion!');
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "inicio.php");
-		include URL_VISTA . 'footer.php';
-	}
-}		
-function pdfclientelente($id_lente, $id_cliente)
-{
-	if(!empty($_SESSION))
-	{
-		$cliente = $this->daoCliente->traerPorId($id_cliente);
-		$lente = $this->daoLente->traerPorId($id_lente);
-		$factura = $this->daoFactura->traerPorIdLente($id_lente);
-		$senia = $this->daoSenia->traerPorIdCliente($id_cliente);
-		
-		if(!empty($senia))
+		}
+		else
 		{
-			foreach ($senia as $seni) {
+			$this->mensaje = new Mensaje('warning', 'Debe iniciar secion!');
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "inicio.php");
+			include URL_VISTA . 'footer.php';
+		}
+	}		
+public function pdfclientelente($id_lente, $id_cliente)
+	{
+		if(!empty($_SESSION))
+		{
+			$cliente = $this->daoCliente->traerPorId($id_cliente);
+			if ($id_lente != -1) {
+				$lente = $this->daoLente->traerPorId($id_lente);
+				$factura = $this->daoFactura->traerPorIdLente($id_lente);
+				$senia = $this->daoSenia->traerPorIdCliente($id_cliente);
+			}
+			else
+			{
+				$lente = NULL;
+				$factura = NULL;
+				$senia = NULL;
+			}
 
-				if (!empty($id_lente)) {
 
-					$senias = $seni->getIdLente();
 
-					if ($senias->getId() == $id_lente){
+			if(!empty($senia))
+			{
+				foreach ($senia as $seni) {
 
-						$senia = $seni->getIdCuentaSaldo();	
+					if (!empty($id_lente)) {
+
+						$senias = $seni->getIdLente();
+
+						if ($senias->getId() == $id_lente){
+
+							$senia = $seni->getIdCuentaSaldo();	
+						}
 					}
 				}
 			}
-		}
 
 
-		if(!empty($cliente))
-		{
-			$pdf = new pdf();
-			$pdf->AddPage();
-			$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
-			$pdf->SetTextColor(0,0,0);
-			$pdf->SetFont('Arial','B',8);
-			ini_set('date.timezone','America/Buenos_Aires');
-			$timed= date('d',time());
-			$timem= date('m',time()); 
-			$timey= date('y',time());
+			if(!empty($cliente))
+			{
+				$pdf = new pdf();
+				$pdf->AddPage();
+				$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
+				$pdf->SetTextColor(0,0,0);
+				$pdf->SetFont('Arial','B',8);
+				ini_set('date.timezone','America/Buenos_Aires');
+				$timed= date('d',time());
+				$timem= date('m',time()); 
+				$timey= date('y',time());
 				//1 Parte{
 				//Fecha{
 				//Dia{
-			$pdf->SetY(16);
-			$pdf->SetX(83.5);
-			$pdf->MultiCell(145,15,$timed);
+				$pdf->SetY(16);
+				$pdf->SetX(83.5);
+				$pdf->MultiCell(145,15,$timed);
 				//Dia}
 				//Mes{
-			$pdf->SetY(16);
-			$pdf->SetX(93.5);
-			$pdf->MultiCell(145,15,$timem);
+				$pdf->SetY(16);
+				$pdf->SetX(93.5);
+				$pdf->MultiCell(145,15,$timem);
 				//Mes}
 				//Anio{
-			$pdf->SetY(16);
-			$pdf->SetX(103.5);
-			$pdf->MultiCell(145,15,$timey);
+				$pdf->SetY(16);
+				$pdf->SetX(103.5);
+				$pdf->MultiCell(145,15,$timey);
 				//Anio}
 				//}
 				//Senior{
 				//Apellido{ 
 				//Nombre{
-			$pdf->SetY(16);
-			$pdf->SetX(124);
-			$resultado = $cliente->getNombre() .' '. $cliente->getApellido();
-			$pdf->MultiCell(145,15,$resultado);
+				$pdf->SetY(16);
+				$pdf->SetX(124);
+				$resultado = $cliente->getNombre() .' '. $cliente->getApellido();
+				$pdf->MultiCell(145,15,$resultado);
 				//Nombre}
 				//Apellido}
 				//Senior}
 				//Observaciones{
-			if (!empty($lente)) {
+				if (!empty($lente)) {
 
-				
-				$pdf->SetY(23.3);
-				$pdf->SetX(89);
+
+					$pdf->SetY(23.3);
+					$pdf->SetX(89);
 				$pdf->MultiCell(145,15,$lente->getObservacion());//Observacion
 				//Observaciones}
 				if(!empty($senia))
@@ -962,10 +972,11 @@ function pdfclientelente($id_lente, $id_cliente)
 				//Saldo Total $}
 				//}
 				}
-				$pdf->Output();
+				
 
 
 			}
+			$pdf->Output();
 		}
 		else
 		{

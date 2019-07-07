@@ -27,8 +27,6 @@
                              <option value="1">Nombre</option> 
                              <option value="2">Apellido</option>
                              <option value="3">Nombre Apellido</option>  
-                             <option value="4">Fecha Factura</option> 
-                             <option value="5">Medico</option> 
                            </select>
                          </div>
                          <input class="flexsearch--input btn2" name="searc" type="search" placeholder="Buscador">

@@ -18,108 +18,157 @@
 					<div class="table-responsive">
 						<table class="table table-hover ta2">
 							<?php 
-							if($lente!= null )
+							if($cliente!= null )
 							{
 								?>
 								<tbody>
-									<tr style="color:white">
-										<td colspan="12">Fecha: <?= date('d-m-Y',strtotime($lente->getFecha())); ?>
-									</tr>
-								</td>
+									<?php 
+									if($lente!= null )
+									{
+										?>
+										<tr style="color:white">
+											<td colspan="12">Fecha: <?= date('d-m-Y',strtotime($lente->getFecha())); ?>
+										</tr>
+									</td>
+									<?php 
+								}
+								?>
 								<tr style="color:white">
 
 									<td colspan="2">Señor: <?= $nombreapellido ?></td>
 									<td colspan="2">Telefono: <?= $cliente->getTelefono(); ?></td>
 								</tr>
-								<tr style="color:white">
-                                        <td colspan="2" >Doctor: <?= $lente->getDoctor(); ?></td>
-                                        <td colspan="2">Observación: <?= $lente->getObservacion(); ?></td>
-                                    </tr>
 								<?php 
-								if($cuenta_saldos!= null )
-									{?>
+								if($lente!= null )
+									{	?>
 										<tr style="color:white">
-											<td colspan="2" >A cuenta: <?= $cuenta_saldos->getACuenta(); ?></td>
-											<td colspan="2">Saldo: <?= $cuenta_saldos->getSaldo(); ?></td>
+											<td colspan="2" >Doctor: <?= $lente->getDoctor(); ?></td>
+											<td colspan="2">Observación: <?= $lente->getObservacion(); ?></td>
 										</tr>
 										<?php 
-									} ?>
-									<tr style="color:white"> 
-										<td colspan="12">Armazon Lejos: <?= $lente->getArmazonLejos(); ?></td>
-									</tr>
-									<tr style="color:white"> 
-										<td colspan="12">Armazon Cerca: <?= $lente->getArmazonCerca() ?></td>
-									</tr style="color:white"> 
-									<tr style="color:white">
-										<td colspan="2">Lejos O.D.Esf: <?= $lente->getLejosOdEsferico(); ?></td>
-										<td colspan="2">Cilindrico: <?= $lente->getLejosOdCilindrico(); ?></td>
-										<td colspan="2">Grados°: <?= $lente->getLejosOdGrados(); ?></td>
-									</tr >
-									<tr style="color:white">
-										<td colspan="2">Lejos O.I. Esf: <?= $lente->getLejosOiEsferico(); ?></td>
-										<td colspan="2">Cilindrico: <?= $lente->getLejosOiCilindrico(); ?></td>
-										<td colspan="2">Grados°: <?= $lente->getLejosOiGrados(); ?></td>
-										<td colspan="2">Color: <?= $lente->getLejosColor(); ?></td>
-									</tr>
-									<tr style="color:white">
-										<td colspan="2">Cerca O.D. Esf: <?= $lente->getCercaOdEsferico(); ?></td>
-										<td colspan="2">Cilindrico: <?= $lente->getCercaOdCilindrico(); ?></td>
-										<td colspan="2">Grados°: <?= $lente->getCercaOdGrados(); ?></td>
-									</tr>
-									<tr style="color:white">
-										<td colspan="2">Cerca O.I. Esf:  <?= $lente->getCercaOiEsferico(); ?></td>
-										<td colspan="2">Cilindrico: <?= $lente->getCercaOiCilindrico(); ?></td>
-										<td colspan="2">Grados°: <?= $lente->getCercaOiGrados(); ?></td>
-										<td colspan="2">Color: <?= $lente->getCercaColor(); ?></td>
-									</tr>
-									<?php 
-									if($factura!= null )
-										{?>
+										if($cuenta_saldos!= null )
+											{?>
+												<tr style="color:white">
+													<td colspan="2" >A cuenta: <?= $cuenta_saldos->getACuenta(); ?></td>
+													<td colspan="2">Saldo: <?= $cuenta_saldos->getSaldo(); ?></td>
+												</tr>
+												<?php 
+											} ?>
+											<tr style="color:white"> 
+												<td colspan="12">Armazon Lejos: <?= $lente->getArmazonLejos(); ?></td>
+											</tr>
+											<tr style="color:white"> 
+												<td colspan="12">Armazon Cerca: <?= $lente->getArmazonCerca() ?></td>
+											</tr style="color:white"> 
 											<tr style="color:white">
-												<td colspan="2">Sub Total: <?= $factura->getSubTotal(); ?></td>
-												<td colspan="2">Seña: <?= $factura->getSenia(); ?></td>
-												<td colspan="2">Saldo Total: <?= $factura->getSaldoTotal(); ?></td>
+												<td colspan="2">Lejos O.D.Esf: <?= $lente->getLejosOdEsferico(); ?></td>
+												<td colspan="2">Cilindrico: <?= $lente->getLejosOdCilindrico(); ?></td>
+												<td colspan="2">Grados°: <?= $lente->getLejosOdGrados(); ?></td>
 											</tr >
-
+											<tr style="color:white">
+												<td colspan="2">Lejos O.I. Esf: <?= $lente->getLejosOiEsferico(); ?></td>
+												<td colspan="2">Cilindrico: <?= $lente->getLejosOiCilindrico(); ?></td>
+												<td colspan="2">Grados°: <?= $lente->getLejosOiGrados(); ?></td>
+												<td colspan="2">Color: <?= $lente->getLejosColor(); ?></td>
+											</tr>
+											<tr style="color:white">
+												<td colspan="2">Cerca O.D. Esf: <?= $lente->getCercaOdEsferico(); ?></td>
+												<td colspan="2">Cilindrico: <?= $lente->getCercaOdCilindrico(); ?></td>
+												<td colspan="2">Grados°: <?= $lente->getCercaOdGrados(); ?></td>
+											</tr>
+											<tr style="color:white">
+												<td colspan="2">Cerca O.I. Esf:  <?= $lente->getCercaOiEsferico(); ?></td>
+												<td colspan="2">Cilindrico: <?= $lente->getCercaOiCilindrico(); ?></td>
+												<td colspan="2">Grados°: <?= $lente->getCercaOiGrados(); ?></td>
+												<td colspan="2">Color: <?= $lente->getCercaColor(); ?></td>
+											</tr>
 											<?php 
-										} ?>
-										<td colspan="2" style="color:white">.
-										</td>
-										<?php 
+										}
 										if($factura!= null )
-											{?>		
-												<td colspan="2" style="color:white">Modificar:
-													<a href="/vista/modificaclienterlente/<?= $cliente->getId(); ?>/<?= $lente->getId(); ?>/<?= $factura->getId(); ?>/<?= $cuenta_saldos->getId();?>/" class="disabled">
+											{?>
+												<tr style="color:white">
+													<td colspan="2">Sub Total: <?= $factura->getSubTotal(); ?></td>
+													<td colspan="2">Seña: <?= $factura->getSenia(); ?></td>
+													<td colspan="2">Saldo Total: <?= $factura->getSaldoTotal(); ?></td>
+												</tr >
+
+												<?php 
+											} ?>
+											<td colspan="2" style="color:white">.
+											</td>
+											<?php 
+											if($lente != null )
+												{?>		
+													<td colspan="2" style="color:white">Modificar:
+														<a href="/vista/modificaclienterlente/<?= $cliente->getId(); ?>/<?= $lente->getId(); ?>/<?php if($factura != null)
+														{
+															$factura->getId();
+														}
+														else
+														{
+															print_r(-1);
+														}
+														?>/<?php if($cuenta_saldos != null)
+														{
+															$cuenta_saldos->getId();
+														}
+														else
+														{
+															print_r(-1);
+														}
+														?>/" class="disabled">
 														<span class="glyphicon glyphicon-pencil" title="Modificar"
 														data-toggle="tooltip" data-placement="right">
 													</span>
 												</a>
+											</td>
+											<td colspan="2" style="color:white">PDF:
+												<a href="/pdf/pdfclientelente/<?= $lente->getId(); ?>/<?= $cliente->getId(); ?>/" target="_blank" class="disabled">         
+													<span class="glyphicon glyphicon-cloud-upload" title="PDF"
+													data-toggle="tooltip" data-placement="right">
+												</span>
 											</td>
 											<?php 
 										}
 										else{
 											?>
 											<td colspan="2" style="color:white">Modificar:
-													<a href="/vista/modificaclienterlente/<?= $cliente->getId(); ?>/<?= $lente->getId(); ?>/<?= null ?>/<?= null ?>/" class="disabled">
-														<span class="glyphicon glyphicon-pencil" title="Modificar"
-														data-toggle="tooltip" data-placement="right">
-													</span>
-												</a>
-											</td>
-											<?php 
-										}?>
+												<a href="/vista/modificaclienterlente/<?= $cliente->getId(); ?>/<?= -1 ?>/<?php if($factura != null)
+														{
+															$factura->getId();
+														}
+														else
+														{
+															print_r(-1);
+														}
+														?>/<?php if($cuenta_saldos != null)
+														{
+															$cuenta_saldos->getId();
+														}
+														else
+														{
+															print_r(-1);
+														}
+														?>/" class="disabled">
+													<span class="glyphicon glyphicon-pencil" title="Modificar"
+													data-toggle="tooltip" data-placement="right">
+												</span>
+											</a>
+										</td>
 										<td colspan="2" style="color:white">PDF:
-											<a href="/pdf/pdfclientelente/<?= $lente->getId(); ?>/<?= $cliente->getId(); ?>/" target="_blank" class="disabled">         
+											<a href="/pdf/pdfclientelente/<?= -1 ?>/<?= $cliente->getId(); ?>/" target="_blank" class="disabled">         
 												<span class="glyphicon glyphicon-cloud-upload" title="PDF"
 												data-toggle="tooltip" data-placement="right">
 											</span>
 										</td>
-										<?php  
-									} ?>
-								</tbody>
-							</table>
-						</div>
+										<?php 
+									}?>
+									<?php  
+								} ?>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>

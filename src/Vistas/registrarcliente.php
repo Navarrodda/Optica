@@ -26,8 +26,8 @@
 				<form id="form_r" method="post" action="/registrar/registrarclientelente/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
 					<input required name="nombre" type="text" class="col-md-6 norightborder btn2" placeholder="Nombre">
 					<input required name="apellido" type="text" class="col-md-6 norightborder btn2" placeholder="Apellido">
-					<input required name="telefono" type="text" class="col-md-4 norightborder btn2" placeholder="Telefono">
-					<input required name="doctor" type="text" class="col-md-4 norightborder btn2" placeholder="Doctor">
+					<input name="telefono" type="text" class="col-md-4 norightborder btn2" placeholder="Telefono">
+					<input name="doctor" type="text" class="col-md-4 norightborder btn2" placeholder="Doctor">
 					<input name="observaciones" type="text" class="col-md-4 norightborder btn2" placeholder="Observaciones">
 					<input name="armason_l" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Lejos">	
 					<input name="armason_c" type="text" class="col-md-6 norightborder btn2" placeholder="Armazon Cerca">	

@@ -790,17 +790,40 @@ class VistaControladora
 		{
 			$cliente = $this->daoCliente->traerPorId($id_cliente);
 		}
-		if(!empty($id_lente))
+		if($id_lente != -1)
 		{
-			$lente = $this->daoLente->traerPorId($id_lente);
+			if(!empty($id_lente))
+			{
+				$lente = $this->daoLente->traerPorId($id_lente);
+			}
 		}
-		if(!empty($id_factura))
+		else
 		{
-			$factura = $this->daoFactura->traerPorId($id_factura);
+			$lente = NULL;
 		}
-		if(!empty($id_cuenta_saldos))
+
+		if($id_factura != -1)
 		{
-			$cuenta_saldos = $this->daoCuenta_saldos->traerPorId($id_cuenta_saldos);
+			if(!empty($id_factura))
+			{
+				$factura = $this->daoFactura->traerPorId($id_factura);
+			}
+		}
+		else
+		{
+			$factura = NULL;
+		}
+		
+		if($id_cuenta_saldos != -1)
+		{
+			if(!empty($id_cuenta_saldos))
+			{
+				$cuenta_saldos = $this->daoCuenta_saldos->traerPorId($id_cuenta_saldos);
+			}
+		}
+		else
+		{
+			$cuenta_saldos = NULL;
 		}
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "modificarclientelente.php");
