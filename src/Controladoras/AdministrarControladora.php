@@ -204,7 +204,6 @@ class AdministrarControladora
 				$cliente = $this->daoCliente->traerPorId($id_cliente);
 
 				$nombreapellido = $nombre .' '. $apellido;
-
 				
 				if($complit=='SI')
 				{
@@ -352,7 +351,6 @@ class AdministrarControladora
 						$idLent = $this->daoLente->actualizar( $lenteInstance, $id_lente );
 						if(!empty($id_factura)){
 
-							$regCompleted = FALSE;
 
 							$factura = $this->daoFactura->traerPorId($id_factura);
 							$cuenta_saldos = null;
@@ -399,6 +397,9 @@ class AdministrarControladora
 				}
 				else
 				{
+					
+					$regCompleted = FALSE;
+					
 					$fecha = date('Y-m-d');
 
 					if($complit=='SI')
