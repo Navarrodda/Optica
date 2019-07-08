@@ -349,6 +349,8 @@ class AdministrarControladora
 					if(!empty($id_lente)){
 						$lenteInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
 						$idLent = $this->daoLente->actualizar( $lenteInstance, $id_lente );
+						$lente = $this->daoLente->traerPorId($id_lente);
+
 						if(!empty($id_factura)){
 
 
