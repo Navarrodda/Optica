@@ -876,9 +876,9 @@ class AdministrarControladora
 					$idLent = $this->daoLente->actualizar( $lenteInstance, $id_lente );
 
 					
-				$this->mensaje = new Mensaje( "success", 'El lente con id:' .' '.'<i><strong>' .  $id_lente
-					. '</strong></i>.  Del Cliente ' .' '.'<i><strong>' .  $nombreapellido
-					. '</strong></i> fue Modificado con exito!' );
+					$this->mensaje = new Mensaje( "success", 'El lente con id:' .' '.'<i><strong>' .  $id_lente
+						. '</strong></i>.  Del Cliente ' .' '.'<i><strong>' .  $nombreapellido
+						. '</strong></i> fue Modificado con exito!' );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "inicio.php");
 					include URL_VISTA . 'footer.php';
@@ -935,27 +935,24 @@ class AdministrarControladora
 					$this->daoFactura->eliminarPorIdLente($id_lente);
 					$this->daoLentexcliente->eliminarPorIdLente($id_lente);
 					$this->daoLente->eliminarPorId($id_lente);
-					$regCompleted = TRUE;
-					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente el lente del cliente
+
+					
+					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente el lente con el ID:' .' '.'<i><strong>' .  $id_lente
+						. '</strong></i> 
 						! El Cliente es:' .' '.'<i><strong>' .  $nombreapellido
 						. '</strong></i>');
-				}
-
-
-				switch ($regCompleted){
-					case TRUE:
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "inicio.php");
 					include URL_VISTA . 'footer.php';
-					break;
 
-					case FALSE:
-					$cliente = $this->daoCliente->traerTodo();
+				}
+				else
+				{
+					$this->mensaje = new Mensaje( "success", "Hubo un Error" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "cliente.php");
 					include URL_VISTA . 'footer.php';
-					break;
-				}
+				}	
 			}
 			else{
 				$this->mensaje = new Mensaje( "success", "Debe iniciar sesion" );
@@ -1029,12 +1026,13 @@ class AdministrarControladora
 						$saldo = $saldo_total;
 						$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
 						$idsaldo = $this->daoCuentasaldos->actualizar( $salInstance, $cuentasaldos[0]->getId());
-						$this->mensaje = new Mensaje( "success", "El costo del lente fue modificado con exito!" );
 
+						$this->mensaje = new Mensaje('success', 'El consto del lente con ID:' .' '.'<i><strong>' .  $id_lente
+							. '</strong></i> A sido modificado con exito ');
+						
 						include URL_VISTA . 'header.php';
 						require(URL_VISTA . "inicio.php");
 						include URL_VISTA . 'footer.php';
-						break;
 					}
 
 				}
