@@ -102,7 +102,7 @@
 													<td colspan="2" style="color:white">Modificar:
 														<a href="/vista/modificaclienterlente/<?= $cliente->getId(); ?>/<?= $lente->getId(); ?>/<?php if($factura != null)
 														{
-															$factura->getId();
+															print_r($factura->getId());
 														}
 														else
 														{
@@ -110,7 +110,7 @@
 														}
 														?>/<?php if($cuenta_saldos != null)
 														{
-															$cuenta_saldos->getId();
+															print_r($cuenta_saldos->getId());
 														}
 														else
 														{
@@ -135,7 +135,7 @@
 											<td colspan="2" style="color:white">Modificar:
 												<a href="/vista/modificaclienterlente/<?= $cliente->getId(); ?>/<?= -1 ?>/<?php if($factura != null)
 														{
-															$factura->getId();
+															print_r($factura->getId());
 														}
 														else
 														{
@@ -143,7 +143,7 @@
 														}
 														?>/<?php if($cuenta_saldos != null)
 														{
-															$cuenta_saldos->getId();
+															print_r($cuenta_saldos->getId());
 														}
 														else
 														{
