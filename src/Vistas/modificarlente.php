@@ -32,6 +32,7 @@
 				if($lente!= NULL)
 					{ ?>
 						<form id="form_r" method="post" action="/administrar/modificarlente/" id="contactform" class="text-left" autocomplete="off" enctype= 'multipart/form-data'>
+							<input  name="id_cliente" type=hidden value="<?= $cliente->getId()?>">
 							<input  name="id_lente" type=hidden value="<?= $lente->getId()?>">
 							<input  name="doctor" type="text" class="col-md-6 norightborder btn2" placeholder="Doctor">
 							<input name="fecha" type="date" class="col-md-6 norightborder btn2" placeholder="Fecha">
