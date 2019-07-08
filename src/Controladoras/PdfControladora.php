@@ -72,13 +72,11 @@ class PdfControladora
 	{
 		if(!empty($_SESSION))
 		{
-
-			
-			$pdf = new pdf();
+			$pdf = new pdf('P','mm','Legal');
 			$pdf->AddPage();
-			$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
+			$pdf->Image('img\Plantilla\plantilla.jpg',-3.1,10,-86);
 			$pdf->SetTextColor(0,0,0);
-			$pdf->SetFont('Arial','B',8);
+			$pdf->SetFont('Arial','B',16);
 			ini_set('date.timezone','America/Buenos_Aires');
 			$timed= date('d',time());
 			$timem= date('m',time()); 
@@ -86,18 +84,18 @@ class PdfControladora
 				//1 Parte{
 				//Fecha{
 				//Dia{
-			$pdf->SetY(16);
-			$pdf->SetX(83.5);
-			$pdf->MultiCell(145,15,$timed);
+			$pdf->SetY(19);
+			$pdf->SetX(88);
+			$pdf->MultiCell(146,15,$timed);
 				//Dia}
 				//Mes{
-			$pdf->SetY(16);
-			$pdf->SetX(93.5);
+			$pdf->SetY(19);
+			$pdf->SetX(100.5);
 			$pdf->MultiCell(145,15,$timem);
 				//Mes}
 				//Anio{
-			$pdf->SetY(16);
-			$pdf->SetX(103.5);
+			$pdf->SetY(19);
+			$pdf->SetX(112.5);
 			$pdf->MultiCell(145,15,$timey);
 				//Anio}
 				//}
@@ -114,18 +112,18 @@ class PdfControladora
 				//2 Parte{
 				//Fecha{
 				//Dia{
-			$pdf->SetY(80.5);
-			$pdf->SetX(163);
+			$pdf->SetY(103.5);
+			$pdf->SetX(173);
 			$pdf->MultiCell(145,15,$timed);
 				//Dia}
 				//Mes{
-			$pdf->SetY(80.5);
-			$pdf->SetX(173.5);
+			$pdf->SetY(103.5);
+			$pdf->SetX(186.5);
 			$pdf->MultiCell(145,15,$timem);
 				//Mes}
 				//Anio{
-			$pdf->SetY(80.5);
-			$pdf->SetX(183.5);
+			$pdf->SetY(103.5);
+			$pdf->SetX(198.5);
 			$pdf->MultiCell(145,15,$timey);
 				//Anio}
 				//Fecha}
@@ -152,6 +150,7 @@ class PdfControladora
 			$pdf->MultiCell(135,15,'');
 				//Telefono}
 				//}
+
 			$pdf->Output();
 
 		}
@@ -169,9 +168,10 @@ class PdfControladora
 	{
 		if(!empty($_SESSION))
 		{
-			$pdf = new pdf();
+			$pdf = new pdf('P','mm','Legal');
 			$pdf->AddPage();
-			$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
+			$pdf->Image('img\Plantilla\plantilla.jpg',-3.1,10,-86);
+			$pdf->SetTextColor(0,0,0);
 			$pdf->Output();	
 		}
 		else
@@ -192,11 +192,11 @@ class PdfControladora
 			$usuario = $this->daoUsuario->traerPorMail($email);
 			if($usuario != NULL )
 			{
-				$pdf = new pdf();
+				$pdf = new pdf('P','mm','Legal');
 				$pdf->AddPage();
-				$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
+				$pdf->Image('img\Plantilla\plantilla.jpg',-3.1,10,-86);
 				$pdf->SetTextColor(0,0,0);
-				$pdf->SetFont('Arial','B',8);
+				$pdf->SetFont('Arial','B',16);
 				ini_set('date.timezone','America/Buenos_Aires');
 				$timed= date('d',time());
 				$timem= date('m',time()); 
@@ -204,284 +204,176 @@ class PdfControladora
 				//1 Parte{
 				//Fecha{
 				//Dia{
-				$pdf->SetY(16);
-				$pdf->SetX(83.5);
+				$pdf->SetY(19);
+				$pdf->SetX(88);
 				$pdf->MultiCell(145,15,$timed);
 				//Dia}
 				//Mes{
-				$pdf->SetY(16);
-				$pdf->SetX(93.5);
+				$pdf->SetY(19);
+				$pdf->SetX(100.5);
 				$pdf->MultiCell(145,15,$timem);
 				//Mes}
 				//Anio{
-				$pdf->SetY(16);
-				$pdf->SetX(103.5);
+				$pdf->SetY(19);
+				$pdf->SetX(112.5);
 				$pdf->MultiCell(145,15,$timey);
 				//Anio}
 				//}
 				//Senior{
 				//Apellido{ 
 				//Nombre{
-				$pdf->SetY(16);
-				$pdf->SetX(124);
-				$resultado = $usuario->getNombre() .' '. $usuario->getApellido();
-				$pdf->MultiCell(145,15,$resultado);
+				$pdf->SetY(19);
+				$pdf->SetX(138);
+				$pdf->MultiCell(145,15,'roberto');
 				//Nombre}
 				//Apellido}
 				//Senior}
 				//Observaciones{
-				$pdf->SetY(23);
-				$pdf->SetX(89);
-				$pdf->MultiCell(145,15,'monocromaticos');//Observacion
+				$pdf->SetY(27.5);
+				$pdf->SetX(95.7);
+				$pdf->MultiCell(145,15,'monocrom');//Observacion
 				//Observaciones}
-				//Sera entregado el dia{
-				//Dia{
-				$pdf->SetY(30.5);
-				$pdf->SetX(53);
-				$pdf->MultiCell(145,15,'03');
-				//Dia}
-				//Mes{
-				$pdf->SetY(30.5);
-				$pdf->SetX(60);
-				$pdf->MultiCell(145,15,'21');
-				//Mes}
-				//Anio{
-				$pdf->SetY(30.5);
-				$pdf->SetX(67.5);
-				$pdf->MultiCell(145,15,'14');
-				//Sera entregado el dia}
 				//A cuenta{
-				$pdf->SetY(25);
-				$pdf->SetX(152.6);
-				$pdf->MultiCell(145,15,'11111');
+				$pdf->SetY(29);
+				$pdf->SetX(165.6);
+				$pdf->MultiCell(145,15,'21111');
 				//A cuenta}
 				//Saldo{
-				$pdf->SetY(30.3);
-				$pdf->SetX(152.6);
+				$pdf->SetY(35.9);
+				$pdf->SetX(165.6);
 				$pdf->MultiCell(145,15,'22222');
 				//Saldo}
 				//}
 				//2 Parte{
 				//Fecha{
 				//Dia{
-				$pdf->SetY(80.5);
-				$pdf->SetX(163);
+				$pdf->SetY(103.5);
+				$pdf->SetX(173);
 				$pdf->MultiCell(145,15,$timed);
 				//Dia}
 				//Mes{
-				$pdf->SetY(80.5);
-				$pdf->SetX(173.5);
+				$pdf->SetY(103.5);
+				$pdf->SetX(186.5);
 				$pdf->MultiCell(145,15,$timem);
 				//Mes}
 				//Anio{
-				$pdf->SetY(80.5);
-				$pdf->SetX(183.5);
+				$pdf->SetY(103.5);
+				$pdf->SetX(198.5);
 				$pdf->MultiCell(145,15,$timey);
 				//Anio}
 				//Fecha}
 				//Senior{ 
 				//Nombre{
-				$pdf->SetY(92.5);
-				$pdf->SetX(29.5);
-				$pdf->MultiCell(135,15,'');
-				//Nombre}
 				//Apellido{
-				$pdf->SetY(92.5);
-				$pdf->SetX(38);
-				$pdf->MultiCell(135,15,'');
+				$pdf->SetY(116.9);
+				$pdf->SetX(24.5);
+				$pdf->MultiCell(135,15,'roberto');
 				//Apellido}
+				//Nombre}
 				//Senior}
-				//Calle{
-				$pdf->SetY(92.5);
-				$pdf->SetX(110.5);
-				$pdf->MultiCell(135,15,'');
-				//Calle}
 				//Telefono{
-				$pdf->SetY(92.5);
-				$pdf->SetX(165.5);
-				$pdf->MultiCell(135,15,'');
+				$pdf->SetY(116.9);
+				$pdf->SetX(153.5);
+				$pdf->MultiCell(135,15,'223123213');
 				//Telefono}
-				//Reseta con fecha{
-				//Dia{
-				$pdf->SetY(99.5);
-				$pdf->SetX(48);
-				$pdf->MultiCell(145,15,'22');
-				//Dia}
-				//Mes{
-				$pdf->SetY(99.5);
-				$pdf->SetX(61);
-				$pdf->MultiCell(145,15,'11');
-				//Mes}
-				//Anio{
-				$pdf->SetY(99.5);
-				$pdf->SetX(75);
-				$pdf->MultiCell(145,15,'16');
-				//Anio}
-				//Reseta con fecha}
 				//Dr{
-				$pdf->SetY(99.5);
-				$pdf->SetX(89.5);
+				$pdf->SetY(125.5);
+				$pdf->SetX(21.5);
 				$pdf->MultiCell(145,15,'Perez');
 				//Dr}
-				//Proc{
-				$pdf->SetY(99.5);
-				$pdf->SetX(158.5);
-				$pdf->MultiCell(145,15,'Roberto');
-				//Proc}
 				//Armazon Lejos{
-				$pdf->SetY(108.6);
-				$pdf->SetX(40.5);
+				$pdf->SetY(137.5);
+				$pdf->SetX(38.5);
 				$pdf->MultiCell(145,15,'+asd');
 				//Armazon Lejos}
-				//$ Armazon Lejos{
-				$pdf->SetY(108.6);
-				$pdf->SetX(160);
-				$pdf->MultiCell(145,15,'+asd');
-				//$ Armazon Lejos}
 				//Armazon Cerca{
-				$pdf->SetY(117.9);
-				$pdf->SetX(40.5);
-				$pdf->MultiCell(145,15,'+as');
+				$pdf->SetY(149.5);
+				$pdf->SetX(38.5);
+				$pdf->MultiCell(145,15,'+16');
 				//Armazon Cerca}
-				//$ Armazon Cerca{
-				$pdf->SetY(117.9);
-				$pdf->SetX(160);
-				$pdf->MultiCell(145,15,'+as');
-				//$ Armazon Cerca}
 				//Lejos OD ESF{
-				$pdf->SetY(127.9);
-				$pdf->SetX(40.5);
-				$pdf->MultiCell(145,15,'+11');
+				$pdf->SetY(162.5);
+				$pdf->SetX(38.5);
+				$pdf->MultiCell(145,15,'+16');
 				//Lejos OD ESF}
 				//Cilindrico OD{
-				$pdf->SetY(127.9);
-				$pdf->SetX(68.5);
-				$pdf->MultiCell(145,15,'+12');
+				$pdf->SetY(162.5);
+				$pdf->SetX(74.5);
+				$pdf->MultiCell(145,15,'+1');
 				//Cilindrico OD}
 				//En GRA OD{
-				$pdf->SetY(127.9);
-				$pdf->SetX(91.7);
-				$pdf->MultiCell(145,15,'+12');
+				$pdf->SetY(162.5);
+				$pdf->SetX(102.5);
+				$pdf->MultiCell(145,15,'+2');
 				//En GRA OD}
-				//$ L OD{
-				$pdf->SetY(128.2);
-				$pdf->SetX(160);
-				$pdf->MultiCell(145,15,'1112');
-				//$ L OD}
 				//Lejos OI ESF{
-				$pdf->SetY(132.6);
-				$pdf->SetX(40.5);
-				$pdf->MultiCell(145,15,'+13');
+				$pdf->SetY(168.6);
+				$pdf->SetX(38.5);
+				$pdf->MultiCell(145,15,'+2');
 				//Lejos OI ESF}
 				//Cilindrico OI{
-				$pdf->SetY(132.6);
-				$pdf->SetX(68.5);
-				$pdf->MultiCell(145,15,'+14');
+				$pdf->SetY(168.6);
+				$pdf->SetX(74.5);
+				$pdf->MultiCell(145,15,'+3');
 				//Cilindrico OI}
 				//EN GRA OI{
-				$pdf->SetY(132.6);
-				$pdf->SetX(91.7);
-				$pdf->MultiCell(145,15,'+14');
+				$pdf->SetY(168.6);
+				$pdf->SetX(102.5);
+				$pdf->MultiCell(145,15,'+3');
 				//EN GRA OI}
 				//Color 1{
-				$pdf->SetY(132.6);
-				$pdf->SetX(120.2);
-				$pdf->MultiCell(145,15,'+14');
+				$pdf->SetY(168.6);
+				$pdf->SetX(140);
+				$pdf->MultiCell(145,15,'+4');
 				//Color 1}
-				//$ L OI{
-				$pdf->SetY(132.8);
-				$pdf->SetX(160);
-				$pdf->MultiCell(145,15,'1124');
-				//$ L OI}
 				//Cerca OD ESF{
-				$pdf->SetY(137.6);
-				$pdf->SetX(40.5);
-				$pdf->MultiCell(145,15,'+14');
+				$pdf->SetY(175);
+				$pdf->SetX(38.5);
+				$pdf->MultiCell(145,15,'+1');
 				//Cerca OD ESF} 
 				//Cilindrico OD{
-				$pdf->SetY(137.6);
-				$pdf->SetX(68.5);
-				$pdf->MultiCell(145,15,'+14');
+				$pdf->SetY(175);
+				$pdf->SetX(74.5);
+				$pdf->MultiCell(145,15,'+2');
 				//Cilindrico OD}
 				//EN GRA OD{
-				$pdf->SetY(137.6);
-				$pdf->SetX(91.7);
-				$pdf->MultiCell(145,15,'+14');
+				$pdf->SetY(175);
+				$pdf->SetX(102.5);
+				$pdf->MultiCell(145,15,'+3');
 				//EN GRA OD}
-				//$ C OD{
-				$pdf->SetY(137.7);
-				$pdf->SetX(160);
-				$pdf->MultiCell(145,15,'123123');
-				//$ C OD}
 				//Cerca OI ESF{
-				$pdf->SetY(142.6);
-				$pdf->SetX(40.5);
-				$pdf->MultiCell(145,15,'+16');
+				$pdf->SetY(181.5);
+				$pdf->SetX(38.5);
+				$pdf->MultiCell(145,15,'+6');
 				//Cerca OI ESF}
 				//Cilindrico OI{
-				$pdf->SetY(142.6);
-				$pdf->SetX(68.5);
+				$pdf->SetY(181.5);
+				$pdf->SetX(74.5);
 				$pdf->MultiCell(145,15,'+16');
 				//Cilindrico OI}
 				//EN GRA OI{
-				$pdf->SetY(142.6);
-				$pdf->SetX(91.7);
+				$pdf->SetY(181.5);
+				$pdf->SetX(102.5);
 				$pdf->MultiCell(145,15,'+16');
 				//EN GRA OI}
 				//Color 2{
-				$pdf->SetY(142.6);
-				$pdf->SetX(120.2);
+				$pdf->SetY(181.5);
+				$pdf->SetX(140);
 				$pdf->MultiCell(145,15,'+16');
 				//Color 2}
-				//$ OI{
-				$pdf->SetY(142.7);
-				$pdf->SetX(160);
-				$pdf->MultiCell(145,15,'21223');
-				//$ OI}
-				//D.I.{
-				$pdf->SetY(147.7);
-				$pdf->SetX(26);
-				$pdf->MultiCell(145,15,'pedro');
-				//D.I.}
-				//Calibre{
-				$pdf->SetY(147.7);
-				$pdf->SetX(57.2);
-				$pdf->MultiCell(145,15,'ajustado');
-				//Calibre}
-				//Puente{
-				$pdf->SetY(147.7);
-				$pdf->SetX(94.7);
-				$pdf->MultiCell(145,15,'sirculo');
-				//Puente}
 				//Sub Total{
-				$pdf->SetY(147.7);
-				$pdf->SetX(160);
+				$pdf->SetY(187.7);
+				$pdf->SetX(171.7);
 				$pdf->MultiCell(145,15,'123123');
 				//Sub Total}
-				//Sera entregado el Dia{
-				$pdf->SetY(155.2);
-				$pdf->SetX(56);
-				$pdf->MultiCell(145,15,'12');
-				//Dia}
-				//Mes{
-				$pdf->SetY(155.2);
-				$pdf->SetX(64);
-				$pdf->MultiCell(145,15,'11');
-				//Mes}
-				//Anio{
-				$pdf->SetY(155.2);
-				$pdf->SetX(73);
-				$pdf->MultiCell(145,15,'16');
-				//Anio}				
-				//Sera entregado el Dia}
 				//$ Senia{
-				$pdf->SetY(152.1);
-				$pdf->SetX(160);
+				$pdf->SetY(193.4);
+				$pdf->SetX(171.7);
 				$pdf->MultiCell(145,15,'1612');
 				//$ Senia}
 				//Saldo Total ${
-				$pdf->SetY(156.4);
-				$pdf->SetX(160);
+				$pdf->SetY(199);
+				$pdf->SetX(171.7);
 				$pdf->MultiCell(145,15,'2112');
 				//Saldo Total $}
 				//}
@@ -515,10 +407,11 @@ class PdfControladora
 
 			
 			$pdf = new pdf();
+			$pdf = new pdf('P','mm','Legal');
 			$pdf->AddPage();
-			$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
+			$pdf->Image('img\Plantilla\plantilla.jpg',-3.1,10,-86);
 			$pdf->SetTextColor(0,0,0);
-			$pdf->SetFont('Arial','B',8);
+			$pdf->SetFont('Arial','B',16);
 			ini_set('date.timezone','America/Buenos_Aires');
 			//1 Parte{
 			$fecha = date('Y-m-d');
@@ -529,18 +422,18 @@ class PdfControladora
 				$timey= date("y", strtotime($fecha)); 
 			//Fecha{
 			//Dia{
-				$pdf->SetY(16);
-				$pdf->SetX(83.5);
+				$pdf->SetY(19);
+				$pdf->SetX(88);
 				$pdf->MultiCell(145,15,$timed);
 			//Dia}
 			//Mes{
-				$pdf->SetY(16);
-				$pdf->SetX(93.5);
+				$pdf->SetY(19);
+				$pdf->SetX(100.5);
 				$pdf->MultiCell(145,15,$timem);
 			//Mes}
 			//Anio{
-				$pdf->SetY(16);
-				$pdf->SetX(103.5);
+				$pdf->SetY(19);
+				$pdf->SetX(112.5);
 				$pdf->MultiCell(145,15,$timey);
 			//Anio}
 			//}
@@ -556,16 +449,16 @@ class PdfControladora
 			//Senior{ 
 			//Apellido}
 			//Nombre{
-			$pdf->SetY(16);
-			$pdf->SetX(124);
+			$pdf->SetY(19);
+			$pdf->SetX(138);
 			$resultado =  $nombre.' '.$apellido;
 			$pdf->MultiCell(145,15,$resultado);
 			//Nombre}
 			//Apellido{
 			//Senior}
 			//Observaciones{
-			$pdf->SetY(23.3);
-			$pdf->SetX(89);
+			$pdf->SetY(27.5);
+			$pdf->SetX(95.7);
 			$pdf->MultiCell(145,15,$observacion);//Observacion
 			//Observaciones}
 				//A cuenta{
@@ -579,13 +472,13 @@ class PdfControladora
 				$saldo_total = $subtotal;
 			}
 			$a_cuenta = $senia; 
-			$pdf->SetY(25);
-			$pdf->SetX(152.6);
+			$pdf->SetY(29);
+			$pdf->SetX(165.6);
 			$pdf->MultiCell(145,15,$a_cuenta);
 				//A cuenta}
 				//Saldo{
-			$pdf->SetY(30.3);
-			$pdf->SetX(152.6);
+			$pdf->SetY(35.9);
+			$pdf->SetX(165.6);
 			$pdf->MultiCell(145,15,$saldo_total);
 				//Saldo}
 				//}
@@ -596,18 +489,18 @@ class PdfControladora
 				$timem= date("m", strtotime($fecha));  
 				$timey= date("y", strtotime($fecha)); 
 				//Dia{
-				$pdf->SetY(80.5);
-				$pdf->SetX(163);
+				$pdf->SetY(103.5);
+				$pdf->SetX(173);
 				$pdf->MultiCell(145,15,$timed);
 				//Dia}
 				//Mes{
-				$pdf->SetY(80.5);
-				$pdf->SetX(173.5);
+				$pdf->SetY(103.5);
+				$pdf->SetX(186.5);
 				$pdf->MultiCell(145,15,$timem);
 				//Mes}
 				//Anio{
-				$pdf->SetY(80.5);
-				$pdf->SetX(183.5);
+				$pdf->SetY(103.5);
+				$pdf->SetX(198.5);
 				$pdf->MultiCell(145,15,$timey);
 				//Anio}
 			}
@@ -615,116 +508,116 @@ class PdfControladora
 				//Senior{ 
 				//Nombre{
 				//Apellido{
-			$pdf->SetY(92.5);
-			$pdf->SetX(29.5);
+			$pdf->SetY(116.9);
+			$pdf->SetX(24.5);
 			$pdf->MultiCell(135,15,$resultado);
 				//Nombre}
 				//Apellido}
 				//Senior}
 				//Telefono{
-			$pdf->SetY(92.5);
-			$pdf->SetX(165.5);
+			$pdf->SetY(116.9);
+			$pdf->SetX(153.5);
 			$pdf->MultiCell(135,15,$telefono);
 				//Telefono}
 				//Dr{
-			$pdf->SetY(99.5);
-			$pdf->SetX(89.5);
+			$pdf->SetY(125.5);
+			$pdf->SetX(21.5);
 			$pdf->MultiCell(145,15,$doctor);
 				//Dr}
 				//Armazon Lejos{
-			$pdf->SetY(108.6);
-			$pdf->SetX(40.5);
+			$pdf->SetY(137.5);
+			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$armazon_lejos);
 				//Armazon Lejos}
 				//Armazon Cerca{
-			$pdf->SetY(117.9);
-			$pdf->SetX(40.5);
+			$pdf->SetY(149.5);
+			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$armazon_cerca);
 				//Armazon Cerca}
 				//Lejos OD ESF{
-			$pdf->SetY(127.9);
-			$pdf->SetX(40.5);
+			$pdf->SetY(162.5);
+			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$lejos_od_esferico);
 				//Lejos OD ESF}
 				//Cilindrico OD{
-			$pdf->SetY(127.9);
-			$pdf->SetX(68.5);
+			$pdf->SetY(162.5);
+			$pdf->SetX(74.5);
 			$pdf->MultiCell(145,15,$lejos_od_cilindrico);
 				//Cilindrico OD}
 				//En GRA OD{
-			$pdf->SetY(127.9);
-			$pdf->SetX(91.7);
+			$pdf->SetY(162.5);
+			$pdf->SetX(102.5);
 			$pdf->MultiCell(145,15,$lejos_od_grados);
 				//En GRA OD}
 				//Lejos OI ESF{
-			$pdf->SetY(132.6);
-			$pdf->SetX(40.5);
+			$pdf->SetY(168.6);
+			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$lejos_oi_esferico);
 				//Lejos OI ESF}
 				//Cilindrico OI{
-			$pdf->SetY(132.6);
-			$pdf->SetX(68.5);
+			$pdf->SetY(168.6);
+			$pdf->SetX(74.5);
 			$pdf->MultiCell(145,15,$lejos_oi_cilindrico);
 				//Cilindrico OI}
 				//EN GRA OI{
-			$pdf->SetY(132.6);
-			$pdf->SetX(91.7);
+			$pdf->SetY(168.6);
+			$pdf->SetX(102.5);
 			$pdf->MultiCell(145,15,$lejos_oi_grados);
 				//EN GRA OI}
 				//Color 1{
-			$pdf->SetY(132.6);
-			$pdf->SetX(120.2);
+			$pdf->SetY(168.6);
+			$pdf->SetX(140);
 			$pdf->MultiCell(145,15,$lejos_color);
 				//Color 1}
 				//Cerca OD ESF{
-			$pdf->SetY(137.6);
-			$pdf->SetX(40.5);
+			$pdf->SetY(175);
+			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$cerca_od_esferico);
 				//Cerca OD ESF} 
 				//Cilindrico OD{
-			$pdf->SetY(137.6);
-			$pdf->SetX(68.5);
+			$pdf->SetY(175);
+			$pdf->SetX(74.5);
 			$pdf->MultiCell(145,15,$cerca_od_cilindrico);
 				//Cilindrico OD}
 				//EN GRA OD{
-			$pdf->SetY(137.6);
-			$pdf->SetX(91.7);
+			$pdf->SetY(175);
+			$pdf->SetX(102.5);
 			$pdf->MultiCell(145,15,$cerca_od_grados);
 				//EN GRA OD}
 				//Cerca OI ESF{
-			$pdf->SetY(142.6);
-			$pdf->SetX(40.5);
+			$pdf->SetY(181.5);
+			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$cerca_oi_esferico);
 				//Cerca OI ESF}
 				//Cilindrico OI{
-			$pdf->SetY(142.6);
-			$pdf->SetX(68.5);
+			$pdf->SetY(181.5);
+			$pdf->SetX(74.5);
 			$pdf->MultiCell(145,15,$cerca_oi_cilindrico);
 				//Cilindrico OI}
 				//EN GRA OI{
-			$pdf->SetY(142.6);
-			$pdf->SetX(91.7);
+			$pdf->SetY(181.5);
+			$pdf->SetX(102.5);
 			$pdf->MultiCell(145,15,$cerca_oi_grados);
 				//EN GRA OI}
 				//Color 2{
-			$pdf->SetY(142.6);
-			$pdf->SetX(120.2);
+			$pdf->SetY(181.5);
+			$pdf->SetX(140);
 			$pdf->MultiCell(145,15,$cerca_color);
 				//Color 2}
 			
 				//Sub Total{
-			$pdf->SetY(147.7);
-			$pdf->SetX(160);
+			$pdf->SetY(187.7);
+			$pdf->SetX(171.7);
 			$pdf->MultiCell(145,15,$subtotal);
 				//Sub Total}
 				//$ Senia{
-			$pdf->SetY(152.1);
-			$pdf->SetX(160);
+			$pdf->SetY(193.4);
+			$pdf->SetX(171.7);
 			$pdf->MultiCell(145,15,$senia);
 				//$ Senia}
 				//Saldo Total ${
-			$pdf->SetY(156.4);
-			$pdf->SetX(160);
+			$pdf->SetY(199);
+			$pdf->SetX(171.7);
 			$pdf->MultiCell(145,15,$saldo_total);
 				//Saldo Total $}
 				//}
@@ -738,7 +631,7 @@ class PdfControladora
 			include URL_VISTA . 'footer.php';
 		}
 	}		
-public function pdfclientelente($id_lente, $id_cliente)
+	public function pdfclientelente($id_lente, $id_cliente)
 	{
 		if(!empty($_SESSION))
 		{
@@ -776,11 +669,11 @@ public function pdfclientelente($id_lente, $id_cliente)
 
 			if(!empty($cliente))
 			{
-				$pdf = new pdf();
+				$pdf = new pdf('P','mm','Legal');
 				$pdf->AddPage();
-				$pdf->Image('img\Plantilla\plantilla.jpg',10,10,-110);
+				$pdf->Image('img\Plantilla\plantilla.jpg',-3.1,10,-86);
 				$pdf->SetTextColor(0,0,0);
-				$pdf->SetFont('Arial','B',8);
+				$pdf->SetFont('Arial','B',16);
 				ini_set('date.timezone','America/Buenos_Aires');
 				$timed= date('d',time());
 				$timem= date('m',time()); 
@@ -788,213 +681,213 @@ public function pdfclientelente($id_lente, $id_cliente)
 				//1 Parte{
 				//Fecha{
 				//Dia{
-				$pdf->SetY(16);
-				$pdf->SetX(83.5);
+				$pdf->SetY(19);
+				$pdf->SetX(88);
 				$pdf->MultiCell(145,15,$timed);
 				//Dia}
 				//Mes{
-				$pdf->SetY(16);
-				$pdf->SetX(93.5);
+				$pdf->SetY(19);
+				$pdf->SetX(100.5);
 				$pdf->MultiCell(145,15,$timem);
 				//Mes}
 				//Anio{
-				$pdf->SetY(16);
-				$pdf->SetX(103.5);
+				$pdf->SetY(19);
+				$pdf->SetX(112.5);
 				$pdf->MultiCell(145,15,$timey);
 				//Anio}
 				//}
 				//Senior{
 				//Apellido{ 
 				//Nombre{
-				$pdf->SetY(16);
-				$pdf->SetX(124);
+				$pdf->SetY(19);
+				$pdf->SetX(138);;
 				$resultado = $cliente->getNombre() .' '. $cliente->getApellido();
 				$pdf->MultiCell(145,15,$resultado);
 				//Nombre}
 				//Apellido}
 				//Senior}
-				//Observaciones{
-				if (!empty($lente)) {
-
-
-					$pdf->SetY(23.3);
-					$pdf->SetX(89);
-				$pdf->MultiCell(145,15,$lente->getObservacion());//Observacion
-				//Observaciones}
-				if(!empty($senia))
+				
+				if (!empty($lente)) 
 				{
+					//Observaciones{
+					$pdf->SetY(27.5);
+					$pdf->SetX(95.7);
+					$pdf->MultiCell(145,15,$lente->getObservacion());//Observacion
+					//Observaciones}
+					if(!empty($senia))
+					{
 				//A cuenta{
-					$pdf->SetY(25);
-					$pdf->SetX(152.6);
-					$pdf->MultiCell(145,15,$senia->getACuenta());
+						$pdf->SetY(29);
+						$pdf->SetX(165.6);
+						$pdf->MultiCell(145,15,$senia->getACuenta());
 				//A cuenta}
 				//Saldo{
-					$pdf->SetY(30.3);
-					$pdf->SetX(152.6);
-					$pdf->MultiCell(145,15,$senia->getSaldo());
-				}
+						$pdf->SetY(35.9);
+						$pdf->SetX(165.6);
+						$pdf->MultiCell(145,15,$senia->getSaldo());
+					}
 				//Saldo}
 				//}
 				//2 Parte{
 				//Fecha{
 				//Dia{
-				$pdf->SetY(80.5);
-				$pdf->SetX(163);
-				$pdf->MultiCell(145,15,$timed);
+					$pdf->SetY(103.5);
+					$pdf->SetX(173);
+					$pdf->MultiCell(145,15,$timed);
 				//Dia}
 				//Mes{
-				$pdf->SetY(80.5);
-				$pdf->SetX(173.5);
-				$pdf->MultiCell(145,15,$timem);
+					$pdf->SetY(103.5);
+					$pdf->SetX(186.5);
+					$pdf->MultiCell(145,15,$timem);
 				//Mes}
 				//Anio{
-				$pdf->SetY(80.5);
-				$pdf->SetX(183.5);
-				$pdf->MultiCell(145,15,$timey);
+					$pdf->SetY(103.5);
+					$pdf->SetX(198.5);
+					$pdf->MultiCell(145,15,$timey);
 				//Anio}
 				//Fecha}
 				//Senior{ 
 				//Nombre{
 				//Apellido{
-				$pdf->SetY(92.5);
-				$pdf->SetX(29.5);
-				$pdf->MultiCell(135,15,$resultado);
+					$pdf->SetY(116.9);
+					$pdf->SetX(24.5);
+					$pdf->MultiCell(135,15,$resultado);
 				//Apellido}
 				//Nombre}				
 				//Senior}
 				//Telefono{
-				$pdf->SetY(92.5);
-				$pdf->SetX(165.5);
-				$pdf->MultiCell(135,15,$cliente->getTelefono());
+					$pdf->SetY(116.9);
+					$pdf->SetX(153.5);
+					$pdf->MultiCell(135,15,$cliente->getTelefono());
 				//Telefono}
 				//Dr{
-				$pdf->SetY(98.9);
-				$pdf->SetX(26.5);
-				$pdf->MultiCell(145,15,$lente->getDoctor());
+					$pdf->SetY(125.5);
+					$pdf->SetX(21.5);
+					$pdf->MultiCell(145,15,$lente->getDoctor());
 				//Dr}
 				//Armazon Lejos{
-				$pdf->SetY(108.6);
-				$pdf->SetX(40.5);
-				$pdf->MultiCell(145,15,$lente->getArmazonLejos());
+					$pdf->SetY(137.5);
+					$pdf->SetX(38.5);
+					$pdf->MultiCell(145,15,$lente->getArmazonLejos());
 				//Armazon Lejos}
 				//Armazon Cerca{
-				$pdf->SetY(117.9);
-				$pdf->SetX(40.5);
-				$pdf->MultiCell(145,15,$lente->getArmazonCerca());
+					$pdf->SetY(149.5);
+					$pdf->SetX(38.5);
+					$pdf->MultiCell(145,15,$lente->getArmazonCerca());
 				//Armazon Cerca}
 				//$ Armazon Cerca}
 				//Lejos OD ESF{
-				$pdf->SetY(127.9);
-				$pdf->SetX(40.5);
-				$pdf->MultiCell(145,15,$lente->getLejosOdEsferico());
+					$pdf->SetY(162.5);
+					$pdf->SetX(38.5);
+					$pdf->MultiCell(145,15,$lente->getLejosOdEsferico());
 				//Lejos OD ESF}
 				//Cilindrico OD{
-				$pdf->SetY(127.9);
-				$pdf->SetX(68.5);
-				$pdf->MultiCell(145,15,$lente-> getLejosOdCilindrico());
+					$pdf->SetY(162.5);
+					$pdf->SetX(74.5);
+					$pdf->MultiCell(145,15,$lente-> getLejosOdCilindrico());
 				//Cilindrico OD}
 				//En GRA OD{
-				$pdf->SetY(127.9);
-				$pdf->SetX(91.7);
-				$pdf->MultiCell(145,15,$lente->getLejosOdGrados());
+					$pdf->SetY(162.5);
+					$pdf->SetX(102.5);
+					$pdf->MultiCell(145,15,$lente->getLejosOdGrados());
 				//En GRA OD}
 				//Lejos OI ESF{
-				$pdf->SetY(132.6);
-				$pdf->SetX(40.5);
-				$pdf->MultiCell(145,15,$lente->getLejosOiEsferico());
+					$pdf->SetY(168.6);
+					$pdf->SetX(38.5);
+					$pdf->MultiCell(145,15,$lente->getLejosOiEsferico());
 				//Lejos OI ESF}
 				//Cilindrico OI{
-				$pdf->SetY(132.6);
-				$pdf->SetX(68.5);
-				$pdf->MultiCell(145,15,$lente->getLejosOiCilindrico());
+					$pdf->SetY(168.6);
+					$pdf->SetX(74.5);
+					$pdf->MultiCell(145,15,$lente->getLejosOiCilindrico());
 				//Cilindrico OI}
 				//EN GRA OI{
-				$pdf->SetY(132.6);
-				$pdf->SetX(91.7);
-				$pdf->MultiCell(145,15,$lente->getLejosOiGrados());
+					$pdf->SetY(168.6);
+					$pdf->SetX(102.5);
+					$pdf->MultiCell(145,15,$lente->getLejosOiGrados());
 				//EN GRA OI}
 				//Color 1{
-				$pdf->SetY(132.6);
-				$pdf->SetX(120.2);
-				$pdf->MultiCell(145,15,$lente->getLejosColor());
+					$pdf->SetY(168.6);
+					$pdf->SetX(140);
+					$pdf->MultiCell(145,15,$lente->getLejosColor());
 				//Color 1}
 				//Cerca OD ESF{
-				$pdf->SetY(137.6);
-				$pdf->SetX(40.5);
-				$pdf->MultiCell(145,15,$lente->getCercaOdEsferico());
+					$pdf->SetY(175);
+					$pdf->SetX(38.5);
+					$pdf->MultiCell(145,15,$lente->getCercaOdEsferico());
 				//Cerca OD ESF} 
 				//Cilindrico OD{
-				$pdf->SetY(137.6);
-				$pdf->SetX(68.5);
-				$pdf->MultiCell(145,15,$lente->getCercaOdCilindrico());
+					$pdf->SetY(175);
+					$pdf->SetX(74.5);
+					$pdf->MultiCell(145,15,$lente->getCercaOdCilindrico());
 				//Cilindrico OD}
 				//EN GRA OD{
-				$pdf->SetY(137.6);
-				$pdf->SetX(91.7);
-				$pdf->MultiCell(145,15,$lente->getCercaOdGrados());
+					$pdf->SetY(175);
+					$pdf->SetX(102.5);
+					$pdf->MultiCell(145,15,$lente->getCercaOdGrados());
 				//EN GRA OD}
 				//Cerca OI ESF{
-				$pdf->SetY(142.6);
-				$pdf->SetX(40.5);
-				$pdf->MultiCell(145,15,$lente->getCercaOiEsferico());
+					$pdf->SetY(181.5);
+					$pdf->SetX(38.5);
+					$pdf->MultiCell(145,15,$lente->getCercaOiEsferico());
 				//Cerca OI ESF}
 				//Cilindrico OI{
-				$pdf->SetY(142.6);
-				$pdf->SetX(68.5);
-				$pdf->MultiCell(145,15,$lente->getCercaOiCilindrico());
+					$pdf->SetY(181.5);
+					$pdf->SetX(74.5);					
+					$pdf->MultiCell(145,15,$lente->getCercaOiCilindrico());
 				//Cilindrico OI}
 				//EN GRA OI{
-				$pdf->SetY(142.6);
-				$pdf->SetX(91.7);
-				$pdf->MultiCell(145,15,$lente->getCercaOiGrados());
+					$pdf->SetY(181.5);
+					$pdf->SetX(102.5);
+					$pdf->MultiCell(145,15,$lente->getCercaOiGrados());
 				//EN GRA OI}
 				//Color 2{
-				$pdf->SetY(142.6);
-				$pdf->SetX(120.2);
-				$pdf->MultiCell(145,15,$lente->getCercaColor());
+					$pdf->SetY(181.5);
+					$pdf->SetX(140);
+					$pdf->MultiCell(145,15,$lente->getCercaColor());
 				//Color 2}
-				if(!empty($factura))
-				{
+					if(!empty($factura))
+					{
 				//Sub Total{
-					$pdf->SetY(147.7);
-					$pdf->SetX(160);
-					$pdf->MultiCell(145,15,$factura[0]->getSubTotal());
+						$pdf->SetY(187.7);
+						$pdf->SetX(171.7);
+						$pdf->MultiCell(145,15,$factura[0]->getSubTotal());
 				//Sub Total}
 				//$ Senia{
-					$pdf->SetY(152.1);
-					$pdf->SetX(160);
-					$pdf->MultiCell(145,15,$factura[0]->getSenia());
+						$pdf->SetY(193.4);
+						$pdf->SetX(171.7);
+						$pdf->MultiCell(145,15,$factura[0]->getSenia());
 				//$ Senia}
 				//Saldo Total ${
-					$pdf->SetY(156.4);
-					$pdf->SetX(160);
-					$pdf->MultiCell(145,15,$factura[0]->getSaldoTotal());
+						$pdf->SetY(199);
+						$pdf->SetX(171.7);
+						$pdf->MultiCell(145,15,$factura[0]->getSaldoTotal());
 				//Saldo Total $}
 				//}
+					}
+
+
+
 				}
-				
-
-
+				$pdf->Output();
 			}
-			$pdf->Output();
+			else
+			{
+				$this->mensaje = new Mensaje('warning', 'No se pudo mostrar el PDF hubo un error!');
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "pdf.php");
+				include URL_VISTA . 'footer.php';
+			}
+
 		}
 		else
 		{
-			$this->mensaje = new Mensaje('warning', 'No se pudo mostrar el PDF hubo un error!');
+			$this->mensaje = new Mensaje('warning', 'Debe iniciar secion!');
 			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "pdf.php");
+			require(URL_VISTA . "inicio.php");
 			include URL_VISTA . 'footer.php';
 		}
-
 	}
-	else
-	{
-		$this->mensaje = new Mensaje('warning', 'Debe iniciar secion!');
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "inicio.php");
-		include URL_VISTA . 'footer.php';
-	}
-}
 
 
 
