@@ -56,22 +56,22 @@ class VistaControladora
 
 	public function index()
 	{
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "inicio.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("inicio.php");
 	}   
 
 	public function iniciar()
 	{
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "iniciarSesion.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("iniciarSesion.php");
 	}
 
 	public function registrar()
 	{
+		generarVistaConHeaderFooter("registrarcliente.php");
+	}
+
+	public function generarVistaConHeaderFooter($vista){
 		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "registrarcliente.php");
+		require(URL_VISTA . $vista);
 		include URL_VISTA . 'footer.php';
 	}
 
@@ -95,10 +95,7 @@ class VistaControladora
 			}
 		}
 		$fecha = date('d-m-Y');
-
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "cuentasaldos.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("cuentasaldos.php");
 	}
 
 	public function clientes()
@@ -142,9 +139,7 @@ class VistaControladora
 		$longitud = $longitud / 10;
 
 		$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "cliente.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("cliente.php");
 	}
 
 	public function clienteslimit($limit, $longitud, $entrada, $pantalla)
@@ -154,34 +149,30 @@ class VistaControladora
 		$calcular = count($calcular);
 
 		if (!empty($limit)) {
-			if ($limit == -1) {
-				$entrada = $entrada + 1;
-				if ($entrada >= $longitud) {
-					$limit = $limit - 2;
-					$entrada = $entrada -1;
-				}
-
+			switch($limit){
+				case -2:
+					$entrada = $entrada - $pantalla;
+					if ($entrada <= 1){
+						$entrada = 1;
+						$pantalla = 1;
+						$limit = 1;
+					}
+				case 1:
+					$limit = 0;
+					break;
+				case -1:
+					$entrada = $entrada + 1;
+					if ($entrada >= $longitud) {
+						$limit = $limit - 2;
+						$entrada = $entrada -1;
+					}
+					break;
+				default:
+					$limit = 10 * $entrada;
+					$limit = $limit - 10;
+					break;
 			}
 
-			if ($limit == -2) {
-				$entrada = $entrada - $pantalla;
-				if ($entrada <= 1){
-					$entrada = 1;
-					$pantalla = 1;
-					$limit = 1;
-				}
-			}
-
-
-			if($limit == 1){
-				$limit = 0;
-			}
-			else
-			{
-
-				$limit = 10 * $entrada;
-				$limit = $limit - 10;
-			}
 			$cliente = $this->daoCliente->traerTodoLimit($limit);
 			$contador =count($cliente);
 			$pantalla = 1; 
@@ -208,18 +199,13 @@ class VistaControladora
 			}
 			$i++;
 		}
-
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "cliente.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("cliente.php");
 	}
 
 	public function registrlente($id_cliente)
 	{
 		$cliente = $this->daoCliente->traerPorId($id_cliente);
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "registrarlente.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("registrarlente.php");
 	}
 
 	public function serch($valor, $dato)
@@ -232,9 +218,7 @@ class VistaControladora
 				{
 					print_r("aseasdsad");
 					$this->mensaje = new Mensaje( "success", "Seleccionar algun Opcion!" );
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "inicio.php");
-					include URL_VISTA . 'footer.php';
+					index();
 				}
 				if($valor == 1) {
 					$limit = 0;
@@ -276,18 +260,14 @@ class VistaControladora
 						$longitud = $longitud / 10;
 
 						$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
-						include URL_VISTA . 'header.php';
-						require(URL_VISTA . "serchclientes.php");
-						include URL_VISTA . 'footer.php';
+						generarVistaConHeaderFooter("serchclientes.php");
 					}
 					else
 					{
 						$parametro = 'Nombre';
 						$palabra = ucwords($dato);
 						$cliente = null;
-						include URL_VISTA . 'header.php';
-						require(URL_VISTA . "serchclientes.php");
-						include URL_VISTA . 'footer.php';
+						generarVistaConHeaderFooter("serchclientes.php");
 					}
 				}
 				if($valor == 2){
@@ -329,18 +309,14 @@ class VistaControladora
 						$longitud = $longitud / 10;
 
 						$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
-						include URL_VISTA . 'header.php';
-						require(URL_VISTA . "serchclientes.php");
-						include URL_VISTA . 'footer.php';
+						generarVistaConHeaderFooter("serchclientes.php");
 					}
 					else
 					{
 						$parametro = 'Apellido';
 						$palabra = ucwords($dato);
 						$cliente = null;
-						include URL_VISTA . 'header.php';
-						require(URL_VISTA . "serchclientes.php");
-						include URL_VISTA . 'footer.php';
+						generarVistaConHeaderFooter("serchclientes.php");
 					}
 
 				}
@@ -385,9 +361,7 @@ class VistaControladora
 						$longitud = $longitud / 10;
 
 						$longitud = round($longitud,PHP_ROUND_HALF_DOWN);
-						include URL_VISTA . 'header.php';
-						require(URL_VISTA . "serchclientes.php");
-						include URL_VISTA . 'footer.php';
+						generarVistaConHeaderFooter("serchclientes.php");
 					}
 				}
 
@@ -395,17 +369,13 @@ class VistaControladora
 			else
 			{
 				$this->mensaje = new Mensaje( "success", "Ningun dato enviado por el buscador!" );
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "inicio.php");
-				include URL_VISTA . 'footer.php';
+				index();
 			}
 		}
 		else
 		{
 			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "inicio.php");
-			include URL_VISTA . 'footer.php';
+			index();
 		}
 
 	}
@@ -518,40 +488,30 @@ class VistaControladora
 				$i++;
 			}
 
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "serchclientes.php");
-			include URL_VISTA . 'footer.php';
+			generarVistaConHeaderFooter("serchclientes.php");
 		}
 		else
 		{
 			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "inicio.php");
-			include URL_VISTA . 'footer.php';
+			index();
 		}
 	}
 
 	public function modificarcliente($id_cliente)
 	{
 		$cliente = $this->daoCliente->traerPorId($id_cliente);
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "modificarcliente.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("modificarcliente.php");
 	}
 
 	public function facturasimple()
 	{
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "simple.php");
-		include URL_VISTA . 'footer.php'; 
+		generarVistaConHeaderFooter("simple.php");
 	}
 
 	public function registrarusuario()
 	{
 		$role = $this->daoRol->traerPorIdPreoridad('Cliente');
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "registrarusuario.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("registrarusuario.php");
 	}
 
 	public function usuario()
@@ -559,25 +519,19 @@ class VistaControladora
 		if(!empty($_SESSION)){
 			if ($_SESSION['rol'] == 'Administrador') {
 				$usuario = $this->daoUsuario->traerTodo();
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "usuarios.php");
-				include URL_VISTA . 'footer.php';
+				generarVistaConHeaderFooter("usuarios.php");
 			}
 			else
 			{
 				$id = $_SESSION["id"];
 				$usuario = $this->daoUsuario->traerPorId($id);
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "usuario.php");
-				include URL_VISTA . 'footer.php';
+				generarVistaConHeaderFooter("usuario.php");
 			}
 		}
 		else
 		{
 			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "inicio.php");
-			include URL_VISTA . 'footer.php';
+			index();
 		}
 
 
@@ -589,33 +543,25 @@ class VistaControladora
 		if(!empty($_SESSION)){
 			if ($_SESSION['rol'] == 'Administrador') {
 				$usuario = $this->daoUsuario->traerPorId($id);
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "modificarpreoridadusuario.php");
-				include URL_VISTA . 'footer.php';
+				generarVistaConHeaderFooter("modificarpreoridadusuario.php");
 			}
 			else
 			{
 				$usuario = $this->daoUsuario->traerPorId($id);
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "modificarusuario.php");
-				include URL_VISTA . 'footer.php';
+				generarVistaConHeaderFooter("modificarusuario.php");
 			}
 
 		}
 		else
 		{
 			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "inicio.php");
-			include URL_VISTA . 'footer.php';
+			index();
 		}
 	}
 
 	public function pdf()
 	{
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "llamarpdf.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("llamarpdf.php");
 	}
 
 	public function lentecliente($id_cliente)
@@ -638,18 +584,14 @@ class VistaControladora
 				}
 				$longitud = count($cunt) + 1;
 				$contar = count($cunt);
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "lentexcliente.php");
-				include URL_VISTA . 'footer.php';
+				generarVistaConHeaderFooter("lentexcliente.php");
 
 			}
 		}
 		else
 		{
 			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "inicio.php");
-			include URL_VISTA . 'footer.php';
+			index();
 		}
 
 	}
@@ -702,9 +644,7 @@ class VistaControladora
 					$longitud = count($cunt)+1;
 					$contar = count($cunt);
 					$pantalla = 1; 
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "lentexcliente.php");
-					include URL_VISTA . 'footer.php';
+					generarVistaConHeaderFooter("lentexcliente.php");
 				}
 
 			}
@@ -713,9 +653,7 @@ class VistaControladora
 		else
 		{
 			$this->mensaje = new Mensaje( "success", "Debe iniciar sesion!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "inicio.php");
-			include URL_VISTA . 'footer.php';
+			index();
 		}
 	}
 
@@ -723,9 +661,7 @@ class VistaControladora
 	{
 		$cliente = $this->daoCliente->traerPorId($id_cliente);
 		$lente = $this->daoLente->traerPorId($id_lente);
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "modificarlente.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("modificarlente.php");
 	}
 
 	public function factura($id_lente,$id_cliente)
@@ -737,17 +673,12 @@ class VistaControladora
 			$factura = $this->daoFactura->traerPorIdLente($id_lente);
 			if(empty($factura))
 			{
-
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "registrarfactura.php");
-				include URL_VISTA . 'footer.php';
+				generarVistaConHeaderFooter("registrarfactura.php");
 			}
 			else
 			{
 				$factura = $factura[0];
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "factura.php");
-				include URL_VISTA . 'footer.php';
+				generarVistaConHeaderFooter("factura.php");
 			}
 		}
 	}
@@ -757,9 +688,7 @@ class VistaControladora
 		$cliente = $this->daoCliente->traerPorId($id_cliente);
 		$lente = $this->daoLente->traerPorId($id_lente);
 		$factura = $this->daoFactura->traerPorId($id_factura);
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "modificarfactura.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("modificarfactura.php");
 	}
 
 	public function modificaclienterlente($id_cliente, $id_lente, $id_factura, $id_cuenta_saldos)
@@ -803,9 +732,7 @@ class VistaControladora
 		{
 			$cuenta_saldos = NULL;
 		}
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "modificarclientelente.php");
-		include URL_VISTA . 'footer.php';
+		generarVistaConHeaderFooter("modificarclientelente.php");
 	}
 
 }
