@@ -1029,7 +1029,6 @@ class AdministrarControladora
 
 						$this->mensaje = new Mensaje('success', 'El consto del lente con ID:' .' '.'<i><strong>' .  $id_lente
 							. '</strong></i> A sido modificado con exito ');
-						
 						include URL_VISTA . 'header.php';
 						require(URL_VISTA . "inicio.php");
 						include URL_VISTA . 'footer.php';

@@ -672,6 +672,7 @@ class VistaControladora
 
 				if ($limit == -2) {
 					$entrada = $entrada - $pantalla;
+					$limit =  $entrada;
 					if ($entrada <= 1){
 						$entrada = 1;
 						$pantalla = 1;
@@ -685,7 +686,7 @@ class VistaControladora
 				}
 				else
 				{
-					$limit= $limit -1;
+					$limit = $limit -1;
 				}
 			}
 			if(!empty($id_cliente)){
