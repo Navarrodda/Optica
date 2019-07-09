@@ -201,6 +201,8 @@ class AdministrarControladora
 				$lejos_color = ucwords($lejos_color);
 				$cerca_color = ucwords($cerca_color);
 				$observacion = ucwords($observacion);
+				$factura = null;
+				$cuenta_saldos = null;
 				$cliente = $this->daoCliente->traerPorId($id_cliente);
 
 				$nombreapellido = $nombre .' '. $apellido;
@@ -216,9 +218,6 @@ class AdministrarControladora
 				{
 					$cerca_color = $lejos_color;
 				}
-
-				
-
 
 				if(empty($nombre))
 				{
@@ -353,186 +352,178 @@ class AdministrarControladora
 
 						if(!empty($id_factura)){
 
-
-							$factura = $this->daoFactura->traerPorId($id_factura);
-							$cuenta_saldos = null;
-							$cuenta_saldos = $this->daoCuentasaldos->traerPorId($id_cuenta_saldos);
-
-							if(empty($subtotal))
+							if($id_factura != -1)
 							{
-								$subtotal =  $factura->getSubTotal();
-							}
-							if(empty($senia))
-							{
-								$senia =  $factura->getSenia();
-							}
-
-							if(!empty($senia)){
-								$saldo_total = $subtotal - $senia;
-								if ($saldo_total < 0) {
-									$saldo_total = 0;
-								}
-							}
-							else{
-								$saldo_total = $subtotal;
-							}
-
-							$factInstance = new Factura($subtotal, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
-							$idfact = $this->daoFactura->actualizar( $factInstance, $id_factura );
-							$a_cuenta = $senia; 
-							$saldo = $saldo_total;
-							$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
-							$idsaldo = $this->daoCuentasaldos->actualizar( $salInstance, $cuenta_saldos->getId());
-							$regla = 'true'; 
-
-							if ($regla == 'true') {
 								$factura = $this->daoFactura->traerPorId($id_factura);
 								$cuenta_saldos = $this->daoCuentasaldos->traerPorId($id_cuenta_saldos);
+
+								if(empty($subtotal))
+								{
+									$subtotal =  $factura->getSubTotal();
+								}
+								if(empty($senia))
+								{
+									$senia =  $factura->getSenia();
+								}
+
+								if(!empty($senia)){
+									$saldo_total = $subtotal - $senia;
+									if ($saldo_total < 0) {
+										$saldo_total = 0;
+									}
+								}
+								else{
+									$saldo_total = $subtotal;
+								}
+
+								$factInstance = new Factura($subtotal, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
+								$idfact = $this->daoFactura->actualizar( $factInstance, $id_factura );
+								$a_cuenta = $senia; 
+								$saldo = $saldo_total;
+								$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
+								$idsaldo = $this->daoCuentasaldos->actualizar( $salInstance, $cuenta_saldos->getId());
+								$regla = 'true'; 
+
+								if ($regla == 'true') {
+									$factura = $this->daoFactura->traerPorId($id_factura);
+									$cuenta_saldos = $this->daoCuentasaldos->traerPorId($id_cuenta_saldos);
+								}
+							}
+							else
+							{
+								if(!empty($subtotal)){
+									if(!empty($senia)){
+										$saldo_total = $subtotal - $senia;
+										if ($saldo_total < 0) {
+											$saldo_total = 0;
+										}
+									}
+									else{
+										$saldo_total = $subtotal;
+									}
+									$sub_total = $subtotal;
+									$factInstance = new Factura($sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($idLent));
+									$idfact = $this->daoFactura->agregar( $factInstance );
+									$factInstance->setId( $idfact );
+
+									$a_cuenta = $senia; 
+									$saldo = $saldo_total;
+									$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
+									$idsaldo = $this->daoCuentasaldos->agregar( $salInstance );
+									$salInstance->setId( $idsaldo );
+
+									$id_cliente = $this->daoCliente->traerPorId($id_cliente);
+
+									$id_cuentasaldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+
+									$id_lente = $this->daoLente->traerPorId($idLent);
+									$clisald = new Senias_x_cliente_lente($id_cuentasaldos, $id_cliente, $id_lente);
+									$idclsald = $this->daoSeniasaldos->agregar( $clisald );
+									$clisald->setIdSeniaXCliente( $idclsald );
+
+									$factura =$this->daoFactura->traerPorId($idfact);
+									$cuenta_saldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+								}
 							}
 						}
 					}
 					else
 					{
-						$factura = null;
-						$cuenta_saldos = null;
-					}
-				}
-				else
-				{
-					
-					$regCompleted = FALSE;
-					
-					$fecha = date('Y-m-d');
 
-					if($complit=='SI')
-					{
-						$cerca_od_cilindrico = $lejos_od_cilindrico;
-						$cerca_od_grados = $lejos_od_grados;
-						$cerca_oi_cilindrico =	$lejos_oi_cilindrico;
-						$cerca_oi_grados =	$lejos_oi_grados;
-					}
-					if (!empty($doctor)) 
-					{
-						$regCompleted = TRUE;
-						$doctor = ucwords($doctor);
-					}
-					if (!empty($observacion)) {
-						$regCompleted = TRUE;
-						$observacion = ucwords($observacion);
-					}
-					if (!empty($armazon_lejos)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($armazon_cerca)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($lejos_od_esferico)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($lejos_od_cilindrico)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($lejos_od_grados)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($lejos_oi_esferico)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($lejos_oi_cilindrico)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($lejos_oi_grados)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($lejos_color)) {
-						$regCompleted = TRUE;
-						$lejos_color = ucwords($lejos_color);
-						$cerca_color = $lejos_color;
-					}
-					if(!empty($cerca_color))
-					{
-						$cerca_color = ucwords($cerca_color);
-						$regCompleted = TRUE;
-						$lejos_color = $cerca_color;
-					}
-					if (!empty($cerca_od_esferico)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($cerca_od_cilindrico)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($cerca_od_grados)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($cerca_oi_esferico)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($cerca_oi_cilindrico)) {
-						$regCompleted = TRUE;
-					}
-					if (!empty($cerca_oi_grados)) {
-						$regCompleted = TRUE;
-					}
+						$regCompleted = FALSE;
 
-					if($regCompleted == TRUE)
-					{
-						$lentInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
-						$idLent= $this->daoLente->agregar( $lentInstance );
-						$lentInstance->setId( $idLent );
-						$id_cliente = $this->daoCliente->traerPorId($id_cliente);
-						$id_lente = $this->daoLente->traerPorId($idLent);
-						$lentxclientInstance = new Lente_x_cliente($id_cliente, $id_lente);
-						$idLentxclient = $this->daoLentexcliente->agregar( $lentxclientInstance );
-						$lentxclientInstance->setIdLenteXCliente($idLentxclient);
-						$lente = $this->daoLente->traerPorId($idLent);
-					}
-					else
-					{
-						$lente = null;
-					}
-					if(!empty($subtotal)){
-						if(!empty($senia)){
-							$saldo_total = $subtotal - $senia;
-							if ($saldo_total < 0) {
-								$saldo_total = 0;
-							}
+						$fecha = date('Y-m-d');
+
+						if($complit=='SI')
+						{
+							$cerca_od_cilindrico = $lejos_od_cilindrico;
+							$cerca_od_grados = $lejos_od_grados;
+							$cerca_oi_cilindrico =	$lejos_oi_cilindrico;
+							$cerca_oi_grados =	$lejos_oi_grados;
 						}
-						else{
-							$saldo_total = $subtotal;
+						if (!empty($doctor)) 
+						{
+							$regCompleted = TRUE;
+							$doctor = ucwords($doctor);
 						}
-						$sub_total = $subtotal;
-						$factInstance = new Factura($sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($idLent));
-						$idfact = $this->daoFactura->agregar( $factInstance );
-						$factInstance->setId( $idfact );
+						if (!empty($observacion)) {
+							$regCompleted = TRUE;
+							$observacion = ucwords($observacion);
+						}
+						if (!empty($armazon_lejos)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($armazon_cerca)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($lejos_od_esferico)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($lejos_od_cilindrico)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($lejos_od_grados)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($lejos_oi_esferico)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($lejos_oi_cilindrico)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($lejos_oi_grados)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($lejos_color)) {
+							$regCompleted = TRUE;
+							$lejos_color = ucwords($lejos_color);
+							$cerca_color = $lejos_color;
+						}
+						if(!empty($cerca_color))
+						{
+							$cerca_color = ucwords($cerca_color);
+							$regCompleted = TRUE;
+							$lejos_color = $cerca_color;
+						}
+						if (!empty($cerca_od_esferico)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($cerca_od_cilindrico)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($cerca_od_grados)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($cerca_oi_esferico)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($cerca_oi_cilindrico)) {
+							$regCompleted = TRUE;
+						}
+						if (!empty($cerca_oi_grados)) {
+							$regCompleted = TRUE;
+						}
 
-						$a_cuenta = $senia; 
-						$saldo = $saldo_total;
-						$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
-						$idsaldo = $this->daoCuentasaldos->agregar( $salInstance );
-						$salInstance->setId( $idsaldo );
+						if($regCompleted == TRUE)
+						{
+							$lentInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
+							$idLent= $this->daoLente->agregar( $lentInstance );
+							$lentInstance->setId( $idLent );
+							$id_cliente = $this->daoCliente->traerPorId($id_cliente);
+							$id_lente = $this->daoLente->traerPorId($idLent);
+							$lentxclientInstance = new Lente_x_cliente($id_cliente, $id_lente);
+							$idLentxclient = $this->daoLentexcliente->agregar( $lentxclientInstance );
+							$lentxclientInstance->setIdLenteXCliente($idLentxclient);
+							$lente = $this->daoLente->traerPorId($idLent);
+						}
+						else
+						{
+							$lente = null;
+						}
 
-						$id_cliente = $this->daoCliente->traerPorId($id_cliente);
-
-						$id_cuentasaldos = $this->daoCuentasaldos->traerPorId($idsaldo);
-
-						$id_lente = $this->daoLente->traerPorId($idLent);
-						$clisald = new Senias_x_cliente_lente($id_cuentasaldos, $id_cliente, $id_lente);
-						$idclsald = $this->daoSenia->agregar( $clisald );
-						$clisald->setIdSeniaXCliente( $idclsald );
-
-						$factura =$this->daoFactura->traerPorId($idfact);
-						$cuenta_saldos = $this->daoCuentasaldos->traerPorId($idsaldo);
-
-					}
-					else
-					{
-						$factura = null;
-						$cuenta_saldos = null;
 					}
 
 				}
-
-
 				$this->mensaje = new Mensaje( "success", 'El Cliente:' .' '.'<i><strong>' .  $nombreapellido
 					. '</strong></i> fue Modificado con exito!' );
 				include URL_VISTA . 'header.php';
@@ -875,7 +866,7 @@ class AdministrarControladora
 					$lenteInstance = new Lente($doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $fecha);
 					$idLent = $this->daoLente->actualizar( $lenteInstance, $id_lente );
 
-					
+
 					$this->mensaje = new Mensaje( "success", 'El lente con id:' .' '.'<i><strong>' .  $id_lente
 						. '</strong></i>.  Del Cliente ' .' '.'<i><strong>' .  $nombreapellido
 						. '</strong></i> fue Modificado con exito!' );
@@ -936,7 +927,7 @@ class AdministrarControladora
 					$this->daoLentexcliente->eliminarPorIdLente($id_lente);
 					$this->daoLente->eliminarPorId($id_lente);
 
-					
+
 					$this->mensaje = new Mensaje('success', 'Ha borrado satisfactoriamente el lente con el ID:' .' '.'<i><strong>' .  $id_lente
 						. '</strong></i> 
 						! El Cliente es:' .' '.'<i><strong>' .  $nombreapellido

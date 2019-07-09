@@ -46,7 +46,7 @@
 											<td colspan="2">Observación: <?= $lente->getObservacion(); ?></td>
 										</tr>
 										<?php 
-										if($cuenta_saldos!= null )
+										if($cuenta_saldos != null)
 											{?>
 												<tr style="color:white">
 													<td colspan="2" >A cuenta: <?= $cuenta_saldos->getACuenta(); ?></td>
@@ -84,7 +84,7 @@
 											</tr>
 											<?php 
 										}
-										if($factura!= null )
+										if($factura != null )
 											{?>
 												<tr style="color:white">
 													<td colspan="2">Sub Total: <?= $factura->getSubTotal(); ?></td>
