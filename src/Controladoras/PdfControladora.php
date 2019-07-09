@@ -639,7 +639,7 @@ class PdfControladora
 			if ($id_lente != -1) {
 				$lente = $this->daoLente->traerPorId($id_lente);
 				$factura = $this->daoFactura->traerPorIdLente($id_lente);
-				$senia = $this->daoSenia->traerPorIdLente($id_cliente);
+				$senia = $this->daoSenia->traerPorIdLente($id_lente);
 			}
 			else
 			{
