@@ -101,6 +101,27 @@ class VistaControladora
 		include URL_VISTA . 'footer.php';
 	}
 
+	public function traerCodigosSenias($clientes){
+		if (!empty($clientes)) {	
+
+			foreach ($clientes as $clie) {
+
+				$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
+				$clie->codigo = NULL;
+				if (!empty($senia) and !empty($senia[0])) {
+				
+					$senias = $senia[0]->getIdCuentaSaldo();
+					$cl = $senia[0]->getIdCliente();
+
+					if ($clie->getId() == $cl->getId()){
+						$clie->codigo = $senias->getId();
+					}	
+					$senia = NULL;
+				}
+			}
+		}
+	}
+
 	public function clientes()
 	{
 		$limit = 0;
@@ -111,32 +132,8 @@ class VistaControladora
 		$cliente = $this->daoCliente->traerTodoLimit($limit);
 		$medir = $this->daoCliente->traerTodo();
 		$longitud = count($medir);
-		$contador = count($cliente);
-		$i = 0;
-		if (!empty($cliente)) {
-			
-			
-			foreach ($cliente as $clie) {
-
-				$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
-
-				if (!empty($senia)) {
-
-					if (!empty($senia[0])) 
-					{
-						$senias = $senia[0]->getIdCuentaSaldo();
-						$cl = $senia[0]->getIdCliente();
-
-						if ($clie->getId() == $cl->getId()){
-
-							$cliente[$i]->codigo = $senias->getId();
-						}	
-					}
-					$senia = NULL;
-				}
-				$i++;
-			}
-		}
+		$contador = count($cliente);	
+		traerCodigosSenias($cliente);	
 
 		$longitud = $longitud + 10;
 		$longitud = $longitud / 10;
@@ -186,29 +183,8 @@ class VistaControladora
 			$contador =count($cliente);
 			$pantalla = 1; 
 		}
-		$i = 0;
-
-		foreach ($cliente as $clie) {
-
-			$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
-			$cliente[$i]->codigo = NULL;
-			if (!empty($senia)) {
-
-				if (!empty($senia[0])) 
-				{
-					$senias = $senia[0]->getIdCuentaSaldo();
-					$cl = $senia[0]->getIdCliente();
-
-					if ($clie->getId() == $cl->getId()){
-
-						$cliente[$i]->codigo = $senias->getId();
-					}	
-				}
-				$senia = NULL;
-			}
-			$i++;
-		}
-
+		traerCodigosSenias($cliente);
+		
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cliente.php");
 		include URL_VISTA . 'footer.php';
@@ -251,27 +227,8 @@ class VistaControladora
 						$medir = $this->daoCliente->traerPorNombre($dato);
 						$longitud = count($medir);
 						$contador = count($cliente);
-						$i = 0;
-						foreach ($cliente as $clie) {
-
-							$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
-
-							if (!empty($senia)) {
-
-								if (!empty($senia[0])) 
-								{
-									$senias = $senia[0]->getIdCuentaSaldo();
-									$cl = $senia[0]->getIdCliente();
-
-									if ($clie->getId() == $cl->getId()){
-
-										$cliente[$i]->codigo = $senias->getId();
-									}	
-								}
-								$senia = NULL;
-							}
-							$i++;
-						}
+						traerCodigosSenias($cliente);
+						
 						$longitud = $longitud + 10;
 						$longitud = $longitud / 10;
 
@@ -304,27 +261,9 @@ class VistaControladora
 						$medir = $this->daoCliente->traerPorApellido($dato);
 						$longitud = count($medir);
 						$contador = count($cliente);
-						$i = 0;
-						foreach ($cliente as $clie) {
-
-							$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
-
-							if (!empty($senia)) {
-
-								if (!empty($senia[0])) 
-								{
-									$senias = $senia[0]->getIdCuentaSaldo();
-									$cl = $senia[0]->getIdCliente();
-
-									if ($clie->getId() == $cl->getId()){
-
-										$cliente[$i]->codigo = $senias->getId();
-									}	
-								}
-								$senia = NULL;
-							}
-							$i++;
-						}
+						
+						traerCodigosSenias($cliente);
+						
 						$longitud = $longitud + 10;
 						$longitud = $longitud / 10;
 
@@ -360,27 +299,9 @@ class VistaControladora
 						$medir = $this->daoCliente->traerTodoNombreApellido($final[0], $final[1]);
 						$longitud = count($medir);
 						$contador = count($cliente);
-						$i = 0;
-						foreach ($cliente as $clie) {
-
-							$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
-
-							if (!empty($senia)) {
-
-								if (!empty($senia[0])) 
-								{
-									$senias = $senia[0]->getIdCuentaSaldo();
-									$cl = $senia[0]->getIdCliente();
-
-									if ($clie->getId() == $cl->getId()){
-
-										$cliente[$i]->codigo = $senias->getId();
-									}	
-								}
-								$senia = NULL;
-							}
-							$i++;
-						}
+						
+						traerCodigosSenias($cliente);
+						
 						$longitud = $longitud + 10;
 						$longitud = $longitud / 10;
 
@@ -497,26 +418,7 @@ class VistaControladora
 			}
 			$i = 0;
 
-			foreach ($cliente as $clie) {
-
-				$senia = $this->daoSenia->traerPorIdCliente($clie->getId());
-				$cliente[$i]->codigo = NULL;
-				if (!empty($senia)) {
-
-					if (!empty($senia[0])) 
-					{
-						$senias = $senia[0]->getIdCuentaSaldo();
-						$cl = $senia[0]->getIdCliente();
-
-						if ($clie->getId() == $cl->getId()){
-
-							$cliente[$i]->codigo = $senias->getId();
-						}	
-					}
-					$senia = NULL;
-				}
-				$i++;
-			}
+			traerCodigosSenias($cliente);
 
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "serchclientes.php");
