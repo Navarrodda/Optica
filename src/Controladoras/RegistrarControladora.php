@@ -286,7 +286,7 @@ class RegistrarControladora
 					$lentxclientInstance->setIdLenteXCliente($idLentxclient);
 					$regCompleted = TRUE;
 					$this->mensaje = new Mensaje( "success", 'El Lente del Cliente: ' .' '.'<i><strong>' .  $nombreapellido
-					. '</strong></i> fue registrado con exito!' );
+						. '</strong></i> fue registrado con exito!' );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "inicio.php");
 					include URL_VISTA . 'footer.php';
@@ -321,6 +321,8 @@ class RegistrarControladora
 			$regCompleted = FALSE;
 
 			if(!empty($_SESSION)){
+				$cliente = $this->daoCliente->traerPorId($id_cliente);
+				$nombreapellido = $cliente->getNombre(). ' ' . $cliente->getApellido();
 
 				if(!empty($id_lente)){
 
@@ -333,44 +335,56 @@ class RegistrarControladora
 					else{
 						$saldo_total = $sub_total;
 					}
-					$factInstance = new Factura($sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
-					$idfact = $this->daoFactura->agregar( $factInstance );
-					$factInstance->setId( $idfact );
 
-					$fecha = date('Y-m-d');
+					$regla = $this->daoFactura->traerPorIdLente($id_lente);
+					if ($regla == null) {
+						$factInstance = new Factura($sub_total, $senia, $saldo_total, $this->daoLente->traerPorId($id_lente));
+						$idfact = $this->daoFactura->agregar( $factInstance );
+						$factInstance->setId( $idfact );
 
-					$a_cuenta = $senia; 
-					$saldo = $saldo_total;
-					$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
-					$idsaldo = $this->daoCuentasaldos->agregar( $salInstance );
-					$salInstance->setId( $idsaldo );
+						$fecha = date('Y-m-d');
 
-					$id_cliente = $this->daoCliente->traerPorId($id_cliente);
+						$a_cuenta = $senia; 
+						$saldo = $saldo_total;
+						$salInstance = new Cuenta_saldos($a_cuenta, $saldo, $fecha);
+						$idsaldo = $this->daoCuentasaldos->agregar( $salInstance );
+						$salInstance->setId( $idsaldo );
 
-					$id_cuentasaldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+						$id_cliente = $this->daoCliente->traerPorId($id_cliente);
 
-					$id_lente = $this->daoLente->traerPorId($id_lente);
-					$clisald = new Senias_x_cliente_lente($id_cuentasaldos, $id_cliente, $id_lente);
-					$idclsald = $this->daoSenia->agregar( $clisald );
-					$clisald->setIdSeniaXCliente( $idclsald );
-					$regCompleted = TRUE;
-					$this->mensaje = new Mensaje( "success", "El costo del lente fue registrado con exito!" );
+						$id_cuentasaldos = $this->daoCuentasaldos->traerPorId($idsaldo);
+
+						$lente = $this->daoLente->traerPorId($id_lente);
+						$clisald = new Senias_x_cliente_lente($id_cuentasaldos, $id_cliente, $lente);
+						$idclsald = $this->daoSenia->agregar( $clisald );
+						$clisald->setIdSeniaXCliente( $idclsald );
+						$this->mensaje = new Mensaje( "success", 'El costo del lente con ID: ' .' '.'<i><strong>' .  $id_lente 
+							. '</strong></i>.  fue registrado con exito! 
+							Pertenece al Cliente: ' .' '.'<i><strong>' .  $nombreapellido
+							. '</strong></i>  ' );
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "inicio.php");
+						include URL_VISTA . 'footer.php';
+					}
+					else
+					{
+						$this->mensaje = new Mensaje( "success", 'El costo del lente con ID: ' .' '.'<i><strong>' .  $id_lente 
+							. '</strong></i>. Ya esta registrado! 
+							Pertenece al Cliente: ' .' '.'<i><strong>' .  $nombreapellido
+							. '</strong></i>  ' );
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "inicio.php");
+						include URL_VISTA . 'footer.php';
+					}
 				}
 			}
+			else
+			{
 
-			switch ($regCompleted) {
-				case TRUE:
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "inicio.php");
-				include URL_VISTA . 'footer.php';
-				break;
-
-				case FALSE:
-				$this->mensaje = new Mensaje( "success", "error!" );
+				$this->mensaje = new Mensaje( "success", "Debe iniciar Sesion!" );
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "registrarfactura.php");
 				include URL_VISTA . 'footer.php';
-				break;
 			}
 
 		}catch(\PDOException $pdo_error){
