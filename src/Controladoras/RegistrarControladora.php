@@ -84,6 +84,29 @@ class RegistrarControladora
 		}
 	}
 
+	public function ucwordsValores($variable, $regCompleted){
+		if (!empty($variable)) 
+		{
+			$regCompleted = TRUE;
+			$variable = ucwords($variable);
+		}
+	}
+
+	public function validarVacio($variable, $regCompleted){
+		if (!empty($variable)) {
+			$regCompleted = TRUE;
+		}
+	}
+
+	public function validarColores($lente1, $lende2, $regCompleted){
+		
+		if (!empty($lente1)) {
+			$regCompleted = TRUE;
+			$lente1 = ucwords($lente1);
+			$lende2 = $lente1;
+		}
+	}
+
 	public function registrarclientelente($nombre, $apellido, $telefono, $doctor, $observacion, $armazon_lejos, $armazon_cerca, $lejos_od_esferico, $lejos_od_cilindrico, $lejos_od_grados, $lejos_oi_esferico, $lejos_oi_cilindrico, $lejos_oi_grados, $lejos_color, $complit, $cerca_od_esferico, $cerca_od_cilindrico, $cerca_od_grados, $cerca_oi_esferico, $cerca_oi_cilindrico, $cerca_oi_grados, $cerca_color, $subtotal, $senia){
 		try{
 			if(!empty($_SESSION)){
@@ -107,68 +130,23 @@ class RegistrarControladora
 					$cerca_oi_cilindrico =	$lejos_oi_cilindrico;
 					$cerca_oi_grados =	$lejos_oi_grados;
 				}
-				if (!empty($doctor)) 
-				{
-					$regCompleted = TRUE;
-					$doctor = ucwords($doctor);
-				}
-				if (!empty($observacion)) {
-					$regCompleted = TRUE;
-					$observacion = ucwords($observacion);
-				}
-				if (!empty($armazon_lejos)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($armazon_cerca)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($lejos_od_esferico)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($lejos_od_cilindrico)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($lejos_od_grados)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($lejos_oi_esferico)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($lejos_oi_cilindrico)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($lejos_oi_grados)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($lejos_color)) {
-					$regCompleted = TRUE;
-					$lejos_color = ucwords($lejos_color);
-					$cerca_color = $lejos_color;
-				}
-				if(!empty($cerca_color))
-				{
-					$cerca_color = ucwords($cerca_color);
-					$regCompleted = TRUE;
-					$lejos_color = $cerca_color;
-				}
-				if (!empty($cerca_od_esferico)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($cerca_od_cilindrico)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($cerca_od_grados)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($cerca_oi_esferico)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($cerca_oi_cilindrico)) {
-					$regCompleted = TRUE;
-				}
-				if (!empty($cerca_oi_grados)) {
-					$regCompleted = TRUE;
-				}
+				ucwordsValores($observacion);
+				validarVacio($armazon_lejos);
+				validarVacio($armazon_cerca);
+				validarVacio($lejos_od_esferico);
+				validarVacio($lejos_od_cilindrico);
+				validarVacio($lejos_od_grados);
+				validarVacio($armazonlejos_oi_esferico_lejos);
+				validarVacio($lejos_oi_cilindrico);
+				validarVacio($lejos_oi_grados);
+				validarColores($lejos_color, $cerca_color, $regCompleted);
+				validarColores($cerca_color, $lejos_color, $regCompleted);
+				validarVacio($cerca_od_esferico);
+				validarVacio($cerca_od_cilindrico);
+				validarVacio($cerca_od_grados);
+				validarVacio($cerca_oi_esferico);
+				validarVacio($cerca_oi_cilindrico);
+				validarVacio($cerca_oi_grados);
 
 				if($regCompleted == TRUE)
 				{
