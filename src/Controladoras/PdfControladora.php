@@ -247,17 +247,17 @@ class PdfControladora
 				//2 Parte{
 				//Fecha{
 				//Dia{
-				$pdf->SetY(103.5);
+				$pdf->SetY(78.5);
 				$pdf->SetX(173);
 				$pdf->MultiCell(145,15,$timed);
 				//Dia}
 				//Mes{
-				$pdf->SetY(103.5);
+				$pdf->SetY(78.5);
 				$pdf->SetX(186.5);
 				$pdf->MultiCell(145,15,$timem);
 				//Mes}
 				//Anio{
-				$pdf->SetY(103.5);
+				$pdf->SetY(78.5);
 				$pdf->SetX(198.5);
 				$pdf->MultiCell(145,15,$timey);
 				//Anio}
@@ -265,114 +265,114 @@ class PdfControladora
 				//Senior{ 
 				//Nombre{
 				//Apellido{
-				$pdf->SetY(116.9);
+				$pdf->SetY(91.5);
 				$pdf->SetX(24.5);
 				$pdf->MultiCell(135,15,'roberto');
 				//Apellido}
 				//Nombre}
 				//Senior}
 				//Telefono{
-				$pdf->SetY(116.9);
+				$pdf->SetY(91.5);
 				$pdf->SetX(153.5);
 				$pdf->MultiCell(135,15,'223123213');
 				//Telefono}
 				//Dr{
-				$pdf->SetY(125.5);
-				$pdf->SetX(21.5);
+				$pdf->SetY(100.4);
+				$pdf->SetX(23.5);
 				$pdf->MultiCell(145,15,'Perez');
 				//Dr}
 				//Armazon Lejos{
-				$pdf->SetY(137.5);
+				$pdf->SetY(112.5);
 				$pdf->SetX(38.5);
 				$pdf->MultiCell(145,15,'+asd');
 				//Armazon Lejos}
 				//Armazon Cerca{
-				$pdf->SetY(149.5);
+				$pdf->SetY(124);
 				$pdf->SetX(38.5);
 				$pdf->MultiCell(145,15,'+16');
 				//Armazon Cerca}
 				//Lejos OD ESF{
-				$pdf->SetY(162.5);
+				$pdf->SetY(137.5);
 				$pdf->SetX(38.5);
 				$pdf->MultiCell(145,15,'+16');
 				//Lejos OD ESF}
 				//Cilindrico OD{
-				$pdf->SetY(162.5);
+				$pdf->SetY(137.5);
 				$pdf->SetX(74.5);
 				$pdf->MultiCell(145,15,'+1');
 				//Cilindrico OD}
 				//En GRA OD{
-				$pdf->SetY(162.5);
+				$pdf->SetY(137.5);
 				$pdf->SetX(102.5);
 				$pdf->MultiCell(145,15,'+2');
 				//En GRA OD}
 				//Lejos OI ESF{
-				$pdf->SetY(168.6);
+				$pdf->SetY(142.8);
 				$pdf->SetX(38.5);
 				$pdf->MultiCell(145,15,'+2');
 				//Lejos OI ESF}
 				//Cilindrico OI{
-				$pdf->SetY(168.6);
+				$pdf->SetY(142.8);
 				$pdf->SetX(74.5);
 				$pdf->MultiCell(145,15,'+3');
 				//Cilindrico OI}
 				//EN GRA OI{
-				$pdf->SetY(168.6);
+				$pdf->SetY(142.8);
 				$pdf->SetX(102.5);
 				$pdf->MultiCell(145,15,'+3');
 				//EN GRA OI}
 				//Color 1{
-				$pdf->SetY(168.6);
+				$pdf->SetY(142.8);
 				$pdf->SetX(140);
 				$pdf->MultiCell(145,15,'+4');
 				//Color 1}
 				//Cerca OD ESF{
-				$pdf->SetY(175);
+				$pdf->SetY(149.8);
 				$pdf->SetX(38.5);
 				$pdf->MultiCell(145,15,'+1');
 				//Cerca OD ESF} 
 				//Cilindrico OD{
-				$pdf->SetY(175);
+				$pdf->SetY(149.8);
 				$pdf->SetX(74.5);
 				$pdf->MultiCell(145,15,'+2');
 				//Cilindrico OD}
 				//EN GRA OD{
-				$pdf->SetY(175);
+				$pdf->SetY(149.8);
 				$pdf->SetX(102.5);
 				$pdf->MultiCell(145,15,'+3');
 				//EN GRA OD}
 				//Cerca OI ESF{
-				$pdf->SetY(181.5);
+				$pdf->SetY(155.8);
 				$pdf->SetX(38.5);
 				$pdf->MultiCell(145,15,'+6');
 				//Cerca OI ESF}
 				//Cilindrico OI{
-				$pdf->SetY(181.5);
+				$pdf->SetY(155.8);
 				$pdf->SetX(74.5);
 				$pdf->MultiCell(145,15,'+16');
 				//Cilindrico OI}
 				//EN GRA OI{
-				$pdf->SetY(181.5);
+				$pdf->SetY(155.8);
 				$pdf->SetX(102.5);
 				$pdf->MultiCell(145,15,'+16');
 				//EN GRA OI}
 				//Color 2{
-				$pdf->SetY(181.5);
+				$pdf->SetY(155.6);
 				$pdf->SetX(140);
 				$pdf->MultiCell(145,15,'+16');
 				//Color 2}
 				//Sub Total{
-				$pdf->SetY(187.7);
+				$pdf->SetY(162.3);
 				$pdf->SetX(171.7);
 				$pdf->MultiCell(145,15,'123123');
 				//Sub Total}
 				//$ Senia{
-				$pdf->SetY(193.4);
+				$pdf->SetY(168);
 				$pdf->SetX(171.7);
 				$pdf->MultiCell(145,15,'1612');
 				//$ Senia}
 				//Saldo Total ${
-				$pdf->SetY(199);
+				$pdf->SetY(173.6);
 				$pdf->SetX(171.7);
 				$pdf->MultiCell(145,15,'2112');
 				//Saldo Total $}
@@ -489,17 +489,17 @@ class PdfControladora
 				$timem= date("m", strtotime($fecha));  
 				$timey= date("y", strtotime($fecha)); 
 				//Dia{
-				$pdf->SetY(103.5);
+				$pdf->SetY(78.5);
 				$pdf->SetX(173);
 				$pdf->MultiCell(145,15,$timed);
 				//Dia}
 				//Mes{
-				$pdf->SetY(103.5);
+				$pdf->SetY(78.5);
 				$pdf->SetX(186.5);
 				$pdf->MultiCell(145,15,$timem);
 				//Mes}
 				//Anio{
-				$pdf->SetY(103.5);
+				$pdf->SetY(78.5);
 				$pdf->SetX(198.5);
 				$pdf->MultiCell(145,15,$timey);
 				//Anio}
@@ -508,115 +508,115 @@ class PdfControladora
 				//Senior{ 
 				//Nombre{
 				//Apellido{
-			$pdf->SetY(116.9);
+			$pdf->SetY(91.5);
 			$pdf->SetX(24.5);
 			$pdf->MultiCell(135,15,$resultado);
 				//Nombre}
 				//Apellido}
 				//Senior}
 				//Telefono{
-			$pdf->SetY(116.9);
+			$pdf->SetY(91.5);
 			$pdf->SetX(153.5);
 			$pdf->MultiCell(135,15,$telefono);
 				//Telefono}
 				//Dr{
-			$pdf->SetY(125.5);
+			$pdf->SetY(100.4);
 			$pdf->SetX(21.5);
 			$pdf->MultiCell(145,15,$doctor);
 				//Dr}
 				//Armazon Lejos{
-			$pdf->SetY(137.5);
+			$pdf->SetY(112.5);
 			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$armazon_lejos);
 				//Armazon Lejos}
 				//Armazon Cerca{
-			$pdf->SetY(149.5);
+			$pdf->SetY(124);
 			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$armazon_cerca);
 				//Armazon Cerca}
 				//Lejos OD ESF{
-			$pdf->SetY(162.5);
+			$pdf->SetY(137.5);
 			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$lejos_od_esferico);
 				//Lejos OD ESF}
 				//Cilindrico OD{
-			$pdf->SetY(162.5);
+			$pdf->SetY(137.5);
 			$pdf->SetX(74.5);
 			$pdf->MultiCell(145,15,$lejos_od_cilindrico);
 				//Cilindrico OD}
 				//En GRA OD{
-			$pdf->SetY(162.5);
+			$pdf->SetY(137.5);
 			$pdf->SetX(102.5);
 			$pdf->MultiCell(145,15,$lejos_od_grados);
 				//En GRA OD}
 				//Lejos OI ESF{
-			$pdf->SetY(168.6);
+			$pdf->SetY(142.8);
 			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$lejos_oi_esferico);
 				//Lejos OI ESF}
 				//Cilindrico OI{
-			$pdf->SetY(168.6);
+			$pdf->SetY(142.8);
 			$pdf->SetX(74.5);
 			$pdf->MultiCell(145,15,$lejos_oi_cilindrico);
 				//Cilindrico OI}
 				//EN GRA OI{
-			$pdf->SetY(168.6);
+			$pdf->SetY(142.8);
 			$pdf->SetX(102.5);
 			$pdf->MultiCell(145,15,$lejos_oi_grados);
 				//EN GRA OI}
 				//Color 1{
-			$pdf->SetY(168.6);
+			$pdf->SetY(142.8);
 			$pdf->SetX(140);
 			$pdf->MultiCell(145,15,$lejos_color);
 				//Color 1}
 				//Cerca OD ESF{
-			$pdf->SetY(175);
+			$pdf->SetY(149.8);
 			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$cerca_od_esferico);
 				//Cerca OD ESF} 
 				//Cilindrico OD{
-			$pdf->SetY(175);
+			$pdf->SetY(149.8);
 			$pdf->SetX(74.5);
 			$pdf->MultiCell(145,15,$cerca_od_cilindrico);
 				//Cilindrico OD}
 				//EN GRA OD{
-			$pdf->SetY(175);
+			$pdf->SetY(149.8);
 			$pdf->SetX(102.5);
 			$pdf->MultiCell(145,15,$cerca_od_grados);
 				//EN GRA OD}
 				//Cerca OI ESF{
-			$pdf->SetY(181.5);
+			$pdf->SetY(155.8);
 			$pdf->SetX(38.5);
 			$pdf->MultiCell(145,15,$cerca_oi_esferico);
 				//Cerca OI ESF}
 				//Cilindrico OI{
-			$pdf->SetY(181.5);
+			$pdf->SetY(155.8);
 			$pdf->SetX(74.5);
 			$pdf->MultiCell(145,15,$cerca_oi_cilindrico);
 				//Cilindrico OI}
 				//EN GRA OI{
-			$pdf->SetY(181.5);
+			$pdf->SetY(155.8);
 			$pdf->SetX(102.5);
 			$pdf->MultiCell(145,15,$cerca_oi_grados);
 				//EN GRA OI}
 				//Color 2{
-			$pdf->SetY(181.5);
+			$pdf->SetY(155.6);
 			$pdf->SetX(140);
 			$pdf->MultiCell(145,15,$cerca_color);
 				//Color 2}
 			
 				//Sub Total{
-			$pdf->SetY(187.7);
+			$pdf->SetY(162.3);
 			$pdf->SetX(171.7);
 			$pdf->MultiCell(145,15,$subtotal);
 				//Sub Total}
 				//$ Senia{
-			$pdf->SetY(193.4);
+			$pdf->SetY(168);
 			$pdf->SetX(171.7);
 			$pdf->MultiCell(145,15,$senia);
 				//$ Senia}
 				//Saldo Total ${
-			$pdf->SetY(199);
+			$pdf->SetY(173.6);
 			$pdf->SetX(171.7);
 			$pdf->MultiCell(145,15,$saldo_total);
 				//Saldo Total $}
@@ -731,17 +731,17 @@ class PdfControladora
 				//2 Parte{
 				//Fecha{
 				//Dia{
-					$pdf->SetY(103.5);
+					$pdf->SetY(78.5);
 					$pdf->SetX(173);
 					$pdf->MultiCell(145,15,$timed);
 				//Dia}
 				//Mes{
-					$pdf->SetY(103.5);
+					$pdf->SetY(78.5);
 					$pdf->SetX(186.5);
 					$pdf->MultiCell(145,15,$timem);
 				//Mes}
 				//Anio{
-					$pdf->SetY(103.5);
+					$pdf->SetY(78.5);
 					$pdf->SetX(198.5);
 					$pdf->MultiCell(145,15,$timey);
 				//Anio}
@@ -749,117 +749,117 @@ class PdfControladora
 				//Senior{ 
 				//Nombre{
 				//Apellido{
-					$pdf->SetY(116.9);
+					$pdf->SetY(91.5);
 					$pdf->SetX(24.5);
 					$pdf->MultiCell(135,15,$resultado);
 				//Apellido}
 				//Nombre}				
 				//Senior}
 				//Telefono{
-					$pdf->SetY(116.9);
+					$pdf->SetY(91.5);
 					$pdf->SetX(153.5);
 					$pdf->MultiCell(135,15,$cliente->getTelefono());
 				//Telefono}
 				//Dr{
-					$pdf->SetY(125.5);
+					$pdf->SetY(100.4);;
 					$pdf->SetX(21.5);
 					$pdf->MultiCell(145,15,$lente->getDoctor());
 				//Dr}
 				//Armazon Lejos{
-					$pdf->SetY(137.5);
+					$pdf->SetY(112.5);
 					$pdf->SetX(38.5);
 					$pdf->MultiCell(145,15,$lente->getArmazonLejos());
 				//Armazon Lejos}
 				//Armazon Cerca{
-					$pdf->SetY(149.5);
+					$pdf->SetY(124);
 					$pdf->SetX(38.5);
 					$pdf->MultiCell(145,15,$lente->getArmazonCerca());
 				//Armazon Cerca}
 				//$ Armazon Cerca}
 				//Lejos OD ESF{
-					$pdf->SetY(162.5);
+					$pdf->SetY(137.5);
 					$pdf->SetX(38.5);
 					$pdf->MultiCell(145,15,$lente->getLejosOdEsferico());
 				//Lejos OD ESF}
 				//Cilindrico OD{
-					$pdf->SetY(162.5);
+					$pdf->SetY(137.5);
 					$pdf->SetX(74.5);
 					$pdf->MultiCell(145,15,$lente-> getLejosOdCilindrico());
 				//Cilindrico OD}
 				//En GRA OD{
-					$pdf->SetY(162.5);
+					$pdf->SetY(137.5);
 					$pdf->SetX(102.5);
 					$pdf->MultiCell(145,15,$lente->getLejosOdGrados());
 				//En GRA OD}
 				//Lejos OI ESF{
-					$pdf->SetY(168.6);
+					$pdf->SetY(142.8);
 					$pdf->SetX(38.5);
 					$pdf->MultiCell(145,15,$lente->getLejosOiEsferico());
 				//Lejos OI ESF}
 				//Cilindrico OI{
-					$pdf->SetY(168.6);
+					$pdf->SetY(142.8);
 					$pdf->SetX(74.5);
 					$pdf->MultiCell(145,15,$lente->getLejosOiCilindrico());
 				//Cilindrico OI}
 				//EN GRA OI{
-					$pdf->SetY(168.6);
+					$pdf->SetY(142.8);
 					$pdf->SetX(102.5);
 					$pdf->MultiCell(145,15,$lente->getLejosOiGrados());
 				//EN GRA OI}
 				//Color 1{
-					$pdf->SetY(168.6);
+					$pdf->SetY(142.8);
 					$pdf->SetX(140);
 					$pdf->MultiCell(145,15,$lente->getLejosColor());
 				//Color 1}
 				//Cerca OD ESF{
-					$pdf->SetY(175);
+					$pdf->SetY(149.8);
 					$pdf->SetX(38.5);
 					$pdf->MultiCell(145,15,$lente->getCercaOdEsferico());
 				//Cerca OD ESF} 
 				//Cilindrico OD{
-					$pdf->SetY(175);
+					$pdf->SetY(149.8);
 					$pdf->SetX(74.5);
 					$pdf->MultiCell(145,15,$lente->getCercaOdCilindrico());
 				//Cilindrico OD}
 				//EN GRA OD{
-					$pdf->SetY(175);
+					$pdf->SetY(149.8);
 					$pdf->SetX(102.5);
 					$pdf->MultiCell(145,15,$lente->getCercaOdGrados());
 				//EN GRA OD}
 				//Cerca OI ESF{
-					$pdf->SetY(181.5);
+					$pdf->SetY(155.8);
 					$pdf->SetX(38.5);
 					$pdf->MultiCell(145,15,$lente->getCercaOiEsferico());
 				//Cerca OI ESF}
 				//Cilindrico OI{
-					$pdf->SetY(181.5);
+					$pdf->SetY(155.8);
 					$pdf->SetX(74.5);					
 					$pdf->MultiCell(145,15,$lente->getCercaOiCilindrico());
 				//Cilindrico OI}
 				//EN GRA OI{
-					$pdf->SetY(181.5);
+					$pdf->SetY(155.8);
 					$pdf->SetX(102.5);
 					$pdf->MultiCell(145,15,$lente->getCercaOiGrados());
 				//EN GRA OI}
 				//Color 2{
-					$pdf->SetY(181.5);
+					$pdf->SetY(155.6);
 					$pdf->SetX(140);
 					$pdf->MultiCell(145,15,$lente->getCercaColor());
 				//Color 2}
 					if(!empty($factura))
 					{
 				//Sub Total{
-						$pdf->SetY(187.7);
+						$pdf->SetY(162.3);
 						$pdf->SetX(171.7);
 						$pdf->MultiCell(145,15,$factura[0]->getSubTotal());
 				//Sub Total}
 				//$ Senia{
-						$pdf->SetY(193.4);
+						$pdf->SetY(168);
 						$pdf->SetX(171.7);
 						$pdf->MultiCell(145,15,$factura[0]->getSenia());
 				//$ Senia}
 				//Saldo Total ${
-						$pdf->SetY(199);
+						$pdf->SetY(173.6);
 						$pdf->SetX(171.7);
 						$pdf->MultiCell(145,15,$factura[0]->getSaldoTotal());
 				//Saldo Total $}
