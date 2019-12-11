@@ -1,0 +1,129 @@
+/*Estilo para la etiqueta <hr>.
+-------------------------------------------------- */
+hr {
+    color: #E3E3E3;
+}
+
+/*Reescribo Bootstrap.
+-------------------------------------------------- */
+.navbar {
+    margin-bottom: 10px;
+}
+
+.navbar-brand {
+    padding: 7px 15px 0;
+}
+
+.navbar-brand .brand {
+    width: 50px;
+}
+
+/*Colores.
+-------------------------------------------------- */
+
+.bg-pri {
+    background-color: white;
+}
+
+.bg-sec {
+    background-color: white;
+}
+
+.bg-body {
+    background-color: white;
+}
+
+/*Diseño tipo 'Cajas'.
+-------------------------------------------------- */
+.box-primary {
+    padding: 15px;
+    border-radius: 5px;
+    border: medium none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.box-secondary {
+    border: medium none;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.lower-box {
+    position: relative;
+    z-index: 1;
+    margin-top: 10px;
+    margin-bottom: 8px;
+}
+
+.lower-box .bg {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /*background-color: #ffffff;*/
+    opacity: 0.4;
+    width: 100%;
+    height: 100%;
+}
+
+.lower-box .box-right-content {
+    border-right: 1px solid #E3E3E3;
+}
+
+/* Si quiero que todos los col tengan la misma altura, le paso esa clase.
+-------------------------------------------------- */
+.altura {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.altura > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo para que el footer se quede en el fondo, sin importar el contenido.
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 37px;
+}
+
+/* Estilo para posicionar los alert.
+-------------------------------------------------- */
+.alert-off {
+    min-height: 54px;
+}
+
+#message {
+    width: 100%;
+}
+
+#inner-message {
+    margin: 0 auto;
+}
+
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity 0.25s linear;
+    -moz-transition: opacity 0.25s linear;
+    -o-transition: opacity 0.25s linear;
+    transition: opacity 0.25s linear;
+}
